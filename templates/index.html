@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="container-fluid">
+    {% for gpu in gpus %}
+    {{ gpu.model }}<br>
+    {% endfor %}
+</section>
+
+{% endblock %}
