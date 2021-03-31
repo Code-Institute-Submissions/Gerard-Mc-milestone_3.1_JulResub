@@ -4,6 +4,7 @@ from flask import (
     redirect, request, session, url_for)
 from flask_pymongo import PyMongo
 from werkzeug.security import generate_password_hash, check_password_hash
+from bson.objectid import ObjectId
 if os.path.exists("env.py"):
     import env
 
@@ -35,10 +36,9 @@ def register():
             "password": generate_password_hash(request.form.get("password"))
         }
         mongo.db.users.insert_one(new_user)
-        username = new_user['name']
-        flash(f"Welcome {username}")
-        session["user"] = request.form.get("username").lower()
-        return render_template("profile.html", username=username)
+        flash(f"Welcome aboard {new_user['name']}!")
+        session["user"] = new_user['name']
+        return redirect(url_for("profile", user=session["user"]))
 
     return render_template("register.html")
 
@@ -50,11 +50,10 @@ def login():
             {"name": request.form.get("username").lower()})
 
         if existing_user:
-            username = existing_user['name']
             if check_password_hash(existing_user["password"], request.form.get("password")):
-                session["user"] = username.lower()
-                flash(f"Welcome back {username}!")
-                return render_template("profile.html", username=username)
+                session['user'] = existing_user['name']
+                flash(f"Welcome back {existing_user['name']}!")
+                return redirect(url_for("profile", user=session['user']))
             else:
                 flash("Incorrect Username and/or Password")
                 return redirect(url_for("login"))
@@ -66,9 +65,11 @@ def login():
     return render_template("login.html")
 
 
-@app.route("/profile", methods=["GET", "POST"])
-def profile():
-    return render_template("profile.html")
+@app.route("/profile/<user>", methods=["GET", "POST"])
+def profile(user):
+    user = mongo.db.users.find_one(
+        {"name": session["user"]})
+    return render_template("profile.html", user=user)
 
 
 if __name__ == "__main__":
