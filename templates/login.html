@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h1 class="center-align col-6 offset-3 text-center mt-5 color-navy">Register</h1>
+<h1 class="center-align col-6 offset-3 text-center mt-5 color-navy">Login</h1>
 <section id="register-body" class="col-10 col-lg-6 offset-lg-3 offset-1 d-flex justify-content-center ">
-    <form class="w-50 mt-5" method="POST" action="{{ url_for('register') }}">
+    <form class="w-50 mt-5" method="POST" action="{{ url_for('login') }}">
         <div class="form-group ">
             <label for="username" class="w-80 font-weight-bolder d-block my-0">Username</label>
             <input id="username" minlength="5" maxlength="20" name="username" type="text" class="validate w-100"
@@ -14,7 +14,7 @@
             <input id="password" name="password" minlength="8" maxlength="30" type="password" class="validate w-100"
                 required>
         </div>
-        <button type="submit" class="btn btn-primary w-40 float-left bg-navy w-100">Submit</button>
+        <button type="submit" class="btn btn-primary w-40 float-left bg-navy w-100">Log In</button>
     </form>
 </section>
 
