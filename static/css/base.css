@@ -10,6 +10,16 @@
     background-color: #280061 !important;
 }
 
+.color-navy{
+    color: #280061 !important;
+}
+
 .color-white{
     color: white !important;
+}
+
+.boder-navy{
+    border-style: solid !important;
+    border-width: 1px !important;
+    border-color: rgba(40, 0, 97, 0.57) !important;
 }

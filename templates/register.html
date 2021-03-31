@@ -1,19 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
 
-<section id="register-body">
-    <h3 class="center-align">Register</h3>
-
-    <form class="" method="POST" action="{{ url_for('register') }}">
-        <div class="form-group">
-            <label for="username">Username</label>
-            <input id="username" name="username" type="text" class="validate">
+<h1 class="center-align col-6 offset-3 text-center mt-5 color-navy">Register</h1>
+<section id="register-body" class="col-10 col-lg-6 offset-lg-3 offset-1 d-flex justify-content-center ">
+    <form class="w-50 mt-5" method="POST" action="{{ url_for('register') }}">
+        <div class="form-group ">
+            <label for="username" class="w-80 font-weight-bolder d-block my-0">Username</label>
+            <input id="username" name="username" type="text" class="validate w-100">
         </div>
         <div class="form-group">
-            <label for="password">Password</label>
-            <input id="password" name="password" type="password" class="validate">
+            <label for="password" class="font-weight-bolder d-block my-0">Password</label>
+            <input id="password" name="password" type="password" class="validate w-100">
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary w-40 float-left bg-navy w-100">Submit</button>
     </form>
 </section>
 
