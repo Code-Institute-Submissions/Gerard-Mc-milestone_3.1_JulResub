@@ -65,6 +65,13 @@ def login():
     return render_template("login.html")
 
 
+@app.route("/logout")
+def logout():
+    flash("Successfully logged out")
+    session.pop("user")
+    return redirect(url_for("login"))
+
+
 @app.route("/profile/<user>", methods=["GET", "POST"])
 def profile(user):
     user = mongo.db.users.find_one(
