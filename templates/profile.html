@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<section class="container-fluid col-12 text-center">
+    <hr>
+    {% if username %}
+    <p><strong>Username: </strong> {{ username }}</p>
+    {% else %}
+    <p><strong>Username: </strong> Test Name</p>
+    {% endif %}
+</section>
+
+{% endblock %}

@@ -23,3 +23,12 @@
     border-width: 1px !important;
     border-color: rgba(40, 0, 97, 0.57) !important;
 }
+
+.font-bold{
+    font-weight: bold;
+}
+
+.border-radius-5px{
+    border-radius: 5px;
+}
+

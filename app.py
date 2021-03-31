@@ -35,8 +35,17 @@ def register():
             "password": generate_password_hash(request.form.get("password"))
         }
         mongo.db.users.insert_one(new_user)
+        username = new_user['name']
+        flash(f"Welcome {username}")
         session["user"] = request.form.get("username").lower()
+        return render_template("profile.html", username=username)
+
     return render_template("register.html")
+
+
+@app.route("/profile", methods=["GET", "POST"])
+def profile():
+    return render_template("profile.html")
 
 
 if __name__ == "__main__":

@@ -25,7 +25,7 @@
                     <a class="nav-link" href="#">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Profile</a>
+                    <a class="nav-link" href="{{ url_for('profile') }}">Profile</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('register') }}">Register</a>
@@ -33,6 +33,16 @@
             </ul>
         </div>
     </nav>
+
+    <section class="row d-flex justify-content-center mt-5">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages%}
+        <h4 class="bg-navy text-center color-white font-bold px-3 py-2 border-radius-5px">{{ message }}</h4>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </section>
 
     {% block content %}
     {% endblock %}
