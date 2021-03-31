@@ -2,8 +2,10 @@
 {% block content %}
 
 <section class="container-fluid">
+    <hr>
     {% for gpu in gpus %}
-    {{ gpu.model }}<br>
+    <p><strong>Model: </strong> {{ gpu.model }} <br><strong>Rank: </strong>{{ gpu.rating }}</p>
+    <hr>
     {% endfor %}
 </section>
 
