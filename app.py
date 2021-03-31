@@ -22,6 +22,20 @@ def find_gpus():
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
+    if request.method == "POST":
+        existing_user = mongo.db.users.find_one(
+            {"name": request.form.get("username").lower()})
+
+        if existing_user:
+            flash("Username is not available")
+            return redirect(url_for("register"))
+
+        new_user = {
+            "name": request.form.get("username").lower(),
+            "password": generate_password_hash(request.form.get("password"))
+        }
+        mongo.db.users.insert_one(new_user)
+        session["user"] = request.form.get("username").lower()
     return render_template("register.html")
 
 
