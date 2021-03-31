@@ -1,0 +1,15 @@
+.float-left{
+    float: !important;
+}
+
+.float-right{
+    float: right !important;
+}
+
+.bg-navy{
+    background-color: #280061 !important;
+}
+
+.color-white{
+    color: white !important;
+}
