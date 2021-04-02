@@ -18,6 +18,10 @@
     color: white !important;
 }
 
+.bg-navy{
+    background-color: #280061 !important;
+}
+
 .boder-navy{
     border-style: solid !important;
     border-width: 1px !important;

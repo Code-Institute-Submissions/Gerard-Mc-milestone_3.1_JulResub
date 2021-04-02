@@ -8,32 +8,40 @@
     {% if user.gpu %}
     <p><strong>GPU: </strong> {{ user.gpu }}</p>
     {% else %}
-    <form action="{{ url_for('search_gpu') }}" method="post">
-        <input id="search_gpu_input" placeholder="GPU" name="user-gpu" minlength="3" class="validate">
-        <button class="" id="gpu_select_button" type="submit">Add GPU</button>
-    </form>
+    <div>
+        <form action="{{ url_for('search_gpu') }}" method="post">
+            <input placeholder="GPU" type="text-gpu" name="user-gpu" id="search_gpu_input" minlength="3"
+                class="validate">
+            <button class="" id="gpu_select_button" type="submit">Add GPU</button>
+
+        </form>
+        <form id="submit_to_python" method="post" action="{{ url_for('submit') }}">
+            <textarea id="gpu-choice" style="display: none" class="hidden-text" name="hidden-text-gpu-model"></textarea>
+            <button class="submit-button bg-navy mt-1" id="submit_to_python_button" for="submit_to_python"
+                type="submit">Confirm
+            </button>
+        </form>
+    </div>
     <div id="gpu_list">
         {% for x in gpu %}
-        <hr>
         <div class="d-block">
-            <a href="#" onclick="hide_and_submit(this.id)"  id="{{ x.model }}">{{ x.model }}</a>
+            <a href="#" id="{{ x.model }}" onclick="hide_and_submit(this.id)">{{ x.model }}</a>
         </div>
         {% endfor %}
     </div>
-    <form id="submit_to_python" method="post" action="{{ url_for('submit') }}">
-        <textarea id="gpu-choice" style="display: none" class="hidden-text" name="hidden-text-gpu-model"></textarea>
-        <button class="submit-button" id="submit_to_python_button" for="form1" type="submit">Confirm
-        </button>
-    </form>
+
     {% endif %}
     {% else %}
     <p><strong>Username: </strong> Test Name</p>
     {% endif %}
 </section>
 <script>
+    document.getElementById("submit_to_python_button").style.display = "none";
     function hide_and_submit(id) {
         model = id;
         document.getElementById("gpu_list").style.display = "none";
+        document.getElementById("gpu_select_button").style.display = "none";
+        document.getElementById("submit_to_python_button").style.display = "contents";
         document.getElementById("search_gpu_input").placeholder = `${model}`;
         document.getElementById("gpu-choice").innerHTML = model;
     }
