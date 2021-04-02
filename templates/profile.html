@@ -5,10 +5,37 @@
     <hr>
     {% if user %}
     <p><strong>Username: </strong> {{ user.name }}</p>
-    <p><strong>ID: </strong> {{ user._id }}</p>
+    {% if user.gpu %}
+    <p><strong>GPU: </strong> {{ user.gpu }}</p>
+    {% else %}
+    <form action="{{ url_for('search_gpu') }}" method="post">
+        <input placeholder="GPU" type="text-gpu" name="user-gpu" id="user-gpu" minlength="3" class="validate">
+        <button class="" id="gpu_select_button" type="submit">Add GPU</button>
+    </form>
+    <div id="gpu_list">
+        {% for x in gpu %}
+        <hr>
+        <div class="d-block">
+            <a href="#" onclick="hide_and_submit(this.id)"  id="{{ x.model }}">{{ x.model }}</a>
+        </div>
+        {% endfor %}
+    </div>
+    <form id="submit_to_python" method="post" action="{{ url_for('submit') }}">
+        <textarea id="gpu-choice" style="display: none" class="hidden-text" name="hidden-text-gpu-model"></textarea>
+        <button class="submit-button" id="submit_to_python_button" for="form1" type="submit">Confirm
+        </button>
+    </form>
+    {% endif %}
     {% else %}
     <p><strong>Username: </strong> Test Name</p>
     {% endif %}
 </section>
+<script>
+    function hide_and_submit(id) {
+        document.getElementById("gpu_list").style.display = "none";
+        model = id;
+        document.getElementById("gpu-choice").innerHTML = model;
+    }
+</script>
 
 {% endblock %}

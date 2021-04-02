@@ -14,13 +14,13 @@ app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 app.secret_key = os.environ.get("SECRET_KEY")
 mongo = PyMongo(app)
 
-
+# Test #
 @app.route('/')
 def find_gpus():
     gpus = mongo.db.gpu.find()
     return render_template("index.html", gpus=gpus)
 
-
+#
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
@@ -70,6 +70,28 @@ def logout():
     flash("Successfully logged out")
     session.pop("user")
     return redirect(url_for("login"))
+
+
+@app.route("/search_gpu", methods=["GET", "POST"])
+def search_gpu():
+    # Search MongoDb for GPUs based on user form input
+    user_gpu = request.form.get("user-gpu")
+    gpu = list(mongo.db.gpu.find(
+        {"$text": {"$search": "\"" + user_gpu + "\""}}))
+    user = mongo.db.users.find_one(
+        {"name": session["user"]})
+    return render_template("profile.html", gpu=gpu, user=user)
+
+
+@app.route('/submit', methods=["GET", "POST"])
+def submit():
+    user = mongo.db.users.find_one(
+        {"name": session["user"]})
+    # Take user GPU choice from hidden text in a form
+    user_gpu_model = request.form.get('hidden-text-gpu-model')
+    set_gpu = {"$set": {"gpu": user_gpu_model}}
+    mongo.db.users.update_one(user, set_gpu)
+    return redirect(url_for("profile", user=user))
 
 
 @app.route("/profile/<user>", methods=["GET", "POST"])
