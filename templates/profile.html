@@ -9,7 +9,7 @@
     <p><strong>GPU: </strong> {{ user.gpu }}</p>
     {% else %}
     <form action="{{ url_for('search_gpu') }}" method="post">
-        <input placeholder="GPU" type="text-gpu" name="user-gpu" id="user-gpu" minlength="3" class="validate">
+        <input id="search_gpu_input" placeholder="GPU" name="user-gpu" minlength="3" class="validate">
         <button class="" id="gpu_select_button" type="submit">Add GPU</button>
     </form>
     <div id="gpu_list">
@@ -32,8 +32,9 @@
 </section>
 <script>
     function hide_and_submit(id) {
-        document.getElementById("gpu_list").style.display = "none";
         model = id;
+        document.getElementById("gpu_list").style.display = "none";
+        document.getElementById("search_gpu_input").placeholder = `${model}`;
         document.getElementById("gpu-choice").innerHTML = model;
     }
 </script>
