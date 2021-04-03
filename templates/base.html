@@ -24,6 +24,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">About</a>
                 </li>
+                <!-- If logged in, the user can access the below links; Profile and logout -->
                 {% if session.user %}
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('profile', user=session['user'])}}">Profile</a>
@@ -31,6 +32,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('logout') }}">Log Out</a>
                 </li>
+                <!-- If not logged in, the user can access the below links; Resgister and login -->
                 {% else %}
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('register') }}">Register</a>
@@ -45,7 +47,7 @@
             </ul>
         </div>
     </nav>
-
+    <!-- Section for flash messages -->
     <section class="row d-flex justify-content-center mt-5">
         {% with messages = get_flashed_messages() %}
         {% if messages %}

@@ -21,45 +21,56 @@ def find_gpus():
     return render_template("index.html", gpus=gpus)
 
 
-#
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
+    # View for user registration
     if request.method == "POST":
+        # Search mongo to match entered username
         existing_user = mongo.db.users.find_one(
             {"name": request.form.get("username").lower()})
 
         if existing_user:
+            # If username found, user is alerted with a flash message
             flash("Username is not available")
             return redirect(url_for("register"))
-
+        # If username available, new user dictionary created
         new_user = {
             "name": request.form.get("username").lower(),
             "password": generate_password_hash(request.form.get("password"))
         }
+        # Dictionary added to database
         mongo.db.users.insert_one(new_user)
         flash(f"Welcome aboard {new_user['name']}!")
+        # User is added to session data
         session["user"] = new_user['name']
         return redirect(url_for("profile", user=session["user"]))
-
+    # If username unavailable, register page is loaded
     return render_template("register.html")
 
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+
     if request.method == "POST":
+        # Searches database for the entered username
         existing_user = mongo.db.users.find_one(
             {"name": request.form.get("username").lower()})
 
         if existing_user:
+            # If username exists, entered password is checked againgst the database user entity
             if check_password_hash(existing_user["password"],
                                    request.form.get("password")):
+                # If successful, session data updated and user is directed to profile page
                 session['user'] = existing_user['name']
                 return redirect(url_for("profile", user=session['user']))
             else:
+                # If password unuccessful, user is directed to login page
                 flash("Incorrect Username and/or Password")
                 return redirect(url_for("login"))
 
         else:
+            # If username unuccessful, user is directed to login page
             flash("Incorrect Username and/or Password")
             return redirect(url_for("login"))
 
@@ -69,6 +80,7 @@ def login():
 @app.route("/logout")
 def logout():
     flash("Successfully logged out")
+    # Removes user from session storage
     session.pop("user")
     return redirect(url_for("login"))
 
@@ -91,12 +103,14 @@ def submit():
     # Take user GPU choice from hidden text in a form
     user_gpu_model = request.form.get('hidden-text-gpu-model')
     set_gpu = {"$set": {"gpu": user_gpu_model}}
+    # Creates or updates a user gpu field
     mongo.db.users.update_one(user, set_gpu)
     return redirect(url_for("profile", user=user))
 
 
 @app.route("/profile/<user>", methods=["GET", "POST"])
 def profile(user):
+    # Dynamically creates a user page based on session data
     user = mongo.db.users.find_one(
         {"name": session["user"]})
     return render_template("profile.html", user=user)

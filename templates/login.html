@@ -3,12 +3,15 @@
 
 <h1 class="center-align col-6 offset-3 text-center mt-5 color-navy">Login</h1>
 <section id="register-body" class="col-10 col-lg-6 offset-lg-3 offset-1 d-flex justify-content-center ">
+    <!-- Form for user to enter their username and password-->
     <form class="w-50 mt-5" method="POST" action="{{ url_for('login') }}">
+        <!-- Enter username-->
         <div class="form-group ">
             <label for="username" class="w-80 font-weight-bolder d-block my-0">Username</label>
             <input id="username" minlength="5" maxlength="20" name="username" type="text" class="validate w-100"
                 required>
         </div>
+        <!-- Enter password-->
         <div class="form-group">
             <label for="password" class="font-weight-bolder d-block my-0">Password</label>
             <input id="password" name="password" minlength="8" maxlength="30" type="password" class="validate w-100"
