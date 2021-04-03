@@ -22,6 +22,10 @@
     background-color: #280061 !important;
 }
 
+.bg-grey{
+    background-color: #e0e0e0 !important;
+}
+
 .boder-navy{
     border-style: solid !important;
     border-width: 1px !important;
@@ -36,3 +40,8 @@
     border-radius: 5px;
 }
 
+/* overflow control for the gpu list the user chooses from on the profile page */
+#gpu_list{
+    max-height: 400px !important;
+    overflow:auto;
+}
