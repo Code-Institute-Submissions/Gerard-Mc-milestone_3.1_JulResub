@@ -168,7 +168,6 @@ def check():
     # Loads json data and extracts the game's PC minimum requirements.
     steam = json.loads(
         r.text)[user_game_id]['data']['pc_requirements']['minimum']
-    steam = "Graphics: Intel UHD 640"
     # Searches different variations of GPU requirements title in json data.
     # to prevent issues with regex confusing normal ram with video ram sizes.
     find_title_is_graphics = re.search("(?<=Graphics:).+", steam)
@@ -264,8 +263,9 @@ def check():
     find_old_geforce_gpu = re.findall(
         r'(?i)(?:nvidia\sgeforce|NVIDIA|geforce\d*)\s'
         r'(?:(?:ti|mx|pcx)\d+|fx|pcx|\d+|\d+\s\+|\d+a|\d+pv)\s*'
-        r'(?:\d+gtx\+|gtx|gso|gt|gx2|ge|gs|le|se|mgpu|ultra|TurboCache|nForce'
-        r'\s4[1-3]0)*\s(?:ultra)*"', gpu_requirements)
+        r'(?:\d+gtx\+'
+        r'|gtx|gso|gt|gx2|ge|gs|le|se|mgpu|ultra|TurboCache|nForce\s4[1-3]0)'
+        r'*\s(?:ultra)*', gpu_requirements)
     if find_old_geforce_gpu:
         info_message = message_success
 
@@ -275,7 +275,7 @@ def check():
         r'(?i)(?:radeon|ati|amd)\s'
         r'(?:hd|x\d+|xpress\s\d+|xpress|8\d+|9\d+)\s'
         r'(?:[2-3]\d+\s(?:pro|xt|gt|x2|\d+)*'
-        r'|[1-2]\d+|x\d+|le|pro|se|xt|xxl|xl|agp|gto|gt|x)"', gpu_requirements)
+        r'|[1-2]\d+|x\d+|le|pro|se|xt|xxl|xl|agp|gto|gt|x)', gpu_requirements)
     if find_old_amd_gpu:
         info_message = message_success
 
@@ -289,7 +289,7 @@ def check():
     # Find mobile Amd gpu that are less powerful than all gpus on user gpu list
     find_old_amd_mobile_gpu = re.findall(
         r'(?i)(?:mobility\sradeon|mobility)\s(?:hd|x)*\s*'
-        r'(?:[1-3][0-9]\d+|4[0-5]\d+)\s*(?:x2|xt)*"', gpu_requirements)
+        r'(?:[1-3][0-9]\d+|4[0-5]\d+)\s*(?:x2|xt)*', gpu_requirements)
     if find_old_amd_mobile_gpu:
         info_message = message_success
 
@@ -313,6 +313,46 @@ def check():
             gpu = re.sub(r"\s\s$",  "", gpu)
             gpu = re.sub(r"\s$",  "", gpu)
             gpu = re.sub(r"  ",  " ", gpu)
+            # searches weaker GPU database
+            check = mongo.db.weaker_gpu.find_one(
+                {"$text": {"$search": "\"" + gpu + "\""}})
+            if check:
+                # If it finds one, this means the users GPU is
+                # automatically better. User informed of success.
+                info_message = message_success
+            else:
+                # Checks the database for GPUs that may or
+                # may not be more powerful
+                check = mongo.db.gpu.find_one(
+                    {"$text": {"$search": "\"" + gpu + "\""}})
+                if check:
+                    # Finds GPU rating
+                    rating = int(check['rating'])
+                    # Compares the GPU rating against the user's GPU
+                    if user_gpu_rating <= rating:
+                        info_message = message_success
+                    elif user_gpu_rating >= rating:
+                        info_message = message_fail
+                    else:
+                        pass
+    else:
+        pass
+
+    # Find Regular Nvidia gpus from above 9000 series exept for titan series
+    # Eg.'Geforce GT 740', 'Geforce RTX 2050 ti (notebook)',
+    # 'Geforce RTX 2080 ti boost', 'Geforce RTX 2070', 'Geforce GTS 160',
+    # 'Geforce GTX 560 SE' 'Geforce GTX 2090 ti mobile'
+    find_newer_gtx_gpu = re.findall(
+        r'(?i)\s(?:gtx\s|gt\s|rtx\s|gts\s|mx|m)\d*[a-zA-Z]*\s*\d*\s*'
+        r'(?:GB|ti\sboost|ti\s\(?notebook\)*|ti|le|max-q|super\smax-q'
+        r'|se|super|\d+m|\(?mobile\)*|\(?notebook\)?)*', gpu_requirements)
+    if find_newer_gtx_gpu:
+        for gpu in find_newer_gtx_gpu:
+            # Formats out any unwanted whitespace
+            gpu = re.sub("(?i)\d+GB",  "", gpu)
+            gpui = re.sub("^",  "NVIDIA GeForce", gpu)
+            gpu = re.sub("\s\s$",  "", gpu)
+            gpu = re.sub("\s$",  "", gpu)
             # searches weaker GPU database
             check = mongo.db.weaker_gpu.find_one(
                 {"$text": {"$search": "\"" + gpu + "\""}})
