@@ -220,6 +220,21 @@ def check():
         # Cuts the json at the end of the graphics section. The Graphics, CPU, HDD, Sound etc always end with </li>.
         gpu_requirements = re.sub("<\/li>.*$", "", gpu_requirements_cut)
 
+    
+    '''  Below fixes naming inconsistancies found in the Steam API files for Nvidia and Intel GPUs '''
+    # Fix Steam Nvidia naming inconsistencies to align with this app's database
+    # Eg. Geforce 7800GTX -> Geforce 7800 GTX or Nvidia 7800GT -> Geforce 7800 GT
+    find_gtx_gt_fix = re.findall('(?i)(?:nvidia\sgeforce|nvidia|geforce)\s\d+gt[xX]?\s', gpu_requirements)
+    for i in find_gtx_gt_fix:
+        before= i
+        i = re.sub("(?i)nvidia\sgeforce",  "", i)
+        i = re.sub("(?i)nvidia",  "", i)
+        i = re.sub("(?i)geforce\s",  " ", i)
+        i = re.sub("^\s",  "Nvidia GeForce ", i)
+        a = re.sub("(?i)(?:GTX|GT)", lambda ele: " " + ele[0] + " ", i) 
+        switch = a
+        gpu_requirements = re.sub(before,  switch, gpu_requirements)
+
     return render_template("result.html", user_gpu_name=user_gpu_name, user_game_id=user_game_id,
                            user_game_name=user_game_name, steam=steam, gpu_requirements=gpu_requirements, info_message=info_message)
 
