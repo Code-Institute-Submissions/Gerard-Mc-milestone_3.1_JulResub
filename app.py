@@ -167,9 +167,7 @@ def check():
                                user_game_name=user_game_name, steam=steam)
     # Loads json data and extracts the game's PC minimum requirements.
     steam = json.loads(
-        r.text)[user_game_id]['data']['pc_requirements']['minimum']
-
-    # Searches different variations of GPU requirements title in json data.
+        r.text)[user_game_id]['data']['pc_requirements']['minimum']    # Searches different variations of GPU requirements title in json data.
     # to prevent issues with regex confusing normal ram with video ram sizes.
     find_title_is_graphics = re.search("(?<=Graphics:).+", steam)
     find_title_is_video = re.search("(?<=Video:).+", steam)
@@ -220,6 +218,8 @@ def check():
         # Cuts the json at the end of the graphics section. The Graphics, CPU, HDD, Sound etc always end with </li>.
         gpu_requirements = re.sub("<\/li>.*$", "", gpu_requirements_cut)
 
+
+    show = ""
     '''  Below fixes naming inconsistancies found in the Steam API files for Nvidia GPUs '''
     # Fix Steam Nvidia naming inconsistencies to align with this app's database
     # Eg. Geforce 7800GTX -> Geforce 7800 GTX or Nvidia 7800GT -> Geforce 7800 GT
@@ -257,8 +257,15 @@ def check():
         "(?i)(?:nvidia\sgeforce|NVIDIA|geforce\d*)\s(?:(?:ti|mx|pcx)\d+|fx|pcx|\d+|\d+\s\+|\d+a|\d+pv)\s*(?:\d+gtx\+|gtx|gso|gt|gx2|ge|gs|le|se|mgpu|ultra|TurboCache|nForce\s4[1-3]0)*\s(?:ultra)*", gpu_requirements)
     if find_old_geforce_gpu:
         info_message = message_success
+
+    # Find all AMD GPUs from years 2001 - 2008 or from Radeon 8000 series up to Radeon HD 3000 series 
+    # Eg. Radeon X700, Radeon X1300 XT, Radeon X1900 GT, Radeon HD 2900 PRO, Radeon HD 3850 X2
+    find_old_amd_gpu = re.findall("(?i)(?:radeon|ati|amd)\s(?:hd|x\d+|xpress\s\d+|xpress|8\d+|9\d+)\s(?:[2-3]\d+\s(?:pro|xt|gt|x2|\d+)*|[1-2]\d+|x\d+|le|pro|se|xt|xxl|xl|agp|gto|gt|x)", gpu_requirements)
+    if find_old_amd_gpu:
+        info_message = message_success
+
     return render_template("result.html", user_gpu_name=user_gpu_name, user_game_id=user_game_id,
-                           user_game_name=user_game_name, steam=steam, gpu_requirements=gpu_requirements, info_message=info_message)
+                           user_game_name=user_game_name, steam=steam, gpu_requirements=gpu_requirements, info_message=info_message, show=show)
 
 
 if __name__ == "__main__":
