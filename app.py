@@ -141,6 +141,14 @@ def search_gpu_homepage():
 
 @app.route('/check', methods=["GET", "POST"])
 def check():
+    # Messages to be displayed based on game being found on the API
+    # and GPU being compatible or not compatible with the game.
+    # info_message will be sent to the results page informing the user of the result.
+    info_message= ""
+    message_success = "Your GPU supports this game"
+    message_fail = "Your GPU does not support this game"
+    message_not_found = "We can't find this configuration in our database"
+
     # Extract user gpu model, game id, and game name from "submit_to_python" form.
     user_gpu_name = request.form.get("gpu-model")
     user_game_name = request.form.get("game-name")
@@ -151,11 +159,10 @@ def check():
     # Sometimes the external API has issues with it's own game ids.
     # In that case, the below sends an error message to the result page.
     if not r:
-        steam = "Sorry, we don't have this game's requirements on our database"
+        steam = message_not_found
         return render_template("result.html", user_gpu_name=user_gpu_name, user_game_name=user_game_name, steam=steam)
     # Loads json data and extracts the game's PC mininum requirements.
-    steam = json.loads(r.text)[
-        user_game_id]['data']['pc_requirements']['minimum']
+    steam = json.loads(r.text)[user_game_id]['data']['pc_requirements']['minimum']
 
     # Below searches different variations of GPU requirements title in the json data.
     # to prevent issues with regex confusing normal ram with video ram sizes.
@@ -176,21 +183,19 @@ def check():
 	    gpu_requirements = re.findall("(?<=Graphics Card:).+", steam)
     elif find_title_is_russian:
 	    gpu_requirements = re.findall("(?<=Видеокарта:).+", steam)
-    else:
-	    print("We don't have this game on our database.")
-
+    # When the graphics section can't be found, the info message
+    gpu_requirements = ""
+    info_message = message_not_found
     # Tidy gpu_requirements variable data for easier regex use.
-    if gpu_requirements:
+    if gpu_requirements != "":
         # Removes words that will conflict or complicate regex patterns and removes extra html.
         gpu_requirements_cut = re.sub(
             "(?i)(?:series\s|or\s|better\s|<\/strong>|<br>)", "", gpu_requirements[0])
         # Cuts the json at the end of the graphics section. The Graphics, CPU, HDD, Sound etc always end with </li>.
         gpu_requirements = re.sub("<\/li>.*$", "", gpu_requirements_cut)
 
-    else:
-        gpu_requirements = "We can't find this configuration in our database"
-
-    return render_template("result.html", user_gpu_name=user_gpu_name, user_game_id=user_game_id, user_game_name=user_game_name, steam=steam, gpu_requirements=gpu_requirements)
+    return render_template("result.html", user_gpu_name=user_gpu_name, user_game_id=user_game_id, user_game_name=user_game_name,
+     steam=steam, gpu_requirements=gpu_requirements,info_message=info_message)
 
 
 if __name__ == "__main__":
