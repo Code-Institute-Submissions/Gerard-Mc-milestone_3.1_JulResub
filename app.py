@@ -243,8 +243,8 @@ def check():
     '''
     # Find old gpus under 1GB
     old_gpu = re.findall("\d+MB|\d+\sMB", gpu_requirements)
-    #if old_gpu:
-        #info_message = message_success
+    if old_gpu:
+        info_message = message_success
 
     '''
     The below regex patterns find AMD and Nvidia GPUs that are below the power
@@ -262,6 +262,11 @@ def check():
     # Eg. Radeon X700, Radeon X1300 XT, Radeon X1900 GT, Radeon HD 2900 PRO, Radeon HD 3850 X2
     find_old_amd_gpu = re.findall("(?i)(?:radeon|ati|amd)\s(?:hd|x\d+|xpress\s\d+|xpress|8\d+|9\d+)\s(?:[2-3]\d+\s(?:pro|xt|gt|x2|\d+)*|[1-2]\d+|x\d+|le|pro|se|xt|xxl|xl|agp|gto|gt|x)", gpu_requirements)
     if find_old_amd_gpu:
+        info_message = message_success
+
+    # Finds more old varients of AMD GPUs. Aids the above pattern to find more.
+    find_x_amd_gpu = re.findall("(?i)(?:radeon|ati|amd)\sx\d+\s(?:le|pro|se|xt|xxl|xl|agp|gto|gt|x)", gpu_requirements)
+    if find_x_amd_gpu:
         info_message = message_success
 
     #Find mobile Amd gpus that are less powerful than all gpus on user gpu list
