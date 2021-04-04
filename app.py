@@ -135,6 +135,14 @@ def search_gpu_homepage():
     return render_template("index.html", gpu=gpu)
 
 
+@app.route('/check', methods=["GET", "POST"])
+def check():
+    user_gpu_name = request.form.get("gpu-model")
+    user_gpu_find = mongo.db.gpu.find_one({ "model": { "$regex": '^'+user_gpu_name+'$', "$options" :'i' } })
+    user_game_id = format(request.form['game-id'])
+    return render_template("result.html", user_gpu_name =user_gpu_name, user_game_id= user_game_id)
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),

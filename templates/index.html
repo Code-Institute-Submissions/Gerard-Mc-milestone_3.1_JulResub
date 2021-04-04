@@ -16,14 +16,14 @@
             required>
         <button class="search-button" type="submit"> Search</button>
     </form>
-    <!-- Form displays after user search for game or gpu has been sent. Displays the results of the search -->
+    <!-- Div displays after user search for game or gpu has been sent. Displays the results of the search -->
     <div id="user_select_form" style="height:400px" class="overflow-auto">
         {% for x in game_list %}
         <hr>
         <!-- When user clicks this link, the game name and id are stored and the results box disappear -->
         <a href="#" onclick="display_game_choice(this.id, this.dataset.id)" name="game_choice" id="{{ x.name }}"
             data-id="{{ x.appid }}">{{ x.name }}</a>
-        <textarea style="display: none" class="hidden-text" name="text-game">{{ x.appid }}</textarea>
+
         {% endfor %}
 
         {% for x in gpu %}
@@ -31,41 +31,61 @@
         <!-- When user clicks this link, the gpu model and rating are stored and the results box disappear -->
         <a href="#" onclick="display_gpu_choice(this.id, this.dataset.id)" name="game_choice" id="{{ x.model }}"
             data-id="{{ x.rating}}">{{ x.model }}</a>
-        <textarea style="display: none" class="hidden-text" name="text-gpu-rating">{{ x.model }}</textarea>
+
         {% endfor %}
     </div>
+    <!-- When user clicks submit, the gpu model and game name are sent to the backend -->
+    <form id="submit_to_python" method="post" action="{{ url_for('check') }}">
+        <!-- JS changes the text area vaule to the game id -->
+        <textarea style="display: none" class="hidden-text" id="submit-game-id" name="game-id"></textarea>
+        <!-- JS changes the text area vaule to the gpu model -->
+        <textarea style="display: none" class="hidden-text"  id="submit-gpu-model"  name="gpu-model"></textarea>
+        <button class="submit-button" id="submit_to_python_button" for="submit_to_python" type="submit">Confirm
+        </button>
+    </form>
+
+
+
 
 </section>
 <script>
-
+    // Below loads values from session storage so that the users values are maintained because a gpu/game form search refreshes the page
+    document.getElementById("query").placeholder = sessionStorage.getItem('name');
+    document.getElementById("query-gpu").placeholder = sessionStorage.getItem('gpu');
+    document.getElementById('submit-game-id').innerHTML = sessionStorage.getItem('appid');
+    document.getElementById('submit-gpu-model').innerHTML = sessionStorage.getItem('gpu');
     function display_game_choice(id, data_id) {
-        // set game name in session storage
+        // Set game name in session storage
         var game = id;
         sessionStorage.setItem('name', game);
-        // set game id session storage
+        // Set game id session storage
         var appid = data_id;
         sessionStorage.setItem('appid', appid);
-        // hide game search results box
+        // Hide game search results box
         document.getElementById("user_select_form").style.display = "none";
-        // set inner html of hidden text area that stores game id to be sent to the backend
+        // Set inner html of hidden text area that stores game id to be sent to the backend
         var game_choice = sessionStorage.getItem('appid');
         // Changes the game search input placeholder to that of the user choice
         document.getElementById("query").placeholder = sessionStorage.getItem('name');
+        // Updates the session storage value for the game id
+        document.getElementById('submit-game-id').innerHTML = sessionStorage.getItem('appid');
     }
 
     function display_gpu_choice(id, data_id) {
-        // set gpu model in session storage
+        // Set gpu model in session storage
         var model = id;
         sessionStorage.setItem('gpu', model);
-        // set gpu rating session storage
+        // Set gpu rating session storage
         var rating = data_id;
         sessionStorage.setItem('rating', rating);
-        // hide gpu search results box
+        // Hide gpu search results box
         document.getElementById("user_select_form").style.display = "none";
-        // set inner html of hidden text area that stores gpu rating to be sent to the backend
+        // Set inner html of hidden text area that stores gpu rating to be sent to the backend
         var gpu_choice = sessionStorage.getItem('rating');
         // Changes the gpu search input placeholder to that of the user choice
         document.getElementById("query-gpu").placeholder = sessionStorage.getItem('gpu');
+        // Updates the session storage value for the gpu model
+        document.getElementById('submit-gpu-model').innerHTML = sessionStorage.getItem('gpu');
     }
 </script>
 {% endblock %}

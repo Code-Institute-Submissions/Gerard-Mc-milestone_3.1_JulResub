@@ -47,7 +47,7 @@
     <!-- Below, the user can select from the search results -->
     <div class="col-4 offset-4" id="gpu_list">
         {% for x in gpu %}
-        <form id="submit_to_python" method="post" action="{{ url_for('submit') }}">
+        <form id="submit_to_python" method="post" action="{{ url_for('check') }}">
             <hr>
             <div class="d-block">
                 <textarea id="gpu-choice" style="display: none" class="hidden-text"
