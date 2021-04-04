@@ -154,6 +154,13 @@ def check():
     # Loads json data and extracts the game's PC mininum requirements
     steam = json.loads(r.text)[
         user_game_id]['data']['pc_requirements']['minimum']
+    # Below searches different variations of GPU requirements title in the json data to prevent issues with regex confusing normal ram with video ram sizes
+    find_title_is_graphics = re.search("(?<=Graphics:).+", steam)
+    find_title_is_video = re.search("(?<=Video:).+", steam)
+    find_title_is_graphics_card = re.search("(?<=Graphics Card:).+", steam)
+    find_title_is_video_card = re.search("(?<=Video Card:).+", steam)
+    find_title_is_russian = re.search("(?<=Видеокарта:).+", steam)
+    
     return render_template("result.html", user_gpu_name=user_gpu_name, user_game_id=user_game_id, user_game_name=user_game_name, steam=steam)
 
 
