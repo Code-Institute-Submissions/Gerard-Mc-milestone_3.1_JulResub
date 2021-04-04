@@ -220,20 +220,31 @@ def check():
         # Cuts the json at the end of the graphics section. The Graphics, CPU, HDD, Sound etc always end with </li>.
         gpu_requirements = re.sub("<\/li>.*$", "", gpu_requirements_cut)
 
-    
-    '''  Below fixes naming inconsistancies found in the Steam API files for Nvidia and Intel GPUs '''
+    '''  Below fixes naming inconsistancies found in the Steam API files for Nvidia GPUs '''
     # Fix Steam Nvidia naming inconsistencies to align with this app's database
     # Eg. Geforce 7800GTX -> Geforce 7800 GTX or Nvidia 7800GT -> Geforce 7800 GT
-    find_gtx_gt_fix = re.findall('(?i)(?:nvidia\sgeforce|nvidia|geforce)\s\d+gt[xX]?\s', gpu_requirements)
+    find_gtx_gt_fix = re.findall(
+        '(?i)(?:nvidia\sgeforce|nvidia|geforce)\s\d+gt[xX]?\s', gpu_requirements)
     for i in find_gtx_gt_fix:
-        before= i
+        before = i
         i = re.sub("(?i)nvidia\sgeforce",  "", i)
         i = re.sub("(?i)nvidia",  "", i)
         i = re.sub("(?i)geforce\s",  " ", i)
         i = re.sub("^\s",  "Nvidia GeForce ", i)
-        a = re.sub("(?i)(?:GTX|GT)", lambda ele: " " + ele[0] + " ", i) 
+        a = re.sub("(?i)(?:GTX|GT)", lambda ele: " " + ele[0] + " ", i)
         switch = a
         gpu_requirements = re.sub(before,  switch, gpu_requirements)
+
+    '''
+    Because all user GPUs are above 1GB VRAM,
+    and only older GPU's VRAM is measured in MB, 512MB and below.
+    If the first regex pattern below finds these, it returns a success message
+    because the GPU is certain to be weaker than the users.
+    '''
+    # Find old gpus under 1GB
+    old_gpu = re.findall("\d+MB|\d+\sMB", gpu_requirements)
+    if old_gpu:
+        info_message = message_success
 
     return render_template("result.html", user_gpu_name=user_gpu_name, user_game_id=user_game_id,
                            user_game_name=user_game_name, steam=steam, gpu_requirements=gpu_requirements, info_message=info_message)
