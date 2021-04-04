@@ -127,6 +127,13 @@ def search_game_homepage():
     print(game)
     return render_template("index.html", game_list=game_list)
 
+@app.route("/search_gpu_homepage", methods=["GET", "POST"])
+def search_gpu_homepage():
+    query_gpu = request.form.get("query-gpu")
+    gpu = list(mongo.db.gpu.find(
+        {"$text": {"$search": "\"" + query_gpu + "\""}}))
+    return render_template("index.html", gpu=gpu)
+
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
