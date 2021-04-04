@@ -1,6 +1,7 @@
 import os
 import requests
 import json
+import re
 from bson import ObjectId
 from flask import (
     Flask, flash, render_template,
@@ -147,21 +148,49 @@ def check():
     # Below uses the user game id to connect to a specific external API file
     r = requests.get(
         f"https://store.steampowered.com/api/appdetails?appids={user_game_id}")
-    # Sometimes the external API has issues with it's own game ids. In that case, the below sends an error message to the result page.
+    # Sometimes the external API has issues with it's own game ids.
+    # In that case, the below sends an error message to the result page.
     if not r:
         steam = "Sorry, we don't have this game's requirements on our database"
         return render_template("result.html", user_gpu_name=user_gpu_name, user_game_name=user_game_name, steam=steam)
-    # Loads json data and extracts the game's PC mininum requirements
+    # Loads json data and extracts the game's PC mininum requirements.
     steam = json.loads(r.text)[
         user_game_id]['data']['pc_requirements']['minimum']
-    # Below searches different variations of GPU requirements title in the json data to prevent issues with regex confusing normal ram with video ram sizes
+
+    # Below searches different variations of GPU requirements title in the json data.
+    # to prevent issues with regex confusing normal ram with video ram sizes.
     find_title_is_graphics = re.search("(?<=Graphics:).+", steam)
     find_title_is_video = re.search("(?<=Video:).+", steam)
     find_title_is_graphics_card = re.search("(?<=Graphics Card:).+", steam)
     find_title_is_video_card = re.search("(?<=Video Card:).+", steam)
     find_title_is_russian = re.search("(?<=Видеокарта:).+", steam)
-    
-    return render_template("result.html", user_gpu_name=user_gpu_name, user_game_id=user_game_id, user_game_name=user_game_name, steam=steam)
+
+    # When title is found, regex cuts from the graphics part of the json file.
+    if find_title_is_graphics:
+	    gpu_requirements = re.findall("(?<=Graphics:).+", steam)
+    elif find_title_is_video:
+	    gpu_requirements = re.findall("(?<=Video:).+", steam)
+    elif find_title_is_video_card:
+	    gpu_requirements = re.findall("(?<=Video Card:).+", steam)
+    elif find_title_is_graphics_card:
+	    gpu_requirements = re.findall("(?<=Graphics Card:).+", steam)
+    elif find_title_is_russian:
+	    gpu_requirements = re.findall("(?<=Видеокарта:).+", steam)
+    else:
+	    print("We don't have this game on our database.")
+
+    # Tidy gpu_requirements variable data for easier regex use.
+    if gpu_requirements:
+        # Removes words that will conflict or complicate regex patterns and removes extra html.
+        gpu_requirements_cut = re.sub(
+            "(?i)(?:series\s|or\s|better\s|<\/strong>|<br>)", "", gpu_requirements[0])
+        # Cuts the json at the end of the graphics section. The Graphics, CPU, HDD, Sound etc always end with </li>.
+        gpu_requirements = re.sub("<\/li>.*$", "", gpu_requirements_cut)
+
+    else:
+        gpu_requirements = "We can't find this configuration in our database"
+
+    return render_template("result.html", user_gpu_name=user_gpu_name, user_game_id=user_game_id, user_game_name=user_game_name, steam=steam, gpu_requirements=gpu_requirements)
 
 
 if __name__ == "__main__":
