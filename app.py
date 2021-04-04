@@ -264,6 +264,11 @@ def check():
     if find_old_amd_gpu:
         info_message = message_success
 
+    #Find mobile Amd gpus that are less powerful than all gpus on user gpu list
+    find_old_amd_mobile_gpu = re.findall("(?i)(?:mobility\sradeon|mobility)\s(?:hd|x)*\s*(?:[1-3][0-9]\d+|4[0-5]\d+)\s*(?:x2|xt)*", gpu_requirements)
+    if find_old_amd_mobile_gpu:
+        info_message = message_success
+
     return render_template("result.html", user_gpu_name=user_gpu_name, user_game_id=user_game_id,
                            user_game_name=user_game_name, steam=steam, gpu_requirements=gpu_requirements, info_message=info_message, show=show)
 
