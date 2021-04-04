@@ -243,9 +243,20 @@ def check():
     '''
     # Find old gpus under 1GB
     old_gpu = re.findall("\d+MB|\d+\sMB", gpu_requirements)
-    if old_gpu:
-        info_message = message_success
+    #if old_gpu:
+        #info_message = message_success
 
+    '''
+    The below regex patterns find AMD and Nvidia GPUs that are below the power
+    of the weakest GPU the user can choose. If any of these patterns are matched,
+    the user info message will be success.
+    '''
+
+    #Find old geforce gpus. Geforce 256, geforce2, geforce3, geforce4, geforce fx, geforce 6000, geforce 7000, geforce 8000, geforce 9000 series.
+    find_old_geforce_gpu = re.findall(
+        "(?i)(?:nvidia\sgeforce|NVIDIA|geforce\d*)\s(?:(?:ti|mx|pcx)\d+|fx|pcx|\d+|\d+\s\+|\d+a|\d+pv)\s*(?:\d+gtx\+|gtx|gso|gt|gx2|ge|gs|le|se|mgpu|ultra|TurboCache|nForce\s4[1-3]0)*\s(?:ultra)*", gpu_requirements)
+    if find_old_geforce_gpu:
+        info_message = message_success
     return render_template("result.html", user_gpu_name=user_gpu_name, user_game_id=user_game_id,
                            user_game_name=user_game_name, steam=steam, gpu_requirements=gpu_requirements, info_message=info_message)
 
