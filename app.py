@@ -144,9 +144,14 @@ def check():
     user_gpu_name = request.form.get("gpu-model")
     user_game_name = request.form.get("game-name")
     user_game_id = format(request.form['game-id'])
-    # Below uses the user game id to connect to correct external api json data and extracts data from the mininum requirements key
+    # Below uses the user game id to connect to a specific external API file
     r = requests.get(
-        "https://store.steampowered.com/api/appdetails?appids=" + user_game_id + "")
+        f"https://store.steampowered.com/api/appdetails?appids={user_game_id}")
+    # Sometimes the external API has issues with it's own game ids. In that case, the below sends an error message to the result page.
+    if not r:
+        steam = "Sorry, we don't have this game's requirements on our database"
+        return render_template("result.html", user_gpu_name=user_gpu_name, user_game_name=user_game_name, steam=steam)
+    # Loads json data and extracts the game's PC mininum requirements
     steam = json.loads(r.text)[
         user_game_id]['data']['pc_requirements']['minimum']
     return render_template("result.html", user_gpu_name=user_gpu_name, user_game_id=user_game_id, user_game_name=user_game_name, steam=steam)
