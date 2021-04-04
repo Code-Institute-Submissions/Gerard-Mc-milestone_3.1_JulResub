@@ -2,10 +2,9 @@ import os
 import requests
 import json
 import re
-from bson import ObjectId
 from flask import (
     Flask, flash, render_template,
-    redirect, request, session, url_for, jsonify)
+    redirect, request, session, url_for)
 from flask_pymongo import PyMongo
 from werkzeug.security import generate_password_hash, check_password_hash
 if os.path.exists("env.py"):
@@ -60,10 +59,12 @@ def login():
             {"name": request.form.get("username").lower()})
 
         if existing_user:
-            # If username exists, entered password is checked againgst the database user entity
+            # If username exists, entered password is checked
+            # againgst the database user entity
             if check_password_hash(existing_user["password"],
                                    request.form.get("password")):
-                # If successful, session data updated and user is directed to profile page
+                # If successful, session data updated and user
+                # is directed to profile page
                 session['user'] = existing_user['name']
                 return redirect(url_for("profile", user=session['user']))
             else:
@@ -143,13 +144,15 @@ def search_gpu_homepage():
 def check():
     # Messages to be displayed based on game being found on the API
     # and GPU being compatible or not compatible with the game.
-    # info_message will be sent to the results page informing the user of the result.
-    info_message= ""
+    # info_message will be sent to the results page informing
+    # the user of the result.
+    info_message = ""
     message_success = "Your GPU supports this game"
     message_fail = "Your GPU does not support this game"
     message_not_found = "We can't find this configuration in our database"
 
-    # Extract user gpu model, game id, and game name from "submit_to_python" form.
+    # Extract user gpu model, game id,
+    # and game name from "submit_to_python" form.
     user_gpu_name = request.form.get("gpu-model")
     user_game_name = request.form.get("game-name")
     user_game_id = format(request.form['game-id'])
@@ -160,42 +163,65 @@ def check():
     # In that case, the below sends an error message to the result page.
     if not r:
         steam = message_not_found
-        return render_template("result.html", user_gpu_name=user_gpu_name, user_game_name=user_game_name, steam=steam)
-    # Loads json data and extracts the game's PC mininum requirements.
-    steam = json.loads(r.text)[user_game_id]['data']['pc_requirements']['minimum']
+        return render_template("result.html", user_gpu_name=user_gpu_name,
+                               user_game_name=user_game_name, steam=steam)
+    # Loads json data and extracts the game's PC minimum requirements.
+    steam = json.loads(
+        r.text)[user_game_id]['data']['pc_requirements']['minimum']
 
-    # Below searches different variations of GPU requirements title in the json data.
+    # Searches different variations of GPU requirements title in json data.
     # to prevent issues with regex confusing normal ram with video ram sizes.
     find_title_is_graphics = re.search("(?<=Graphics:).+", steam)
     find_title_is_video = re.search("(?<=Video:).+", steam)
     find_title_is_graphics_card = re.search("(?<=Graphics Card:).+", steam)
     find_title_is_video_card = re.search("(?<=Video Card:).+", steam)
     find_title_is_russian = re.search("(?<=Видеокарта:).+", steam)
+    # Finds section when there is html in between the title and it's
+    #  following colon. (Happens rarely)
+    find_title_is_graphics_card_no_colon = re.search(
+        "(?<=Graphics Card).+", steam)
+    find_title_is_graphics_no_colon = re.search("(?<=Graphics).+", steam)
+    find_title_is_video_card_no_colon = re.search("(?<=Video Card).+", steam)
+    find_title_is_video_no_colon = re.search("(?<=Video).+", steam)
+    find_title_is_russian_no_colon = re.search("(?<=Видеокарта).+", steam)
 
     # When title is found, regex cuts from the graphics part of the json file.
     if find_title_is_graphics:
-	    gpu_requirements = re.findall("(?<=Graphics:).+", steam)
-    elif find_title_is_video:
-	    gpu_requirements = re.findall("(?<=Video:).+", steam)
-    elif find_title_is_video_card:
-	    gpu_requirements = re.findall("(?<=Video Card:).+", steam)
+        gpu_requirements = re.findall("(?<=Graphics:).+", steam)
     elif find_title_is_graphics_card:
-	    gpu_requirements = re.findall("(?<=Graphics Card:).+", steam)
+        gpu_requirements = re.findall("(?<=Graphics Card:).+", steam)
+    elif find_title_is_video:
+        gpu_requirements = re.findall("(?<=Video:).+", steam)
+    elif find_title_is_video_card:
+        gpu_requirements = re.findall("(?<=Video Card:).+", steam)
     elif find_title_is_russian:
-	    gpu_requirements = re.findall("(?<=Видеокарта:).+", steam)
+        gpu_requirements = re.findall("(?<=Видеокарта:).+", steam)
+    # Regex cuts from the graphics when there is html in between the title and it's following colon.
+    elif find_title_is_graphics_no_colon:
+        gpu_requirements = re.findall("(?<=Graphics).+", steam)
+    elif find_title_is_graphics_card_no_colon:
+        gpu_requirements = re.findall("(?<=Graphics Card).+", steam)
+    elif find_title_is_video_card_no_colon:
+        gpu_requirements = re.findall("(?<=Video Card).+", steam)
+    elif find_title_is_video_no_colon:
+        gpu_requirements = re.findall("(?<=Video).+", steam)
+    elif find_title_is_russian_no_colon:
+        gpu_requirements = re.findall("(?<=Видеокарта).+", steam)
     # When the graphics section can't be found, the info message
-    gpu_requirements = ""
-    info_message = message_not_found
+    else:
+        gpu_requirements = ""
+        info_message = message_not_found
     # Tidy gpu_requirements variable data for easier regex use.
     if gpu_requirements != "":
-        # Removes words that will conflict or complicate regex patterns and removes extra html.
+        # Removes words that will conflict or complicate regex patterns
+        # and removes extra html.
         gpu_requirements_cut = re.sub(
-            "(?i)(?:series\s|or\s|better\s|<\/strong>|<br>)", "", gpu_requirements[0])
+            "(?i)(?:series\s|or\s|better\s|<\/strong>|<br>|:)", "", gpu_requirements[0])
         # Cuts the json at the end of the graphics section. The Graphics, CPU, HDD, Sound etc always end with </li>.
         gpu_requirements = re.sub("<\/li>.*$", "", gpu_requirements_cut)
 
-    return render_template("result.html", user_gpu_name=user_gpu_name, user_game_id=user_game_id, user_game_name=user_game_name,
-     steam=steam, gpu_requirements=gpu_requirements,info_message=info_message)
+    return render_template("result.html", user_gpu_name=user_gpu_name, user_game_id=user_game_id,
+                           user_game_name=user_game_name, steam=steam, gpu_requirements=gpu_requirements, info_message=info_message)
 
 
 if __name__ == "__main__":
