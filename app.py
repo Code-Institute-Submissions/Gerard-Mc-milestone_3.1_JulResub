@@ -128,7 +128,6 @@ def search_game_homepage():
     for i in game:
         if i["appid"] % 10 == 0:
             game_list.append(i)
-    print(game)
     return render_template("index.html", game_list=game_list)
 
 
@@ -148,7 +147,7 @@ def check():
     # the user of the result.
     info_message = ""
     message_success = "Your GPU supports this game"
-    message_fail = "Your GPU does not support this game"
+    # message_fail = "Your GPU does not support this game"
     message_not_found = "We can't find this configuration in our database"
 
     # Extract user gpu model, game id,
@@ -167,7 +166,8 @@ def check():
                                user_game_name=user_game_name, steam=steam)
     # Loads json data and extracts the game's PC minimum requirements.
     steam = json.loads(
-        r.text)[user_game_id]['data']['pc_requirements']['minimum']    # Searches different variations of GPU requirements title in json data.
+        r.text)[user_game_id]['data']['pc_requirements']['minimum']
+    # Searches different variations of GPU requirements title in json data.
     # to prevent issues with regex confusing normal ram with video ram sizes.
     find_title_is_graphics = re.search("(?<=Graphics:).+", steam)
     find_title_is_video = re.search("(?<=Video:).+", steam)
@@ -194,7 +194,8 @@ def check():
         gpu_requirements = re.findall("(?<=Video Card:).+", steam)
     elif find_title_is_russian:
         gpu_requirements = re.findall("(?<=Видеокарта:).+", steam)
-    # Regex cuts from the graphics when there is html in between the title and it's following colon.
+    # Regex cuts from the graphics when there is html in
+    # between the title and it's following colon.
     elif find_title_is_graphics_no_colon:
         gpu_requirements = re.findall("(?<=Graphics).+", steam)
     elif find_title_is_graphics_card_no_colon:
@@ -214,24 +215,28 @@ def check():
         # Removes words that will conflict or complicate regex patterns
         # and removes extra html.
         gpu_requirements_cut = re.sub(
-            "(?i)(?:series\s|or\s|better\s|<\/strong>|<br>|:)", "", gpu_requirements[0])
-        # Cuts the json at the end of the graphics section. The Graphics, CPU, HDD, Sound etc always end with </li>.
-        gpu_requirements = re.sub("<\/li>.*$", "", gpu_requirements_cut)
+            r"(?i)(?:series\s|or\s|better\s|<\/strong>|<br>|:)", "",
+            gpu_requirements[0])
+        # Cuts the json at the end of the graphics section.
+        # The Graphics, CPU, HDD, Sound etc always end with </li>.
+        gpu_requirements = re.sub(r"<\/li>.*$", "", gpu_requirements_cut)
 
-
-    show = ""
-    '''  Below fixes naming inconsistancies found in the Steam API files for Nvidia GPUs '''
+    '''
+    Below fixes naming inconsistancies found
+    in the Steam API files for Nvidia GPUs
+    '''
     # Fix Steam Nvidia naming inconsistencies to align with this app's database
-    # Eg. Geforce 7800GTX -> Geforce 7800 GTX or Nvidia 7800GT -> Geforce 7800 GT
+    # Eg. Geforce 7800GTX > Geforce 7800 GTX or Nvidia 7800GT > Geforce 7800 GT
     find_gtx_gt_fix = re.findall(
-        '(?i)(?:nvidia\sgeforce|nvidia|geforce)\s\d+gt[xX]?\s', gpu_requirements)
+        r'(?i)(?:nvidia\sgeforce|nvidia|geforce)\s\d+gt[xX]?\s',
+        gpu_requirements)
     for i in find_gtx_gt_fix:
         before = i
-        i = re.sub("(?i)nvidia\sgeforce",  "", i)
-        i = re.sub("(?i)nvidia",  "", i)
-        i = re.sub("(?i)geforce\s",  " ", i)
-        i = re.sub("^\s",  "Nvidia GeForce ", i)
-        a = re.sub("(?i)(?:GTX|GT)", lambda ele: " " + ele[0] + " ", i)
+        i = re.sub(r"(?i)nvidia\sgeforce",  "", i)
+        i = re.sub(r"(?i)nvidia",  "", i)
+        i = re.sub(r"(?i)geforce\s",  " ", i)
+        i = re.sub(r"^\s",  "Nvidia GeForce ", i)
+        a = re.sub(r"(?i)(?:GTX|GT)", lambda ele: " " + ele[0] + " ", i)
         switch = a
         gpu_requirements = re.sub(before,  switch, gpu_requirements)
 
@@ -242,40 +247,60 @@ def check():
     because the GPU is certain to be weaker than the users.
     '''
     # Find old gpus under 1GB
-    old_gpu = re.findall("\d+MB|\d+\sMB", gpu_requirements)
+    old_gpu = re.findall(r"\d+MB|\d+\sMB", gpu_requirements)
     if old_gpu:
         info_message = message_success
 
     '''
     The below regex patterns find AMD and Nvidia GPUs that are below the power
-    of the weakest GPU the user can choose. If any of these patterns are matched,
-    the user info message will be success.
+    of the weakest GPU the user can choose. If any of these patterns are
+    matched, the user info message will be success.
     '''
 
-    #Find old geforce gpus. Geforce 256, geforce2, geforce3, geforce4, geforce fx, geforce 6000, geforce 7000, geforce 8000, geforce 9000 series.
+    # Find old geforce gpus. Geforce 256, geforce2 - geforce4, geforce fx
+    # geforce 6000, geforce 7000, geforce 8000, geforce 9000 series.
     find_old_geforce_gpu = re.findall(
-        "(?i)(?:nvidia\sgeforce|NVIDIA|geforce\d*)\s(?:(?:ti|mx|pcx)\d+|fx|pcx|\d+|\d+\s\+|\d+a|\d+pv)\s*(?:\d+gtx\+|gtx|gso|gt|gx2|ge|gs|le|se|mgpu|ultra|TurboCache|nForce\s4[1-3]0)*\s(?:ultra)*", gpu_requirements)
+        r'"(?i)(?:nvidia\sgeforce|NVIDIA|geforce\d*)\s'
+        r'(?:(?:ti|mx|pcx)\d+|fx|pcx|\d+|\d+\s\+|\d+a|\d+pv)\s*'
+        r'(?:\d+gtx\+|gtx|gso|gt|gx2|ge|gs|le|se|mgpu|ultra|TurboCache|nForce'
+        r'\s4[1-3]0)*\s(?:ultra)*"', gpu_requirements)
     if find_old_geforce_gpu:
         info_message = message_success
 
-    # Find all AMD GPUs from years 2001 - 2008 or from Radeon 8000 series up to Radeon HD 3000 series 
-    # Eg. Radeon X700, Radeon X1300 XT, Radeon X1900 GT, Radeon HD 2900 PRO, Radeon HD 3850 X2
-    find_old_amd_gpu = re.findall("(?i)(?:radeon|ati|amd)\s(?:hd|x\d+|xpress\s\d+|xpress|8\d+|9\d+)\s(?:[2-3]\d+\s(?:pro|xt|gt|x2|\d+)*|[1-2]\d+|x\d+|le|pro|se|xt|xxl|xl|agp|gto|gt|x)", gpu_requirements)
+    # Finds AMD GPU years 2001-2008 or from Radeon 8000 series - HD 3000 series
+    # Eg. Radeon X700, Radeon X1300 XT, Radeon X1900 GT, Radeon HD 2900 PRO
+    find_old_amd_gpu = re.findall(
+        r'"(?i)(?:radeon|ati|amd)\s'
+        r'(?:hd|x\d+|xpress\s\d+|xpress|8\d+|9\d+)\s'
+        r'(?:[2-3]\d+\s(?:pro|xt|gt|x2|\d+)*'
+        r'|[1-2]\d+|x\d+|le|pro|se|xt|xxl|xl|agp|gto|gt|x)"', gpu_requirements)
     if find_old_amd_gpu:
         info_message = message_success
 
     # Finds more old varients of AMD GPUs. Aids the above pattern to find more.
-    find_x_amd_gpu = re.findall("(?i)(?:radeon|ati|amd)\sx\d+\s(?:le|pro|se|xt|xxl|xl|agp|gto|gt|x)", gpu_requirements)
+    find_x_amd_gpu = re.findall(
+        r'"(?i)(?:radeon|ati|amd)\sx\d+\s'
+        r'(?:le|pro|se|xt|xxl|xl|agp|gto|gt|x)"', gpu_requirements)
     if find_x_amd_gpu:
         info_message = message_success
 
-    #Find mobile Amd gpus that are less powerful than all gpus on user gpu list
-    find_old_amd_mobile_gpu = re.findall("(?i)(?:mobility\sradeon|mobility)\s(?:hd|x)*\s*(?:[1-3][0-9]\d+|4[0-5]\d+)\s*(?:x2|xt)*", gpu_requirements)
+    # Find mobile Amd gpu that are less powerful than all gpus on user gpu list
+    find_old_amd_mobile_gpu = re.findall(
+        r'"(?i)(?:mobility\sradeon|mobility)\s(?:hd|x)*\s*'
+        r'(?:[1-3][0-9]\d+|4[0-5]\d+)\s*(?:x2|xt)*"', gpu_requirements)
     if find_old_amd_mobile_gpu:
         info_message = message_success
 
-    return render_template("result.html", user_gpu_name=user_gpu_name, user_game_id=user_game_id,
-                           user_game_name=user_game_name, steam=steam, gpu_requirements=gpu_requirements, info_message=info_message, show=show)
+    '''
+    The below code will find any patterns that are for GPUs
+    not guaranteed to be less powerful than the user GPU.
+    '''
+
+    return render_template(
+        "result.html", user_gpu_name=user_gpu_name,
+        user_game_id=user_game_id,
+        user_game_name=user_game_name, steam=steam,
+        gpu_requirements=gpu_requirements, info_message=info_message)
 
 
 if __name__ == "__main__":
