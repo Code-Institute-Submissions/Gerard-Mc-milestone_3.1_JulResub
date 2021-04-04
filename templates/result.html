@@ -2,10 +2,13 @@
 {% block content %}
 
 <section id="results" class="col-4 offset-4 mt-5">
-<h1>Results</h1>
-<br>
-<p><strong>User GPU:</strong> {{ user_gpu_name}} </p>
-<p><strong>Game ID: </strong> {{ user_game_id }} </p>
-<p ><strong> Can I run it? </strong>Maybe</p>
+    <h1>Results</h1>
+    <h4>Can {{ user_gpu_name}} run {{ user_game_name }}?</h4>
+    <br>
+    {{ steam|safe }}
+    <br>
+    <p><strong>User GPU:</strong> {{ user_gpu_name}} </p>
+    <p><strong>Game ID: </strong> {{ user_game_id }} </p>
+    <p><strong> Can I run it? </strong>Maybe</p>
 </section>
 {% endblock %}

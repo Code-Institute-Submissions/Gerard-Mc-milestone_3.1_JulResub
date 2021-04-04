@@ -1,4 +1,6 @@
 import os
+import requests
+import json
 from bson import ObjectId
 from flask import (
     Flask, flash, render_template,
@@ -127,6 +129,7 @@ def search_game_homepage():
     print(game)
     return render_template("index.html", game_list=game_list)
 
+
 @app.route("/search_gpu_homepage", methods=["GET", "POST"])
 def search_gpu_homepage():
     query_gpu = request.form.get("query-gpu")
@@ -137,10 +140,16 @@ def search_gpu_homepage():
 
 @app.route('/check', methods=["GET", "POST"])
 def check():
+    # Extract user gpu model, game id, and game name from "submit_to_python" form.
     user_gpu_name = request.form.get("gpu-model")
-    user_gpu_find = mongo.db.gpu.find_one({ "model": { "$regex": '^'+user_gpu_name+'$', "$options" :'i' } })
+    user_game_name = request.form.get("game-name")
     user_game_id = format(request.form['game-id'])
-    return render_template("result.html", user_gpu_name =user_gpu_name, user_game_id= user_game_id)
+    # Below uses the user game id to connect to correct external api json data and extracts data from the mininum requirements key
+    r = requests.get(
+        "https://store.steampowered.com/api/appdetails?appids=" + user_game_id + "")
+    steam = json.loads(r.text)[
+        user_game_id]['data']['pc_requirements']['minimum']
+    return render_template("result.html", user_gpu_name=user_gpu_name, user_game_id=user_game_id, user_game_name=user_game_name, steam=steam)
 
 
 if __name__ == "__main__":

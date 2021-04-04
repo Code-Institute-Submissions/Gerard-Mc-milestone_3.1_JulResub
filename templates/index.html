@@ -10,12 +10,14 @@
         <input placeholder="Search Game" type="text" name="query" id="query" minlength="3" class="validate" required>
         <button class="search-button" type="submit"> Search</button>
     </form>
+    
     <!-- Form that takes user gpu input and sends to backend to search database -->
     <form action="{{ url_for('search_gpu_homepage') }}" method="post">
         <input placeholder="Search GPU" type="text-gpu" name="query-gpu" id="query-gpu" minlength="3" class="validate"
             required>
         <button class="search-button" type="submit"> Search</button>
     </form>
+
     <!-- Div displays after user search for game or gpu has been sent. Displays the results of the search -->
     <div id="user_select_form" style="height:400px" class="overflow-auto">
         {% for x in game_list %}
@@ -34,18 +36,18 @@
 
         {% endfor %}
     </div>
+
     <!-- When user clicks submit, the gpu model and game name are sent to the backend -->
     <form id="submit_to_python" method="post" action="{{ url_for('check') }}">
+        <!-- JS changes the text area vaule to the game name -->
+        <textarea style="display: none" class="hidden-text" id="submit-game-name" name="game-name"></textarea>
         <!-- JS changes the text area vaule to the game id -->
         <textarea style="display: none" class="hidden-text" id="submit-game-id" name="game-id"></textarea>
         <!-- JS changes the text area vaule to the gpu model -->
-        <textarea style="display: none" class="hidden-text"  id="submit-gpu-model"  name="gpu-model"></textarea>
+        <textarea style="display: none" class="hidden-text" id="submit-gpu-model" name="gpu-model"></textarea>
         <button class="submit-button" id="submit_to_python_button" for="submit_to_python" type="submit">Confirm
         </button>
     </form>
-
-
-
 
 </section>
 <script>
@@ -53,6 +55,7 @@
     document.getElementById("query").placeholder = sessionStorage.getItem('name');
     document.getElementById("query-gpu").placeholder = sessionStorage.getItem('gpu');
     document.getElementById('submit-game-id').innerHTML = sessionStorage.getItem('appid');
+    document.getElementById('submit-game-name').innerHTML = sessionStorage.getItem('name');
     document.getElementById('submit-gpu-model').innerHTML = sessionStorage.getItem('gpu');
     function display_game_choice(id, data_id) {
         // Set game name in session storage
@@ -67,6 +70,8 @@
         var game_choice = sessionStorage.getItem('appid');
         // Changes the game search input placeholder to that of the user choice
         document.getElementById("query").placeholder = sessionStorage.getItem('name');
+        // Updates the session storage value for the game name
+        document.getElementById('submit-game-name').innerHTML = sessionStorage.getItem('name');
         // Updates the session storage value for the game id
         document.getElementById('submit-game-id').innerHTML = sessionStorage.getItem('appid');
     }
