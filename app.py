@@ -1,7 +1,8 @@
 import os
+from bson import ObjectId
 from flask import (
     Flask, flash, render_template,
-    redirect, request, session, url_for)
+    redirect, request, session, url_for, jsonify)
 from flask_pymongo import PyMongo
 from werkzeug.security import generate_password_hash, check_password_hash
 if os.path.exists("env.py"):
@@ -17,9 +18,7 @@ mongo = PyMongo(app)
 # Test #
 @app.route('/')
 def find_gpus():
-    gpus = mongo.db.gpu.find()
-    return render_template("index.html", gpus=gpus)
-
+    return render_template("index.html")
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -114,6 +113,19 @@ def profile(user):
     user = mongo.db.users.find_one(
         {"name": session["user"]})
     return render_template("profile.html", user=user)
+
+
+@app.route('/search_game_homepage', methods=["GET", "POST"])
+def search_game_homepage():
+    query = request.form.get("query")
+    game_list = []
+    game = list(mongo.db.game.find(
+        {"$text": {"$search": "\"" + query + "\""}}))
+    for i in game:
+        if i["appid"] % 10 == 0:
+            game_list.append(i)
+    print(game)
+    return render_template("index.html", game_list=game_list)
 
 
 if __name__ == "__main__":

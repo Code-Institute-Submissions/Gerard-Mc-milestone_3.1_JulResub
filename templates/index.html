@@ -1,12 +1,42 @@
 {% extends "base.html" %}
 {% block content %}
+<section class="col-4 offset-4 mt-5">
+    <br>
+    <h1>Can your GPU run it?</h1>
+    <p>Search for your GPU and chosen game in the fields below</p>
+    <hr>
+    <!-- Form that takes user game input and sends to backend to search database -->
+    <form action="{{ url_for('search_game_homepage') }}" method="post">
+        <input placeholder="Search Game" type="text" name="query" id="query" minlength="3" class="validate" required>
+        <button class="search-button" type="submit"> Send</button>
+    </form>
+    <!-- Form displays after user search has been sent. Displays the results of the search -->
+    <form id="game_select_form" style="height:400px" class="overflow-auto">
+        {% for x in game_list %}
+        <hr>
+        <!-- When user clicks this link, the game name and id are stored and the results box disappear -->
+        <a href="#" onclick="display_game_choice(this.id, this.dataset.id)" name="game_choice" id="{{ x.name }}"
+            data-id="{{ x.appid }}">{{ x.name }}</a>
+        <textarea style="display: none" class="hidden-text" name="text-game">{{ x.appid }}</textarea>
+        {% endfor %}
+    </form>
 
-<section class="container-fluid">
-    <hr>
-    {% for gpu in gpus %}
-    <p><strong>Model: </strong> {{ gpu.model }} <br><strong>Rank: </strong>{{ gpu.rating }}</p>
-    <hr>
-    {% endfor %}
 </section>
+<script>
 
+    function display_game_choice(id, data_id) {
+        // set game name in session storage
+        var game = id;
+        sessionStorage.setItem('name', game);
+        // set game id session storage
+        var appid = data_id;
+        sessionStorage.setItem('appid', appid);
+        // hide game search results box
+        document.getElementById("game_select_form").style.display = "none";
+        // set inner html of hidden text area that stores game id to be sent to the backend
+        var game_choice = sessionStorage.getItem('appid');
+        // Changes the game search input placeholder to that of the user choice
+        document.getElementById("query").placeholder = sessionStorage.getItem('name');
+    }
+</script>
 {% endblock %}
