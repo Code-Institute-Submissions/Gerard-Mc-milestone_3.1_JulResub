@@ -45,6 +45,8 @@
         <textarea style="display: none" class="hidden-text" id="submit-game-id" name="game-id"></textarea>
         <!-- JS changes the text area vaule to the gpu model -->
         <textarea style="display: none" class="hidden-text" id="submit-gpu-model" name="gpu-model"></textarea>
+        <!-- JS changes the text area vaule to the gpu rating -->
+        <textarea style="display: none" class="hidden-text" id="submit-gpu-rating" name="gpu-rating"></textarea>
         <button class="submit-button" id="submit_to_python_button" for="submit_to_python" type="submit">Confirm
         </button>
     </form>
@@ -57,6 +59,7 @@
     document.getElementById('submit-game-id').innerHTML = sessionStorage.getItem('appid');
     document.getElementById('submit-game-name').innerHTML = sessionStorage.getItem('name');
     document.getElementById('submit-gpu-model').innerHTML = sessionStorage.getItem('gpu');
+    document.getElementById('submit-gpu-rating').innerHTML = sessionStorage.getItem('rating');
     function display_game_choice(id, data_id) {
         // Set game name in session storage
         var game = id;
@@ -91,6 +94,9 @@
         document.getElementById("query-gpu").placeholder = sessionStorage.getItem('gpu');
         // Updates the session storage value for the gpu model
         document.getElementById('submit-gpu-model').innerHTML = sessionStorage.getItem('gpu');
+        // Updates the session storage value for the gpu rating
+        document.getElementById('submit-gpu-rating').innerHTML = sessionStorage.getItem('rating');
+
     }
 </script>
 {% endblock %}

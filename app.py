@@ -147,12 +147,13 @@ def check():
     # the user of the result.
     info_message = ""
     message_success = "Your GPU supports this game"
-    # message_fail = "Your GPU does not support this game"
+    message_fail = "Your GPU does not support this game"
     message_not_found = "We can't find this configuration in our database"
 
     # Extract user gpu model, game id,
     # and game name from "submit_to_python" form.
     user_gpu_name = request.form.get("gpu-model")
+    user_gpu_rating = int(request.form.get('gpu-rating'))
     user_game_name = request.form.get("game-name")
     user_game_id = format(request.form['game-id'])
     # Below uses the user game id to connect to a specific external API file
@@ -167,6 +168,7 @@ def check():
     # Loads json data and extracts the game's PC minimum requirements.
     steam = json.loads(
         r.text)[user_game_id]['data']['pc_requirements']['minimum']
+    steam = "Graphics: Intel UHD 640"
     # Searches different variations of GPU requirements title in json data.
     # to prevent issues with regex confusing normal ram with video ram sizes.
     find_title_is_graphics = re.search("(?<=Graphics:).+", steam)
@@ -260,7 +262,7 @@ def check():
     # Find old geforce gpus. Geforce 256, geforce2 - geforce4, geforce fx
     # geforce 6000, geforce 7000, geforce 8000, geforce 9000 series.
     find_old_geforce_gpu = re.findall(
-        r'"(?i)(?:nvidia\sgeforce|NVIDIA|geforce\d*)\s'
+        r'(?i)(?:nvidia\sgeforce|NVIDIA|geforce\d*)\s'
         r'(?:(?:ti|mx|pcx)\d+|fx|pcx|\d+|\d+\s\+|\d+a|\d+pv)\s*'
         r'(?:\d+gtx\+|gtx|gso|gt|gx2|ge|gs|le|se|mgpu|ultra|TurboCache|nForce'
         r'\s4[1-3]0)*\s(?:ultra)*"', gpu_requirements)
@@ -270,7 +272,7 @@ def check():
     # Finds AMD GPU years 2001-2008 or from Radeon 8000 series - HD 3000 series
     # Eg. Radeon X700, Radeon X1300 XT, Radeon X1900 GT, Radeon HD 2900 PRO
     find_old_amd_gpu = re.findall(
-        r'"(?i)(?:radeon|ati|amd)\s'
+        r'(?i)(?:radeon|ati|amd)\s'
         r'(?:hd|x\d+|xpress\s\d+|xpress|8\d+|9\d+)\s'
         r'(?:[2-3]\d+\s(?:pro|xt|gt|x2|\d+)*'
         r'|[1-2]\d+|x\d+|le|pro|se|xt|xxl|xl|agp|gto|gt|x)"', gpu_requirements)
@@ -279,22 +281,62 @@ def check():
 
     # Finds more old varients of AMD GPUs. Aids the above pattern to find more.
     find_x_amd_gpu = re.findall(
-        r'"(?i)(?:radeon|ati|amd)\sx\d+\s'
+        r'(?i)(?:radeon|ati|amd)\sx\d+\s'
         r'(?:le|pro|se|xt|xxl|xl|agp|gto|gt|x)"', gpu_requirements)
     if find_x_amd_gpu:
         info_message = message_success
 
     # Find mobile Amd gpu that are less powerful than all gpus on user gpu list
     find_old_amd_mobile_gpu = re.findall(
-        r'"(?i)(?:mobility\sradeon|mobility)\s(?:hd|x)*\s*'
+        r'(?i)(?:mobility\sradeon|mobility)\s(?:hd|x)*\s*'
         r'(?:[1-3][0-9]\d+|4[0-5]\d+)\s*(?:x2|xt)*"', gpu_requirements)
     if find_old_amd_mobile_gpu:
         info_message = message_success
 
     '''
-    The below code will find any patterns that are for GPUs
-    not guaranteed to be less powerful than the user GPU.
+    The below code will find any patterns that are for GPUs not guaranteed
+    to be less powerful than the user GPU.
+    They will find the patterns in the Steam API json and search
+    MongoDB to find a match.
+    If it finds a match, it will compare the GPU rating field of both the users
+    GPU and the GPU on in the API json.
+    If the user gpu is a higher rating, they receive a success message.
     '''
+    # Find intel integrated graphics cards
+    # eg. intel hd 3000 and Intel hd 620
+    find_intel_gpu = re.findall(r'(?i)intel\su?hd\s\d+[a-zA-Z]{0,2}',
+                                gpu_requirements)
+    if find_intel_gpu:
+        for gpu in find_intel_gpu:
+            # Formats out any unwanted whitespace
+            gpu = re.sub(r"^\s",  "", gpu)
+            gpu = re.sub(r"\s\s$",  "", gpu)
+            gpu = re.sub(r"\s$",  "", gpu)
+            gpu = re.sub(r"  ",  " ", gpu)
+            # searches weaker GPU database
+            check = mongo.db.weaker_gpu.find_one(
+                {"$text": {"$search": "\"" + gpu + "\""}})
+            if check:
+                # If it finds one, this means the users GPU is
+                # automatically better. User informed of success.
+                info_message = message_success
+            else:
+                # Checks the database for GPUs that may or
+                # may not be more powerful
+                check = mongo.db.gpu.find_one(
+                    {"$text": {"$search": "\"" + gpu + "\""}})
+                if check:
+                    # Finds GPU rating
+                    rating = int(check['rating'])
+                    # Compares the GPU rating against the user's GPU
+                    if user_gpu_rating <= rating:
+                        info_message = message_success
+                    elif user_gpu_rating >= rating:
+                        info_message = message_fail
+                    else:
+                        pass
+    else:
+        pass
 
     return render_template(
         "result.html", user_gpu_name=user_gpu_name,
