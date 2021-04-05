@@ -434,6 +434,46 @@ def check():
     else:
         pass
 
+    # Finds newer AMD GPUs
+    find_new_amd_gpu = re.findall(
+        r'(?i)(?:mobility\sradeon|mobility|radeon|ati|amd)\s'
+        r'(?:hd|r[579x]|VII)\s\d*[a-zA-Z]*\d*\s*'
+        r'(?:xt|x2|boost|x|duo|56|64\sliquid|64)*', gpu_requirements)
+    if find_new_amd_gpu:
+        for gpu in find_new_amd_gpu:
+            # Formats String to be compatible with database
+            gpu = re.sub(r"(?i)ati",  "", gpu)
+            gpu = re.sub(r"(?i)amd",  "", gpu)
+            gpu = re.sub(r"(?i)radeon",  "", gpu)
+            gpu = re.sub(r"^",  "AMD Radeon ", gpu)
+            gpu = re.sub(r"\s\s",  " ", gpu)
+            gpu = re.sub(r"\s\s$",  "", gpu)
+            gpu = re.sub(r"\s$",  "", gpu)
+            # searches weaker GPU database
+            check = mongo.db.weaker_gpu.find_one(
+                {"$text": {"$search": "\"" + gpu + "\""}})
+            if check:
+                # If it finds one, this means the users GPU is
+                # automatically better. User informed of success.
+                info_message = message_success
+            else:
+                # Checks the database for GPUs that may or
+                # may not be more powerful
+                check = mongo.db.gpu.find_one(
+                    {"$text": {"$search": "\"" + gpu + "\""}})
+                if check:
+                    # Finds GPU rating
+                    rating = int(check['rating'])
+                    # Compares the GPU rating against the user's GPU
+                    if user_gpu_rating <= rating:
+                        info_message = message_success
+                    elif user_gpu_rating >= rating:
+                        info_message = message_fail
+                    else:
+                        pass
+    else:
+        pass
+
     return render_template(
         "result.html", user_gpu_name=user_gpu_name,
         user_game_id=user_game_id,
