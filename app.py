@@ -168,6 +168,7 @@ def check():
     # Loads json data and extracts the game's PC minimum requirements.
     steam = json.loads(
         r.text)[user_game_id]['data']['pc_requirements']['minimum']
+    steam = "Graphics: NVIDIA Titan Xp Collectors Edition NVIDIA Titan Xp NVIDIA Titan X (Pascal) NVIDIA GTX TITAN X NVIDIA GTX Titan Black 'NVIDIA Titan RTX 'NVIDIA Titan V nvidia titan x"
     # Searches different variations of GPU requirements title in json data.
     # to prevent issues with regex confusing normal ram with video ram sizes.
     find_title_is_graphics = re.search("(?<=Graphics:).+", steam)
@@ -340,19 +341,17 @@ def check():
 
     # Find Regular Nvidia gpus from above 9000 series exept for titan series
     # Eg.'Geforce GT 740', 'Geforce RTX 2050 ti (notebook)',
-    # 'Geforce RTX 2080 ti boost', 'Geforce RTX 2070', 'Geforce GTS 160',
-    # 'Geforce GTX 560 SE' 'Geforce GTX 2090 ti mobile'
     find_newer_gtx_gpu = re.findall(
         r'(?i)\s(?:gtx\s|gt\s|rtx\s|gts\s|mx|m)\d*[a-zA-Z]*\s*\d*\s*'
         r'(?:GB|ti\sboost|ti\s\(?notebook\)*|ti|le|max-q|super\smax-q'
         r'|se|super|\d+m|\(?mobile\)*|\(?notebook\)?)*', gpu_requirements)
     if find_newer_gtx_gpu:
         for gpu in find_newer_gtx_gpu:
-            # Formats out any unwanted whitespace
-            gpu = re.sub("(?i)\d+GB",  "", gpu)
-            gpui = re.sub("^",  "NVIDIA GeForce", gpu)
-            gpu = re.sub("\s\s$",  "", gpu)
-            gpu = re.sub("\s$",  "", gpu)
+            # Formats String to be compatible with database
+            gpu = re.sub(r"(?i)\d+GB",  "", gpu)
+            gpu = re.sub(r"^",  "NVIDIA GeForce", gpu)
+            gpu = re.sub(r"\s\s$",  "", gpu)
+            gpu = re.sub(r"\s$",  "", gpu)
             # searches weaker GPU database
             check = mongo.db.weaker_gpu.find_one(
                 {"$text": {"$search": "\"" + gpu + "\""}})
@@ -377,6 +376,37 @@ def check():
                         pass
     else:
         pass
+
+    # find all Nvidia titan gpus in user gpu database
+    # eg "NVIDIA Titan Xp Collector's Edition", 'NVIDIA Titan Xp'
+    # 'NVIDIA Titan X (Pascal)', 'NVIDIA GTX TITAN X', 'NVIDIA GTX Titan Black'
+    find_nvidia_titan = re.findall(
+        r'(?i)\s(?:geforce\sgtx\stitan|nvidia\sgtx\stitan|nvidia\stitan|titan)'
+        r'\s(?:rtx|gtx|X\s'
+        r'\(?Pascal\)?|Xp\sCollector\'s\sEdition|xp|x|V|5|black)',
+        gpu_requirements)
+    if find_newer_gtx_gpu:
+        for gpu in find_nvidia_titan:
+            # Formats String to be compatible with database
+            gpu = re.sub(r"Geforce",  "", gpu)
+            gpu = re.sub(r"^\s",  "", gpu)
+            gpu = re.sub(r"\s\s$",  "", gpu)
+            gpu = re.sub(r"\s$",  "", gpu)
+            gpu = re.sub(r"  ",  " ", gpu)
+            check = mongo.db.gpu.find_one(
+                {"$text": {"$search": "\"" + gpu + "\""}})
+            if check:
+                # Finds GPU rating
+                rating = int(check['rating'])
+                # Compares the GPU rating against the user's GPU
+                if user_gpu_rating <= rating:
+                    info_message = message_success
+                elif user_gpu_rating >= rating:
+                    info_message = message_fail
+                else:
+                    pass
+            else:
+                pass
 
     return render_template(
         "result.html", user_gpu_name=user_gpu_name,
