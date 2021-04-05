@@ -168,7 +168,7 @@ def check():
     # Loads json data and extracts the game's PC minimum requirements.
     steam = json.loads(
         r.text)[user_game_id]['data']['pc_requirements']['minimum']
-    steam = "Graphics: NVIDIA Titan Xp Collectors Edition NVIDIA Titan Xp NVIDIA Titan X (Pascal) NVIDIA GTX TITAN X NVIDIA GTX Titan Black 'NVIDIA Titan RTX 'NVIDIA Titan V nvidia titan x"
+    steam = "512mb vram + 32mb+ vram 128mb graphics card+ 256 mb video cardGraphics: Radeon RX 5300M Radeon 625 Radeon RX 560X radeon R9 M470 Radeon R9 M275X Radeon R9 M470X Radeon HD 8850M Radeon HD 7520G Radeon HD 7770M Mobility Radeon HD 5470 Mobility Radeon HD 550v Mobility Radeon HD 4250 Mobility Radeon HD 2400 XT Mobility Radeon X2300 Radeon RX 6800 Radeon RX 6900 X Radeon RX Vega 56 Radeon RX Vega 64 Liquid Radeon 520 Radeon 530 Radeon RX 550X Radeon RX 470D Radeon R9 380X Radeon R9 Fury X Radeon Pro Duo Radeon HD 8570 NVIDIA Titan Xp Collector's Edition NVIDIA Titan Xp NVIDIA Titan X (Pascal) NVIDIA GTX TITAN X NVIDIA GTX Titan Black NVIDIA Titan RTX NVIDIA Titan V Vram: 32mb Nvidia Gefore GTX 640 or NVIDIA GeForce GT 740 or NVIDIA GeForce GT 640m Radeon ve/7000 Radeon le7100 Radeonsdr Radeon ddr Radeon 7500 Radeon 340 Radeon 9250 Radeon 9100 Radeon 9800 Radeon xpress GeForce RTX 2050 ti (notebook) GeForce GTX 2090 ti notebook GeForce RTX 2080 ti boost GeForce RTX 2070 notebook GeForce RTX 2010 (notebook) GeForce RTX 2070 ti boost Super Max-Q GeForce GTS 160M GeForce GTS 250 GeForce GTX 560 SE GeForce MX110 GeForce M120 NVIDIA GeForce GTX 850M GeForce GT 520MX GeForce RTX 2070 Max-Q GeForce MX45 radeon 520 radeon 530 radeon 8500 Radeon Radeon amd x300 Radeon ati x1050 geforce gtx 5000 ti nvidia titan x nvidia gt 300 super Radeon x700 Radeon x800 xt Radeon hd 2350 Radeon hd 2900 Radeon hd 3400 Radeon 3100 Radeon hd 4300 Radeon hd 4250 Radeon hd 5400 Radeon hd 6750 Radeon hd 6600 Radeon hd 5500 4 MB Video Card NVIDIA 7800GT NVIDIA 7800GTx NVIDIA geforce 6666GTx intel uhd 620 NVIDIA 9990 GT 256MB graphics card or better,GeForce3 Ti200 GeForce 256 DDR GeForce2 MX GeForce4 Ti4200 8x GeForce FX 5800 Ultra GeForce 6800 GT GeForce 7800 GTX GeForce 7300 SE GeForce G 100 GeForce 8800 Ultra GeForce GT 120 GeForce 9400 mGPU GeForce GT 140 ATI Radeon X1900 256MB graphics card or better"
     # Searches different variations of GPU requirements title in json data.
     # to prevent issues with regex confusing normal ram with video ram sizes.
     find_title_is_graphics = re.search("(?<=Graphics:).+", steam)
@@ -407,6 +407,32 @@ def check():
                     pass
             else:
                 pass
+    else:
+        pass
+
+    # Find AMD RX graphics cards
+    find_new_amd_rx__gpu = re.findall(
+        r"(?i)(?:radeon|ati|amd)\srx\s\d*[a-zA-Z]*\s*", gpu_requirements)
+    if find_new_amd_rx__gpu:
+        for gpu in find_new_amd_rx__gpu:
+            # Formats String to be compatible with database
+            gpu = re.sub(r"(?i)ati",  "radeon", gpu)
+            gpu = re.sub(r"(?i)amd",  "radeon", gpu)
+            gpu = re.sub(r"^\s",  "", gpu)
+            gpu = re.sub(r"\s\s$",  "", gpu)
+            gpu = re.sub(r"\s$",  "", gpu)
+            check = mongo.db.gpu.find_one(
+                {"$text": {"$search": "\"" + gpu + "\""}})
+            if check:
+                rating = int(check['rating'])
+                if user_gpu_rating <= rating:
+                    info_message = message_success
+                elif user_gpu_rating >= rating:
+                    info_message = message_fail
+                else:
+                    pass
+    else:
+        pass
 
     return render_template(
         "result.html", user_gpu_name=user_gpu_name,
