@@ -223,24 +223,9 @@ def check():
         # The Graphics, CPU, HDD, Sound etc always end with </li>.
         gpu_requirements = re.sub(r"<\/li>.*$", "", gpu_requirements_cut)
 
-    '''
-    Below fixes naming inconsistancies found
-    in the Steam API files for Nvidia GPUs
-    '''
-    # Fix Steam Nvidia naming inconsistencies to align with this app's database
-    # Eg. Geforce 7800GTX > Geforce 7800 GTX or Nvidia 7800GT > Geforce 7800 GT
-    find_gtx_gt_fix = re.findall(
-        r'(?i)(?:nvidia\sgeforce|nvidia|geforce)\s\d+gt[xX]?\s',
-        gpu_requirements)
-    for i in find_gtx_gt_fix:
-        before = i
-        i = re.sub(r"(?i)nvidia\sgeforce",  "", i)
-        i = re.sub(r"(?i)nvidia",  "", i)
-        i = re.sub(r"(?i)geforce\s",  " ", i)
-        i = re.sub(r"^\s",  "Nvidia GeForce ", i)
-        a = re.sub(r"(?i)(?:GTX|GT)", lambda ele: " " + ele[0] + " ", i)
-        switch = a
-        gpu_requirements = re.sub(before,  switch, gpu_requirements)
+    else:
+        return render_template(
+        "result.html",info_message=message_fail)
 
     '''
     Because all user GPUs are above 1GB VRAM,
@@ -252,6 +237,28 @@ def check():
     old_gpu = re.findall(r"\d+MB|\d+\sMB", gpu_requirements)
     if old_gpu:
         info_message = message_success
+
+    '''
+    Below fixes naming inconsistancies found
+    in the Steam API files for Nvidia GPUs
+    '''
+    # Fix Steam Nvidia naming inconsistencies to align with this app's database
+    # Eg. Geforce 7800GTX > Geforce 7800 GTX or Nvidia 7800GT > Geforce 7800 GT
+    find_gtx_gt_fix = re.findall(
+        r'(?i)(?:nvidia\sgeforce|nvidia|geforce)\s\d+gt[xX]?\s',
+        gpu_requirements)
+    if find_gtx_gt_fix:
+        for i in find_gtx_gt_fix:
+            before = i
+            i = re.sub(r"(?i)nvidia\sgeforce",  "", i)
+            i = re.sub(r"(?i)nvidia",  "", i)
+            i = re.sub(r"(?i)geforce\s",  " ", i)
+            i = re.sub(r"^\s",  "Nvidia GeForce ", i)
+            a = re.sub(r"(?i)(?:GTX|GT)", lambda ele: " " + ele[0] + " ", i)
+            switch = a
+            gpu_requirements = re.sub(before,  switch, gpu_requirements)
+    else:
+        pass
 
     '''
     The below regex patterns find AMD and Nvidia GPUs that are below the power
@@ -269,6 +276,8 @@ def check():
         r'*\s(?:ultra)*', gpu_requirements)
     if find_old_geforce_gpu:
         info_message = message_success
+    else:
+        pass
 
     # Finds AMD GPU years 2001-2008 or from Radeon 8000 series - HD 3000 series
     # Eg. Radeon X700, Radeon X1300 XT, Radeon X1900 GT, Radeon HD 2900 PRO
@@ -279,6 +288,8 @@ def check():
         r'|[1-2]\d+|x\d+|le|pro|se|xt|xxl|xl|agp|gto|gt|x)', gpu_requirements)
     if find_old_amd_gpu:
         info_message = message_success
+    else:
+        pass
 
     # Finds more old varients of AMD GPUs. Aids the above pattern to find more.
     find_x_amd_gpu = re.findall(
@@ -286,6 +297,8 @@ def check():
         r'(?:le|pro|se|xt|xxl|xl|agp|gto|gt|x)"', gpu_requirements)
     if find_x_amd_gpu:
         info_message = message_success
+    else:
+        pass
 
     # Find mobile Amd gpu that are less powerful than all gpus on user gpu list
     find_old_amd_mobile_gpu = re.findall(
@@ -293,6 +306,8 @@ def check():
         r'(?:[1-3][0-9]\d+|4[0-5]\d+)\s*(?:x2|xt)*', gpu_requirements)
     if find_old_amd_mobile_gpu:
         info_message = message_success
+    else:
+        pass
 
     '''
     The below code will find any patterns that are for GPUs not guaranteed
