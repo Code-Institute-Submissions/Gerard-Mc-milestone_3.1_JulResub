@@ -47,12 +47,24 @@
         <textarea style="display: none" class="hidden-text" id="submit-gpu-model" name="gpu-model"></textarea>
         <!-- JS changes the text area vaule to the gpu rating -->
         <textarea style="display: none" class="hidden-text" id="submit-gpu-rating" name="gpu-rating"></textarea>
-        <button class="submit-button" id="submit_to_python_button" for="submit_to_python" type="submit">Confirm
-        </button>
     </form>
+    <div>
+        <button class="submit-button" id="submit_to_python_button" form="submit_to_python" type="submit">Confirm
+        </button>
+        <button class="submit-button" id="reset" onclick="reset()">Reset
+        </button>
+        </div>
 
 </section>
 <script>
+    // Resets input field values visible to the user and resets the form hidden textarea elements sent to the backend on submission. 
+    function reset() {
+        sessionStorage.setItem('name', 'Search Game');
+        sessionStorage.setItem('gpu', 'Search GPU');
+        sessionStorage.setItem('rating', '');
+        sessionStorage.setItem('appid', '');
+        location.reload();
+}
     // Below loads values from session storage so that the users values are maintained because a gpu/game form search refreshes the page
     document.getElementById("query-game").placeholder = sessionStorage.getItem('name');
     document.getElementById("query-gpu").placeholder = sessionStorage.getItem('gpu');
