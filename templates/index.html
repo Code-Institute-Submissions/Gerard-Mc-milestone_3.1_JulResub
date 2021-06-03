@@ -58,36 +58,31 @@
 
 </section>
 <script>
-    // Resets input field values visible to the user and resets the form hidden textarea elements sent to the backend on submission. 
-    function reset() {
-        sessionStorage.setItem('name', 'Search Game');
-        sessionStorage.setItem('gpu', 'Search GPU');
-        sessionStorage.setItem('rating', '');
-        sessionStorage.setItem('appid', '');
-        sessionStorage.setItem('display', 'none');
-        location.reload();
-
+    // IF statements prevent input user GPU/Game input field placeholders loading as NULL when session data is empty.
+    // Else sets placeholder values to session data when available
+    if ((sessionStorage.getItem('name') == null)) {
+        document.getElementById("query-game").placeholder = "Search Game";
     }
+    else{
+        document.getElementById("query-game").placeholder = sessionStorage.getItem('name');
+    }
+    if ((sessionStorage.getItem('gpu') == null)) {
+        document.getElementById("query-gpu").placeholder = "Search GPU";
+    }
+    else{
+        document.getElementById("query-gpu").placeholder = sessionStorage.getItem('gpu');
+    }
+
     // If the display session storage has a value, the results box value will be set to the session item.
     // Otherwise, it will stay as the inline style of "display:none"
     // This ensures on initial page load, the results box wont be displayed
     if (sessionStorage.getItem('display') != null){
         document.getElementById("user_select_form").style.display = sessionStorage.getItem('display');
     }
-    console.log(sessionStorage.getItem('display'));
-    console.log(document.getElementById("user_select_form").style.display);
 
     // Displays the results box only after the search button has been used. The backend data is then displayed in this results box
     function display_results() {
         sessionStorage.setItem('display', 'contents');
-    }
-
-    // Below IF statements prevent input user GPU/Game input field placeholders loading as NULL when session data is empty.
-    if ((sessionStorage.getItem('name') == null)) {
-        document.getElementById("query-game").placeholder = "Search Game";
-    }
-    if ((sessionStorage.getItem('gpu') == null)) {
-        document.getElementById("query-gpu").placeholder = "Search GPU";
     }
 
     function display_game_choice(id, data_id) {
@@ -101,7 +96,7 @@
         sessionStorage.setItem('display', 'none');
         document.getElementById("user_select_form").style.display = sessionStorage.getItem('display');
         // Set inner html of hidden text area that stores game id to be sent to the backend
-        //var game_choice = sessionStorage.getItem('appid');
+        // var game_choice = sessionStorage.getItem('appid');
         // Changes the game search input placeholder to that of the user choice
         document.getElementById("query-game").placeholder = sessionStorage.getItem('name');
         // Updates the session storage value for the game name
@@ -112,7 +107,6 @@
     }
 
     function display_gpu_choice(id, data_id) {
-        console.log(data_id);
         // Set gpu model in session storage
         var model = id;
         sessionStorage.setItem('gpu', model);
@@ -137,5 +131,15 @@
     document.getElementById('submit-game-name').innerText = sessionStorage.getItem('name');
     document.getElementById('submit-gpu-model').innerText = sessionStorage.getItem('gpu');
     document.getElementById('submit-gpu-rating').innerText = sessionStorage.getItem('rating');
+
+    // Resets input field values visible to the user and resets the form hidden textarea elements sent to the backend on submission. 
+    function reset() {
+        sessionStorage.setItem('name', 'Search Game');
+        sessionStorage.setItem('gpu', 'Search GPU');
+        sessionStorage.setItem('rating', '');
+        sessionStorage.setItem('appid', '');
+        sessionStorage.setItem('display', 'none');
+        location.reload();
+    }
 </script>
 {% endblock %}
