@@ -8,18 +8,18 @@
     <!-- Form that takes user game input and sends to backend to search database -->
     <form action="{{ url_for('search_game_homepage') }}" method="post">
         <input type="text" name="query-game" id="query-game" minlength="3" class="validate" required>
-        <button class="search-button" type="submit"> Search</button>
-    </form>
-    
-    <!-- Form that takes user gpu input and sends to backend to search database -->
-    <form action="{{ url_for('search_gpu_homepage') }}" method="post">
-        <input type="text" name="query-gpu" id="query-gpu" minlength="3" class="validate"
-            required>
-        <button class="search-button" type="submit"> Search</button>
+        <button onclick="display_results()" class="search-button" type="submit"> Search</button>
     </form>
 
-    <!-- Div displays after user search for game or gpu has been sent. Displays the results of the search -->
-    <div id="user_select_form" style="height:400px" class="overflow-auto">
+    <!-- Form that takes user gpu input and sends to backend to search database -->
+    <form action="{{ url_for('search_gpu_homepage') }}" method="post">
+        <input type="text" name="query-gpu" id="query-gpu" minlength="3" class="validate" required>
+        <button onclick="display_results()" class="search-button" type="submit"> Search</button>
+    </form>
+
+    <!-- Div displays after user search for gpu has been sent. Displays the results of the search -->
+    <div style="max-height:400px" class="overflow-auto">
+        <div id="user_select_form" style="display:none">
         {% for x in game_list %}
         <hr>
         <!-- When user clicks this link, the game name and id are stored and the results box disappear -->
@@ -35,6 +35,7 @@
             data-id="{{ x.rating}}">{{ x.model }}</a>
 
         {% endfor %}
+    </div>
     </div>
 
     <!-- When user clicks submit, the gpu model and game name are sent to the backend -->
@@ -53,7 +54,7 @@
         </button>
         <button class="submit-button" id="reset" onclick="reset()">Reset
         </button>
-        </div>
+    </div>
 
 </section>
 <script>
@@ -63,15 +64,23 @@
         sessionStorage.setItem('gpu', 'Search GPU');
         sessionStorage.setItem('rating', '');
         sessionStorage.setItem('appid', '');
+        sessionStorage.setItem('display', 'none');
         location.reload();
-}
-    // Below loads values from session storage so that the users values are maintained because a gpu/game form search refreshes the page
-    document.getElementById("query-game").placeholder = sessionStorage.getItem('name');
-    document.getElementById("query-gpu").placeholder = sessionStorage.getItem('gpu');
-    document.getElementById('submit-game-id').innerHTML = sessionStorage.getItem('appid');
-    document.getElementById('submit-game-name').innerHTML = sessionStorage.getItem('name');
-    document.getElementById('submit-gpu-model').innerHTML = sessionStorage.getItem('gpu');
-    document.getElementById('submit-gpu-rating').innerHTML = sessionStorage.getItem('rating');
+
+    }
+    // If the display session storage has a value, the results box value will be set to the session item.
+    // Otherwise, it will stay as the inline style of "display:none"
+    // This ensures on initial page load, the results box wont be displayed
+    if (sessionStorage.getItem('display') != null){
+        document.getElementById("user_select_form").style.display = sessionStorage.getItem('display');
+    }
+    console.log(sessionStorage.getItem('display'));
+    console.log(document.getElementById("user_select_form").style.display);
+
+    // Displays the results box only after the search button has been used. The backend data is then displayed in this results box
+    function display_results() {
+        sessionStorage.setItem('display', 'contents');
+    }
 
     // Below IF statements prevent input user GPU/Game input field placeholders loading as NULL when session data is empty.
     if ((sessionStorage.getItem('name') == null)) {
@@ -89,18 +98,21 @@
         var appid = data_id;
         sessionStorage.setItem('appid', appid);
         // Hide game search results box
-        document.getElementById("user_select_form").style.display = "none";
+        sessionStorage.setItem('display', 'none');
+        document.getElementById("user_select_form").style.display = sessionStorage.getItem('display');
         // Set inner html of hidden text area that stores game id to be sent to the backend
-        var game_choice = sessionStorage.getItem('appid');
+        //var game_choice = sessionStorage.getItem('appid');
         // Changes the game search input placeholder to that of the user choice
         document.getElementById("query-game").placeholder = sessionStorage.getItem('name');
         // Updates the session storage value for the game name
-        document.getElementById('submit-game-name').innerHTML = sessionStorage.getItem('name');
+        document.getElementById('submit-game-name').innerText = sessionStorage.getItem('name');
         // Updates the session storage value for the game id
-        document.getElementById('submit-game-id').innerHTML = sessionStorage.getItem('appid');
+        document.getElementById('submit-game-id').innerText = sessionStorage.getItem('appid');
+
     }
 
     function display_gpu_choice(id, data_id) {
+        console.log(data_id);
         // Set gpu model in session storage
         var model = id;
         sessionStorage.setItem('gpu', model);
@@ -108,16 +120,22 @@
         var rating = data_id;
         sessionStorage.setItem('rating', rating);
         // Hide gpu search results box
-        document.getElementById("user_select_form").style.display = "none";
+        sessionStorage.setItem('display', 'none');
+        document.getElementById("user_select_form").style.display = sessionStorage.getItem('display');
         // Set inner html of hidden text area that stores gpu rating to be sent to the backend
         var gpu_choice = sessionStorage.getItem('rating');
         // Changes the gpu search input placeholder to that of the user choice
         document.getElementById("query-gpu").placeholder = sessionStorage.getItem('gpu');
         // Updates the session storage value for the gpu model
         document.getElementById('submit-gpu-model').innerHTML = sessionStorage.getItem('gpu');
+        document.getElementById("submit-gpu-rating").innerText = sessionStorage.getItem('rating');
         // Updates the session storage value for the gpu rating
-        document.getElementById('submit-gpu-rating').innerHTML = sessionStorage.getItem('rating');
-
     }
+
+    // Sets all the hidden textarea data to be sent to the backend on submit
+    document.getElementById('submit-game-id').innerText = sessionStorage.getItem('appid');
+    document.getElementById('submit-game-name').innerText = sessionStorage.getItem('name');
+    document.getElementById('submit-gpu-model').innerText = sessionStorage.getItem('gpu');
+    document.getElementById('submit-gpu-rating').innerText = sessionStorage.getItem('rating');
 </script>
 {% endblock %}
