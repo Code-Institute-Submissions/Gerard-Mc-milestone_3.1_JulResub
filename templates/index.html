@@ -7,13 +7,13 @@
     <hr>
     <!-- Form that takes user game input and sends to backend to search database -->
     <form action="{{ url_for('search_game_homepage') }}" method="post">
-        <input placeholder="Search Game" type="text" name="query" id="query" minlength="3" class="validate" required>
+        <input placeholder="Search Game" type="text" name="query-game" id="query-game" minlength="3" class="validate" required>
         <button class="search-button" type="submit"> Search</button>
     </form>
     
     <!-- Form that takes user gpu input and sends to backend to search database -->
     <form action="{{ url_for('search_gpu_homepage') }}" method="post">
-        <input placeholder="Search GPU" type="text-gpu" name="query-gpu" id="query-gpu" minlength="3" class="validate"
+        <input placeholder="Search GPU" type="text" name="query-gpu" id="query-gpu" minlength="3" class="validate"
             required>
         <button class="search-button" type="submit"> Search</button>
     </form>
@@ -54,7 +54,7 @@
 </section>
 <script>
     // Below loads values from session storage so that the users values are maintained because a gpu/game form search refreshes the page
-    document.getElementById("query").placeholder = sessionStorage.getItem('name');
+    document.getElementById("query-game").placeholder = sessionStorage.getItem('name');
     document.getElementById("query-gpu").placeholder = sessionStorage.getItem('gpu');
     document.getElementById('submit-game-id').innerHTML = sessionStorage.getItem('appid');
     document.getElementById('submit-game-name').innerHTML = sessionStorage.getItem('name');
@@ -72,7 +72,7 @@
         // Set inner html of hidden text area that stores game id to be sent to the backend
         var game_choice = sessionStorage.getItem('appid');
         // Changes the game search input placeholder to that of the user choice
-        document.getElementById("query").placeholder = sessionStorage.getItem('name');
+        document.getElementById("query-game").placeholder = sessionStorage.getItem('name');
         // Updates the session storage value for the game name
         document.getElementById('submit-game-name').innerHTML = sessionStorage.getItem('name');
         // Updates the session storage value for the game id

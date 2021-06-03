@@ -121,10 +121,10 @@ def profile(user):
 
 @app.route('/search_game_homepage', methods=["GET", "POST"])
 def search_game_homepage():
-    query = request.form.get("query")
+    query_game = request.form.get("query-game")
     game_list = []
     game = list(mongo.db.game.find(
-        {"$text": {"$search": "\"" + query + "\""}}))
+        {"$text": {"$search": "\"" + query_game + "\""}}))
     for i in game:
         if i["appid"] % 10 == 0:
             game_list.append(i)
