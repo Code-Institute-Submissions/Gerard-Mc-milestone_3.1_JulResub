@@ -7,6 +7,7 @@
     <hr>
     <!-- Form that takes user game input and sends to backend to search database -->
     <form action="{{ url_for('search_game_homepage') }}" method="post">
+        <!-- Add autocomplete="off" to input when testing is complete for UX purposes-->
         <input type="text" name="query-game" id="query-game" minlength="3" class="validate" required>
         <button onclick="display_results()" class="search-button" type="submit"> Search</button>
     </form>
@@ -16,6 +17,12 @@
         <input type="text" name="query-gpu" id="query-gpu" minlength="3" class="validate" required>
         <button onclick="display_results()" class="search-button" type="submit"> Search</button>
     </form>
+     <div>
+        <button class="submit-button" id="submit_to_python_button" form="submit_to_python" type="submit">Confirm
+        </button>
+        <button class="submit-button" id="reset" onclick="reset()">Reset
+        </button>
+    </div>
 
     <!-- Div displays after user search for gpu has been sent. Displays the results of the search -->
     <div style="max-height:400px" class="overflow-auto">
@@ -49,13 +56,6 @@
         <!-- JS changes the text area vaule to the gpu rating -->
         <textarea style="display: none" class="hidden-text" id="submit-gpu-rating" name="gpu-rating"></textarea>
     </form>
-    <div>
-        <button class="submit-button" id="submit_to_python_button" form="submit_to_python" type="submit">Confirm
-        </button>
-        <button class="submit-button" id="reset" onclick="reset()">Reset
-        </button>
-    </div>
-
 </section>
 <script>
     // IF statements prevent input user GPU/Game input field placeholders loading as NULL when session data is empty.
