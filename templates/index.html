@@ -132,6 +132,15 @@
     document.getElementById('submit-gpu-model').innerText = sessionStorage.getItem('gpu');
     document.getElementById('submit-gpu-rating').innerText = sessionStorage.getItem('rating');
 
+    // Prevents main submit form from being sent if the hidden textareas are empty and alerts the user.
+    $("#submit_to_python").submit(function (event) {
+        if (document.getElementById('submit-game-id').innerText != "" && document.getElementById('submit-gpu-rating').innerText != "") {
+            return;
+        }
+        alert("Please choose GPU/Game");
+        event.preventDefault();
+    });
+
     // Resets input field values visible to the user and resets the form hidden textarea elements sent to the backend on submission. 
     function reset() {
         sessionStorage.setItem('name', 'Search Game');
