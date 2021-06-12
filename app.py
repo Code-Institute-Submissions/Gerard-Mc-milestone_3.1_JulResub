@@ -148,7 +148,7 @@ def check():
     info_message = ""
     message_success = "Your GPU supports this game"
     message_fail = "Your GPU does not support this game"
-    message_not_found = "We can't find this configuration in our database"
+    not_found_message = "We can't find this configuration in our database"
 
     # Extract user gpu model, game id,
     # and game name from "submit_to_python" form.
@@ -159,16 +159,25 @@ def check():
     # Below uses the user game id to connect to a specific external API file
     r = requests.get(
         f"https://store.steampowered.com/api/appdetails?appids={user_game_id}")
-    # Sometimes the external API has issues with it's own game ids.
-    # In that case, the below sends an error message to the result page.
-    if not r:
-        steam = message_not_found
+    # Sometimes the Steam API has missing documents and returns a json file
+    # with 'success': False.
+    # This seems to be from duplicate game names in the API game list.
+    # Only one has the correct ID that corresponds to a link with a JSON file containing
+    # the full game information.
+    # Below checks for this and alerts the user that the game isn't in the database
+    # and then removes the duplicate or faulty game/ID from the database.
+    find_missing_api_json = re.search(
+        "(?<='success': False).+", str(json.loads(r.text)))
+    if find_missing_api_json:
+        print("--------------API Fail-----------------")
+        mongo.db.game.delete_one({ "appid": int(user_game_id) })
+
         return render_template("result.html", user_gpu_name=user_gpu_name,
-                               user_game_name=user_game_name, steam=steam)
+                               user_game_name=user_game_name,
+                               info_message=not_found_message)
     # Loads json data and extracts the game's PC minimum requirements.
     steam = json.loads(
         r.text)[user_game_id]['data']['pc_requirements']['minimum']
-    # steam = "512mb vram + 32mb+ vram 128mb graphics card+ 256 mb video cardGraphics: Radeon RX 5300M Radeon 625 Radeon RX 560X radeon R9 M470 Radeon R9 M275X Radeon R9 M470X Radeon HD 8850M Radeon HD 7520G Radeon HD 7770M Mobility Radeon HD 5470 Mobility Radeon HD 550v Mobility Radeon HD 4250 Mobility Radeon HD 2400 XT Mobility Radeon X2300 Radeon RX 6800 Radeon RX 6900 X Radeon RX Vega 56 Radeon RX Vega 64 Liquid Radeon 520 Radeon 530 Radeon RX 550X Radeon RX 470D Radeon R9 380X Radeon R9 Fury X Radeon Pro Duo Radeon HD 8570 NVIDIA Titan Xp Collector's Edition NVIDIA Titan Xp NVIDIA Titan X (Pascal) NVIDIA GTX TITAN X NVIDIA GTX Titan Black NVIDIA Titan RTX NVIDIA Titan V Vram: 32mb Nvidia Gefore GTX 640 or NVIDIA GeForce GT 740 or NVIDIA GeForce GT 640m Radeon ve/7000 Radeon le7100 Radeonsdr Radeon ddr Radeon 7500 Radeon 340 Radeon 9250 Radeon 9100 Radeon 9800 Radeon xpress GeForce RTX 2050 ti (notebook) GeForce GTX 2090 ti notebook GeForce RTX 2080 ti boost GeForce RTX 2070 notebook GeForce RTX 2010 (notebook) GeForce RTX 2070 ti boost Super Max-Q GeForce GTS 160M GeForce GTS 250 GeForce GTX 560 SE GeForce MX110 GeForce M120 NVIDIA GeForce GTX 850M GeForce GT 520MX GeForce RTX 2070 Max-Q GeForce MX45 radeon 520 radeon 530 radeon 8500 Radeon Radeon amd x300 Radeon ati x1050 geforce gtx 5000 ti nvidia titan x nvidia gt 300 super Radeon x700 Radeon x800 xt Radeon hd 2350 Radeon hd 2900 Radeon hd 3400 Radeon 3100 Radeon hd 4300 Radeon hd 4250 Radeon hd 5400 Radeon hd 6750 Radeon hd 6600 Radeon hd 5500 4 MB Video Card NVIDIA 7800GT NVIDIA 7800GTx NVIDIA geforce 6666GTx intel uhd 620 NVIDIA 9990 GT 256MB graphics card or better,GeForce3 Ti200 GeForce 256 DDR GeForce2 MX GeForce4 Ti4200 8x GeForce FX 5800 Ultra GeForce 6800 GT GeForce 7800 GTX GeForce 7300 SE GeForce G 100 GeForce 8800 Ultra GeForce GT 120 GeForce 9400 mGPU GeForce GT 140 ATI Radeon X1900 256MB graphics card or better"
     # Searches different variations of GPU requirements title in json data.
     # to prevent issues with regex confusing normal ram with video ram sizes.
     find_title_is_graphics = re.search("(?<=Graphics:).+", steam)
@@ -347,7 +356,7 @@ def check():
                     # Compares the GPU rating against the user's GPU
                     if user_gpu_rating <= rating:
                         info_message = message_success
-                    elif user_gpu_rating >= rating:
+                    elif user_gpu_rating > rating:
                         info_message = message_fail
                     else:
                         pass
@@ -385,7 +394,7 @@ def check():
                     # Compares the GPU rating against the user's GPU
                     if user_gpu_rating <= rating:
                         info_message = message_success
-                    elif user_gpu_rating >= rating:
+                    elif user_gpu_rating > rating:
                         info_message = message_fail
                     else:
                         pass
@@ -416,7 +425,7 @@ def check():
                 # Compares the GPU rating against the user's GPU
                 if user_gpu_rating <= rating:
                     info_message = message_success
-                elif user_gpu_rating >= rating:
+                elif user_gpu_rating > rating:
                     info_message = message_fail
                 else:
                     pass
@@ -442,7 +451,7 @@ def check():
                 rating = int(check['rating'])
                 if user_gpu_rating <= rating:
                     info_message = message_success
-                elif user_gpu_rating >= rating:
+                elif user_gpu_rating > rating:
                     info_message = message_fail
                 else:
                     pass
@@ -482,15 +491,15 @@ def check():
                     # Compares the GPU rating against the user's GPU
                     if user_gpu_rating <= rating:
                         info_message = message_success
-                    elif user_gpu_rating >= rating:
+                    elif user_gpu_rating > rating:
                         info_message = message_fail
                     else:
                         pass
     else:
         pass
 
-    if info_message == message_success:
-        mongo.db.gpu.update_one({ "model": user_gpu_name },{ "$push": { 'games': { "name": user_game_name}}})
+    # if info_message == message_success:
+    #     mongo.db.gpu.update_one({ "model": user_gpu_name },{ "$push": { 'games': { "name": user_game_name}}})
 
 
     return render_template(
