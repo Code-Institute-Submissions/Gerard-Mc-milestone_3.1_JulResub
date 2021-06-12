@@ -498,9 +498,13 @@ def check():
     else:
         pass
 
-    # if info_message == message_success:
-    #     mongo.db.gpu.update_one({ "model": user_gpu_name },{ "$push": { 'games': { "name": user_game_name}}})
-
+    # If GPU is found to be strong enough, the users inputed game is added to an array 
+    # that stores a list of compatible games within the GPU entity in the database.
+    if info_message == message_success:
+        mongo.db.gpu.update_one(
+            {"model": user_gpu_name},
+            {"$push": {'games': {"name": user_game_name}}})
+        print("Added to database")
 
     return render_template(
         "result.html", user_gpu_name=user_gpu_name,
