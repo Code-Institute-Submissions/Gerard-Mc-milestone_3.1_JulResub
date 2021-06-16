@@ -30,7 +30,7 @@
                 <!-- If logged in, the user can access the below links; Profile and logout -->
                 {% if session.user %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('profile', user=session['user'])}}">Profile</a>
+                    <a class="nav-link" href="{{ url_for('profile', user=session['user'])}}" id="profile-link-id" data-id="profile-link" onclick="display(this.id,this.dataset.id)">Profile</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('logout') }}">Log Out</a>
