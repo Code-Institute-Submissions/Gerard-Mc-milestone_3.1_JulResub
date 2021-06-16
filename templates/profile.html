@@ -32,7 +32,6 @@
             </form>
             {% endfor %}
         </div>
-
         {% else %}
         <!-- Form to add a GPU attribute/value to the user entity when no GPU attribute is found  -->
         <p id="edit-gpu-2"><strong>GPU: </strong> {{ user.gpu }} <a href="#" data-id="2" data-number="2"
@@ -69,46 +68,61 @@
 {% endblock %}
 {% block postloadjs %}
 <script>
+    {% if display %}
+    // Enables edit options to display after browser back navigation.
+    sessionStorage.setItem("link-display-1", "contents");
+    sessionStorage.setItem("link-display-2", "contents");
+    // Changes a session storage display variable to be used by the following If statements.
+    sessionStorage.setItem("result-display-1", "none");
+    sessionStorage.setItem("result-display-2", 'none');
+    {% endif %}
+    // Prevents search results from being displayed after browser back navigation.
+    if (document.getElementById("gpu_list-1") != null) {
+        if (sessionStorage.getItem('result-display-1') != null) {
+            document.getElementById("gpu_list-1").style.display = sessionStorage.getItem('result-display-1');
+        }
+    }
+    if (document.getElementById("gpu_list-2") != null) {
+        if (sessionStorage.getItem('result-display-2') != null) {
+            document.getElementById("gpu_list-2").style.display = sessionStorage.getItem('result-display-2');
+        }
+    }
+
     var gpu_input_paragragh_1 = document.getElementById("edit-gpu-1");
     var display_variable_1 = sessionStorage.getItem('link-display-1');
     var gpu_input_paragragh_2 = document.getElementById("edit-gpu-2");
     var display_variable_2 = sessionStorage.getItem('link-display-2');
-
     // Some elements are loaded by Jinja depending on whether the user has a GPU attribute in their user entity or not.
-    // If loaded by Jinja, this code edits the display value for the paragraphs with IDs of edit-gpu-1 and edit-gpu-2.
-    if ((gpu_input_paragragh_1 != null && typeof(gpu_input_paragragh_1) != "undefined")) {
+    // If loaded by Jinja, this code edits the display value for the paragraphs with the IDs:edit-gpu-1 and edit-gpu-2.
+    if ((gpu_input_paragragh_1 != null && typeof (gpu_input_paragragh_1) != "undefined")) {
         if (display_variable_1 != null) {
             gpu_input_paragragh_1.style.display = display_variable_1;
-            console.log("If display 1: " + gpu_input_paragragh_1.style.display) + "";
         }
         else {
             gpu_input_paragragh_1.style.display = "contents";
-            console.log("Else display 1: " + gpu_input_paragragh_1.style.display) + "";
         }
     }
-    if ((gpu_input_paragragh_2 != null && typeof(gpu_input_paragragh_2) != "undefined")) {
+    if ((gpu_input_paragragh_2 != null && typeof (gpu_input_paragragh_2) != "undefined")) {
         if (display_variable_2 != null) {
             gpu_input_paragragh_2.style.display = display_variable_2;
-            console.log("If display 2: " + gpu_input_paragragh_2.style.display) + "";
         }
         else {
             gpu_input_paragragh_2.style.display = "contents";
-            console.log("Else display 2: " + gpu_input_paragragh_2.style.display) + "";
         }
     }
-    
+
     // Function to control when elements are displayed.
     function display(data_number, data_id) {
         console.log(data_id);
         // Controls element display style when search button is pressed.
         if (data_id == `search-button-${data_number}`) {
-            document.getElementById("gpu_list-1").style.display = 'contents';
+            sessionStorage.setItem(`result-display-${data_number}`, "contents");
             sessionStorage.setItem(`link-display-${data_number}`, "none");
-            console.log(document.getElementById("gpu_list-1").style.display );
             return;
         }
         // Controls element display style when a GPU is pressed from the GPU list.
         else if (data_id == `user-gpu-choice-${data_number}`) {
+            sessionStorage.setItem(`result-display${data_number}`, "none");
             sessionStorage.setItem(`link-display-${data_number}`, "contents");
             return;
         }
@@ -128,7 +142,7 @@
             return;
         }
     }
-    
+
 </script>
 <script type="text/javascript" src="/static/js/reset_index.js"></script>
 {% endblock %}
