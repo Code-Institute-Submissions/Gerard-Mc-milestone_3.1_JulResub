@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-<section class="container-fluid col-12 text-center">
+<section class="container-fluid col-12">
     <div class="boder-navy p-5 border-radius-5px">
         <h3 class="mb-3"><strong>Username: </strong> {{ user.name }}</h3>
         <!-- Form to edit user GPU attribute in the user entity -->
@@ -32,37 +32,45 @@
             </form>
             {% endfor %}
         </div>
-        {% else %}
-        <!-- Form to add a GPU attribute/value to the user entity when no GPU attribute is found  -->
-        <p id="edit-gpu-2"><strong>GPU: </strong> {{ user.gpu }} <a href="#" data-id="2" data-number="2"
-                onclick="display(this.dataset.number, this.dataset.id)"> Add GPU</a></p>
-        <div id="gpu-results-2" class="w-100" style="display: none">
-            <form id="profile-submit" class="w-100" action="{{ url_for('search_gpu') }}" method="post">
-                <input placeholder="Search GPUs" type="text-gpu" name="user-gpu" id="search_gpu_input" minlength="3"
-                    class="validate" required>
-                <button for="profile-submit" data-id="search-button-2" data-number="2"
-                    onclick="display(this.dataset.number, this.dataset.id)" type="submit">
-                    Search
-                    GPU</button>
-            </form>
-        </div>
-        <!-- Below, the user can select from the search results -->
-        <div class="col-4 offset-4" id="gpu_list-2">
-            {% for x in gpu %}
-            <form id="submit_to_python" method="post" action="{{ url_for('submit') }}">
-                <hr>
-                <div class="d-block">
-                    <textarea id="gpu-choice" style="display: none" class="hidden-text"
-                        name="hidden-text-gpu-model">{{ x.model }}</textarea>
-                    <!-- On submit, the users GPU field is updated -->
-                    <button for="submit_to_python" data-id="user-gpu-choice-2" data-number="2" type="submit"
-                        onclick="display(this.dataset.number, this.dataset.id)">{{ x.model }}</button>
-                </div>
-            </form>
+        <div>
+            {% if gpu_in_database %}
+            <p id="games" class="mb-1"><strong>Playable games</strong></p>
+            {% for game in gpu_in_database.games %}
+            <p class="mx-3 my-0">{{ game.name }}</p>
             {% endfor %}
+            {% endif %}
         </div>
-        {% endif %}
     </div>
+    {% else %}
+    <!-- Form to add a GPU attribute/value to the user entity when no GPU attribute is found  -->
+    <p id="edit-gpu-2"><strong>GPU: </strong> {{ user.gpu }} <a href="#" data-id="2" data-number="2"
+            onclick="display(this.dataset.number, this.dataset.id)"> Add GPU</a></p>
+    <div id="gpu-results-2" class="w-100" style="display: none">
+        <form id="profile-submit" class="w-100" action="{{ url_for('search_gpu') }}" method="post">
+            <input placeholder="Search GPUs" type="text-gpu" name="user-gpu" id="search_gpu_input" minlength="3"
+                class="validate" required>
+            <button for="profile-submit" data-id="search-button-2" data-number="2"
+                onclick="display(this.dataset.number, this.dataset.id)" type="submit">
+                Search
+                GPU</button>
+        </form>
+    </div>
+    <!-- Below, the user can select from the search results -->
+    <div class="col-4 offset-4" id="gpu_list-2">
+        {% for x in gpu %}
+        <form id="submit_to_python" method="post" action="{{ url_for('submit') }}">
+            <hr>
+            <div class="d-block">
+                <textarea id="gpu-choice" style="display: none" class="hidden-text"
+                    name="hidden-text-gpu-model">{{ x.model }}</textarea>
+                <!-- On submit, the users GPU field is updated -->
+                <button for="submit_to_python" data-id="user-gpu-choice-2" data-number="2" type="submit"
+                    onclick="display(this.dataset.number, this.dataset.id)">{{ x.model }}</button>
+            </div>
+        </form>
+        {% endfor %}
+    </div>
+    {% endif %}
     </div>
 </section>
 {% endblock %}

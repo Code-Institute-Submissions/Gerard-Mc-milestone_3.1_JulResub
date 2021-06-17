@@ -116,12 +116,18 @@ def profile(user):
     # Dynamically creates a user page based on session data
     user = mongo.db.users.find_one(
         {"name": session["user"]})
+    # Searches the name of the user GPU in the GPU database collection to be used
+    # by Jinja logic when page loads.
+    if user['gpu']:
+        print(user['gpu'])
+        gpu_in_database = mongo.db.gpu.find_one({"model": user['gpu']})
+        print(gpu_in_database)
     # The display variable is used in the profile.html JavaScript to prevent elements displaying
     # or not displaying inappropriately when the user navigates backwards on their browser.
     display = False
     if request.method == "GET":
         display=True
-    return render_template("profile.html", user=user,display=display)
+    return render_template("profile.html", user=user, display=display, gpu_in_database=gpu_in_database)
 
 
 @app.route('/search_game_homepage', methods=["GET", "POST"])
