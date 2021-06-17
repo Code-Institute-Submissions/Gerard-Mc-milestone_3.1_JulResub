@@ -32,14 +32,23 @@
             </form>
             {% endfor %}
         </div>
-        <div>
-            {% if gpu_in_database %}
+        <!-- Form for user to input the frames per second achieved while playing the game on their GPU. -->
+        {% if gpu_in_database %}
+        <div class="w-100">
             <p id="games" class="mb-1"><strong>Playable games</strong></p>
             {% for game in gpu_in_database.games %}
-            <p class="mx-3 my-0">{{ game.name }}</p>
-            {% endfor %}
-            {% endif %}
+            <hr>
+            <h4><strong>{{ game.name }}</strong></h4>
+            <p>Input your FPS @ Low settings and 1080p resolution.</p>
+            <form class="w-100" action="{{ url_for('profile', user=session['user'])}}" method="post">
+                <input min="0" max="1000" type="number" name="submit_fps_input">
+                <textarea style="display: none" class="hidden-text" name="game-name">{{ game.name }}</textarea>
+                <button type="submit">Submit</button>
+            </form> {% endfor %}
         </div>
+    </div>
+    {% endif %}
+    </div>
     </div>
     {% else %}
     <!-- Form to add a GPU attribute/value to the user entity when no GPU attribute is found  -->
