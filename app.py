@@ -122,6 +122,20 @@ def profile(user):
         print(user['gpu'])
         gpu_in_database = mongo.db.gpu.find_one({"model": user['gpu']})
         print(gpu_in_database)
+    # Adds the user's username and their frames-per-second input
+    # to a unique object within an array called userfps.
+    # This array holds FPS information from any user
+    # for this specficic game and GPU configuration.
+    if request.method == "POST":
+        username = user['name']
+        game_name = request.form.get("game-name")
+        user_fps_input = request.form.get("submit_fps_input")
+        mongo.db.gpu.update_one(
+            {'$and': [{'model': f"{gpu_in_database['model']}"}, {
+                'games.name': game_name}]}, {
+                    "$addToSet": {"games.$.userfps": {
+                        'username': username,
+                        'fps': int(user_fps_input)}}})
     # The display variable is used in the profile.html JavaScript to prevent elements displaying
     # or not displaying inappropriately when the user navigates backwards on their browser.
     display = False
