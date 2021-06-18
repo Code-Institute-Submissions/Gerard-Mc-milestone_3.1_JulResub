@@ -39,12 +39,30 @@
             {% for game in gpu_in_database.games %}
             <hr>
             <h4><strong>{{ game.name }}</strong></h4>
-            <p>Input your FPS @ Low settings and 1080p resolution.</p>
-            <form class="w-100" action="{{ url_for('profile', user=session['user'])}}" method="post">
-                <input min="0" max="1000" type="number" name="submit_fps_input">
-                <textarea style="display: none" class="hidden-text" name="game-name">{{ game.name }}</textarea>
-                <button type="submit">Submit</button>
-            </form> {% endfor %}
+            <p>Your FPS:
+                {% if game["name"] == game.name %}
+                <h7><strong>{{ game["name"] }}</strong></h7>
+                <br>
+                {% for object in game["userfps"] %}
+                {% if (object["username"] == user.name) %}
+
+                <strong>Your FPS:</strong> {{ object["fps"] }}
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+                <span id="edit-switch-{{ game.name }}" data-switch="0" data-game="{{ game.name }}"
+                    onclick="show_edit_fps_options(this.dataset.switch, this.dataset.game)">Edit</span>
+                <br><br>
+            </p>
+            <div id="edit-fps-{{ game.name }}" style="display: none;">
+                <p>Input your FPS @ Low settings and 1080p resolution.</p>
+                <form class="w-100" action="{{ url_for('profile', user=session['user'])}}" method="post">
+                    <input min="0" max="1000" type="number" name="submit_fps_input">
+                    <textarea style="display: none" class="hidden-text" name="game-name">{{ game.name }}</textarea>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+            {% endfor %}
         </div>
     </div>
     {% endif %}
@@ -151,12 +169,27 @@
         }
         // Controls edit-gpu-1/edit-gpu-2 paragragh display style when the edit or add GPU links are pressed.
         else {
-            divID = `gpu-results-${data_number}`;
+            let divID = `gpu-results-${data_number}`;
             //Shows GPU search form when edit/add-gpu link is clicked.
             document.getElementById(divID).style.display = "contents";
             // Removes edit link while form is displayed.
             document.getElementById(`edit-gpu-${data_number}`).style.display = "none";
             return;
+        }
+    }
+    // Hides or shows the fps edit div when the <span> with the inner text of edit is pressed.
+    function show_edit_fps_options(data_switch, data_game) {
+        var switch_number = data_switch;
+        let divID = `edit-fps-${data_game}`;
+        let switch_id = document.getElementById(`edit-switch-${data_game}`);
+
+        if (switch_number == 0) {
+            document.getElementById(divID).style.display = "contents";
+            switch_id.setAttribute("data-switch", 1);
+        }
+        else {
+            document.getElementById(divID).style.display = "none";
+            switch_id.setAttribute("data-switch", 0);
         }
     }
 
