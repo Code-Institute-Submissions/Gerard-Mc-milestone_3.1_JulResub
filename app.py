@@ -17,7 +17,6 @@ app.secret_key = os.environ.get("SECRET_KEY")
 mongo = PyMongo(app)
 
 
-# Test #
 @app.route('/')
 def find_gpus():
     return render_template("index.html")
@@ -113,12 +112,13 @@ def submit():
 
 @app.route("/profile/<user>", methods=["GET", "POST"])
 def profile(user):
+    gpu_in_database = None
     # Dynamically creates a user page based on session data
     user = mongo.db.users.find_one(
         {"name": session["user"]})
     # Searches the name of the user GPU in the GPU database collection to be used
     # by Jinja logic when page loads.
-    if user['gpu']:
+    if "gpu" in user:
         print(user['gpu'])
         gpu_in_database = mongo.db.gpu.find_one({"model": user['gpu']})
         print(gpu_in_database)
