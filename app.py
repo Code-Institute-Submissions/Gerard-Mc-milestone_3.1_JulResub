@@ -119,9 +119,9 @@ def profile(user):
     # Searches the name of the user GPU in the GPU database collection to be used
     # by Jinja logic when page loads.
     if "gpu" in user:
-        print(user['gpu'])
         gpu_in_database = mongo.db.gpu.find_one({"model": user['gpu']})
-        print(gpu_in_database)
+    else:
+        pass
     # Adds the user's username and their frames-per-second input
     # to a unique object within an array called userfps.
     # This array holds FPS information from any user
@@ -130,6 +130,13 @@ def profile(user):
         username = user['name']
         game_name = request.form.get("game-name")
         user_fps_input = request.form.get("submit_fps_input")
+        # Checks and deletes if the user has already inputted the FPS achieved with the game.
+        mongo.db.gpu.update_one(
+            {'$and': [{'model': f"{gpu_in_database['model']}"}, {
+                'games.name': game_name}]}, {
+                    "$pull": {"games.$.userfps": {
+                        'username': username}}})
+        # Adds the user's FPS input to the GPU entity.
         mongo.db.gpu.update_one(
             {'$and': [{'model': f"{gpu_in_database['model']}"}, {
                 'games.name': game_name}]}, {
