@@ -14,7 +14,9 @@ app = Flask(__name__)
 app.config["MONGO_DBNAME"] = 'os.environ.get("MONGO_DBNAME")'
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 app.secret_key = os.environ.get("SECRET_KEY")
+app.jinja_env.add_extension('jinja2.ext.loopcontrols')
 mongo = PyMongo(app)
+
 
 
 @app.route('/')

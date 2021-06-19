@@ -34,20 +34,32 @@
         </div>
         <!-- Form for user to input the frames per second achieved while playing the game on their GPU. -->
         {% if gpu_in_database %}
+        
         <div class="w-100">
             <p id="games" class="mb-1"><strong>Playable games</strong></p>
             {% for game in gpu_in_database.games %}
+            
             <hr>
-            <p>
-                {% if game["name"] == game.name %}
-                <h7><strong>{{ game["name"] }}</strong></h7>
-                <br>
-                {% for object in game["userfps"] %}
-                {% if (object["username"] == user.name) %}
-                <strong>Your FPS:</strong> {{ object["fps"] }}
-                {% endif %}
-                {% endfor %}
-                {% endif %}
+            <h4><strong>{{ game.name }}</strong></h4>
+            <p class="mb-0">
+                <strong>Average user FPS:</strong>
+                    {% set sum = namespace(value=0) %}
+                    {% set denominator = namespace(value=0) %}
+                    {% set averageFps = namespace(value=0) %}
+
+                    {% for object in game["userfps"] %}
+                        {% set sum.value = sum.value + object.fps %}
+                        {% set denominator.value = denominator.value + 1 %}
+                    {% endfor %}
+                    {% set averageFps.value = sum.value / denominator.value %}
+                    <strong>{{ averageFps.value|round(1, 'floor')|int}}</strong>
+            </p>
+            <p><strong>Your FPS:</strong>
+                    {% for object in game["userfps"] %}
+                            {% if (object["username"] == user.name) %}
+                                {{ object.fps }}
+                            {% endif %}    
+                    {% endfor %}
                 <span id="edit-switch-{{ game.name }}" data-switch="0" data-game="{{ game.name }}"
                     onclick="show_edit_fps_options(this.dataset.switch, this.dataset.game)">Edit</span>
                 <br><br>
