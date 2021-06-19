@@ -38,14 +38,12 @@
             <p id="games" class="mb-1"><strong>Playable games</strong></p>
             {% for game in gpu_in_database.games %}
             <hr>
-            <h4><strong>{{ game.name }}</strong></h4>
-            <p>Your FPS:
+            <p>
                 {% if game["name"] == game.name %}
                 <h7><strong>{{ game["name"] }}</strong></h7>
                 <br>
                 {% for object in game["userfps"] %}
                 {% if (object["username"] == user.name) %}
-
                 <strong>Your FPS:</strong> {{ object["fps"] }}
                 {% endif %}
                 {% endfor %}

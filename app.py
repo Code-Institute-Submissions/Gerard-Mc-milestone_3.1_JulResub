@@ -81,10 +81,12 @@ def login():
 
 @app.route("/logout")
 def logout():
-    flash("Successfully logged out")
-    # Removes user from session storage
-    session.pop("user")
-    return redirect(url_for("login"))
+    if "user" in session:
+        flash("Successfully logged out")
+        # Removes user from session storage
+        session.pop("user")
+        return redirect(url_for("login"))
+    return render_template("index.html")
 
 
 @app.route("/search_gpu", methods=["GET", "POST"])
@@ -100,55 +102,58 @@ def search_gpu():
 
 @app.route('/submit', methods=["GET", "POST"])
 def submit():
-    user = mongo.db.users.find_one(
-        {"name": session["user"]})
-    # Take user GPU choice from hidden text in a form
-    user_gpu_model = request.form.get('hidden-text-gpu-model')
-    set_gpu = {"$set": {"gpu": user_gpu_model}}
-    # Creates or updates a user gpu field
-    mongo.db.users.update_one(user, set_gpu)
-    return redirect(url_for("profile", user=user))
+    if "user" in session:
+        user = mongo.db.users.find_one(
+            {"name": session["user"]})
+        # Take user GPU choice from hidden text in a form
+        user_gpu_model = request.form.get('hidden-text-gpu-model')
+        set_gpu = {"$set": {"gpu": user_gpu_model}}
+        # Creates or updates a user gpu field
+        mongo.db.users.update_one(user, set_gpu)
+        return redirect(url_for("profile", user=user))
+    return redirect(url_for("login"))
 
 
 @app.route("/profile/<user>", methods=["GET", "POST"])
 def profile(user):
     gpu_in_database = None
+    fps_average = None
     # Dynamically creates a user page based on session data
-    user = mongo.db.users.find_one(
-        {"name": session["user"]})
-    # Searches the name of the user GPU in the GPU database collection to be used
-    # by Jinja logic when page loads.
-    if "gpu" in user:
-        gpu_in_database = mongo.db.gpu.find_one({"model": user['gpu']})
-    else:
-        pass
-    # Adds the user's username and their frames-per-second input
-    # to a unique object within an array called userfps.
-    # This array holds FPS information from any user
-    # for this specficic game and GPU configuration.
-    if request.method == "POST":
-        username = user['name']
-        game_name = request.form.get("game-name")
-        user_fps_input = request.form.get("submit_fps_input")
-        # Checks and deletes if the user has already inputted the FPS achieved with the game.
-        mongo.db.gpu.update_one(
-            {'$and': [{'model': f"{gpu_in_database['model']}"}, {
-                'games.name': game_name}]}, {
-                    "$pull": {"games.$.userfps": {
-                        'username': username}}})
-        # Adds the user's FPS input to the GPU entity.
-        mongo.db.gpu.update_one(
-            {'$and': [{'model': f"{gpu_in_database['model']}"}, {
-                'games.name': game_name}]}, {
-                    "$addToSet": {"games.$.userfps": {
-                        'username': username,
-                        'fps': int(user_fps_input)}}})
-    # The display variable is used in the profile.html JavaScript to prevent elements displaying
-    # or not displaying inappropriately when the user navigates backwards on their browser.
-    display = False
-    if request.method == "GET":
-        display=True
-    return render_template("profile.html", user=user, display=display, gpu_in_database=gpu_in_database)
+    if "user" in session:
+        user = mongo.db.users.find_one(
+            {"name": session["user"]})
+        # Searches the name of the user GPU in the GPU database collection to be used
+        # by Jinja logic when page loads.
+        if "gpu" in user:
+            gpu_in_database = mongo.db.gpu.find_one({"model": user['gpu']})
+        # Adds the user's username and their frames-per-second input
+        # to a unique object within an array called userfps.
+        # This array holds FPS information from any user
+        # for this specficic game and GPU configuration.
+        if request.method == "POST":
+            username = user['name']
+            game_name = request.form.get("game-name")
+            user_fps_input = request.form.get("submit_fps_input")
+            # Checks and deletes if the user has already inputted the FPS achieved with the game.
+            mongo.db.gpu.update_one(
+                {'$and': [{'model': f"{gpu_in_database['model']}"}, {
+                    'games.name': game_name}]}, {
+                        "$pull": {"games.$.userfps": {
+                            'username': username}}})
+            # Adds the user's FPS input to the GPU entity.
+            mongo.db.gpu.update_one(
+                {'$and': [{'model': f"{gpu_in_database['model']}"}, {
+                    'games.name': game_name}]}, {
+                        "$addToSet": {"games.$.userfps": {
+                            'username': username,
+                            'fps': int(user_fps_input)}}})
+        # The display variable is used in the profile.html JavaScript to prevent elements displaying
+        # or not displaying inappropriately when the user navigates backwards on their browser.
+        display = False
+        if request.method == "GET":
+            display=True
+        return render_template("profile.html", user=user, display=display, gpu_in_database=gpu_in_database, fps_average = fps_average)
+    return render_template("login.html")
 
 
 @app.route('/search_game_homepage', methods=["GET", "POST"])
