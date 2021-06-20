@@ -34,37 +34,45 @@
         </div>
         <!-- Form for user to input the frames per second achieved while playing the game on their GPU. -->
         {% if gpu_in_database %}
-        
+
         <div class="w-100">
             <p id="games" class="mb-1"><strong>Playable games</strong></p>
             {% for game in gpu_in_database.games %}
-            
+
             <hr>
             <h4><strong>{{ game.name }}</strong></h4>
             <p class="mb-0">
                 <strong>Average user FPS:</strong>
-                    {% set sum = namespace(value=0) %}
-                    {% set denominator = namespace(value=0) %}
-                    {% set averageFps = namespace(value=0) %}
+                {% set sum = namespace(value=0) %}
+                {% set denominator = namespace(value=0) %}
+                {% set averageFps = namespace(value=0) %}
 
-                    {% for object in game["userfps"] %}
-                        {% set sum.value = sum.value + object.fps %}
-                        {% set denominator.value = denominator.value + 1 %}
-                    {% endfor %}
-                    {% set averageFps.value = sum.value / denominator.value %}
-                    <strong>{{ averageFps.value|round(1, 'floor')|int}}</strong>
+                {% for object in game["userfps"] %}
+                    {% set sum.value = sum.value + object.fps %}
+                    {% set denominator.value = denominator.value + 1 %}
+                {% endfor %}
+                {% set averageFps.value = sum.value / denominator.value %}
+                <strong>{{ averageFps.value|round(1, 'floor')|int}}</strong>
             </p>
-            <p><strong>Your FPS:</strong>
-                    {% for object in game["userfps"] %}
-                            {% if (object["username"] == user.name) %}
-                                {{ object.fps }}
-                            {% endif %}    
-                    {% endfor %}
-                <span id="edit-switch-{{ game.name }}" data-switch="0" data-game="{{ game.name }}"
+            <p><strong>Your FPS:</strong><span id="userfps_{{ game.name|replace(' ', '') }}"></span>
+                {% for object in game["userfps"] %}
+                    {% if (object["username"] == user.name and (object["fps"] is defined ) ) %}
+                        <script>
+                            document.getElementById("userfps_{{ game.name|replace(' ', '') }}").innerText = {{ object.fps }};
+                        </script>
+                        {% break %}
+                    {% else %}
+                        <script>
+                            document.getElementById("userfps_{{ game.name|replace(' ', '') }}").innerText = "Empty";
+                        </script>
+                    {% endif %}
+                {% endfor %}
+                <span id="edit-switch-{{ game.name|replace(' ', '') }}" data-switch="0"
+                    data-game="{{ game.name|replace(' ', '') }}"
                     onclick="show_edit_fps_options(this.dataset.switch, this.dataset.game)">Edit</span>
                 <br><br>
             </p>
-            <div id="edit-fps-{{ game.name }}" style="display: none;">
+            <div id="edit-fps-{{ game.name|replace(' ', '') }}" style="display: none;">
                 <p>Input your FPS @ Low settings and 1080p resolution.</p>
                 <form class="w-100" action="{{ url_for('profile', user=session['user'])}}" method="post">
                     <input min="0" max="1000" type="number" name="submit_fps_input">
@@ -113,6 +121,8 @@
 {% endblock %}
 {% block postloadjs %}
 <script>
+
+
     {% if display %}
     // Enables edit options to display after browser back navigation.
     sessionStorage.setItem("link-display-1", "contents");
@@ -202,6 +212,7 @@
             switch_id.setAttribute("data-switch", 0);
         }
     }
+
 
 </script>
 <script type="text/javascript" src="/static/js/reset_index.js"></script>
