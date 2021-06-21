@@ -1,0 +1,798 @@
+[
+    {
+        "model": "NVIDIA GeForce RTX 3090",
+        "rating": "1"
+    },
+    {
+        "model": "AMD Radeon 6900 XT",
+        "rating": "2"
+    },
+    {
+        "model": "AMD Radeon RX 6800 XT",
+        "rating": "3"
+    },
+    {
+        "model": "NVIDIA GeForce RTX 3080",
+        "rating": "4"
+    },
+    {
+        "model": "AMD Radeon RX 6800",
+        "rating": "5"
+    },
+    {
+        "model": "NVIDIA Titan RTX",
+        "rating": "6"
+    },
+    {
+        "model": "NVIDIA GeForce RTX 2080 Ti",
+        "rating": "7"
+    },
+    {
+        "model": "NVIDIA GeForce RTX 3070",
+        "rating": "8"
+    },
+    {
+        "model": "NVIDIA Quadro RTX 6000",
+        "rating": "9"
+    },
+    {
+        "model": "NVIDIA Titan V",
+        "rating": "10"
+    },
+    {
+        "model": "NVIDIA GeForce RTX 3060 Ti",
+        "rating": "11"
+    },
+    {
+        "model": "NVIDIA GeForce RTX 2080 SUPER",
+        "rating": "12"
+    },
+    {
+        "model": "NVIDIA GeForce RTX 2080",
+        "rating": "13"
+    },
+    {
+        "model": "NVIDIA Quadro RTX 5000",
+        "rating": "14"
+    },
+    {
+        "model": "NVIDIA Titan Xp",
+        "rating": "15"
+    },
+    {
+        "model": "NVIDIA GeForce RTX 2070 SUPER",
+        "rating": "16"
+    },
+    {
+        "model": "NVIDIA GeForce RTX 2080 SUPER (Notebook)",
+        "rating": "17"
+    },
+    {
+        "model": "NVIDIA Titan Xp Collector's Edition",
+        "rating": "18"
+    },
+    {
+        "model": "NVIDIA GeForce RTX 2080 (Notebook)",
+        "rating": "19"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 1080 Ti",
+        "rating": "20"
+    },
+    {
+        "model": "NVIDIA Titan X (Pascal)",
+        "rating": "21"
+    },
+    {
+        "model": "AMD Radeon RX 5700 XT 50th Anniversary",
+        "rating": "22"
+    },
+    {
+        "model": "AMD Radeon RX 5700 XT",
+        "rating": "23"
+    },
+    {
+        "model": "NVIDIA GeForce RTX 2070",
+        "rating": "24"
+    },
+    {
+        "model": "AMD Radeon VII",
+        "rating": "25"
+    },
+    {
+        "model": "NVIDIA GeForce RTX 2060 SUPER",
+        "rating": "26"
+    },
+    {
+        "model": "NVIDIA GeForce RTX 2080 SUPER Max-Q",
+        "rating": "27"
+    },
+    {
+        "model": "AMD Radeon RX 5700",
+        "rating": "28"
+    },
+    {
+        "model": "NVIDIA GeForce RTX 2070 SUPER (Notebook)",
+        "rating": "29"
+    },
+    {
+        "model": "NVIDIA GeForce RTX 2080 Max-Q",
+        "rating": "30"
+    },
+    {
+        "model": "NVIDIA Quadro RTX 4000",
+        "rating": "31"
+    },
+    {
+        "model": "AMD Radeon RX Vega 64 Liquid",
+        "rating": "32"
+    },
+    {
+        "model": "NVIDIA Quadro RTX 5000 Max-Q",
+        "rating": "33"
+    },
+    {
+        "model": "NVIDIA GeForce RTX 2070 (Notebook refresh)",
+        "rating": "34"
+    },
+    {
+        "model": "AMD Radeon RX 5600 XT",
+        "rating": "35"
+    },
+    {
+        "model": "NVIDIA GeForce RTX 2070 SUPER Max-Q",
+        "rating": "36"
+    },
+    {
+        "model": "NVIDIA GeForce RTX 2070 (Notebook)",
+        "rating": "37"
+    },
+    {
+        "model": "NVIDIA GeForce RTX 2060",
+        "rating": "38"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 1080",
+        "rating": "39"
+    },
+    {
+        "model": "AMD Radeon RX Vega 64",
+        "rating": "40"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 1080 (Notebook)",
+        "rating": "41"
+    },
+    {
+        "model": "NVIDIA GeForce RTX 2070 Max-Q",
+        "rating": "42"
+    },
+    {
+        "model": "AMD Radeon Vega Frontier Edition",
+        "rating": "43"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 1070 Ti",
+        "rating": "44"
+    },
+    {
+        "model": "NVIDIA Quadro RTX 4000 (notebook)",
+        "rating": "45"
+    },
+    {
+        "model": "AMD Radeon RX Vega 56",
+        "rating": "46"
+    },
+    {
+        "model": "NVIDIA Quadro P5000",
+        "rating": "47"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 1660 Ti",
+        "rating": "48"
+    },
+    {
+        "model": "NVIDIA Quadro P5200",
+        "rating": "49"
+    },
+    {
+        "model": "NVIDIA GeForce RTX 2060 (Notebook refresh)",
+        "rating": "50"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 1660 SUPER",
+        "rating": "51"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 980 Ti",
+        "rating": "52"
+    },
+    {
+        "model": "AMD Radeon RX 5600M",
+        "rating": "53"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 1080 Max-Q",
+        "rating": "54"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 1070",
+        "rating": "55"
+    },
+    {
+        "model": "NVIDIA GeForce RTX 2060 (Notebook)",
+        "rating": "56"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 980 Ti",
+        "rating": "57"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 1660 Ti (Notebook)",
+        "rating": "58"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 1070 (Notebook)",
+        "rating": "59"
+    },
+    {
+        "model": "NVIDIA GeForce RTX 2060 Max-Q",
+        "rating": "60"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 1660",
+        "rating": "61"
+    },
+    {
+        "model": "NVIDIA GTX TITAN X",
+        "rating": "62"
+    },
+    {
+        "model": "AMD Radeon R9 Fury X",
+        "rating": "63"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 1660 Ti Max-Q",
+        "rating": "64"
+    },
+    {
+        "model": "NVIDIA Quadro P4000",
+        "rating": "65"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 1070 Max-Q",
+        "rating": "66"
+    },
+    {
+        "model": "AMD Radeon RX 5500 XT",
+        "rating": "67"
+    },
+    {
+        "model": "AMD Radeon R9 Fury",
+        "rating": "68"
+    },
+    {
+        "model": "AMD Radeon RX 590",
+        "rating": "69"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 1650 SUPER",
+        "rating": "70"
+    },
+    {
+        "model": "AMD Radeon R9 Nano",
+        "rating": "71"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 980",
+        "rating": "72"
+    },
+    {
+        "model": "AMD Radeon RX 580",
+        "rating": "73"
+    },
+    {
+        "model": "AMD Radeon R9 390X",
+        "rating": "74"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 1060",
+        "rating": "75"
+    },
+    {
+        "model": "AMD Radeon RX 480",
+        "rating": "76"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 980 (Notebook)",
+        "rating": "77"
+    },
+    {
+        "model": "AMD Radeon R9 290X",
+        "rating": "78"
+    },
+    {
+        "model": "AMD Radeon R9 390",
+        "rating": "79"
+    },
+    {
+        "model": "AMD Radeon RX 580 2048SP",
+        "rating": "80"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 1060-5GB",
+        "rating": "81"
+    },
+    {
+        "model": "AMD Radeon RX 570",
+        "rating": "82"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 1060",
+        "rating": "83"
+    },
+    {
+        "model": "AMD Radeon R9 290",
+        "rating": "84"
+    },
+    {
+        "model": "AMD Radeon RX 470",
+        "rating": "85"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 1060 (Notebook)",
+        "rating": "86"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 1650 Ti (Notebook)",
+        "rating": "87"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 970",
+        "rating": "88"
+    },
+    {
+        "model": "AMD Radeon RX 580 (Laptop)",
+        "rating": "89"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 1060 Max-Q",
+        "rating": "90"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 1650 (Notebook)",
+        "rating": "91"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 1650",
+        "rating": "92"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 780 Ti",
+        "rating": "93"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 1650 Ti Max-Q",
+        "rating": "94"
+    },
+    {
+        "model": "NVIDIA Quadro T2000 (Notebook)",
+        "rating": "95"
+    },
+    {
+        "model": "NVIDIA GTX Titan Black",
+        "rating": "96"
+    },
+    {
+        "model": "AMD Radeon R9 380X",
+        "rating": "97"
+    },
+    {
+        "model": "NVIDIA Quadro P2000",
+        "rating": "98"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 980M",
+        "rating": "99"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 1650 Max-Q",
+        "rating": "100"
+    },
+    {
+        "model": "AMD Radeon RX Vega M GH Graphics",
+        "rating": "101"
+    },
+    {
+        "model": "NVIDIA GeForce GTX Titan",
+        "rating": "102"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 780",
+        "rating": "103"
+    },
+    {
+        "model": "AMD Radeon R9 380",
+        "rating": "104"
+    },
+    {
+        "model": "AMD Radeon R9 285",
+        "rating": "105"
+    },
+    {
+        "model": "AMD Radeon R9 280X",
+        "rating": "106"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 1050 Ti",
+        "rating": "107"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 1050 Ti (Notebook)",
+        "rating": "108"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 960",
+        "rating": "109"
+    },
+    {
+        "model": "AMD Radeon HD 7970",
+        "rating": "110"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 970M",
+        "rating": "111"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 1050 Max-Q",
+        "rating": "112"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 770",
+        "rating": "113"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 1050 (Notebook)",
+        "rating": "114"
+    },
+    {
+        "model": "AMD Radeon RX Vega M GL Graphics",
+        "rating": "115"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 680",
+        "rating": "116"
+    },
+    {
+        "model": "AMD Radeon R9 280",
+        "rating": "117"
+    },
+    {
+        "model": "AMD Radeon HD 7950",
+        "rating": "118"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 950",
+        "rating": "119"
+    },
+    {
+        "model": "AMD Radeon RX 560X (Laptop)",
+        "rating": "120"
+    },
+    {
+        "model": "AMD Radeon RX 560",
+        "rating": "121"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 670",
+        "rating": "122"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 965M",
+        "rating": "123"
+    },
+    {
+        "model": "AMD Radeon R9 270X",
+        "rating": "124"
+    },
+    {
+        "model": "AMD Radeon RX 460",
+        "rating": "125"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 1050",
+        "rating": "126"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 760",
+        "rating": "127"
+    },
+    {
+        "model": "AMD Radeon HD 7870",
+        "rating": "128"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 660 Ti",
+        "rating": "129"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 880M",
+        "rating": "130"
+    },
+    {
+        "model": "AMD Radeon R9 270",
+        "rating": "131"
+    },
+    {
+        "model": "AMD Radeon R7 370",
+        "rating": "132"
+    },
+    {
+        "model": "AMD Radeon R7 260X",
+        "rating": "133"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 780M",
+        "rating": "134"
+    },
+    {
+        "model": "Intel Iris Xe Graphics G7 96EU",
+        "rating": "135"
+    },
+    {
+        "model": "AMD Radeon R7 360",
+        "rating": "136"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 870M",
+        "rating": "137"
+    },
+    {
+        "model": "AMD Radeon HD 7850",
+        "rating": "138"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 660",
+        "rating": "139"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 750 Ti",
+        "rating": "140"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 960M",
+        "rating": "141"
+    },
+    {
+        "model": "AMD Radeon RX Vega 11",
+        "rating": "142"
+    },
+    {
+        "model": "AMD Radeon RX 550",
+        "rating": "143"
+    },
+    {
+        "model": "NVIDIA Quadro K2200",
+        "rating": "144"
+    },
+    {
+        "model": "AMD Radeon RX Vega 11 Mobile",
+        "rating": "145"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 860M",
+        "rating": "146"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 650 Ti Boost",
+        "rating": "147"
+    },
+    {
+        "model": "NVIDIA GeForce MX250 (25W)",
+        "rating": "148"
+    },
+    {
+        "model": "NVIDIA GeForce GT 1030",
+        "rating": "149"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 750",
+        "rating": "150"
+    },
+    {
+        "model": "AMD Radeon RX Vega 7 (Ryzen 4000 Mobile)",
+        "rating": "151"
+    },
+    {
+        "model": "NVIDIA GeForce MX150",
+        "rating": "152"
+    },
+    {
+        "model": "NVIDIA GeForce 950M",
+        "rating": "153"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 850M",
+        "rating": "154"
+    },
+    {
+        "model": "AMD Radeon Vega 6 Mobile",
+        "rating": "155"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 770M",
+        "rating": "156"
+    },
+    {
+        "model": "AMD Radeon Vega 6",
+        "rating": "157"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 650 Ti",
+        "rating": "158"
+    },
+    {
+        "model": "NVIDIA GeForce MX250 (10W)",
+        "rating": "159"
+    },
+    {
+        "model": "AMD Radeon Vega 8",
+        "rating": "160"
+    },
+    {
+        "model": "AMD Radeon RX Vega 5 (Ryzen 4000 Mobile)",
+        "rating": "161"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 580",
+        "rating": "162"
+    },
+    {
+        "model": "AMD Radeon HD 7770",
+        "rating": "163"
+    },
+    {
+        "model": "AMD Radeon Vega 10 Mobile",
+        "rating": "164"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 765M",
+        "rating": "165"
+    },
+    {
+        "model": "Intel Iris Pro Graphics 10th Gen Mobile",
+        "rating": "166"
+    },
+    {
+        "model": "AMD Radeon Vega 8 Mobile",
+        "rating": "167"
+    },
+    {
+        "model": "NVIDIA Quadro K620",
+        "rating": "168"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 745",
+        "rating": "169"
+    },
+    {
+        "model": "NVIDIA GeForce MX130",
+        "rating": "170"
+    },
+    {
+        "model": "NVIDIA Quadro P400",
+        "rating": "171"
+    },
+    {
+        "model": "Intel Iris Plus Graphics 655",
+        "rating": "172"
+    },
+    {
+        "model": "NVIDIA GeForce 940MX",
+        "rating": "173"
+    },
+    {
+        "model": "NVIDIA GeForce GTX 650",
+        "rating": "174"
+    },
+    {
+        "model": "AMD Radeon 530",
+        "rating": "175"
+    },
+    {
+        "model": "NVIDIA GeForce GT 740",
+        "rating": "176"
+    },
+    {
+        "model": "NVIDIA GeForce 940M",
+        "rating": "177"
+    },
+    {
+        "model": "NVIDIA GeForce 840M",
+        "rating": "178"
+    },
+    {
+        "model": "AMD Radeon R7",
+        "rating": "179"
+    },
+    {
+        "model": "NVIDIA GeForce GT 750M",
+        "rating": "180"
+    },
+    {
+        "model": "Intel UHD 630",
+        "rating": "181"
+    },
+    {
+        "model": "AMD Radeon Vega 3",
+        "rating": "182"
+    },
+    {
+        "model": "NVIDIA GeForce GT 650M",
+        "rating": "183"
+    },
+    {
+        "model": "AMD Radeon Vega 3 Mobile",
+        "rating": "184"
+    },
+    {
+        "model": "NVIDIA GeForce GT 640 (DDR3)",
+        "rating": "185"
+    },
+    {
+        "model": "Intel UHD 10th Gen Mobile",
+        "rating": "186"
+    },
+    {
+        "model": "Intel HD 630",
+        "rating": "187"
+    },
+    {
+        "model": "Intel HD 530",
+        "rating": "188"
+    },
+    {
+        "model": "Intel HD 630 Mobile",
+        "rating": "189"
+    },
+    {
+        "model": "Intel UHD 620",
+        "rating": "190"
+    },
+    {
+        "model": "NVIDIA GeForce GT 740M",
+        "rating": "191"
+    },
+    {
+        "model": "Intel HD 620",
+        "rating": "192"
+    },
+    {
+        "model": "NVIDIA GeForce 920M",
+        "rating": "193"
+    },
+    {
+        "model": "Intel Iris Graphics 520",
+        "rating": "194"
+    },
+    {
+        "model": "NVIDIA GeForce GT 730",
+        "rating": "195"
+    },
+    {
+        "model": "Intel HD 5500",
+        "rating": "196"
+    },
+    {
+        "model": "NVIDIA GeForce GT 710",
+        "rating": "197"
+    },
+    {
+        "model": "Intel HD 4600",
+        "rating": "198"
+    },
+    {
+        "model": "NVIDIA GeForce GT 630",
+        "rating": "199"
+    }
+]
