@@ -2,6 +2,7 @@ import os
 import requests
 import json
 import re
+from bs4 import BeautifulSoup
 from flask import (
     Flask, flash, render_template,
     redirect, request, session, url_for)
@@ -402,7 +403,7 @@ def check():
     # else:
     #     pass
 
-    # Find Regular Nvidia gpus from above 9000 series exept for titan series
+    # Find Regular Nvidia gpus from above 9000 series except for Titan and Quadro series.
     # Eg.'Geforce GT 740', 'Geforce RTX 2050 ti (notebook)'
 
     # TESTING 
@@ -412,41 +413,61 @@ def check():
     list = json.loads(gpu_list)
     gpu_requirements = json.dumps(list)
 
+    with open("static/data/wiki.html") as wiki:
+        soup = BeautifulSoup(wiki, "html.parser")
+        find = str(soup)
+
     test = ""
     count = 0
     count2 = 0
-    find_nvidia_only = ""
-    find_nvidia = re.findall(r'"NVIDIA\sG(.*?)"', gpu_requirements)
-    for z in find_nvidia:
-        z = re.sub(r"^",  "NVIDIA G", z)
-        find_nvidia_only += "" + z + "\n"
-        count += 1
-    print("-------------------------------Nvidia Geforce in Database--------------------------------------")
-    print('Total Found:')
-    print(count)
-    print(find_nvidia_only)
-    print("-------------------------------------------End-------------------------------------------------")
-    print(" ")
-    print(" ")
+    # find_nvidia_only = ""
+    # find_nvidia = re.findall(r'"NVIDIA\sG(.*?)"', find)
+    # for z in find_nvidia:
+    #     z = re.sub(r"^",  "NVIDIA G", z)
+    #     find_nvidia_only += "" + z + "\n"
+    #     count += 1
+    # print("-------------------------------Nvidia Geforce in Database--------------------------------------")
+    # print('Total Found:')
+    # print(count)
+    # print(find_nvidia_only)
+    # print("-------------------------------------------End-------------------------------------------------")
+    # print(" ")
+    # print(" ")
     
+    # Note
+    # Need to make a pattern to find GeForce 9 (9xxx) series and 9 series mobile.
     find_newer_gtx_gpu = re.findall(
-        r'(?i)\s(?:gtx\s|gt\s|rtx\s|gts\s|mx|m|\d+[a-zA-Z]*)(?:\d+\s*-*\d+gb|\d*[a-zA-Z]*\s*\d*\s*)'
-        r'(?:\(\d+w\)|ti\sboost|ti\s\(?notebook\)*|ti|le|max-q|super\smax-q'
-        r'|se|super|\d+m|\(mobile\)|mobile|\(m\)|m|\(notebook\srefresh\)|notbook\srefresh'
-        r'|\(notebook\)|notebook?)*'
-        r'(?:\smax-q|\s\(mobile\)|\smobile|\s\(m\)|\sm|\(notebook\srefresh\)|notbook\srefresh'
-        r'|\s\(notebook\)|\snotebook|\s\(refresh\)|\srefresh|\smax-q?)*', find_nvidia_only)
-    # print('find_newer_gtx_gpu')
-    # print(find_newer_gtx_gpu)
+        r'(?i)\s(?:geforce\s|gtx\s|gt\s|rtx\s|gts\s|g|mx|m|\d+[a-zA-Z]*)'
+        r'(?:\d+\s*-*\d+gb|\d*[a-zA-Z]*\s*\d*\s*)'
+        r'(?:\(\d+w\)|max-q|max\sq|\(max\sq\)|\(max-q\)|max\sq|ti\sboost|ti|le'
+        r'|super\smax-q|se|super|\d+m|\(laptop\)|laptop|\(mobile\)|mobile|\(m\)'
+        r'|m|\(notebook\)|notebook|\(notebook\srefresh\)|notebook\srefresh)*'
+        r'(?:\smax-q|\smax\sq|\s\(max\sq\)|\s\(max-q\)|\s\(mobile\)|\smobile|\s\(m\)'
+        r'|\sm|\s\(notebook\srefresh\)|\snotebook\srefresh|\s\(notebook\)|\snotebook'
+        r'|\s\(laptop\)|\slaptop|\s\(refresh\)|\srefresh)*', find)
     if find_newer_gtx_gpu:
         for gpu in find_newer_gtx_gpu:
             # Formats String to be compatible with database
-            # gpu = re.sub(r"(?i)\d+GB",  "", gpu)
-            gpu = re.sub(r"^",  "NVIDIA GeForce", gpu)
+            gpu = re.sub(r"GeForce",  "", gpu)
             gpu = re.sub(r"\s\s$",  "", gpu)
             gpu = re.sub(r"\s$",  "", gpu)
-            test += "" + gpu + "\n"
+            gpu = re.sub(r"^",  "NVIDIA GeForce ", gpu)
+            gpu = re.sub(r"\s\s",  " ", gpu)
+            # if re.search(r'(?i)quatro',gpu):
+            #     pass
+            # elif re.search(r'^NVIDIA\sGeForce\s(?:\d+|[a-zA-Z]+|\d+px)$',gpu):
+            #     pass
+            # elif re.search(r'(?i)NVIDIA\sGeForce\s(?:[0-9]{1,2}\s\d|256\sse|\d+\sse|\dm|[0-9]{1,3}m|\d+\sm$'
+            # r'|\dx{1,3}|\d+px|ms|0\s\d|\d+em|\dh\d|\dc\d|\d+\s0|\dh|\da\d|\dv\d|\d{1,2}[a-zA-Z]\d|3d|mx{2,5}'
+            # r'|rtx\sx0{1,3}|mx\s|zx|mx[13456789]|m2\d+zx|\d+[abcdefghjklnopqrstuvwyz]+|m64|'
+            # r'multiprocessors|mcp|mobile\s6|gtx\sgraphics|\d+XGL)',gpu):
+            #     pass
+            # elif re.search(r'(?i)RTX\s(?:ax|cards)',gpu):
+            #     pass
+            # else:
+            test += "<p>" + gpu + "</p>"
             count2 += 1
+        return render_template("test.html", test=test)
             
     print("-------------------------------Nvidia Geforce Regex Results--------------------------------------")
     print('Total Found:')
