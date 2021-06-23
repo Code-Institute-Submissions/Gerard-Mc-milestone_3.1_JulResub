@@ -1,0 +1,4626 @@
+[
+    {
+        "model": "Intel HD 610",
+        "rating": "670"
+    },
+    {
+        "model": "Radeon R7 PRO A8-8650B",
+        "rating": "668"
+    },
+    {
+        "model": "Radeon HD 7640G + HD 8500M N HD 8500M Dual",
+        "rating": "665"
+    },
+    {
+        "model": "FirePro M7740",
+        "rating": "665"
+    },
+    {
+        "model": "Radeon HD 8550G + 8690M Dual",
+        "rating": "664"
+    },
+    {
+        "model": "Quadro 500M",
+        "rating": "664"
+    },
+    {
+        "model": "GeForce GT 735M",
+        "rating": "661"
+    },
+    {
+        "model": "FireGL V7700",
+        "rating": "660"
+    },
+    {
+        "model": "Radeon HD 2900 XT",
+        "rating": "659"
+    },
+    {
+        "model": "Radeon HD 7660G + HD 7600M Dual",
+        "rating": "659"
+    },
+    {
+        "model": "Radeon R5 PRO A8-9600B 4C+6G",
+        "rating": "658"
+    },
+    {
+        "model": "GeForce GT 140",
+        "rating": "657"
+    },
+    {
+        "model": "GeForce GT 820M",
+        "rating": "657"
+    },
+    {
+        "model": "Radeon HD 7640G + 8750M Dual",
+        "rating": "654"
+    },
+    {
+        "model": "Radeon HD 8550G + HD 8600/8700M Dual",
+        "rating": "654"
+    },
+    {
+        "model": "Radeon HD 8650G + 8570M Dual",
+        "rating": "654"
+    },
+    {
+        "model": "Professional HD Driver",
+        "rating": "653"
+    },
+    {
+        "model": "Radeon HD 7520G + HD 8750M Dual",
+        "rating": "651"
+    },
+    {
+        "model": "GeForce GTS 360M",
+        "rating": "650"
+    },
+    {
+        "model": "SUMO 9640",
+        "rating": "650"
+    },
+    {
+        "model": "Radeon R5 M430",
+        "rating": "648"
+    },
+    {
+        "model": "Radeon R7 A8 PRO-7600B",
+        "rating": "647"
+    },
+    {
+        "model": "FireStream 9170",
+        "rating": "647"
+    },
+    {
+        "model": "Radeon HD 6670 + 6670 Dual",
+        "rating": "646"
+    },
+    {
+        "model": "Radeon HD 8610G + HD 8500M Dual",
+        "rating": "645"
+    },
+    {
+        "model": "Radeon HD 7640G + 7670M Dual",
+        "rating": "644"
+    },
+    {
+        "model": "Radeon HD 7540D + HD 6450 Dual",
+        "rating": "643"
+    },
+    {
+        "model": "Intel HD P4600/P4700",
+        "rating": "639"
+    },
+    {
+        "model": "GeForce 9800 GTX/9800 GTX+",
+        "rating": "638"
+    },
+    {
+        "model": "GeForce 8800 Ultra",
+        "rating": "638"
+    },
+    {
+        "model": "Radeon R5 PRO A6-8570E 2C+4G",
+        "rating": "637"
+    },
+    {
+        "model": "Radeon HD 7640G + 7400M Dual",
+        "rating": "637"
+    },
+    {
+        "model": "Radeon HD 8450G + 8750M Dual",
+        "rating": "637"
+    },
+    {
+        "model": "GeForce 9800 S",
+        "rating": "635"
+    },
+    {
+        "model": "GeForce GT 710",
+        "rating": "635"
+    },
+    {
+        "model": "Radeon HD 8650G + 8670M Dual",
+        "rating": "635"
+    },
+    {
+        "model": "Matrox C420 LP PCIe x16",
+        "rating": "634"
+    },
+    {
+        "model": "NVS 5400M",
+        "rating": "634"
+    },
+    {
+        "model": "Radeon HD 8650G + HD 7670M Dual",
+        "rating": "634"
+    },
+    {
+        "model": "Radeon HD 7660D + HD 7000 Dual",
+        "rating": "633"
+    },
+    {
+        "model": "Intel HD 4600",
+        "rating": "632"
+    },
+    {
+        "model": "Radeon HD 7610M",
+        "rating": "632"
+    },
+    {
+        "model": "Radeon R7 M265",
+        "rating": "631"
+    },
+    {
+        "model": "Radeon HD 7640G + HD 7700M N HD 7700M Dual",
+        "rating": "630"
+    },
+    {
+        "model": "Radeon HD 7660G + 7470M Dual",
+        "rating": "630"
+    },
+    {
+        "model": "Radeon R7 M340",
+        "rating": "630"
+    },
+    {
+        "model": "GeForce GTS 240",
+        "rating": "630"
+    },
+    {
+        "model": "Radeon HD 8510G + HD 8500M Dual",
+        "rating": "629"
+    },
+    {
+        "model": "Radeon R6",
+        "rating": "629"
+    },
+    {
+        "model": "Radeon HD 7570",
+        "rating": "628"
+    },
+    {
+        "model": "Radeon HD 2900 PRO",
+        "rating": "627"
+    },
+    {
+        "model": "Radeon HD 7640G + 7500/7600 Dual",
+        "rating": "627"
+    },
+    {
+        "model": "GeForce 810A",
+        "rating": "627"
+    },
+    {
+        "model": "Radeon HD 8650G + 8500M Dual",
+        "rating": "626"
+    },
+    {
+        "model": "GeForce GTS 250",
+        "rating": "625"
+    },
+    {
+        "model": "Intel HD 510",
+        "rating": "624"
+    },
+    {
+        "model": "Radeon HD 7520G + HD 8600/8700M Dual",
+        "rating": "623"
+    },
+    {
+        "model": "Radeon HD 7640G + HD 7400M Dual",
+        "rating": "621"
+    },
+    {
+        "model": "GeForce GTX 280M",
+        "rating": "621"
+    },
+    {
+        "model": "Radeon HD 8570 + 8670D Dual",
+        "rating": "620"
+    },
+    {
+        "model": "Radeon HD 8550G + R5 M200 Dual",
+        "rating": "619"
+    },
+    {
+        "model": "Radeon R5 A10-9600P 4C+6G",
+        "rating": "619"
+    },
+    {
+        "model": "Radeon HD 8550G + 8600M Dual",
+        "rating": "617"
+    },
+    {
+        "model": "Radeon R5 330",
+        "rating": "616"
+    },
+    {
+        "model": "Radeon HD 7500G + 7500M/7600M Dual",
+        "rating": "616"
+    },
+    {
+        "model": "FireGL V7600",
+        "rating": "615"
+    },
+    {
+        "model": "Intel HD 515",
+        "rating": "614"
+    },
+    {
+        "model": "GeForce GT 720A",
+        "rating": "613"
+    },
+    {
+        "model": "Radeon HD 8650G + 8600M Dual",
+        "rating": "613"
+    },
+    {
+        "model": "Radeon HD 8550G N HD 8550G + HD 8600M N HD 8600M D",
+        "rating": "611"
+    },
+    {
+        "model": "7900 MOD - Radeon HD 6520G",
+        "rating": "610"
+    },
+    {
+        "model": "Quadro K510M",
+        "rating": "610"
+    },
+    {
+        "model": "Radeon HD 8610G + 8500M Dual",
+        "rating": "610"
+    },
+    {
+        "model": "GeForce 910M",
+        "rating": "608"
+    },
+    {
+        "model": "Radeon HD 7640G + HD 8500M Dual",
+        "rating": "607"
+    },
+    {
+        "model": "GeForce 8800 GTS 512",
+        "rating": "607"
+    },
+    {
+        "model": "Radeon HD 8650G + HD 8600M Dual",
+        "rating": "606"
+    },
+    {
+        "model": "Radeon R5 A6-9400 RADEON R5, 6 COMPUTE CORES 2C+4G",
+        "rating": "605"
+    },
+    {
+        "model": "Intel HD P4600",
+        "rating": "604"
+    },
+    {
+        "model": "GeForce 8800 GTX",
+        "rating": "603"
+    },
+    {
+        "model": "Radeon HD 8550G + 8500M Dual",
+        "rating": "602"
+    },
+    {
+        "model": "Radeon HD 8610G + 8670M Dual",
+        "rating": "599"
+    },
+    {
+        "model": "Radeon HD 8510G + 8500M Dual",
+        "rating": "596"
+    },
+    {
+        "model": "Radeon R5 M330",
+        "rating": "595"
+    },
+    {
+        "model": "Radeon HD 7640G + 7470M Dual",
+        "rating": "595"
+    },
+    {
+        "model": "Quadro 1000M",
+        "rating": "594"
+    },
+    {
+        "model": "Radeon HD 8550G + HD 8600M Dual",
+        "rating": "593"
+    },
+    {
+        "model": "Radeon HD 7520G + 7600M Dual",
+        "rating": "591"
+    },
+    {
+        "model": "Radeon R7 A8-7650K",
+        "rating": "590"
+    },
+    {
+        "model": "Radeon HD 7640G + HD 7700M Dual",
+        "rating": "589"
+    },
+    {
+        "model": "Radeon HD 8610G + 8600M Dual",
+        "rating": "588"
+    },
+    {
+        "model": "Radeon HD 7520G + 7610M Dual",
+        "rating": "588"
+    },
+    {
+        "model": "Radeon HD 7660G + 7400M Dual",
+        "rating": "588"
+    },
+    {
+        "model": "Radeon HD 7660G + 8670M Dual",
+        "rating": "587"
+    },
+    {
+        "model": "Radeon HD 7640G + HD 8600/8700M Dual",
+        "rating": "586"
+    },
+    {
+        "model": "GeForce 820A",
+        "rating": "586"
+    },
+    {
+        "model": "Radeon HD 7640G + 8500M Dual",
+        "rating": "585"
+    },
+    {
+        "model": "Radeon HD 8650G + HD 8670M Dual",
+        "rating": "585"
+    },
+    {
+        "model": "GeForce GT 720",
+        "rating": "585"
+    },
+    {
+        "model": "Radeon HD 7520G + 7500/7600 Dual",
+        "rating": "582"
+    },
+    {
+        "model": "Intel HD 5500",
+        "rating": "581"
+    },
+    {
+        "model": "Radeon HD 8550G + 8670M Dual",
+        "rating": "579"
+    },
+    {
+        "model": "Radeon HD 8450G + R5 M230 Dual",
+        "rating": "578"
+    },
+    {
+        "model": "Radeon HD 8610G + HD 8670M Dual",
+        "rating": "577"
+    },
+    {
+        "model": "Radeon HD 7620G + 8670M Dual",
+        "rating": "577"
+    },
+    {
+        "model": "Intel Skylake HD DT GT2",
+        "rating": "576"
+    },
+    {
+        "model": "Radeon R5 A240",
+        "rating": "576"
+    },
+    {
+        "model": "Radeon HD 7520G + HD 7700M Dual",
+        "rating": "574"
+    },
+    {
+        "model": "Quadro FX 3800M",
+        "rating": "574"
+    },
+    {
+        "model": "Radeon R5 420",
+        "rating": "574"
+    },
+    {
+        "model": "Radeon HD 7520G N HD 7520G + HD 7500/7600 7500/760",
+        "rating": "574"
+    },
+    {
+        "model": "Radeon HD 8450G + HD 8670M Dual",
+        "rating": "574"
+    },
+    {
+        "model": "Radeon HD 3870",
+        "rating": "574"
+    },
+    {
+        "model": "GeForce GT 550M",
+        "rating": "572"
+    },
+    {
+        "model": "Radeon R6 + R7 M265DX Dual",
+        "rating": "570"
+    },
+    {
+        "model": "Radeon R6 PRO A8-8600B R6, 10 Compute Cores 4C+6G",
+        "rating": "569"
+    },
+    {
+        "model": "Radeon HD 7560D + 6450 Dual",
+        "rating": "568"
+    },
+    {
+        "model": "Radeon HD 8670D",
+        "rating": "567"
+    },
+    {
+        "model": "GeForce GT 635M",
+        "rating": "566"
+    },
+    {
+        "model": "Radeon HD 6610M",
+        "rating": "565"
+    },
+    {
+        "model": "GeForce GT 430",
+        "rating": "565"
+    },
+    {
+        "model": "Mobility Radeon HD 3870 X2",
+        "rating": "564"
+    },
+    {
+        "model": "Radeon HD 7560D + R5 235 Dual",
+        "rating": "563"
+    },
+    {
+        "model": "Radeon R5 PRO A10-8730B R5, 10 COMPUTE CORES 4C+6G",
+        "rating": "562"
+    },
+    {
+        "model": "Quadro FX 5600",
+        "rating": "561"
+    },
+    {
+        "model": "Radeon R6 A8-8600P",
+        "rating": "560"
+    },
+    {
+        "model": "Radeon R6 PRO A10-8700B R6, 10 Compute Cores 4C+6G",
+        "rating": "559"
+    },
+    {
+        "model": "Radeon HD 7640G + R5 M200 Dual",
+        "rating": "559"
+    },
+    {
+        "model": "Radeon HD 8550G + HD 8500M Dual",
+        "rating": "558"
+    },
+    {
+        "model": "Radeon HD 7640G + 8670M Dual",
+        "rating": "558"
+    },
+    {
+        "model": "Radeon HD 7640G + 8570M Dual",
+        "rating": "558"
+    },
+    {
+        "model": "GeForce GT 435M",
+        "rating": "558"
+    },
+    {
+        "model": "GRID K180Q",
+        "rating": "556"
+    },
+    {
+        "model": "Radeon HD 7600G + HD 7500M/7600M Dual",
+        "rating": "555"
+    },
+    {
+        "model": "Radeon 6600M",
+        "rating": "554"
+    },
+    {
+        "model": "GF117",
+        "rating": "554"
+    },
+    {
+        "model": "Radeon HD 7650A",
+        "rating": "552"
+    },
+    {
+        "model": "Radeon R7 7850A10-7850K",
+        "rating": "551"
+    },
+    {
+        "model": "Quadro 600",
+        "rating": "551"
+    },
+    {
+        "model": "Mobility Radeon HD 5570",
+        "rating": "550"
+    },
+    {
+        "model": "Intel HD 5000",
+        "rating": "550"
+    },
+    {
+        "model": "FireGL V8650",
+        "rating": "550"
+    },
+    {
+        "model": "GeForce GT 630M",
+        "rating": "549"
+    },
+    {
+        "model": "NVS 5200M",
+        "rating": "549"
+    },
+    {
+        "model": "Radeon R5 M335",
+        "rating": "548"
+    },
+    {
+        "model": "GeForce 615",
+        "rating": "548"
+    },
+    {
+        "model": "Radeon R7 M360",
+        "rating": "548"
+    },
+    {
+        "model": "Mobility Radeon HD 3870",
+        "rating": "547"
+    },
+    {
+        "model": "FirePro 3D V5700",
+        "rating": "546"
+    },
+    {
+        "model": "Radeon HD 8550G + HD 8670M Dual",
+        "rating": "546"
+    },
+    {
+        "model": "Radeon HD 8450G + 8600M Dual",
+        "rating": "545"
+    },
+    {
+        "model": "FirePro 3D V7750",
+        "rating": "545"
+    },
+    {
+        "model": "Radeon HD 7520G + HD 7400M Dual",
+        "rating": "544"
+    },
+    {
+        "model": "Radeon HD 7600G + HD 8670M Dual",
+        "rating": "543"
+    },
+    {
+        "model": "GeForce GT 240",
+        "rating": "543"
+    },
+    {
+        "model": "Quadro FX 2700",
+        "rating": "543"
+    },
+    {
+        "model": "Radeon HD 7520G + 7470M Dual",
+        "rating": "542"
+    },
+    {
+        "model": "GeForce GTS 250M",
+        "rating": "542"
+    },
+    {
+        "model": "Radeon R5 M255",
+        "rating": "542"
+    },
+    {
+        "model": "Radeon R7 M265DX",
+        "rating": "539"
+    },
+    {
+        "model": "KV SPECTRE LITE MOBILE 25W",
+        "rating": "538"
+    },
+    {
+        "model": "Radeon R6 PRO A10-8700B 4C+6G",
+        "rating": "538"
+    },
+    {
+        "model": "Radeon HD 7560D + HD 7000 Dual",
+        "rating": "534"
+    },
+    {
+        "model": "GeForce GT 425M",
+        "rating": "532"
+    },
+    {
+        "model": "Radeon HD 8550G + 8570M Dual",
+        "rating": "532"
+    },
+    {
+        "model": "Radeon R6 M255DX",
+        "rating": "532"
+    },
+    {
+        "model": "Radeon R6 PRO A8-8600B 4C+6G",
+        "rating": "531"
+    },
+    {
+        "model": "RADEON HD6530D",
+        "rating": "531"
+    },
+    {
+        "model": "Radeon HD 8550G + HD 8570M Dual",
+        "rating": "529"
+    },
+    {
+        "model": "Radeon HD 7640G + 6400M Dual",
+        "rating": "526"
+    },
+    {
+        "model": "Radeon R6 A10-8700P",
+        "rating": "526"
+    },
+    {
+        "model": "Radeon HD 7600G N HD 7600G + HD ON HD Dual",
+        "rating": "526"
+    },
+    {
+        "model": "Intel HD 4400",
+        "rating": "525"
+    },
+    {
+        "model": "Radeon HD 8650D",
+        "rating": "525"
+    },
+    {
+        "model": "Radeon HD 7660D + R5 235 Dual",
+        "rating": "523"
+    },
+    {
+        "model": "Radeon HD 7520G + 7670M Dual",
+        "rating": "523"
+    },
+    {
+        "model": "Radeon HD 8670M",
+        "rating": "520"
+    },
+    {
+        "model": "Radeon HD 7640G + HD 7670M Dual",
+        "rating": "518"
+    },
+    {
+        "model": "Radeon HD 8650G",
+        "rating": "517"
+    },
+    {
+        "model": "IncrediblE HD 4000",
+        "rating": "517"
+    },
+    {
+        "model": "Intel HD P4000",
+        "rating": "516"
+    },
+    {
+        "model": "A10-8700P",
+        "rating": "513"
+    },
+    {
+        "model": "GeForce 8800 GT",
+        "rating": "512"
+    },
+    {
+        "model": "Mobility Radeon HD 4830",
+        "rating": "511"
+    },
+    {
+        "model": "GeForce 820M",
+        "rating": "511"
+    },
+    {
+        "model": "Radeon HD 7640G + 7610M Dual",
+        "rating": "510"
+    },
+    {
+        "model": "Radeon HD 7600G + HD 7550M Dual",
+        "rating": "509"
+    },
+    {
+        "model": "Radeon HD 7620G + 8600M Dual",
+        "rating": "508"
+    },
+    {
+        "model": "Radeon R5 PRO A6-8500B 2C+4G",
+        "rating": "508"
+    },
+    {
+        "model": "Radeon HD 7620G + HD 8670M Dual",
+        "rating": "507"
+    },
+    {
+        "model": "GeForce GT625M",
+        "rating": "507"
+    },
+    {
+        "model": "Radeon R5 240",
+        "rating": "505"
+    },
+    {
+        "model": "Radeon HD 6570",
+        "rating": "505"
+    },
+    {
+        "model": "GeForce GTS 150M",
+        "rating": "504"
+    },
+    {
+        "model": "Radeon HD 8450G + HD 8750M Dual",
+        "rating": "503"
+    },
+    {
+        "model": "Radeon HD 7660D",
+        "rating": "500"
+    },
+    {
+        "model": "GeForce 9600 GT",
+        "rating": "498"
+    },
+    {
+        "model": "TRINITY SCRAPPER MOBILE",
+        "rating": "498"
+    },
+    {
+        "model": "SUMO 964A",
+        "rating": "497"
+    },
+    {
+        "model": "GeForce GTX 260M",
+        "rating": "497"
+    },
+    {
+        "model": "Radeon HD 7500G + 7550M Dual",
+        "rating": "497"
+    },
+    {
+        "model": "ASUS EAH4870x2",
+        "rating": "496"
+    },
+    {
+        "model": "Radeon HD 7520G + HD 7670M Dual",
+        "rating": "495"
+    },
+    {
+        "model": "Mobility Radeon HD 5730",
+        "rating": "494"
+    },
+    {
+        "model": "GeForce GT 540M",
+        "rating": "493"
+    },
+    {
+        "model": "Quadro FX 3700M",
+        "rating": "493"
+    },
+    {
+        "model": "Radeon HD8530M",
+        "rating": "490"
+    },
+    {
+        "model": "Radeon HD 8670D N HD 8670D + HD 8670D Dual",
+        "rating": "488"
+    },
+    {
+        "model": "Radeon HD 8550G + R5 M230 Dual",
+        "rating": "487"
+    },
+    {
+        "model": "Radeon R4E",
+        "rating": "487"
+    },
+    {
+        "model": "GeForce 710A",
+        "rating": "486"
+    },
+    {
+        "model": "Radeon HD 7520G + 7400M Dual",
+        "rating": "486"
+    },
+    {
+        "model": "GeForce 9800 GTX+",
+        "rating": "486"
+    },
+    {
+        "model": "Radeon R5 M420",
+        "rating": "483"
+    },
+    {
+        "model": "Radeon HD 8610G + HD 8600M Dual",
+        "rating": "480"
+    },
+    {
+        "model": "Radeon HD 7560D",
+        "rating": "480"
+    },
+    {
+        "model": "Quadro FX 1800M",
+        "rating": "479"
+    },
+    {
+        "model": "Mobility Radeon HD 5000 Serisi",
+        "rating": "478"
+    },
+    {
+        "model": "GeForce 9800 GT",
+        "rating": "478"
+    },
+    {
+        "model": "Radeon HD 7660G",
+        "rating": "474"
+    },
+    {
+        "model": "Radeon HD 8450G + 8670M Dual",
+        "rating": "474"
+    },
+    {
+        "model": "Radeon HD 7640G + HD 8570M Dual",
+        "rating": "474"
+    },
+    {
+        "model": "GeForce 8800M GTS",
+        "rating": "474"
+    },
+    {
+        "model": "FirePro 3D V3800",
+        "rating": "472"
+    },
+    {
+        "model": "Radeon HD 8570D + R5 235 Dual",
+        "rating": "470"
+    },
+    {
+        "model": "Radeon HD 5570",
+        "rating": "470"
+    },
+    {
+        "model": "Radeon HD 7600G + 8500M/8700M Dual",
+        "rating": "469"
+    },
+    {
+        "model": "Radeon HD 7650M",
+        "rating": "468"
+    },
+    {
+        "model": "GeForce 800M",
+        "rating": "468"
+    },
+    {
+        "model": "Radeon HD 8690A",
+        "rating": "467"
+    },
+    {
+        "model": "Quadro FX 3600M",
+        "rating": "466"
+    },
+    {
+        "model": "Radeon HD 3850",
+        "rating": "466"
+    },
+    {
+        "model": "SUMO 9644",
+        "rating": "465"
+    },
+    {
+        "model": "Radeon HD 7660D + 7470 Dual",
+        "rating": "465"
+    },
+    {
+        "model": "Radeon HD 7550M",
+        "rating": "464"
+    },
+    {
+        "model": "FirePro V5700",
+        "rating": "464"
+    },
+    {
+        "model": "Radeon HD 7640G",
+        "rating": "463"
+    },
+    {
+        "model": "Mobility Radeon HD 4670",
+        "rating": "463"
+    },
+    {
+        "model": "GeForce 8800M GTX",
+        "rating": "462"
+    },
+    {
+        "model": "Radeon R5 M315",
+        "rating": "461"
+    },
+    {
+        "model": "GeForce 9800M GTX",
+        "rating": "461"
+    },
+    {
+        "model": "Radeon HD 7660G + HD 7600M N HD 7600M Dual",
+        "rating": "460"
+    },
+    {
+        "model": "Radeon Vega 2",
+        "rating": "460"
+    },
+    {
+        "model": "Quadro FX 4600",
+        "rating": "458"
+    },
+    {
+        "model": "GeForce 9800M GS",
+        "rating": "457"
+    },
+    {
+        "model": "GeForce GT 720M",
+        "rating": "457"
+    },
+    {
+        "model": "Intel HD Family",
+        "rating": "456"
+    },
+    {
+        "model": "GeForce 705M",
+        "rating": "455"
+    },
+    {
+        "model": "Radeon HD 7570M",
+        "rating": "455"
+    },
+    {
+        "model": "Radeon HD 7520G + 7650M Dual",
+        "rating": "453"
+    },
+    {
+        "model": "Radeon HD 8450G + HD 8600M Dual",
+        "rating": "452"
+    },
+    {
+        "model": "HIS DIGITAL HD 4650 AGP",
+        "rating": "452"
+    },
+    {
+        "model": "Radeon HD 7620G N HD 7620G + HD 8600M N HD 8600M D",
+        "rating": "451"
+    },
+    {
+        "model": "GeForce 8800 GTS",
+        "rating": "451"
+    },
+    {
+        "model": "Radeon HD 7670M",
+        "rating": "451"
+    },
+    {
+        "model": "Radeon HD 8570D",
+        "rating": "447"
+    },
+    {
+        "model": "Radeon HD 7520G + HD 7600M Dual",
+        "rating": "447"
+    },
+    {
+        "model": "Mobility Radeon HD 5650",
+        "rating": "446"
+    },
+    {
+        "model": "Radeon HD 8570M",
+        "rating": "446"
+    },
+    {
+        "model": "Radeon HD 7660G + 8600M Dual",
+        "rating": "445"
+    },
+    {
+        "model": "PHDGD Ivy 5",
+        "rating": "445"
+    },
+    {
+        "model": "GeForce GT 525M",
+        "rating": "445"
+    },
+    {
+        "model": "GeForce 710M",
+        "rating": "444"
+    },
+    {
+        "model": "Radeon HD 8350G",
+        "rating": "443"
+    },
+    {
+        "model": "Radeon R7 M260",
+        "rating": "443"
+    },
+    {
+        "model": "Radeon HD 7620G + HD 8600M Dual",
+        "rating": "442"
+    },
+    {
+        "model": "Quadro 410",
+        "rating": "440"
+    },
+    {
+        "model": "GeForce GT 710M",
+        "rating": "437"
+    },
+    {
+        "model": "GeForce GT 320",
+        "rating": "437"
+    },
+    {
+        "model": "Radeon R5 Opteron X3216",
+        "rating": "436"
+    },
+    {
+        "model": "Radeon HD 8550G",
+        "rating": "435"
+    },
+    {
+        "model": "Radeon HD 7600G + HD Dual",
+        "rating": "435"
+    },
+    {
+        "model": "Radeon HD 8410G",
+        "rating": "435"
+    },
+    {
+        "model": "GeForce GT 625M",
+        "rating": "435"
+    },
+    {
+        "model": "GeForce 9800M GT",
+        "rating": "434"
+    },
+    {
+        "model": "GeForce GT 420M",
+        "rating": "433"
+    },
+    {
+        "model": "Radeon R5 M240",
+        "rating": "432"
+    },
+    {
+        "model": "Radeon HD 3850 AGP",
+        "rating": "432"
+    },
+    {
+        "model": "Radeon HD 8610G",
+        "rating": "428"
+    },
+    {
+        "model": "GeForce 800A",
+        "rating": "428"
+    },
+    {
+        "model": "GeForce GTS 350M",
+        "rating": "427"
+    },
+    {
+        "model": "GeForce GT 620M",
+        "rating": "427"
+    },
+    {
+        "model": "Radeon HD 7640G + HD 7500/7600 Dual",
+        "rating": "423"
+    },
+    {
+        "model": "Radeon HD 7600G + 7550M Dual",
+        "rating": "423"
+    },
+    {
+        "model": "RADEON HD6410D",
+        "rating": "422"
+    },
+    {
+        "model": "Radeon HD 7640G N HD 7640G + HD 8570M Dual",
+        "rating": "422"
+    },
+    {
+        "model": "Intel 4th Generation Haswell HD",
+        "rating": "419"
+    },
+    {
+        "model": "Quadro FX 2800M",
+        "rating": "413"
+    },
+    {
+        "model": "Radeon HD 6550D",
+        "rating": "412"
+    },
+    {
+        "model": "Intel HD 5300",
+        "rating": "410"
+    },
+    {
+        "model": "Radeon HD 7470M",
+        "rating": "407"
+    },
+    {
+        "model": "Radeon HD 7640G + HD 7600M N HD 7600M Dual",
+        "rating": "406"
+    },
+    {
+        "model": "Radeon HD 7600G + 7500M/7600M Dual",
+        "rating": "405"
+    },
+    {
+        "model": "RADEON E4690",
+        "rating": "405"
+    },
+    {
+        "model": "Quadro FX 1800",
+        "rating": "402"
+    },
+    {
+        "model": "GeForce GT 330",
+        "rating": "401"
+    },
+    {
+        "model": "Radeon R5 M320",
+        "rating": "401"
+    },
+    {
+        "model": "Mobility Radeon HD 4650",
+        "rating": "401"
+    },
+    {
+        "model": "GeForce GT 335M",
+        "rating": "396"
+    },
+    {
+        "model": "GeForce 8800 GS",
+        "rating": "394"
+    },
+    {
+        "model": "Radeon HD 8500M",
+        "rating": "390"
+    },
+    {
+        "model": "Radeon HD 7600G + 7450M Dual",
+        "rating": "389"
+    },
+    {
+        "model": "GeForce GT 420",
+        "rating": "389"
+    },
+    {
+        "model": "Radeon HD 5550",
+        "rating": "389"
+    },
+    {
+        "model": "IncrediblE HD",
+        "rating": "389"
+    },
+    {
+        "model": "Quadro FX 3700",
+        "rating": "387"
+    },
+    {
+        "model": "Quadro FX 2700M",
+        "rating": "387"
+    },
+    {
+        "model": "Radeon R5 M230",
+        "rating": "387"
+    },
+    {
+        "model": "Radeon HD 8450G",
+        "rating": "384"
+    },
+    {
+        "model": "Radeon HD 4670",
+        "rating": "380"
+    },
+    {
+        "model": "Radeon HD 8510G",
+        "rating": "379"
+    },
+    {
+        "model": "GeForce 810M",
+        "rating": "378"
+    },
+    {
+        "model": "Radeon HD 6490M",
+        "rating": "377"
+    },
+    {
+        "model": "Radeon HD 7520G + 8750M Dual",
+        "rating": "376"
+    },
+    {
+        "model": "Radeon HD 7600G + 6400M Dual",
+        "rating": "376"
+    },
+    {
+        "model": "GeForce GT 130",
+        "rating": "376"
+    },
+    {
+        "model": "Radeon HD 6620G",
+        "rating": "374"
+    },
+    {
+        "model": "PHDGD Ivy 4",
+        "rating": "374"
+    },
+    {
+        "model": "Radeon HD 8570D + HD8490 Dual",
+        "rating": "374"
+    },
+    {
+        "model": "GeForce 9600 GSO 512",
+        "rating": "372"
+    },
+    {
+        "model": "GeForce 9700M GTS",
+        "rating": "368"
+    },
+    {
+        "model": "GeForce GT 610M / GT 620M / GT 710M / GT 720M / GT",
+        "rating": "368"
+    },
+    {
+        "model": "Intel UHD 605",
+        "rating": "368"
+    },
+    {
+        "model": "GeForce 9800M GTS",
+        "rating": "367"
+    },
+    {
+        "model": "Matrox Millennium P690 PCIe x16",
+        "rating": "366"
+    },
+    {
+        "model": "Radeon HD4670",
+        "rating": "365"
+    },
+    {
+        "model": "Mobility Radeon HD 3850",
+        "rating": "365"
+    },
+    {
+        "model": "Radeon HD 8470D",
+        "rating": "365"
+    },
+    {
+        "model": "Radeon HD 7520G N HD 7520G + HD 7600M N HD 7600M D",
+        "rating": "364"
+    },
+    {
+        "model": "GeForce GT 620",
+        "rating": "364"
+    },
+    {
+        "model": "Radeon HD 7660G + HD 8600M Dual",
+        "rating": "363"
+    },
+    {
+        "model": "FirePro M2000",
+        "rating": "361"
+    },
+    {
+        "model": "GeForce 9600 GSO",
+        "rating": "359"
+    },
+    {
+        "model": "Radeon HD 7500G + HD 7500M/7600M Dual",
+        "rating": "355"
+    },
+    {
+        "model": "Radeon HD 6480M",
+        "rating": "353"
+    },
+    {
+        "model": "Mobility Radeon HD 565v",
+        "rating": "353"
+    },
+    {
+        "model": "Intel Q965/Q963 Express",
+        "rating": "352"
+    },
+    {
+        "model": "Radeon HD 7580D",
+        "rating": "350"
+    },
+    {
+        "model": "Radeon HD 7620G",
+        "rating": "345"
+    },
+    {
+        "model": "Intel HD 505",
+        "rating": "343"
+    },
+    {
+        "model": "FirePro 3D V3750",
+        "rating": "341"
+    },
+    {
+        "model": "FireGL V5600",
+        "rating": "341"
+    },
+    {
+        "model": "Radeon HD 8310E",
+        "rating": "340"
+    },
+    {
+        "model": "Radeon HD 7660D + HD 7400 Dual",
+        "rating": "339"
+    },
+    {
+        "model": "Radeon HD 8400E",
+        "rating": "339"
+    },
+    {
+        "model": "Radeon HD 8570D + HD 8470 Dual",
+        "rating": "338"
+    },
+    {
+        "model": "Radeon R4",
+        "rating": "336"
+    },
+    {
+        "model": "Radeon HD 7470",
+        "rating": "336"
+    },
+    {
+        "model": "FirePro RG220",
+        "rating": "335"
+    },
+    {
+        "model": "Intel UHD 600",
+        "rating": "334"
+    },
+    {
+        "model": "Radeon HD 7540D",
+        "rating": "334"
+    },
+    {
+        "model": "Radeon R5 310",
+        "rating": "331"
+    },
+    {
+        "model": "Intel HD 4000",
+        "rating": "330"
+    },
+    {
+        "model": "GeForce GT 705",
+        "rating": "330"
+    },
+    {
+        "model": "GeForce 9600 GS",
+        "rating": "329"
+    },
+    {
+        "model": "Radeon HD 7450M",
+        "rating": "329"
+    },
+    {
+        "model": "Radeon HD 7600G + HD 7400M Dual",
+        "rating": "328"
+    },
+    {
+        "model": "Mobile Intel HD",
+        "rating": "325"
+    },
+    {
+        "model": "Radeon HD 7600G",
+        "rating": "325"
+    },
+    {
+        "model": "FirePro V3800",
+        "rating": "324"
+    },
+    {
+        "model": "GeForce GT 120 / 9500 GT",
+        "rating": "324"
+    },
+    {
+        "model": "Radeon E6460",
+        "rating": "323"
+    },
+    {
+        "model": "RADEON HD6370D",
+        "rating": "320"
+    },
+    {
+        "model": "GeForce 240M GT",
+        "rating": "319"
+    },
+    {
+        "model": "Radeon HD 8280",
+        "rating": "319"
+    },
+    {
+        "model": "GeForce GT 415M",
+        "rating": "318"
+    },
+    {
+        "model": "Mobility Radeon HD 560v",
+        "rating": "318"
+    },
+    {
+        "model": "Radeon R5 235X",
+        "rating": "316"
+    },
+    {
+        "model": "GeForce 605",
+        "rating": "313"
+    },
+    {
+        "model": "Radeon HD 6530D",
+        "rating": "312"
+    },
+    {
+        "model": "Radeon HD 7520G + 8600/8700M Dual",
+        "rating": "311"
+    },
+    {
+        "model": "Radeon HD 6370D",
+        "rating": "310"
+    },
+    {
+        "model": "Radeon HD 7520G",
+        "rating": "309"
+    },
+    {
+        "model": "GeForce GT 625",
+        "rating": "306"
+    },
+    {
+        "model": "Quadro FX 3500M",
+        "rating": "306"
+    },
+    {
+        "model": "GeForce 7900 GTX",
+        "rating": "306"
+    },
+    {
+        "model": "Radeon R3",
+        "rating": "306"
+    },
+    {
+        "model": "Radeon HD 6520G",
+        "rating": "306"
+    },
+    {
+        "model": "Intel HD 500",
+        "rating": "304"
+    },
+    {
+        "model": "GeForce GT 230",
+        "rating": "304"
+    },
+    {
+        "model": "Radeon HD 7420G",
+        "rating": "304"
+    },
+    {
+        "model": "Radeon HD 7500G",
+        "rating": "303"
+    },
+    {
+        "model": "Radeon R1E",
+        "rating": "301"
+    },
+    {
+        "model": "Radeon R5 235",
+        "rating": "300"
+    },
+    {
+        "model": "Radeon HD 7400G",
+        "rating": "300"
+    },
+    {
+        "model": "Radeon HD 8370D",
+        "rating": "299"
+    },
+    {
+        "model": "GeForce GT 610",
+        "rating": "299"
+    },
+    {
+        "model": "NVS 315",
+        "rating": "296"
+    },
+    {
+        "model": "GRID K120Q",
+        "rating": "293"
+    },
+    {
+        "model": "Intel HD P3000",
+        "rating": "293"
+    },
+    {
+        "model": "GeForce 9600M GT / GeForce GT 220M",
+        "rating": "293"
+    },
+    {
+        "model": "Radeon R5E",
+        "rating": "293"
+    },
+    {
+        "model": "Radeon HD 2900 GT",
+        "rating": "292"
+    },
+    {
+        "model": "GeForce GT 520MX",
+        "rating": "292"
+    },
+    {
+        "model": "GeForce GT 520",
+        "rating": "291"
+    },
+    {
+        "model": "Radeon HD 7480D",
+        "rating": "290"
+    },
+    {
+        "model": "GeForce 610M",
+        "rating": "288"
+    },
+    {
+        "model": "Radeon HD 7450A",
+        "rating": "288"
+    },
+    {
+        "model": "GeForce 7950 Xtreme",
+        "rating": "287"
+    },
+    {
+        "model": "Mobility Radeon HD 5165",
+        "rating": "284"
+    },
+    {
+        "model": "Radeon HD 8280E",
+        "rating": "283"
+    },
+    {
+        "model": "Radeon HD 2600 XT",
+        "rating": "282"
+    },
+    {
+        "model": "VisionTek Radeon 4550",
+        "rating": "280"
+    },
+    {
+        "model": "Radeon HD 6370M",
+        "rating": "275"
+    },
+    {
+        "model": "Radeon HD 6480G",
+        "rating": "275"
+    },
+    {
+        "model": "GeForce GT 520M",
+        "rating": "275"
+    },
+    {
+        "model": "Radeon HD 8490",
+        "rating": "270"
+    },
+    {
+        "model": "GeForce Go 7900 GTX",
+        "rating": "270"
+    },
+    {
+        "model": "GeForce 9650M GS",
+        "rating": "270"
+    },
+    {
+        "model": "Radeon HD 8280G",
+        "rating": "269"
+    },
+    {
+        "model": "Radeon HD 5470",
+        "rating": "268"
+    },
+    {
+        "model": "Mobility Radeon HD 550v",
+        "rating": "266"
+    },
+    {
+        "model": "GeForce GT 120M",
+        "rating": "265"
+    },
+    {
+        "model": "GeForce 7950 GT",
+        "rating": "264"
+    },
+    {
+        "model": "Radeon HD 8490",
+        "rating": "264"
+    },
+    {
+        "model": "GeForce Go 7950 GTX",
+        "rating": "263"
+    },
+    {
+        "model": "Radeon HD 8470",
+        "rating": "262"
+    },
+    {
+        "model": "Radeon HD 6450A",
+        "rating": "260"
+    },
+    {
+        "model": "Radeon HD 8400",
+        "rating": "258"
+    },
+    {
+        "model": "GeForce 7900 GT",
+        "rating": "258"
+    },
+    {
+        "model": "Intel HD 3000",
+        "rating": "256"
+    },
+    {
+        "model": "Quadro NVS 510M",
+        "rating": "253"
+    },
+    {
+        "model": "NVS 310",
+        "rating": "250"
+    },
+    {
+        "model": "Radeon HD 8240",
+        "rating": "249"
+    },
+    {
+        "model": "Radeon HD 7640G + 8600M Dual",
+        "rating": "249"
+    },
+    {
+        "model": "Qualcomm Adreno 630 GPU",
+        "rating": "249"
+    },
+    {
+        "model": "GeForce 510",
+        "rating": "248"
+    },
+    {
+        "model": "Radeon R3E",
+        "rating": "247"
+    },
+    {
+        "model": "GeForce GT 415",
+        "rating": "247"
+    },
+    {
+        "model": "Intel 82945G Express",
+        "rating": "247"
+    },
+    {
+        "model": "GeForce 7900 GT/GTO",
+        "rating": "247"
+    },
+    {
+        "model": "Radeon HD 8330",
+        "rating": "246"
+    },
+    {
+        "model": "NVS 4200M",
+        "rating": "245"
+    },
+    {
+        "model": "Quadro FX 5500",
+        "rating": "242"
+    },
+    {
+        "model": "GeForce 410M",
+        "rating": "242"
+    },
+    {
+        "model": "Radeon R5 230",
+        "rating": "242"
+    },
+    {
+        "model": "Radeon R2",
+        "rating": "240"
+    },
+    {
+        "model": "Radeon HD 8330E",
+        "rating": "240"
+    },
+    {
+        "model": "Radeon HD 4650",
+        "rating": "239"
+    },
+    {
+        "model": "Radeon R2E",
+        "rating": "239"
+    },
+    {
+        "model": "Mobility Radeon HD 5470",
+        "rating": "236"
+    },
+    {
+        "model": "Quadro FX 4500 X2",
+        "rating": "236"
+    },
+    {
+        "model": "Radeon HD 7450",
+        "rating": "235"
+    },
+    {
+        "model": "Radeon HD 4550",
+        "rating": "235"
+    },
+    {
+        "model": "Mobility Radeon HD 3670",
+        "rating": "232"
+    },
+    {
+        "model": "Radeon HD 6470M",
+        "rating": "224"
+    },
+    {
+        "model": "GT 430",
+        "rating": "223"
+    },
+    {
+        "model": "Quadro FX 880M",
+        "rating": "221"
+    },
+    {
+        "model": "GeForce 7800 GTX",
+        "rating": "221"
+    },
+    {
+        "model": "Radeon HD 7340M",
+        "rating": "221"
+    },
+    {
+        "model": "HD6450",
+        "rating": "220"
+    },
+    {
+        "model": "A6 Micro-6500T Quad-Core APU with RadeonR4",
+        "rating": "220"
+    },
+    {
+        "model": "Radeon HD 4650",
+        "rating": "219"
+    },
+    {
+        "model": "GeForce 7900 GS",
+        "rating": "219"
+    },
+    {
+        "model": "Mobility FireGL V5725",
+        "rating": "219"
+    },
+    {
+        "model": "Quadro FX 2500M",
+        "rating": "217"
+    },
+    {
+        "model": "Quadro FX 770M",
+        "rating": "217"
+    },
+    {
+        "model": "GeForce 9700M GT",
+        "rating": "216"
+    },
+    {
+        "model": "Radeon HD 6320 Graphic",
+        "rating": "216"
+    },
+    {
+        "model": "Radeon HD 7350",
+        "rating": "215"
+    },
+    {
+        "model": "FirePro 2460",
+        "rating": "215"
+    },
+    {
+        "model": "Mobility Radeon. HD 5470",
+        "rating": "215"
+    },
+    {
+        "model": "Radeon HD 6410D",
+        "rating": "214"
+    },
+    {
+        "model": "GeForce 320M",
+        "rating": "214"
+    },
+    {
+        "model": "Mobility Radeon HD 5450",
+        "rating": "214"
+    },
+    {
+        "model": "Radeon HD 6380G",
+        "rating": "213"
+    },
+    {
+        "model": "Intel HD 2000",
+        "rating": "213"
+    },
+    {
+        "model": "Intel 2nd Generation SandyBridge HD",
+        "rating": "212"
+    },
+    {
+        "model": "WinFast GT 610",
+        "rating": "211"
+    },
+    {
+        "model": "Radeon HD 2600 PRO",
+        "rating": "211"
+    },
+    {
+        "model": "GeForce GT 330M",
+        "rating": "209"
+    },
+    {
+        "model": "GeForce Go 7800 GTX",
+        "rating": "209"
+    },
+    {
+        "model": "Quadro FX 3500",
+        "rating": "208"
+    },
+    {
+        "model": "Radeon HD 4650 AGP",
+        "rating": "207"
+    },
+    {
+        "model": "Quadro NVS 290",
+        "rating": "207"
+    },
+    {
+        "model": "GeForce GT 220",
+        "rating": "206"
+    },
+    {
+        "model": "GeForce GT 240M",
+        "rating": "206"
+    },
+    {
+        "model": "Quadro FX 4500",
+        "rating": "206"
+    },
+    {
+        "model": "Radeon HD 8210",
+        "rating": "206"
+    },
+    {
+        "model": "Barco MXRT 1450",
+        "rating": "205"
+    },
+    {
+        "model": "Intel 2nd Generation SandyBridge HD 3000",
+        "rating": "205"
+    },
+    {
+        "model": "Quadro NVS 320M",
+        "rating": "204"
+    },
+    {
+        "model": "NVS 5100M",
+        "rating": "203"
+    },
+    {
+        "model": "Radeon HD 8250",
+        "rating": "203"
+    },
+    {
+        "model": "GeForce 7950 GX2",
+        "rating": "201"
+    },
+    {
+        "model": "GeForce G200",
+        "rating": "199"
+    },
+    {
+        "model": "Mobility Radeon HD 545v",
+        "rating": "199"
+    },
+    {
+        "model": "RADEON HD 7450",
+        "rating": "199"
+    },
+    {
+        "model": "Radeon HD 6450",
+        "rating": "199"
+    },
+    {
+        "model": "GeForce GT 230M",
+        "rating": "198"
+    },
+    {
+        "model": "Radeon HD 6320M",
+        "rating": "198"
+    },
+    {
+        "model": "GeForce GT 130M",
+        "rating": "196"
+    },
+    {
+        "model": "Radeon HD 7340G",
+        "rating": "196"
+    },
+    {
+        "model": "GeForce 7800 GT",
+        "rating": "196"
+    },
+    {
+        "model": "Intel Infoshock HD",
+        "rating": "193"
+    },
+    {
+        "model": "Radeon HD 8210E",
+        "rating": "193"
+    },
+    {
+        "model": "Radeon HD 6430M",
+        "rating": "192"
+    },
+    {
+        "model": "Mobility Radeon HD 2600 XT",
+        "rating": "191"
+    },
+    {
+        "model": "Mobility Radeon HD 4550",
+        "rating": "191"
+    },
+    {
+        "model": "GeForce 305M",
+        "rating": "190"
+    },
+    {
+        "model": "Radeon HD 8350",
+        "rating": "189"
+    },
+    {
+        "model": "Mobility Radeon HD 540v",
+        "rating": "188"
+    },
+    {
+        "model": "GeForce 505",
+        "rating": "186"
+    },
+    {
+        "model": "Quadro FX 1600M",
+        "rating": "185"
+    },
+    {
+        "model": "GeForce GT 120",
+        "rating": "182"
+    },
+    {
+        "model": "GeForce 7600 GT",
+        "rating": "181"
+    },
+    {
+        "model": "Mobility Radeon HD 5430",
+        "rating": "181"
+    },
+    {
+        "model": "Radeon HD 7310G",
+        "rating": "180"
+    },
+    {
+        "model": "Quadro FX 1700M",
+        "rating": "180"
+    },
+    {
+        "model": "Barco MXRT 7100",
+        "rating": "180"
+    },
+    {
+        "model": "FireGL V3600",
+        "rating": "179"
+    },
+    {
+        "model": "Radeon HD 6230",
+        "rating": "179"
+    },
+    {
+        "model": "FirePro 3D V3700",
+        "rating": "178"
+    },
+    {
+        "model": "GeForce 7800 GS",
+        "rating": "177"
+    },
+    {
+        "model": "GeForce Go 7900 GS",
+        "rating": "176"
+    },
+    {
+        "model": "Mobility Radeon HD 530v",
+        "rating": "174"
+    },
+    {
+        "model": "Radeon HD 7310 - Carte graphique",
+        "rating": "174"
+    },
+    {
+        "model": "Quadro FX 1500M",
+        "rating": "171"
+    },
+    {
+        "model": "Radeon HDG 4670",
+        "rating": "170"
+    },
+    {
+        "model": "GeForce GT 325M",
+        "rating": "169"
+    },
+    {
+        "model": "Mobility Radeon HD 2600",
+        "rating": "167"
+    },
+    {
+        "model": "Radeon HD 7310M",
+        "rating": "166"
+    },
+    {
+        "model": "Intel HD manual-gen9_2015-133271",
+        "rating": "165"
+    },
+    {
+        "model": "GeForce Go 7600 GT",
+        "rating": "165"
+    },
+    {
+        "model": "Radeon E6465",
+        "rating": "164"
+    },
+    {
+        "model": "VIA/S3G C-645/640 GPU",
+        "rating": "163"
+    },
+    {
+        "model": "FirePro 2270",
+        "rating": "163"
+    },
+    {
+        "model": "GeForce 315",
+        "rating": "162"
+    },
+    {
+        "model": "Radeon HD 3670",
+        "rating": "158"
+    },
+    {
+        "model": "GeForce 9500 GS",
+        "rating": "157"
+    },
+    {
+        "model": "Radeon HD 4300/4500 Serisi",
+        "rating": "155"
+    },
+    {
+        "model": "Quadro FX 1500",
+        "rating": "155"
+    },
+    {
+        "model": "GeForce 8600 GTS",
+        "rating": "153"
+    },
+    {
+        "model": "Quadro 400",
+        "rating": "152"
+    },
+    {
+        "model": "Radeon HD 8180",
+        "rating": "152"
+    },
+    {
+        "model": "Radeon HD 7340",
+        "rating": "152"
+    },
+    {
+        "model": "Radeon X1950 CrossFire Edition",
+        "rating": "151"
+    },
+    {
+        "model": "GeForce 9650M GT",
+        "rating": "151"
+    },
+    {
+        "model": "Radeon HD 6300M",
+        "rating": "150"
+    },
+    {
+        "model": "Radeon HD 3650 AGP",
+        "rating": "150"
+    },
+    {
+        "model": "Quadro FX 3450",
+        "rating": "148"
+    },
+    {
+        "model": "Mobility Radeon HD 4350",
+        "rating": "148"
+    },
+    {
+        "model": "GeForce Go 7700",
+        "rating": "147"
+    },
+    {
+        "model": "ZX Chrome 645/640 GPU",
+        "rating": "147"
+    },
+    {
+        "model": "Radeon X1900 GT",
+        "rating": "145"
+    },
+    {
+        "model": "Quadro FX 580",
+        "rating": "145"
+    },
+    {
+        "model": "Radeon HD 6320",
+        "rating": "144"
+    },
+    {
+        "model": "Quadro FX 380 LP",
+        "rating": "142"
+    },
+    {
+        "model": "GeForce 6800 GT",
+        "rating": "142"
+    },
+    {
+        "model": "RADEON HD 6350",
+        "rating": "141"
+    },
+    {
+        "model": "Radeon HD 4290",
+        "rating": "140"
+    },
+    {
+        "model": "Radeon HD 5450",
+        "rating": "140"
+    },
+    {
+        "model": "Radeon X1800 GTO",
+        "rating": "140"
+    },
+    {
+        "model": "Radeon HD 6290M",
+        "rating": "140"
+    },
+    {
+        "model": "nForce 760i SLI",
+        "rating": "140"
+    },
+    {
+        "model": "Intel Haswell HD - GT2",
+        "rating": "139"
+    },
+    {
+        "model": "NVS 2100M",
+        "rating": "139"
+    },
+    {
+        "model": "GeForce 6800 Ultra",
+        "rating": "138"
+    },
+    {
+        "model": "GeForce Go 6800 Ultra",
+        "rating": "137"
+    },
+    {
+        "model": "GeForce 6800 GS",
+        "rating": "137"
+    },
+    {
+        "model": "Radeon X1900 CrossFire Edition",
+        "rating": "137"
+    },
+    {
+        "model": "Radeon R5 220",
+        "rating": "135"
+    },
+    {
+        "model": "Mobility Radeon HD 4330",
+        "rating": "135"
+    },
+    {
+        "model": "GeForce 9500 GT",
+        "rating": "135"
+    },
+    {
+        "model": "Mobility Radeon X1900",
+        "rating": "134"
+    },
+    {
+        "model": "GeForce 7600 GS",
+        "rating": "134"
+    },
+    {
+        "model": "Quadro FX 3450/4000 SDI",
+        "rating": "134"
+    },
+    {
+        "model": "GeForce 9800 GT 1024MB",
+        "rating": "134"
+    },
+    {
+        "model": "EAH5450",
+        "rating": "134"
+    },
+    {
+        "model": "GeForce 7650 GS",
+        "rating": "134"
+    },
+    {
+        "model": "GeForce G100",
+        "rating": "133"
+    },
+    {
+        "model": "Mobility Radeon HD 3650",
+        "rating": "132"
+    },
+    {
+        "model": "Radeon HD 7310",
+        "rating": "131"
+    },
+    {
+        "model": "Mobility Radeon HD 4570",
+        "rating": "131"
+    },
+    {
+        "model": "MOBILITY RADEON X1800",
+        "rating": "130"
+    },
+    {
+        "model": "GeForce 9200M GE",
+        "rating": "129"
+    },
+    {
+        "model": "RADEON X800 SE",
+        "rating": "129"
+    },
+    {
+        "model": "Quadro FX 380M",
+        "rating": "129"
+    },
+    {
+        "model": "GeForce 9600M GT",
+        "rating": "129"
+    },
+    {
+        "model": "GeForce 405",
+        "rating": "129"
+    },
+    {
+        "model": "GeForce 9300 / nForce 730i",
+        "rating": "128"
+    },
+    {
+        "model": "FireGL V7300",
+        "rating": "128"
+    },
+    {
+        "model": "GeForce Go 7600",
+        "rating": "127"
+    },
+    {
+        "model": "All-in-Wonder X1900",
+        "rating": "127"
+    },
+    {
+        "model": "GeForce 9300",
+        "rating": "126"
+    },
+    {
+        "model": "Radeon HD 3300",
+        "rating": "126"
+    },
+    {
+        "model": "Quadro FX 1700",
+        "rating": "126"
+    },
+    {
+        "model": "GeForce 205",
+        "rating": "126"
+    },
+    {
+        "model": "GeForce 8700M GT",
+        "rating": "125"
+    },
+    {
+        "model": "GeForce 310",
+        "rating": "124"
+    },
+    {
+        "model": "Seria Mobility Radeon HD 3400",
+        "rating": "124"
+    },
+    {
+        "model": "M76M",
+        "rating": "124"
+    },
+    {
+        "model": "Radeon HD 6310",
+        "rating": "123"
+    },
+    {
+        "model": "Matrox G200e WDDM 2.0",
+        "rating": "123"
+    },
+    {
+        "model": "Radeon HD 7290M",
+        "rating": "123"
+    },
+    {
+        "model": "Intel Haswell HD - GT1",
+        "rating": "123"
+    },
+    {
+        "model": "Radeon HD 4250",
+        "rating": "122"
+    },
+    {
+        "model": "Quadro FX 570M",
+        "rating": "122"
+    },
+    {
+        "model": "GeForce 9500M G",
+        "rating": "121"
+    },
+    {
+        "model": "GeForce GT 220M",
+        "rating": "121"
+    },
+    {
+        "model": "Radeon HD 2400",
+        "rating": "120"
+    },
+    {
+        "model": "Extreme AX850 PRO",
+        "rating": "120"
+    },
+    {
+        "model": "GeForce 315M",
+        "rating": "120"
+    },
+    {
+        "model": "GeForce 9600M GS",
+        "rating": "118"
+    },
+    {
+        "model": "Radeon HD 2400 XT",
+        "rating": "118"
+    },
+    {
+        "model": "RV530 PRO",
+        "rating": "118"
+    },
+    {
+        "model": "GeForce 9400M",
+        "rating": "118"
+    },
+    {
+        "model": "Intel Q45/Q43 Express Chipset",
+        "rating": "118"
+    },
+    {
+        "model": "FireMV 2260",
+        "rating": "117"
+    },
+    {
+        "model": "GeForce 8400M GS",
+        "rating": "117"
+    },
+    {
+        "model": "Mobile Intel 45 Express-Chipsatzfamilie",
+        "rating": "117"
+    },
+    {
+        "model": "Radeon HD 6290",
+        "rating": "116"
+    },
+    {
+        "model": "PHDGD Quantic C3",
+        "rating": "116"
+    },
+    {
+        "model": "Radeon X1700 Targa Edition",
+        "rating": "116"
+    },
+    {
+        "model": "FireGL V7200",
+        "rating": "116"
+    },
+    {
+        "model": "GeForce G210M",
+        "rating": "115"
+    },
+    {
+        "model": "Radeon X1600 XT",
+        "rating": "115"
+    },
+    {
+        "model": "NVS 3100M",
+        "rating": "115"
+    },
+    {
+        "model": "Quadro FX 570",
+        "rating": "115"
+    },
+    {
+        "model": "Radeon HD 7290",
+        "rating": "115"
+    },
+    {
+        "model": "GeForce Go 7800",
+        "rating": "114"
+    },
+    {
+        "model": "FireGL V5200",
+        "rating": "114"
+    },
+    {
+        "model": "Radeon HD 2400 Pro",
+        "rating": "114"
+    },
+    {
+        "model": "GeForce 8600 GT",
+        "rating": "114"
+    },
+    {
+        "model": "Quadro FX 560",
+        "rating": "113"
+    },
+    {
+        "model": "GeForce 8400 GS",
+        "rating": "113"
+    },
+    {
+        "model": "GeForce G105M",
+        "rating": "113"
+    },
+    {
+        "model": "Radeon X1950 Pro",
+        "rating": "112"
+    },
+    {
+        "model": "FirePro 2260",
+        "rating": "112"
+    },
+    {
+        "model": "GeForce 6800",
+        "rating": "112"
+    },
+    {
+        "model": "Sapphire RADEON X800 GT",
+        "rating": "112"
+    },
+    {
+        "model": "NVS 300",
+        "rating": "112"
+    },
+    {
+        "model": "GeForce 310M",
+        "rating": "112"
+    },
+    {
+        "model": "Intel HD Modded",
+        "rating": "112"
+    },
+    {
+        "model": "Radeon HD 4200",
+        "rating": "111"
+    },
+    {
+        "model": "Mobility Radeon HD 3400 Serisi",
+        "rating": "111"
+    },
+    {
+        "model": "FireGL V7350",
+        "rating": "110"
+    },
+    {
+        "model": "Radeon HD 2600 Pro AGP",
+        "rating": "110"
+    },
+    {
+        "model": "Radeon HD 4270",
+        "rating": "109"
+    },
+    {
+        "model": "Radeon HD 4330",
+        "rating": "109"
+    },
+    {
+        "model": "XFX Radeon HD 4650 AGP",
+        "rating": "109"
+    },
+    {
+        "model": "GeForce 6800 LE",
+        "rating": "109"
+    },
+    {
+        "model": "VIA/S3G Chrome 645/640 GPU",
+        "rating": "109"
+    },
+    {
+        "model": "GeForce 8500 GT",
+        "rating": "109"
+    },
+    {
+        "model": "GeForce 7300 GT",
+        "rating": "108"
+    },
+    {
+        "model": "Quadro FX 370 LP",
+        "rating": "108"
+    },
+    {
+        "model": "GeForce G210",
+        "rating": "107"
+    },
+    {
+        "model": "GeForce GT 320M",
+        "rating": "106"
+    },
+    {
+        "model": "Radeon Infoshock 3000",
+        "rating": "106"
+    },
+    {
+        "model": "Radeon X1950 GT",
+        "rating": "106"
+    },
+    {
+        "model": "GeForce Go 6800",
+        "rating": "106"
+    },
+    {
+        "model": "GeForce9400M",
+        "rating": "105"
+    },
+    {
+        "model": "GeForce 9450",
+        "rating": "104"
+    },
+    {
+        "model": "Mobility Radeon X1700",
+        "rating": "104"
+    },
+    {
+        "model": "Quadro FX 3400/4400",
+        "rating": "104"
+    },
+    {
+        "model": "M880G with Mobility Radeon HD 4250",
+        "rating": "104"
+    },
+    {
+        "model": "GeForce 9500M",
+        "rating": "103"
+    },
+    {
+        "model": "Quadro FX 1400",
+        "rating": "103"
+    },
+    {
+        "model": "GeForce 9500M GS",
+        "rating": "103"
+    },
+    {
+        "model": "FireGL V3400",
+        "rating": "103"
+    },
+    {
+        "model": "Quadro FX 380",
+        "rating": "102"
+    },
+    {
+        "model": "Quadro FX 370 Low Profile",
+        "rating": "102"
+    },
+    {
+        "model": "GeForce 6800 GS/XT",
+        "rating": "102"
+    },
+    {
+        "model": "Mobility Radeon HD 2400 XT",
+        "rating": "102"
+    },
+    {
+        "model": "Quadro FX Go1400",
+        "rating": "101"
+    },
+    {
+        "model": "Radeon HD 4350",
+        "rating": "101"
+    },
+    {
+        "model": "GeForce 6800 XT",
+        "rating": "101"
+    },
+    {
+        "model": "Quadro FX 4000",
+        "rating": "101"
+    },
+    {
+        "model": "GeForce 6600 GT",
+        "rating": "100"
+    },
+    {
+        "model": "Intel Media Accelerator HD",
+        "rating": "99"
+    },
+    {
+        "model": "Radeon X1600 Pro",
+        "rating": "98"
+    },
+    {
+        "model": "GeForce 9300M GS",
+        "rating": "98"
+    },
+    {
+        "model": "ION",
+        "rating": "98"
+    },
+    {
+        "model": "Mobility Radeon HD 4250",
+        "rating": "98"
+    },
+    {
+        "model": "GeForce 9200",
+        "rating": "98"
+    },
+    {
+        "model": "Radeon 3000",
+        "rating": "98"
+    },
+    {
+        "model": "Mobility Radeon HD 3430",
+        "rating": "98"
+    },
+    {
+        "model": "Radeon HD 6250",
+        "rating": "97"
+    },
+    {
+        "model": "ION LE",
+        "rating": "97"
+    },
+    {
+        "model": "GeForce 9300GE",
+        "rating": "97"
+    },
+    {
+        "model": "RADEON X800 XT",
+        "rating": "97"
+    },
+    {
+        "model": "Quadro NVS 130M",
+        "rating": "97"
+    },
+    {
+        "model": "GeForce 8600 GS",
+        "rating": "97"
+    },
+    {
+        "model": "Mobility Radeon HD serie 4200",
+        "rating": "96"
+    },
+    {
+        "model": "GeForce 210",
+        "rating": "96"
+    },
+    {
+        "model": "Radeon HD 3000",
+        "rating": "95"
+    },
+    {
+        "model": "GeForce 6700 XL",
+        "rating": "95"
+    },
+    {
+        "model": "MEDION RADEON X740XL",
+        "rating": "94"
+    },
+    {
+        "model": "Matrox G200eW3 WDDM 2.0",
+        "rating": "94"
+    },
+    {
+        "model": "Mobility Radeon HD 3470 Hybrid X2",
+        "rating": "93"
+    },
+    {
+        "model": "GeForce G102M",
+        "rating": "93"
+    },
+    {
+        "model": "Mobility Radeon HD 3470",
+        "rating": "93"
+    },
+    {
+        "model": "Quadro FX 370M",
+        "rating": "93"
+    },
+    {
+        "model": "Mobility Radeon HD 4270",
+        "rating": "92"
+    },
+    {
+        "model": "M880G with Mobility Radeon HD 4200",
+        "rating": "92"
+    },
+    {
+        "model": "Radeon HD 3470",
+        "rating": "92"
+    },
+    {
+        "model": "FireGL V5100",
+        "rating": "92"
+    },
+    {
+        "model": "Quadro NVS 150M",
+        "rating": "92"
+    },
+    {
+        "model": "Mobility Radeon X1600",
+        "rating": "92"
+    },
+    {
+        "model": "nForce 780a SLI",
+        "rating": "92"
+    },
+    {
+        "model": "RADEON X600XT",
+        "rating": "91"
+    },
+    {
+        "model": "GeForce G205M",
+        "rating": "91"
+    },
+    {
+        "model": "GeForce 8300",
+        "rating": "91"
+    },
+    {
+        "model": "Mobility Radeon HD 3450",
+        "rating": "91"
+    },
+    {
+        "model": "Mobility Radeon HD 4200",
+        "rating": "90"
+    },
+    {
+        "model": "GeForce 9400 GT",
+        "rating": "90"
+    },
+    {
+        "model": "Mobility Radeon HD 2400",
+        "rating": "89"
+    },
+    {
+        "model": "Quadro NVS 140M",
+        "rating": "89"
+    },
+    {
+        "model": "GeForce 6610 XL",
+        "rating": "88"
+    },
+    {
+        "model": "Quadro FX 360M",
+        "rating": "86"
+    },
+    {
+        "model": "GeForce 9400",
+        "rating": "86"
+    },
+    {
+        "model": "Quadro FX 350",
+        "rating": "85"
+    },
+    {
+        "model": "FireGL V3200",
+        "rating": "84"
+    },
+    {
+        "model": "Radeon X1650 Pro",
+        "rating": "84"
+    },
+    {
+        "model": "GeForce 9300M G",
+        "rating": "84"
+    },
+    {
+        "model": "ALL-IN-WONDER X800 GT",
+        "rating": "84"
+    },
+    {
+        "model": "Radeon X1300 PRO",
+        "rating": "84"
+    },
+    {
+        "model": "RADEON X800 GT",
+        "rating": "84"
+    },
+    {
+        "model": "GeForce 8600M GT",
+        "rating": "84"
+    },
+    {
+        "model": "GeForce 999 GTX",
+        "rating": "83"
+    },
+    {
+        "model": "Quadro FX 370",
+        "rating": "83"
+    },
+    {
+        "model": "nForce 750a SLI",
+        "rating": "83"
+    },
+    {
+        "model": "Radeon HD 3200",
+        "rating": "82"
+    },
+    {
+        "model": "GeForce 9100",
+        "rating": "81"
+    },
+    {
+        "model": "RADEON X850 XT Platinum Edition",
+        "rating": "81"
+    },
+    {
+        "model": "Mobility Radeon X2500",
+        "rating": "81"
+    },
+    {
+        "model": "MOBILITY FireGL V5000",
+        "rating": "81"
+    },
+    {
+        "model": "GeForce 9300 SE",
+        "rating": "81"
+    },
+    {
+        "model": "nForce 980a/780a SLI",
+        "rating": "81"
+    },
+    {
+        "model": "GeForce 8400",
+        "rating": "81"
+    },
+    {
+        "model": "RADEON X800 XT Platinum Edition",
+        "rating": "81"
+    },
+    {
+        "model": "Mobility Radeon 4100",
+        "rating": "81"
+    },
+    {
+        "model": "RADEON X850 XT",
+        "rating": "81"
+    },
+    {
+        "model": "Quadro FX 540",
+        "rating": "80"
+    },
+    {
+        "model": "Quadro NVS 420",
+        "rating": "80"
+    },
+    {
+        "model": "GeForce 9300 GS",
+        "rating": "80"
+    },
+    {
+        "model": "Radeon HD 3450",
+        "rating": "79"
+    },
+    {
+        "model": "RADEON X800GT",
+        "rating": "79"
+    },
+    {
+        "model": "GeForce 8200",
+        "rating": "79"
+    },
+    {
+        "model": "GeForce 8100 / nForce 720a",
+        "rating": "79"
+    },
+    {
+        "model": "GeForce 9100M G",
+        "rating": "78"
+    },
+    {
+        "model": "Quadro NVS 160M",
+        "rating": "78"
+    },
+    {
+        "model": "GeForce 8600M GS",
+        "rating": "77"
+    },
+    {
+        "model": "RADEON X800 GTO",
+        "rating": "76"
+    },
+    {
+        "model": "Radeon HD 2350",
+        "rating": "76"
+    },
+    {
+        "model": "RADEON X700 PRO",
+        "rating": "75"
+    },
+    {
+        "model": "M860G with Mobility Radeon 4100",
+        "rating": "75"
+    },
+    {
+        "model": "Radeon X1650 GTO",
+        "rating": "74"
+    },
+    {
+        "model": "Quadro NVS 295",
+        "rating": "74"
+    },
+    {
+        "model": "GeForce 7350 LE",
+        "rating": "74"
+    },
+    {
+        "model": "FireMV 2450",
+        "rating": "73"
+    },
+    {
+        "model": "Radeon 3100",
+        "rating": "73"
+    },
+    {
+        "model": "Quadro NVS 450",
+        "rating": "73"
+    },
+    {
+        "model": "RADEON X800 PRO/GTO",
+        "rating": "73"
+    },
+    {
+        "model": "Mobility Radeon HD 4300 Serisi",
+        "rating": "73"
+    },
+    {
+        "model": "RADEON X850 PRO",
+        "rating": "72"
+    },
+    {
+        "model": "GeForce 9400M G",
+        "rating": "72"
+    },
+    {
+        "model": "RADEON X700",
+        "rating": "72"
+    },
+    {
+        "model": "FireGL V7100",
+        "rating": "71"
+    },
+    {
+        "model": "GeForce 8200M G",
+        "rating": "71"
+    },
+    {
+        "model": "MEDION RADEON 9800 XXL",
+        "rating": "71"
+    },
+    {
+        "model": "M880G with Mobility Radeon HD 4225",
+        "rating": "71"
+    },
+    {
+        "model": "RADEON X700 SE",
+        "rating": "71"
+    },
+    {
+        "model": "Radeon X1650 SE",
+        "rating": "71"
+    },
+    {
+        "model": "Radeon X550XTX",
+        "rating": "70"
+    },
+    {
+        "model": "FireGL V3300",
+        "rating": "70"
+    },
+    {
+        "model": "Diamond X1300-PCIE 256MB",
+        "rating": "70"
+    },
+    {
+        "model": "GeForce 8400M GT",
+        "rating": "69"
+    },
+    {
+        "model": "BASICDISPLAY",
+        "rating": "69"
+    },
+    {
+        "model": "GeForce Go 6600",
+        "rating": "69"
+    },
+    {
+        "model": "RADEON X800 XL",
+        "rating": "69"
+    },
+    {
+        "model": "Radeon X1600 Pro / X1300XT",
+        "rating": "69"
+    },
+    {
+        "model": "GeForce 7500 LE",
+        "rating": "69"
+    },
+    {
+        "model": "Quadro FX 3000",
+        "rating": "69"
+    },
+    {
+        "model": "GeForce 9300 GE",
+        "rating": "68"
+    },
+    {
+        "model": "FireGL V3350",
+        "rating": "68"
+    },
+    {
+        "model": "Mobile Intel 45 Express",
+        "rating": "68"
+    },
+    {
+        "model": "GeForce G 105M",
+        "rating": "68"
+    },
+    {
+        "model": "Intel B43 Express Chipset",
+        "rating": "68"
+    },
+    {
+        "model": "GeForce 8400 SE",
+        "rating": "68"
+    },
+    {
+        "model": "Intel G45/G43/G41 Express Chipset",
+        "rating": "67"
+    },
+    {
+        "model": "Matrox G200eR WDDM 2.0",
+        "rating": "67"
+    },
+    {
+        "model": "256MB RADEON X600",
+        "rating": "67"
+    },
+    {
+        "model": "MOBILITY RADEON X700",
+        "rating": "66"
+    },
+    {
+        "model": "GeForce 8300 GS",
+        "rating": "66"
+    },
+    {
+        "model": "Radeon X1550",
+        "rating": "66"
+    },
+    {
+        "model": "Mobility Radeon HD 4225",
+        "rating": "66"
+    },
+    {
+        "model": "GeForce 7300 GS",
+        "rating": "66"
+    },
+    {
+        "model": "128MB DDR Radeon 9800 Pro",
+        "rating": "66"
+    },
+    {
+        "model": "RADEON X800 PRO",
+        "rating": "64"
+    },
+    {
+        "model": "M71-M",
+        "rating": "64"
+    },
+    {
+        "model": "Quadro FX 550",
+        "rating": "63"
+    },
+    {
+        "model": "GeForce G 103M",
+        "rating": "63"
+    },
+    {
+        "model": "Mobility Radeon HD 3410",
+        "rating": "62"
+    },
+    {
+        "model": "GeForce Go 7400",
+        "rating": "62"
+    },
+    {
+        "model": "Intel HD manual-15.28-1861",
+        "rating": "62"
+    },
+    {
+        "model": "GeForce 6600",
+        "rating": "62"
+    },
+    {
+        "model": "Quadro FX 350M",
+        "rating": "62"
+    },
+    {
+        "model": "MOBILITY FireGL V3200",
+        "rating": "62"
+    },
+    {
+        "model": "128 DDR Radeon 9800 Pro",
+        "rating": "62"
+    },
+    {
+        "model": "SAPPHIRE Radeon X1550",
+        "rating": "61"
+    },
+    {
+        "model": "Intel G45/G43 Express Chipset",
+        "rating": "60"
+    },
+    {
+        "model": "GeForce 9200M GS",
+        "rating": "60"
+    },
+    {
+        "model": "MOBILITY RADEON X700 XL",
+        "rating": "59"
+    },
+    {
+        "model": "Radeon 2100",
+        "rating": "59"
+    },
+    {
+        "model": "RADEON 9800 PRO",
+        "rating": "59"
+    },
+    {
+        "model": "Matrox G200e WDDM 1.2",
+        "rating": "59"
+    },
+    {
+        "model": "GeForce FX 5950 Ultra",
+        "rating": "59"
+    },
+    {
+        "model": "FireGL X1",
+        "rating": "59"
+    },
+    {
+        "model": "GeForce 6800 XE",
+        "rating": "58"
+    },
+    {
+        "model": "GeForce 8400M G",
+        "rating": "58"
+    },
+    {
+        "model": "Radeon X1300",
+        "rating": "58"
+    },
+    {
+        "model": "Mobile Intel 965 Express",
+        "rating": "57"
+    },
+    {
+        "model": "Intel - Express Chipset Q45/Q43",
+        "rating": "57"
+    },
+    {
+        "model": "RADEON 9800",
+        "rating": "57"
+    },
+    {
+        "model": "Intel G41 Express-Chipsatz",
+        "rating": "57"
+    },
+    {
+        "model": "Intel Q45/Q43 Express-Chipsatz",
+        "rating": "57"
+    },
+    {
+        "model": "Quadro NVS 135M",
+        "rating": "56"
+    },
+    {
+        "model": "RADEON 9800 XT",
+        "rating": "56"
+    },
+    {
+        "model": "Intel - Express Chipset G41",
+        "rating": "56"
+    },
+    {
+        "model": "RADEON X600 256MB HyperMemory",
+        "rating": "56"
+    },
+    {
+        "model": "RADEON X550XT",
+        "rating": "56"
+    },
+    {
+        "model": "Intel G41 Express Chipset",
+        "rating": "56"
+    },
+    {
+        "model": "GeForce 7300 LE",
+        "rating": "55"
+    },
+    {
+        "model": "RADEON 9700 PRO",
+        "rating": "53"
+    },
+    {
+        "model": "FireGL V3100",
+        "rating": "52"
+    },
+    {
+        "model": "Radeon Xpress 1300",
+        "rating": "52"
+    },
+    {
+        "model": "Matrox G200eh WDDM 1.2",
+        "rating": "51"
+    },
+    {
+        "model": "RADEON E2400",
+        "rating": "51"
+    },
+    {
+        "model": "GeForce FX Go5700",
+        "rating": "51"
+    },
+    {
+        "model": "GeForce 6600 LE",
+        "rating": "51"
+    },
+    {
+        "model": "FirePro 2450",
+        "rating": "51"
+    },
+    {
+        "model": "RADEON X550",
+        "rating": "50"
+    },
+    {
+        "model": "Matrox G200eR WDDM 1.2",
+        "rating": "50"
+    },
+    {
+        "model": "Mobility Radeon HD 2300",
+        "rating": "50"
+    },
+    {
+        "model": "GeForce Go 7300",
+        "rating": "50"
+    },
+    {
+        "model": "MOBILITY RADEON X600",
+        "rating": "50"
+    },
+    {
+        "model": "Matrox G200eW WDDM 1.2",
+        "rating": "50"
+    },
+    {
+        "model": "Radeon X1600",
+        "rating": "49"
+    },
+    {
+        "model": "MOBILITY RADEON X600 SE",
+        "rating": "49"
+    },
+    {
+        "model": "Radeon X1050",
+        "rating": "49"
+    },
+    {
+        "model": "128MB RADEON X600 SE",
+        "rating": "49"
+    },
+    {
+        "model": "Mobility Radeon X2300 HD",
+        "rating": "48"
+    },
+    {
+        "model": "Mobility Radeon X2300",
+        "rating": "48"
+    },
+    {
+        "model": "Radeon X1550 64-bit",
+        "rating": "47"
+    },
+    {
+        "model": "Quadro NVS 110M",
+        "rating": "47"
+    },
+    {
+        "model": "SAPPHIRE RADEON 9600 ATLANTIS",
+        "rating": "47"
+    },
+    {
+        "model": "Quadro NVS 120M",
+        "rating": "46"
+    },
+    {
+        "model": "MOBILITY RADEON 9800",
+        "rating": "46"
+    },
+    {
+        "model": "FireMV 2250",
+        "rating": "45"
+    },
+    {
+        "model": "GeForce Go 7200",
+        "rating": "45"
+    },
+    {
+        "model": "Matrox G200eh WDDM 2.0",
+        "rating": "45"
+    },
+    {
+        "model": "MOBILITY FireGL V5200",
+        "rating": "44"
+    },
+    {
+        "model": "GeForce Go 6600 TE/6200 TE",
+        "rating": "44"
+    },
+    {
+        "model": "Mobile Intel serie 4 Express",
+        "rating": "44"
+    },
+    {
+        "model": "Mobile Intel 4 Express-Chipsatzfamilie",
+        "rating": "44"
+    },
+    {
+        "model": "GeForce 6200",
+        "rating": "44"
+    },
+    {
+        "model": "128 DDR Radeon 9700 TX w/TV-Out",
+        "rating": "44"
+    },
+    {
+        "model": "GeForce 7100 GS",
+        "rating": "43"
+    },
+    {
+        "model": "Mobility Radeon X1400",
+        "rating": "42"
+    },
+    {
+        "model": "RADEON 9600 PRO",
+        "rating": "42"
+    },
+    {
+        "model": "Radeon Xpress 1250",
+        "rating": "42"
+    },
+    {
+        "model": "Matrox M9138 LP PCIe x16",
+        "rating": "42"
+    },
+    {
+        "model": "GeForce 7300 SE/7200 GS",
+        "rating": "42"
+    },
+    {
+        "model": "RADEON 9500 PRO / 9700",
+        "rating": "41"
+    },
+    {
+        "model": "GeForce FX 5900 Ultra",
+        "rating": "41"
+    },
+    {
+        "model": "Gigabyte RADEON X300",
+        "rating": "40"
+    },
+    {
+        "model": "GeForce FX 5700",
+        "rating": "40"
+    },
+    {
+        "model": "MOBILITY FIREGL T2",
+        "rating": "40"
+    },
+    {
+        "model": "Matrox G200eh",
+        "rating": "40"
+    },
+    {
+        "model": "Radeon Xpress 1300M",
+        "rating": "40"
+    },
+    {
+        "model": "GeForce FX 5900XT",
+        "rating": "40"
+    },
+    {
+        "model": "Mobility Radeon X1350",
+        "rating": "39"
+    },
+    {
+        "model": "Matrox G200eW",
+        "rating": "39"
+    },
+    {
+        "model": "Mobility Radeon X1300",
+        "rating": "39"
+    },
+    {
+        "model": "S3 Chrome 430 ULP",
+        "rating": "39"
+    },
+    {
+        "model": "MOBILITY RADEON 9600/9700",
+        "rating": "39"
+    },
+    {
+        "model": "GIGABYTE RADEON 9600 PRO",
+        "rating": "39"
+    },
+    {
+        "model": "GeForce 7300 SE",
+        "rating": "39"
+    },
+    {
+        "model": "GeForce 6200 TurboCache",
+        "rating": "38"
+    },
+    {
+        "model": "Mobile Intel - famiglia Express Chipset 45",
+        "rating": "38"
+    },
+    {
+        "model": "GeForce 6500",
+        "rating": "38"
+    },
+    {
+        "model": "Quadro NVS 285 128MB",
+        "rating": "38"
+    },
+    {
+        "model": "RADEON X300SE",
+        "rating": "38"
+    },
+    {
+        "model": "256MB DDR Radeon 9800 XT",
+        "rating": "37"
+    },
+    {
+        "model": "Quadro NVS 440",
+        "rating": "37"
+    },
+    {
+        "model": "Radeon X1250",
+        "rating": "37"
+    },
+    {
+        "model": "Matrox G200eR",
+        "rating": "36"
+    },
+    {
+        "model": "CONNECT 3D RADEON X300",
+        "rating": "36"
+    },
+    {
+        "model": "RADEON 9500",
+        "rating": "36"
+    },
+    {
+        "model": "FireMV 2200 PCIe",
+        "rating": "36"
+    },
+    {
+        "model": "MOBILITY RADEON 9600",
+        "rating": "36"
+    },
+    {
+        "model": "Quadro FX 1100",
+        "rating": "35"
+    },
+    {
+        "model": "Radeon Xpress 1200",
+        "rating": "35"
+    },
+    {
+        "model": "Quadro NVS 285",
+        "rating": "35"
+    },
+    {
+        "model": "RADEON 9600 XT",
+        "rating": "35"
+    },
+    {
+        "model": "GeForce PCX 5750",
+        "rating": "34"
+    },
+    {
+        "model": "RADEON 9550",
+        "rating": "34"
+    },
+    {
+        "model": "GeForce FX 5900",
+        "rating": "34"
+    },
+    {
+        "model": "Quadro FX 1300",
+        "rating": "34"
+    },
+    {
+        "model": "Quadro FX 1000",
+        "rating": "34"
+    },
+    {
+        "model": "GeForce FX 5700 Ultra",
+        "rating": "34"
+    },
+    {
+        "model": "GeForce PCX 5900",
+        "rating": "34"
+    },
+    {
+        "model": "Radeon Xpress 1100",
+        "rating": "34"
+    },
+    {
+        "model": "MOBILITY RADEON X300",
+        "rating": "33"
+    },
+    {
+        "model": "MOBILITY FIREGL T2/T2e",
+        "rating": "33"
+    },
+    {
+        "model": "Mobility Radeon X1450",
+        "rating": "33"
+    },
+    {
+        "model": "GeForce FX 5700VE",
+        "rating": "33"
+    },
+    {
+        "model": "GeForce 7150 / nForce 630i",
+        "rating": "33"
+    },
+    {
+        "model": "Intel Media Accelerator",
+        "rating": "32"
+    },
+    {
+        "model": "GeForce FX 5900ZT",
+        "rating": "32"
+    },
+    {
+        "model": "Radeon X1200",
+        "rating": "32"
+    },
+    {
+        "model": "GeForce 6200 A-LE",
+        "rating": "32"
+    },
+    {
+        "model": "Red Hat QXL controller",
+        "rating": "31"
+    },
+    {
+        "model": "GeForce 7050 / nForce 620i",
+        "rating": "31"
+    },
+    {
+        "model": "Radeon X1270",
+        "rating": "31"
+    },
+    {
+        "model": "OpenXT Display Driver",
+        "rating": "30"
+    },
+    {
+        "model": "FireGL T2-128",
+        "rating": "30"
+    },
+    {
+        "model": "MOBILITY RADEON 9550",
+        "rating": "30"
+    },
+    {
+        "model": "All-in-Wonder X1800XL",
+        "rating": "30"
+    },
+    {
+        "model": "Radeon Xpress 1150",
+        "rating": "29"
+    },
+    {
+        "model": "RADEON XPRESS 200",
+        "rating": "29"
+    },
+    {
+        "model": "Radeon 9550 / X1050",
+        "rating": "29"
+    },
+    {
+        "model": "GeForce 6200SE TurboCache",
+        "rating": "28"
+    },
+    {
+        "model": "GeForce 7025 / nForce 630a",
+        "rating": "28"
+    },
+    {
+        "model": "GeForce 7050 / nForce 610i",
+        "rating": "27"
+    },
+    {
+        "model": "MOBILITY RADEON 9700",
+        "rating": "27"
+    },
+    {
+        "model": "MOBILITY FireGL V5250",
+        "rating": "27"
+    },
+    {
+        "model": "RADEON 9600SE",
+        "rating": "27"
+    },
+    {
+        "model": "MOBILITY RADEON XPRESS 200",
+        "rating": "27"
+    },
+    {
+        "model": "GeForce 7050 / nForce 630i",
+        "rating": "27"
+    },
+    {
+        "model": "GeForce 6200 LE",
+        "rating": "26"
+    },
+    {
+        "model": "RADEON 9600 PRO Family",
+        "rating": "26"
+    },
+    {
+        "model": "Radeon Xpress 1270",
+        "rating": "26"
+    },
+    {
+        "model": "GeForce 7100 / nForce 620i",
+        "rating": "26"
+    },
+    {
+        "model": "PHDGD Sapphire GR for Mobile Intel 965",
+        "rating": "25"
+    },
+    {
+        "model": "Matrox M9125 PCIe x16",
+        "rating": "25"
+    },
+    {
+        "model": "GeForce 6100 nForce 420",
+        "rating": "25"
+    },
+    {
+        "model": "GeForce 6100 nForce 400",
+        "rating": "25"
+    },
+    {
+        "model": "RADEON 9600 Family",
+        "rating": "25"
+    },
+    {
+        "model": "MOBILITY RADEON 9600 PRO TURBO",
+        "rating": "24"
+    },
+    {
+        "model": "GeForce 6150SE",
+        "rating": "24"
+    },
+    {
+        "model": "GeForce 7100 / nForce 630i",
+        "rating": "24"
+    },
+    {
+        "model": "GeForce FX 5700LE",
+        "rating": "24"
+    },
+    {
+        "model": "GeForce Go 6400",
+        "rating": "24"
+    },
+    {
+        "model": "Mobile Intel 965 Express-Chipsatzfamilie",
+        "rating": "24"
+    },
+    {
+        "model": "Quadro NVS 210S",
+        "rating": "23"
+    },
+    {
+        "model": "RADEON 9800 SE",
+        "rating": "23"
+    },
+    {
+        "model": "Matrox M9140 LP PCIe x16",
+        "rating": "23"
+    },
+    {
+        "model": "ALL-IN-WONDER 9800",
+        "rating": "23"
+    },
+    {
+        "model": "GeForce 7200 GS",
+        "rating": "23"
+    },
+    {
+        "model": "GeForce 6100 nForce 430",
+        "rating": "23"
+    },
+    {
+        "model": "RADEON A9800XT",
+        "rating": "22"
+    },
+    {
+        "model": "RADEON XPRESS 200M",
+        "rating": "22"
+    },
+    {
+        "model": "GeForce 7050 PV / nForce 630a",
+        "rating": "22"
+    },
+    {
+        "model": "GeForce 6100 nForce 405",
+        "rating": "22"
+    },
+    {
+        "model": "GeForce 6150",
+        "rating": "21"
+    },
+    {
+        "model": "9xx Soldiers sans frontiers Sigma 2",
+        "rating": "21"
+    },
+    {
+        "model": "GeForce 6100",
+        "rating": "21"
+    },
+    {
+        "model": "GeForce 6150 LE",
+        "rating": "21"
+    },
+    {
+        "model": "Quadro NVS 210S / GeForce 6150LE",
+        "rating": "20"
+    },
+    {
+        "model": "PHDGD Solo 2 x64",
+        "rating": "20"
+    },
+    {
+        "model": "Matrox M9120 PCIe x16",
+        "rating": "19"
+    },
+    {
+        "model": "GeForce 6150SE nForce 430",
+        "rating": "19"
+    },
+    {
+        "model": "QXL KMDOD",
+        "rating": "18"
+    },
+    {
+        "model": "S3 Chrome S25 DDR2",
+        "rating": "18"
+    },
+    {
+        "model": "RADEON 9600 TX Family",
+        "rating": "18"
+    },
+    {
+        "model": "Intel G965 Express",
+        "rating": "18"
+    },
+    {
+        "model": "GeForce 7150M / nForce 630M",
+        "rating": "18"
+    },
+    {
+        "model": "RADEON XPRESS 200 CROSSFIRE",
+        "rating": "18"
+    },
+    {
+        "model": "Quadro FX 2000",
+        "rating": "18"
+    },
+    {
+        "model": "GeForce Go 6150",
+        "rating": "17"
+    },
+    {
+        "model": "GeForce Go 6100",
+        "rating": "17"
+    },
+    {
+        "model": "GeForce FX Go 5600",
+        "rating": "17"
+    },
+    {
+        "model": "Mobile Intel965 Express",
+        "rating": "17"
+    },
+    {
+        "model": "GeForce FX 5600 Ultra",
+        "rating": "17"
+    },
+    {
+        "model": "GeForce FX Go5650",
+        "rating": "16"
+    },
+    {
+        "model": "GRID V100-8Q",
+        "rating": "16"
+    },
+    {
+        "model": "NV44",
+        "rating": "15"
+    },
+    {
+        "model": "GeForce Go 6200",
+        "rating": "15"
+    },
+    {
+        "model": "Quadro FX 500/600 PCI",
+        "rating": "14"
+    },
+    {
+        "model": "Radeon HD 2400 PCI",
+        "rating": "14"
+    },
+    {
+        "model": "GeForce 7000M",
+        "rating": "13"
+    },
+    {
+        "model": "GeForce 7000M / nForce 610M",
+        "rating": "12"
+    },
+    {
+        "model": "GeForce FX 5600",
+        "rating": "12"
+    },
+    {
+        "model": "GeForce FX Go5300",
+        "rating": "12"
+    },
+    {
+        "model": "GeForce FX 5200 Ultra",
+        "rating": "12"
+    },
+    {
+        "model": "GeForce FX 5200SE",
+        "rating": "11"
+    },
+    {
+        "model": "FireMV 2400 PCIe",
+        "rating": "11"
+    },
+    {
+        "model": "RGH Drivers v3",
+        "rating": "11"
+    },
+    {
+        "model": "PHDGD Solo 1.2.0 x86",
+        "rating": "11"
+    },
+    {
+        "model": "Intel Q33 Express",
+        "rating": "10"
+    },
+    {
+        "model": "VIA Chrome9 HD IGP",
+        "rating": "10"
+    },
+    {
+        "model": "Familia Intel Q33 Express Chipset",
+        "rating": "10"
+    },
+    {
+        "model": "Master X3100 Driver",
+        "rating": "10"
+    },
+    {
+        "model": "MOBILITY IGP 9000/9100",
+        "rating": "10"
+    },
+    {
+        "model": "Matrox M9148 LP PCIe x16",
+        "rating": "9"
+    },
+    {
+        "model": "Matrox Parhelia 256MB",
+        "rating": "9"
+    },
+    {
+        "model": "ASUS A7000",
+        "rating": "9"
+    },
+    {
+        "model": "GeForce FX 5600XT",
+        "rating": "9"
+    },
+    {
+        "model": "GeCube RADEON 7000",
+        "rating": "8"
+    },
+    {
+        "model": "GeForce FX Go 5200",
+        "rating": "8"
+    },
+    {
+        "model": "Intel Q35 Embedded",
+        "rating": "8"
+    },
+    {
+        "model": "GeForce FX 5500",
+        "rating": "8"
+    },
+    {
+        "model": "Mobile Intel 965 Express - BR-0907-0461 v1839",
+        "rating": "8"
+    },
+    {
+        "model": "Quadro NVS 280 PCI",
+        "rating": "8"
+    },
+    {
+        "model": "Intel 82945G Express-Chipsatzfamilie",
+        "rating": "8"
+    },
+    {
+        "model": "MOBILITY RADEON 9000 IGP",
+        "rating": "7"
+    },
+    {
+        "model": "GeForce FX 5100",
+        "rating": "7"
+    },
+    {
+        "model": "ASUS V9520-X V62.11",
+        "rating": "7"
+    },
+    {
+        "model": "Quadro FX 500/FX 600",
+        "rating": "7"
+    },
+    {
+        "model": "GeForce FX 5200",
+        "rating": "7"
+    },
+    {
+        "model": "Famille de jeu de puces Express Intel 946GZ",
+        "rating": "7"
+    },
+    {
+        "model": "Intel US15 Embedded Media and Controller",
+        "rating": "7"
+    },
+    {
+        "model": "GeForce4 Ti 4400",
+        "rating": "7"
+    },
+    {
+        "model": "GeForce FX 5200LE",
+        "rating": "7"
+    },
+    {
+        "model": "Intel Media Accelerator 600",
+        "rating": "6"
+    },
+    {
+        "model": "GeForce4 Ti 4800 SE",
+        "rating": "6"
+    },
+    {
+        "model": "Matrox Millennium P690 Plus LP PCIe x16",
+        "rating": "6"
+    },
+    {
+        "model": "Quadro4 380 XGL",
+        "rating": "6"
+    },
+    {
+        "model": "RADEON 8500 Family",
+        "rating": "6"
+    },
+    {
+        "model": "GeForce4 MX Integrated GPU",
+        "rating": "6"
+    },
+    {
+        "model": "V9560XT V62.11",
+        "rating": "6"
+    },
+    {
+        "model": "GeForce2 Ultra",
+        "rating": "6"
+    },
+    {
+        "model": "MOBILITY RADEON 7000 IGP",
+        "rating": "6"
+    },
+    {
+        "model": "Intel 946GZ Express",
+        "rating": "6"
+    },
+    {
+        "model": "GeForce PCX 5300",
+        "rating": "6"
+    },
+    {
+        "model": "RADEON 9100 Family",
+        "rating": "6"
+    },
+    {
+        "model": "Quadro NVS 55/280 PCI",
+        "rating": "6"
+    },
+    {
+        "model": "RADEON IGP 350M",
+        "rating": "6"
+    },
+    {
+        "model": "GeForce4 440 Go 64M",
+        "rating": "5"
+    },
+    {
+        "model": "VIA/S3G UniChromeII",
+        "rating": "5"
+    },
+    {
+        "model": "GeForce4 Ti 4800",
+        "rating": "5"
+    },
+    {
+        "model": "Mobile Intel 945GM Express",
+        "rating": "5"
+    },
+    {
+        "model": "Quadro 280 NVS PCIe",
+        "rating": "5"
+    },
+    {
+        "model": "64MB DDR GeForce3 Ti 200",
+        "rating": "5"
+    },
+    {
+        "model": "Intel 82915G Express",
+        "rating": "5"
+    },
+    {
+        "model": "Matrox M9120 Plus LP PCIe x16",
+        "rating": "5"
+    },
+    {
+        "model": "MOBILITY RADEON 9000/9100 IGP",
+        "rating": "5"
+    },
+    {
+        "model": "Matrox Parhelia APVe",
+        "rating": "5"
+    },
+    {
+        "model": "ALL-IN-WONDER RADEON 8500DV",
+        "rating": "5"
+    },
+    {
+        "model": "GeForce4 Ti 4200",
+        "rating": "5"
+    },
+    {
+        "model": "GeForce4 448 Go",
+        "rating": "5"
+    },
+    {
+        "model": "GeForce4 Ti 4600",
+        "rating": "5"
+    },
+    {
+        "model": "RADEON 9100 IGP",
+        "rating": "5"
+    },
+    {
+        "model": "GeForce4 420 Go 32M",
+        "rating": "5"
+    },
+    {
+        "model": "Matrox M9128 LP PCIe x16",
+        "rating": "5"
+    },
+    {
+        "model": "Matrox Millennium P650 PCIe 128",
+        "rating": "5"
+    },
+    {
+        "model": "Mobile Intel 945GM/GU Express",
+        "rating": "5"
+    },
+    {
+        "model": "SAPPHIRE RADEON 9000 ATLANTIS PRO",
+        "rating": "5"
+    },
+    {
+        "model": "Xabre",
+        "rating": "5"
+    },
+    {
+        "model": "GeForce 256",
+        "rating": "5"
+    },
+    {
+        "model": "Quadro4 980 XGL",
+        "rating": "5"
+    },
+    {
+        "model": "GeForce4 440",
+        "rating": "4"
+    },
+    {
+        "model": "Quadro4 900 XGL",
+        "rating": "4"
+    },
+    {
+        "model": "ALL-IN-WONDER 9000",
+        "rating": "4"
+    },
+    {
+        "model": "GeForce3",
+        "rating": "4"
+    },
+    {
+        "model": "GeForce4 MX 440 with AGP8X",
+        "rating": "4"
+    },
+    {
+        "model": "WinFast A250 LE",
+        "rating": "4"
+    },
+    {
+        "model": "GeForce2 MX with DVI-D and TV-out",
+        "rating": "4"
+    },
+    {
+        "model": "GeForce4 MX 420",
+        "rating": "4"
+    },
+    {
+        "model": "MOBILITY FIREGL 7800",
+        "rating": "4"
+    },
+    {
+        "model": "RADEON 7500 Family",
+        "rating": "4"
+    },
+    {
+        "model": "VIA/S3G UniChrome Pro IGP",
+        "rating": "4"
+    },
+    {
+        "model": "Intel 82865G Controller",
+        "rating": "4"
+    },
+    {
+        "model": "Intel 915G/915GV/910GL Embedded Controller Functio",
+        "rating": "4"
+    },
+    {
+        "model": "RADEON 9000",
+        "rating": "4"
+    },
+    {
+        "model": "GeForce2 Ti",
+        "rating": "4"
+    },
+    {
+        "model": "XGI Volari Family v1.13.23.D_V",
+        "rating": "4"
+    },
+    {
+        "model": "GeForce4 MX 440SE",
+        "rating": "4"
+    },
+    {
+        "model": "GeForce4 MX 440",
+        "rating": "4"
+    },
+    {
+        "model": "Quadro2 MXR/EX",
+        "rating": "4"
+    },
+    {
+        "model": "Intel 945G Embedded Chipset Function 0",
+        "rating": "4"
+    },
+    {
+        "model": "GeForce4 MX 4000",
+        "rating": "4"
+    },
+    {
+        "model": "ASUS AGP-V3800PRO v31.40H",
+        "rating": "4"
+    },
+    {
+        "model": "GeForce2 Integrated GPU",
+        "rating": "4"
+    },
+    {
+        "model": "Mobile Intel 915GM/GMS/910GML Express",
+        "rating": "4"
+    },
+    {
+        "model": "Mobile Intel 945 Express",
+        "rating": "4"
+    },
+    {
+        "model": "Dell 8200",
+        "rating": "4"
+    },
+    {
+        "model": "VIA Chrome9 HC IGP",
+        "rating": "4"
+    },
+    {
+        "model": "VIA/S3G UniChrome IGP",
+        "rating": "4"
+    },
+    {
+        "model": "GeForce4 MX 460",
+        "rating": "4"
+    },
+    {
+        "model": "GeForce2 Go",
+        "rating": "4"
+    },
+    {
+        "model": "MOBILITY/RADEON 9000",
+        "rating": "4"
+    },
+    {
+        "model": "GeForce3 Ti 200",
+        "rating": "4"
+    },
+    {
+        "model": "VIA/S3G KM400/KN400",
+        "rating": "4"
+    },
+    {
+        "model": "Intel 915G,910G Express",
+        "rating": "4"
+    },
+    {
+        "model": "GeForce2 GTS/GeForce2 Pro",
+        "rating": "3"
+    },
+    {
+        "model": "GeForce4 4200 Go",
+        "rating": "3"
+    },
+    {
+        "model": "GeForce2 MX/MX 400",
+        "rating": "3"
+    },
+    {
+        "model": "ABIT Siluro T400",
+        "rating": "3"
+    },
+    {
+        "model": "VIA Chrome9 HC IGP Family",
+        "rating": "3"
+    },
+    {
+        "model": "RADEON 7000 / RADEON VE Family",
+        "rating": "3"
+    },
+    {
+        "model": "RIVA TNT2 Model 64/Model 64 Pro",
+        "rating": "3"
+    },
+    {
+        "model": "RADEON IGP 320",
+        "rating": "3"
+    },
+    {
+        "model": "GeForce4 440 Go",
+        "rating": "3"
+    },
+    {
+        "model": "Intel 82915G/915GV/910GL",
+        "rating": "3"
+    },
+    {
+        "model": "Intel 865 Embedded Controller",
+        "rating": "3"
+    },
+    {
+        "model": "GeForce 6200A",
+        "rating": "3"
+    },
+    {
+        "model": "RADEON 9200",
+        "rating": "3"
+    },
+    {
+        "model": "MOBILITY RADEON 7500",
+        "rating": "3"
+    },
+    {
+        "model": "Radeon IGP 320M",
+        "rating": "3"
+    },
+    {
+        "model": "RADEON 9000 Family",
+        "rating": "3"
+    },
+    {
+        "model": "VIA Chrome9 HC IGP Family WDDM",
+        "rating": "3"
+    },
+    {
+        "model": "Intel Media Accelerator 500",
+        "rating": "3"
+    },
+    {
+        "model": "RIVA TNT2/TNT2 Pro",
+        "rating": "3"
+    },
+    {
+        "model": "Matrox Parhelia 128MB",
+        "rating": "3"
+    },
+    {
+        "model": "GeForce4 420 Go",
+        "rating": "3"
+    },
+    {
+        "model": "VIA/S3G DeltaChrome IGP",
+        "rating": "3"
+    },
+    {
+        "model": "MOBILITY RADEON 9000",
+        "rating": "3"
+    },
+    {
+        "model": "GeForce2 MX 100/200",
+        "rating": "3"
+    },
+    {
+        "model": "Intel 946GZ Embedded Chipset Function 0",
+        "rating": "3"
+    },
+    {
+        "model": "RADEON 7500",
+        "rating": "3"
+    },
+    {
+        "model": "S3 Inc. Savage4",
+        "rating": "3"
+    },
+    {
+        "model": "AMIGAMERLIN 3.1-R1 For Voodoo 4 4500 PCI",
+        "rating": "3"
+    },
+    {
+        "model": "Rage Fury Pro/Xpert 2000 Pro",
+        "rating": "3"
+    },
+    {
+        "model": "Intel 82915G/GV/910GL Express",
+        "rating": "3"
+    },
+    {
+        "model": "Vanta/Vanta LT",
+        "rating": "3"
+    },
+    {
+        "model": "MOBILITY RADEON 9200",
+        "rating": "3"
+    },
+    {
+        "model": "MOBILITY RADEON 9100 IGP",
+        "rating": "2"
+    },
+    {
+        "model": "Intel Media Accelerator 3150",
+        "rating": "2"
+    },
+    {
+        "model": "Intel 82845G/GL/GE/PE/GV Controller",
+        "rating": "2"
+    },
+    {
+        "model": "RADEON 7200",
+        "rating": "2"
+    },
+    {
+        "model": "RADEON 9200 PRO Family",
+        "rating": "2"
+    },
+    {
+        "model": "VIA Chrome9 HC IGP WDDM",
+        "rating": "2"
+    },
+    {
+        "model": "VIA Chrome9 HC IGP WDDM 1.1",
+        "rating": "2"
+    },
+    {
+        "model": "GeForce2 MX",
+        "rating": "2"
+    },
+    {
+        "model": "RADEON IGP 345M",
+        "rating": "2"
+    },
+    {
+        "model": "Radeon 7000 / Radeon VE",
+        "rating": "2"
+    },
+    {
+        "model": "VIA Chrome9 HC3 IGP",
+        "rating": "2"
+    },
+    {
+        "model": "Intel 82915G/GV/910GL Advanced v3.5",
+        "rating": "2"
+    },
+    {
+        "model": "Intel 82845G/GL Controller",
+        "rating": "2"
+    },
+    {
+        "model": "RADEON 9200 LE Family",
+        "rating": "2"
+    },
+    {
+        "model": "RADEON 9250",
+        "rating": "2"
+    },
+    {
+        "model": "64MB GeForce2 MX with TV Out",
+        "rating": "2"
+    },
+    {
+        "model": "RADEON 9200 SE",
+        "rating": "2"
+    },
+    {
+        "model": "GeForce3 Ti 500",
+        "rating": "2"
+    },
+    {
+        "model": "Intel GMA 3150 Express",
+        "rating": "2"
+    },
+    {
+        "model": "Radeon IGP 340M",
+        "rating": "2"
+    },
+    {
+        "model": "Quadro NVS 280 SD",
+        "rating": "2"
+    },
+    {
+        "model": "Dell 8100",
+        "rating": "2"
+    },
+    {
+        "model": "VIA Chrome9 HC IGP Prerelease WDDM 1.1",
+        "rating": "2"
+    },
+    {
+        "model": "Intel 82845G Controller",
+        "rating": "2"
+    },
+    {
+        "model": "Radeon VE",
+        "rating": "2"
+    },
+    {
+        "model": "Intel Extreme Controller",
+        "rating": "1"
+    },
+    {
+        "model": "S3 SuperSavage/IXC 1014",
+        "rating": "1"
+    },
+    {
+        "model": "VisionTek Radeon 7000",
+        "rating": "1"
+    },
+    {
+        "model": "VIA Chrome9 HCM IGP",
+        "rating": "1"
+    },
+    {
+        "model": "RADEON IGP 34xM",
+        "rating": "1"
+    },
+    {
+        "model": "IGP 340M",
+        "rating": "1"
+    },
+    {
+        "model": "S3 ProSavageDDR",
+        "rating": "1"
+    },
+    {
+        "model": "Rage 128 Pro",
+        "rating": "1"
+    },
+    {
+        "model": "Intel 82852/82855 GM/GME Controller",
+        "rating": "1"
+    },
+    {
+        "model": "RAGE 128 PRO AGP 4X TMDS",
+        "rating": "1"
+    },
+    {
+        "model": "Quadro2 Pro",
+        "rating": "1"
+    },
+    {
+        "model": "FireMV 2200 PCI",
+        "rating": "1"
+    }
+]

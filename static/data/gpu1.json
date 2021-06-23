@@ -64,7 +64,7 @@
         "rating": "16"
     },
     {
-        "model": "NVIDIA GeForce RTX 2080 SUPER (Notebook)",
+        "model": "NVIDIA GeForce RTX 2080 SUPER Notebook",
         "rating": "17"
     },
     {
@@ -72,7 +72,7 @@
         "rating": "18"
     },
     {
-        "model": "NVIDIA GeForce RTX 2080 (Notebook)",
+        "model": "NVIDIA GeForce RTX 2080 Notebook",
         "rating": "19"
     },
     {
@@ -112,7 +112,7 @@
         "rating": "28"
     },
     {
-        "model": "NVIDIA GeForce RTX 2070 SUPER (Notebook)",
+        "model": "NVIDIA GeForce RTX 2070 SUPER Notebook",
         "rating": "29"
     },
     {
@@ -132,7 +132,7 @@
         "rating": "33"
     },
     {
-        "model": "NVIDIA GeForce RTX 2070 (Notebook refresh)",
+        "model": "NVIDIA GeForce RTX 2070 NotebookR",
         "rating": "34"
     },
     {
@@ -144,7 +144,7 @@
         "rating": "36"
     },
     {
-        "model": "NVIDIA GeForce RTX 2070 (Notebook)",
+        "model": "NVIDIA GeForce RTX 2070 Notebook",
         "rating": "37"
     },
     {
@@ -160,7 +160,7 @@
         "rating": "40"
     },
     {
-        "model": "NVIDIA GeForce GTX 1080 (Notebook)",
+        "model": "NVIDIA GeForce GTX 1080 Notebook",
         "rating": "41"
     },
     {
@@ -176,7 +176,7 @@
         "rating": "44"
     },
     {
-        "model": "NVIDIA Quadro RTX 4000 (notebook)",
+        "model": "NVIDIA Quadro RTX 4000 Notebook",
         "rating": "45"
     },
     {
@@ -196,7 +196,7 @@
         "rating": "49"
     },
     {
-        "model": "NVIDIA GeForce RTX 2060 (Notebook refresh)",
+        "model": "NVIDIA GeForce RTX 2060 NotebookR",
         "rating": "50"
     },
     {
@@ -220,7 +220,7 @@
         "rating": "55"
     },
     {
-        "model": "NVIDIA GeForce RTX 2060 (Notebook)",
+        "model": "NVIDIA GeForce RTX 2060 Notebook",
         "rating": "56"
     },
     {
@@ -228,11 +228,11 @@
         "rating": "57"
     },
     {
-        "model": "NVIDIA GeForce GTX 1660 Ti (Notebook)",
+        "model": "NVIDIA GeForce GTX 1660 Ti Notebook",
         "rating": "58"
     },
     {
-        "model": "NVIDIA GeForce GTX 1070 (Notebook)",
+        "model": "NVIDIA GeForce GTX 1070 Notebook",
         "rating": "59"
     },
     {
@@ -304,7 +304,7 @@
         "rating": "76"
     },
     {
-        "model": "NVIDIA GeForce GTX 980 (Notebook)",
+        "model": "NVIDIA GeForce GTX 980 Notebook",
         "rating": "77"
     },
     {
@@ -340,11 +340,11 @@
         "rating": "85"
     },
     {
-        "model": "NVIDIA GeForce GTX 1060 (Notebook)",
+        "model": "NVIDIA GeForce GTX 1060 Notebook",
         "rating": "86"
     },
     {
-        "model": "NVIDIA GeForce GTX 1650 Ti (Notebook)",
+        "model": "NVIDIA GeForce GTX 1650 Ti Notebook",
         "rating": "87"
     },
     {
@@ -352,7 +352,7 @@
         "rating": "88"
     },
     {
-        "model": "AMD Radeon RX 580 (Laptop)",
+        "model": "AMD Radeon RX 580 Notebook",
         "rating": "89"
     },
     {
@@ -360,7 +360,7 @@
         "rating": "90"
     },
     {
-        "model": "NVIDIA GeForce GTX 1650 (Notebook)",
+        "model": "NVIDIA GeForce GTX 1650 Notebook",
         "rating": "91"
     },
     {
@@ -376,7 +376,7 @@
         "rating": "94"
     },
     {
-        "model": "NVIDIA Quadro T2000 (Notebook)",
+        "model": "NVIDIA Quadro T2000 Notebook",
         "rating": "95"
     },
     {
@@ -428,7 +428,7 @@
         "rating": "107"
     },
     {
-        "model": "NVIDIA GeForce GTX 1050 Ti (Notebook)",
+        "model": "NVIDIA GeForce GTX 1050 Ti Notebook",
         "rating": "108"
     },
     {
@@ -452,7 +452,7 @@
         "rating": "113"
     },
     {
-        "model": "NVIDIA GeForce GTX 1050 (Notebook)",
+        "model": "NVIDIA GeForce GTX 1050 Notebook",
         "rating": "114"
     },
     {
@@ -736,7 +736,7 @@
         "rating": "184"
     },
     {
-        "model": "NVIDIA GeForce GT 640 (DDR3)",
+        "model": "NVIDIA GeForce GT 640",
         "rating": "185"
     },
     {

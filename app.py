@@ -404,15 +404,15 @@ def check():
     #     pass
 
     # Find Regular Nvidia gpus from above 9000 series except for Titan and Quadro series.
-    # Eg.'Geforce GT 740', 'Geforce RTX 2050 ti (notebook)'
-
+    # Eg.'Geforce GT 740', 'Geforce RTX 2050 ti '
+    # Note to self:
+    # Need to make a pattern to find GeForce 9 (9xxx) series and 9 series mobile.
     # TESTING 
     # Tests Regex code that finds newer Nvidia Geforce GPUs.
     with open('/workspace/milestone_3.1/static/data/gpu1.json', 'r') as json_file:
         gpu_list=json_file.read()
     list = json.loads(gpu_list)
     gpu_requirements = json.dumps(list)
-
     with open("static/data/wiki.html") as wiki:
         soup = BeautifulSoup(wiki, "html.parser")
         find = str(soup)
@@ -420,85 +420,66 @@ def check():
     test = ""
     count = 0
     count2 = 0
-    # find_nvidia_only = ""
-    # find_nvidia = re.findall(r'"NVIDIA\sG(.*?)"', find)
-    # for z in find_nvidia:
-    #     z = re.sub(r"^",  "NVIDIA G", z)
-    #     find_nvidia_only += "" + z + "\n"
-    #     count += 1
-    # print("-------------------------------Nvidia Geforce in Database--------------------------------------")
-    # print('Total Found:')
-    # print(count)
-    # print(find_nvidia_only)
-    # print("-------------------------------------------End-------------------------------------------------")
-    # print(" ")
-    # print(" ")
-    
-    # Note
-    # Need to make a pattern to find GeForce 9 (9xxx) series and 9 series mobile.
+    # gpu_requirements = "NVIDIA GeForce GTX 1060-5GB NVIDIA GeForce MX250 (25W)"
     find_newer_gtx_gpu = re.findall(
         r'(?i)\s(?:geforce\s|gtx\s|gt\s|rtx\s|gts\s|g|mx|m|\d+[a-zA-Z]*)'
         r'(?:\d+\s*-*\d+gb|\d*[a-zA-Z]*\s*\d*\s*)'
-        r'(?:\(\d+w\)|max-q|max\sq|\(max\sq\)|\(max-q\)|max\sq|ti\sboost|ti|le'
+        r'(?:max-q|NotebookR|max\sq|\(max\sq\)|\(max-q\)|max\sq|ti\sboost|ti|le'
         r'|super\smax-q|se|super|\d+m|\(laptop\)|laptop|\(mobile\)|mobile|\(m\)'
-        r'|m|\(notebook\)|notebook|\(notebook\srefresh\)|notebook\srefresh)*'
-        r'(?:\smax-q|\smax\sq|\s\(max\sq\)|\s\(max-q\)|\s\(mobile\)|\smobile|\s\(m\)'
-        r'|\sm|\s\(notebook\srefresh\)|\snotebook\srefresh|\s\(notebook\)|\snotebook'
-        r'|\s\(laptop\)|\slaptop|\s\(refresh\)|\srefresh)*', find)
+        r'|m|\(notebook\)|notebook|\(notebook\srefresh\)|\(\d+watts\)|\d+watts|\(\d+w\)|\d+w)*'
+        r'(?:\smax-q|\smax\sq|\s\(max\sq\)|\s\(max-q\)|\s\(*mobile\)*|\s\(*m\)*|\s\(laptop\)'
+        r'|\slaptop|\sNotebookR|\s\(notebook\srefresh\)|\snotebook\srefresh|\s\(notebook\)|\snotebook'
+        r'|-\d+gb|\s\d+gb|\d+\sgb|\s\(refresh\)|\srefresh||\s\(\d+watts\)|\s\d+watts|\s\(\d+w\)|\s\d+w)*', gpu_requirements)
     if find_newer_gtx_gpu:
         for gpu in find_newer_gtx_gpu:
             # Formats String to be compatible with database
             gpu = re.sub(r"GeForce",  "", gpu)
+            gpu = re.sub(r"\s\s",  " ", gpu)
+            gpu = re.sub(r"^\s",  "", gpu)
             gpu = re.sub(r"\s\s$",  "", gpu)
             gpu = re.sub(r"\s$",  "", gpu)
             gpu = re.sub(r"^",  "NVIDIA GeForce ", gpu)
+            gpu = re.sub(r"(?:\(laptop\srefresh\)|laptop\srefresh|\(mobile\srefresh\)"
+            r'|mobile\srefresh|\(m\srefresh\)|m\srefresh|\(notebook\srefresh\)|\snotebook\srefresh)',  "NotebookR", gpu)
+            gpu = re.sub(r"(?:\(laptop\)$|laptop$|\(mobile\)$|mobile$|\(m\)$)",  "Notebook", gpu)
+            gpu = re.sub(r"(?:\sm|\sm$)",  " Notebook", gpu)
+            gpu = re.sub(r"[)(]",  "", gpu)
+            gpu = re.sub(r"(?:watts|watts$)",  "w", gpu)
             gpu = re.sub(r"\s\s",  " ", gpu)
-            # if re.search(r'(?i)quatro',gpu):
-            #     pass
-            # elif re.search(r'^NVIDIA\sGeForce\s(?:\d+|[a-zA-Z]+|\d+px)$',gpu):
-            #     pass
-            # elif re.search(r'(?i)NVIDIA\sGeForce\s(?:[0-9]{1,2}\s\d|256\sse|\d+\sse|\dm|[0-9]{1,3}m|\d+\sm$'
-            # r'|\dx{1,3}|\d+px|ms|0\s\d|\d+em|\dh\d|\dc\d|\d+\s0|\dh|\da\d|\dv\d|\d{1,2}[a-zA-Z]\d|3d|mx{2,5}'
-            # r'|rtx\sx0{1,3}|mx\s|zx|mx[13456789]|m2\d+zx|\d+[abcdefghjklnopqrstuvwyz]+|m64|'
-            # r'multiprocessors|mcp|mobile\s6|gtx\sgraphics|\d+XGL)',gpu):
-            #     pass
-            # elif re.search(r'(?i)RTX\s(?:ax|cards)',gpu):
-            #     pass
-            # else:
-            test += "<p>" + gpu + "</p>"
-            count2 += 1
-        return render_template("test.html", test=test)
-            
-    print("-------------------------------Nvidia Geforce Regex Results--------------------------------------")
-    print('Total Found:')
-    print(count2)
-    print(test)
-    print("--------------------------------------------End--------------------------------------------------")
-
-    #         # searches weaker GPU database
-    #         check = mongo.db.weaker_gpu.find_one(
-    #             {"$text": {"$search": "\"" + gpu + "\""}})
-    #         if check:
-    #             # If it finds one, this means the users GPU is
-    #             # automatically better. User informed of success.
-    #             info_message = message_success
-    #         else:
-    #             # Checks the database for GPUs that may or
-    #             # may not be more powerful
-    #             check = mongo.db.gpu.find_one(
-    #                 {"$text": {"$search": "\"" + gpu + "\""}})
-    #             if check:
-    #                 # Finds GPU rating
-    #                 rating = int(check['rating'])
-    #                 # Compares the GPU rating against the user's GPU
-    #                 if user_gpu_rating <= rating:
-    #                     info_message = message_success
-    #                 elif user_gpu_rating > rating:
-    #                     info_message = message_fail
-    #                 else:
-    #                     pass
-    # else:
-    #     pass
+            check = mongo.db.strong_gpu.find({ "model": { "$regex": "^" + gpu + "$" , "$options": "i"} })
+            for i in check:
+                if str(i["model"]) == str(gpu):
+                    test += "<p>" + i["model"] + "</p>" +"<p>" + i["rating"] + "</p>"
+                    print(str(gpu))
+                    print(str(i["model"]))
+                    print("------------------")
+    return render_template("test.html", test=test)
+            # if check:
+            #     for i in check:
+            #         print("----------------------------------------")
+            #         print(gpu)
+            #         print(i)
+            #         if gpu != i["model"] :
+            #             a = "x"
+                        
+            #         elif gpu == i["model"]:
+            #             print("equals gpu")
+            #             print(gpu)
+            #             test += "<p>Mongo:" + i["model"] + "</p>" +"<p>JSON:" + gpu + "</p>"
+            #             # Finds GPU rating 
+            #             rating = int(i["rating"])
+            #             # Compares the GPU rating against the user's GPU
+            #             if user_gpu_rating <= rating:
+            #                 info_message = message_success
+            #             elif user_gpu_rating > rating:
+            #                 info_message = message_fail
+            #             else:
+            #                 pass
+            #         else:
+            #             pass
+    #     else:
+    #         pass
+    # return render_template("test.html", test=test)
 
     # # find all Nvidia titan gpus in user gpu database
     # # eg "NVIDIA Titan Xp Collector's Edition", 'NVIDIA Titan Xp'
@@ -508,7 +489,7 @@ def check():
     #     r'\s(?:rtx|gtx|X\s'
     #     r'\(?Pascal\)?|Xp\sCollector\'s\sEdition|xp|x|V|5|black)',
     #     gpu_requirements)
-    # if find_newer_gtx_gpu:
+    # if find_nvidia_titan:
     #     for gpu in find_nvidia_titan:
     #         # Formats String to be compatible with database
     #         gpu = re.sub(r"Geforce",  "", gpu)
