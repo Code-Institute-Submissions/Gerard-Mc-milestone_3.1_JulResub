@@ -312,41 +312,42 @@ def check():
     # else:
     #     pass
 
-    # '''
-    # The below regex patterns find AMD and Nvidia GPUs that are below the power
-    # of the weakest GPU the user can choose. If any of these patterns are
-    # matched, the user info message will be success.
-    # '''
+    # 
+    """ The below regex patterns find AMD and Nvidia GPUs that are below the power
+    of the weakest GPU the user can choose from. If any of these patterns are
+    matched, the user info message will be success. """
 
     # Find old geforce gpus. Geforce 256, geforce2 - geforce4, geforce fx
-    # geforce 6000, geforce 7000, geforce 8000, geforce 9000 series.
+    # geforce 6000, geforce 7000, geforce 8000 series.
     
-    find_old_geforce_gpu = re.findall(
-        r'(?i)(?:geforce\s(?:256|fx|pcx|mx4000|8\d{3}|6\d{3}'
-        r'|7\d{3}(?!m))|geforce[2-4]{1}\s)', gpu_requirements)
-    if find_old_geforce_gpu:
-        info_message = message_success
-        return render_template(
-        "result.html", user_gpu_name=user_gpu_name,
-        user_game_id=user_game_id,
-        user_game_name=user_game_name, steam=steam, info_message=info_message)
-
+    # find_old_geforce_gpu = re.findall(
+    #     r'(?i)(?:geforce\s(?:256|fx|pcx|mx4000|8\d{3}|6\d{3}'
+    #     r'|7\d{3}(?!m))|geforce[2-4]{1}\s)', gpu_requirements)
     # if find_old_geforce_gpu:
     #     info_message = message_success
-    # else:
-    #     pass
+    #     mongo.db.gpu.update_one(
+    #         {"model": user_gpu_name},
+    #         {"$push": {'games': {"name": user_game_name}}})
+    #     print("Added to database")
+    #     return render_template(
+    #     "result.html", user_gpu_name=user_gpu_name,
+    #     user_game_id=user_game_id,
+    #     user_game_name=user_game_name, steam=steam, info_message=info_message)
 
-    # # Finds AMD GPU years 2001-2008 or from Radeon 8000 series - HD 3000 series
-    # # Eg. Radeon X700, Radeon X1300 XT, Radeon X1900 GT, Radeon HD 2900 PRO
-    # find_old_amd_gpu = re.findall(
-    #     r'(?i)(?:radeon|ati|amd)\s'
-    #     r'(?:hd|x\d+|xpress\s\d+|xpress|8\d+|9\d+)\s'
-    #     r'(?:[2-3]\d+\s(?:pro|xt|gt|x2|\d+)*'
-    #     r'|[1-2]\d+|x\d+|le|pro|se|xt|xxl|xl|agp|gto|gt|x)', gpu_requirements)
-    # if find_old_amd_gpu:
-    #     info_message = message_success
-    # else:
-    #     pass
+    # Finds AMD GPU years 2001-2008 or from Radeon 8000 series - HD 3000 series
+    # Eg. Radeon X700, Radeon X1300 XT, Radeon X1900 GT, Radeon HD 2900 PRO
+    find_old_amd_gpu = re.findall(
+        r'(?i)(?:3d\srage|rage\s(?:pro|xl|128|fury)'
+        r'radeontm\s|radeon\s(?:ve|le|sdr|ddr|7500|3[2-4]{1}0|[8-9]\d{3})|x\d{3,4}|hd\s[2-3]\d{3})', gpu_requirements)
+    if find_old_amd_gpu:
+        info_message = message_success
+        # mongo.db.gpu.update_one(
+        #     {"model": user_gpu_name},
+        #     {"$push": {'games': {"name": user_game_name}}})
+        # print("Added to database")
+        return render_template(
+        "result.html", user_gpu_name=user_gpu_name, user_game_id=user_game_id,
+        user_game_name=user_game_name, steam=steam, info_message=info_message)
 
     # # Finds more old varients of AMD GPUs. Aids the above pattern to find more.
     # find_x_amd_gpu = re.findall(
