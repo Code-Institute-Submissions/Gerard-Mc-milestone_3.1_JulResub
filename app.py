@@ -315,14 +315,24 @@ def check():
     # matched, the user info message will be success.
     # '''
 
-    # # Find old geforce gpus. Geforce 256, geforce2 - geforce4, geforce fx
-    # # geforce 6000, geforce 7000, geforce 8000, geforce 9000 series.
-    # find_old_geforce_gpu = re.findall(
-    #     r'(?i)(?:nvidia\sgeforce|NVIDIA|geforce\d*)\s'
-    #     r'(?:(?:ti|mx|pcx)\d+|fx|pcx|\d+|\d+\s\+|\d+a|\d+pv)\s*'
-    #     r'(?:\d+gtx\+'
-    #     r'|gtx|gso|gt|gx2|ge|gs|le|se|mgpu|ultra|TurboCache|nForce\s4[1-3]0)'
-    #     r'*\s(?:ultra)*', gpu_requirements)
+    # Find old geforce gpus. Geforce 256, geforce2 - geforce4, geforce fx
+    # geforce 6000, geforce 7000, geforce 8000, geforce 9000 series.
+    with open('/workspace/milestone_3.1/static/data/gpu2.json', 'r') as json_file:
+        gpu_list=json_file.read()
+    list = json.loads(gpu_list)
+    gpu_requirements = json.dumps(list)
+    with open("static/data/wiki.html") as wiki:
+        soup = BeautifulSoup(wiki, "html.parser")
+        find = str(soup)
+    test = ""
+    
+    find_old_geforce_gpu = re.findall(
+        r'(?i)(?:geforce\s(?:256|fx|pcx|mx4000|8\d{3}|6\d{3}'
+        r'|7\d{3}(?!m))|geforce[2-4]{1}\s)', find)
+    for gpu in find_old_geforce_gpu:
+        test += "<p>" + gpu + "</p>"
+    return render_template("test.html", test=test)
+
     # if find_old_geforce_gpu:
     #     info_message = message_success
     # else:
@@ -405,55 +415,53 @@ def check():
 
     # Find Regular Nvidia gpus from above 9000 series except for Titan and Quadro series.
     # Eg.'Geforce GT 740', 'Geforce RTX 2050 ti '
-    # Note to self:
-    # Need to make a pattern to find GeForce 9 (9xxx) series and 9 series mobile.
     # TESTING 
     # Tests Regex code that finds newer Nvidia Geforce GPUs.
-    with open('/workspace/milestone_3.1/static/data/gpu1.json', 'r') as json_file:
-        gpu_list=json_file.read()
-    list = json.loads(gpu_list)
-    gpu_requirements = json.dumps(list)
-    with open("static/data/wiki.html") as wiki:
-        soup = BeautifulSoup(wiki, "html.parser")
-        find = str(soup)
+    # with open('/workspace/milestone_3.1/static/data/gpu1.json', 'r') as json_file:
+    #     gpu_list=json_file.read()
+    # list = json.loads(gpu_list)
+    # gpu_requirements = json.dumps(list)
+    # with open("static/data/wiki.html") as wiki:
+    #     soup = BeautifulSoup(wiki, "html.parser")
+    #     find = str(soup)
 
-    test = ""
-    count = 0
-    count2 = 0
-    # gpu_requirements = "NVIDIA GeForce GTX 1060-5GB NVIDIA GeForce MX250 (25W)"
-    find_newer_gtx_gpu = re.findall(
-        r'(?i)\s(?:geforce\s|gtx\s|gt\s|rtx\s|gts\s|g|mx|m|\d+[a-zA-Z]*)'
-        r'(?:\d+\s*-*\d+gb|\d*[a-zA-Z]*\s*\d*\s*)'
-        r'(?:max-q|NotebookR|max\sq|\(max\sq\)|\(max-q\)|max\sq|ti\sboost|ti|le'
-        r'|super\smax-q|se|super|\d+m|\(laptop\)|laptop|\(mobile\)|mobile|\(m\)'
-        r'|m|\(notebook\)|notebook|\(notebook\srefresh\)|\(\d+watts\)|\d+watts|\(\d+w\)|\d+w)*'
-        r'(?:\smax-q|\smax\sq|\s\(max\sq\)|\s\(max-q\)|\s\(*mobile\)*|\s\(*m\)*|\s\(laptop\)'
-        r'|\slaptop|\sNotebookR|\s\(notebook\srefresh\)|\snotebook\srefresh|\s\(notebook\)|\snotebook'
-        r'|-\d+gb|\s\d+gb|\d+\sgb|\s\(refresh\)|\srefresh||\s\(\d+watts\)|\s\d+watts|\s\(\d+w\)|\s\d+w)*', gpu_requirements)
-    if find_newer_gtx_gpu:
-        for gpu in find_newer_gtx_gpu:
-            # Formats String to be compatible with database
-            gpu = re.sub(r"GeForce",  "", gpu)
-            gpu = re.sub(r"\s\s",  " ", gpu)
-            gpu = re.sub(r"^\s",  "", gpu)
-            gpu = re.sub(r"\s\s$",  "", gpu)
-            gpu = re.sub(r"\s$",  "", gpu)
-            gpu = re.sub(r"^",  "NVIDIA GeForce ", gpu)
-            gpu = re.sub(r"(?:\(laptop\srefresh\)|laptop\srefresh|\(mobile\srefresh\)"
-            r'|mobile\srefresh|\(m\srefresh\)|m\srefresh|\(notebook\srefresh\)|\snotebook\srefresh)',  "NotebookR", gpu)
-            gpu = re.sub(r"(?:\(laptop\)$|laptop$|\(mobile\)$|mobile$|\(m\)$)",  "Notebook", gpu)
-            gpu = re.sub(r"(?:\sm|\sm$)",  " Notebook", gpu)
-            gpu = re.sub(r"[)(]",  "", gpu)
-            gpu = re.sub(r"(?:watts|watts$)",  "w", gpu)
-            gpu = re.sub(r"\s\s",  " ", gpu)
-            check = mongo.db.strong_gpu.find({ "model": { "$regex": "^" + gpu + "$" , "$options": "i"} })
-            for i in check:
-                if str(i["model"]) == str(gpu):
-                    test += "<p>" + i["model"] + "</p>" +"<p>" + i["rating"] + "</p>"
-                    print(str(gpu))
-                    print(str(i["model"]))
-                    print("------------------")
-    return render_template("test.html", test=test)
+    # test = ""
+    # count = 0
+    # count2 = 0
+    # # gpu_requirements = "NVIDIA GeForce GTX 1060-5GB NVIDIA GeForce MX250 (25W)"
+    # find_newer_gtx_gpu = re.findall(
+    #     r'(?i)\s(?:geforce\s|gtx\s|gt\s|rtx\s|gts\s|g|mx|m|\d+[a-zA-Z]*)'
+    #     r'(?:\d+\s*-*\d+gb|\d*[a-zA-Z]*\s*\d*\s*)'
+    #     r'(?:max-q|NotebookR|max\sq|\(max\sq\)|\(max-q\)|max\sq|ti\sboost|ti|le'
+    #     r'|super\smax-q|se|super|\d+m|\(laptop\)|laptop|\(mobile\)|mobile|\(m\)'
+    #     r'|m|\(notebook\)|notebook|\(notebook\srefresh\)|\(\d+watts\)|\d+watts|\(\d+w\)|\d+w)*'
+    #     r'(?:\smax-q|\smax\sq|\s\(max\sq\)|\s\(max-q\)|\s\(*mobile\)*|\s\(*m\)*|\s\(laptop\)'
+    #     r'|\slaptop|\sNotebookR|\s\(notebook\srefresh\)|\snotebook\srefresh|\s\(notebook\)|\snotebook'
+    #     r'|-\d+gb|\s\d+gb|\d+\sgb|\s\(refresh\)|\srefresh||\s\(\d+watts\)|\s\d+watts|\s\(\d+w\)|\s\d+w)*', gpu_requirements)
+    # if find_newer_gtx_gpu:
+    #     for gpu in find_newer_gtx_gpu:
+    #         # Formats String to be compatible with database
+    #         gpu = re.sub(r"GeForce",  "", gpu)
+    #         gpu = re.sub(r"\s\s",  " ", gpu)
+    #         gpu = re.sub(r"^\s",  "", gpu)
+    #         gpu = re.sub(r"\s\s$",  "", gpu)
+    #         gpu = re.sub(r"\s$",  "", gpu)
+    #         gpu = re.sub(r"^",  "NVIDIA GeForce ", gpu)
+    #         gpu = re.sub(r"(?:\(laptop\srefresh\)|laptop\srefresh|\(mobile\srefresh\)"
+    #         r'|mobile\srefresh|\(m\srefresh\)|m\srefresh|\(notebook\srefresh\)|\snotebook\srefresh)',  "NotebookR", gpu)
+    #         gpu = re.sub(r"(?:\(laptop\)$|laptop$|\(mobile\)$|mobile$|\(m\)$)",  "Notebook", gpu)
+    #         gpu = re.sub(r"(?:\sm|\sm$)",  " Notebook", gpu)
+    #         gpu = re.sub(r"[)(]",  "", gpu)
+    #         gpu = re.sub(r"(?:watts|watts$)",  "w", gpu)
+    #         gpu = re.sub(r"\s\s",  " ", gpu)
+    #         check = mongo.db.strong_gpu.find({ "model": { "$regex": "^" + gpu + "$" , "$options": "i"} })
+    #         for i in check:
+    #             if str(i["model"]) == str(gpu):
+    #                 test += "<p>" + i["model"] + "</p>" +"<p>" + i["rating"] + "</p>"
+    #                 print(str(gpu))
+    #                 print(str(i["model"]))
+    #                 print("------------------")
+    # return render_template("test.html", test=test)
             # if check:
             #     for i in check:
             #         print("----------------------------------------")
