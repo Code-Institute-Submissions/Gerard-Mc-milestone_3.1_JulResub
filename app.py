@@ -189,6 +189,8 @@ def check():
     message_success = "Your GPU supports this game"
     message_fail = "Your GPU does not support this game"
     not_found_message = "We can't find this configuration in our database"
+    steam_format_error_message = """We can't find this configuration in our database.\nTry 
+    reading the minimum requirements above for further information."""
 
     # Extract user gpu model, game id,
     # and game name from "submit_to_python" form.
@@ -260,7 +262,6 @@ def check():
     # When the graphics section can't be found, the info message
     else:
         gpu_requirements = ""
-        info_message = message_not_found
     # Tidy gpu_requirements variable data for easier regex use.
     if gpu_requirements != "":
         # Removes words that will conflict or complicate regex patterns
@@ -273,8 +274,10 @@ def check():
         gpu_requirements = re.sub(r"<\/li>.*$", "", gpu_requirements_cut)
 
     else:
+        info_message = steam_format_error_message
         return render_template(
-        "result.html",info_message=message_fail)
+        "result.html", user_gpu_name=user_gpu_name,user_game_id=user_game_id,
+        user_game_name=user_game_name, steam=steam, info_message=info_message)
 
     '''
     Because all user GPUs are above 1GB VRAM,
@@ -317,21 +320,16 @@ def check():
 
     # Find old geforce gpus. Geforce 256, geforce2 - geforce4, geforce fx
     # geforce 6000, geforce 7000, geforce 8000, geforce 9000 series.
-    with open('/workspace/milestone_3.1/static/data/gpu2.json', 'r') as json_file:
-        gpu_list=json_file.read()
-    list = json.loads(gpu_list)
-    gpu_requirements = json.dumps(list)
-    with open("static/data/wiki.html") as wiki:
-        soup = BeautifulSoup(wiki, "html.parser")
-        find = str(soup)
-    test = ""
     
     find_old_geforce_gpu = re.findall(
         r'(?i)(?:geforce\s(?:256|fx|pcx|mx4000|8\d{3}|6\d{3}'
-        r'|7\d{3}(?!m))|geforce[2-4]{1}\s)', find)
-    for gpu in find_old_geforce_gpu:
-        test += "<p>" + gpu + "</p>"
-    return render_template("test.html", test=test)
+        r'|7\d{3}(?!m))|geforce[2-4]{1}\s)', gpu_requirements)
+    if find_old_geforce_gpu:
+        info_message = message_success
+        return render_template(
+        "result.html", user_gpu_name=user_gpu_name,
+        user_game_id=user_game_id,
+        user_game_name=user_game_name, steam=steam, info_message=info_message)
 
     # if find_old_geforce_gpu:
     #     info_message = message_success
