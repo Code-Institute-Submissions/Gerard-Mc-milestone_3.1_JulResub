@@ -660,7 +660,7 @@
         "rating": "165"
     },
     {
-        "model": "Intel Iris Pro Graphics 10th Gen Mobile",
+        "model": "Intel Iris Xe Graphics G7 64EU",
         "rating": "166"
     },
     {
@@ -764,7 +764,7 @@
         "rating": "191"
     },
     {
-        "model": "Intel HD 620",
+        "model": "Intel HD 620 Mobile",
         "rating": "192"
     },
     {

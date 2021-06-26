@@ -336,81 +336,64 @@ def check():
 
     # Finds AMD GPU years 2001-2008 or from Radeon 8000 series - HD 3000 series
     # Eg. Radeon X700, Radeon X1300 XT, Radeon X1900 GT, Radeon HD 2900 PRO
-    find_old_amd_gpu = re.findall(
-        r'(?i)(?:3d\srage|rage\s(?:pro|xl|128|fury)'
-        r'radeontm\s|radeon\s(?:ve|le|sdr|ddr|7500|3[2-4]{1}0|[8-9]\d{3})|x\d{3,4}|hd\s[2-3]\d{3})', gpu_requirements)
-    if find_old_amd_gpu:
-        info_message = message_success
-        # mongo.db.gpu.update_one(
-        #     {"model": user_gpu_name},
-        #     {"$push": {'games': {"name": user_game_name}}})
-        # print("Added to database")
-        return render_template(
-        "result.html", user_gpu_name=user_gpu_name, user_game_id=user_game_id,
-        user_game_name=user_game_name, steam=steam, info_message=info_message)
+    # r'(?i)(?:radeon|ati|amd)\s'
+    #     r'(?:hd|x\d+|xpress\s\d+|xpress|8\d+|9\d+)\s'
+    #     r'(?:[2-3]\d+\s(?:pro|xt|gt|x2|\d+)*'
+    #     r'|[1-2]\d+|x\d+|le|pro|se|xt|xxl|xl|agp|gto|gt|x)', find)
 
-    # # Finds more old varients of AMD GPUs. Aids the above pattern to find more.
-    # find_x_amd_gpu = re.findall(
-    #     r'(?i)(?:radeon|ati|amd)\sx\d+\s'
-    #     r'(?:le|pro|se|xt|xxl|xl|agp|gto|gt|x)"', gpu_requirements)
-    # if find_x_amd_gpu:
+    # find_old_amd_gpu = re.findall(
+    #     r'(?i)(?:3d\srage|rage\s(?:pro|xl|128|fury)'
+    #     r'|radeontm\s|ati\s|amd\s|radeon\s(?:ve|le|sdr|ddr'
+    #     r'|7500|3[2-4]{1}0|[8-9]\d{3,4}|x\d{3,4}|hd\s[2-3]\d{3}))', gpu_requirements)
+    # if find_old_amd_gpu:
     #     info_message = message_success
-    # else:
-    #     pass
+    #     return render_template(
+    #     "result.html", user_gpu_name=user_gpu_name, user_game_id=user_game_id,
+    #     user_game_name=user_game_name, steam=steam, info_message=info_message)
 
-    # # Find mobile Amd gpu that are less powerful than all gpus on user gpu list
-    # find_old_amd_mobile_gpu = re.findall(
-    #     r'(?i)(?:mobility\sradeon|mobility)\s(?:hd|x)*\s*'
-    #     r'(?:[1-3][0-9]\d+|4[0-5]\d+)\s*(?:x2|xt)*', gpu_requirements)
-    # if find_old_amd_mobile_gpu:
-    #     info_message = message_success
-    # else:
-    #     pass
 
-    # '''
-    # The below code will find any patterns that are for GPUs not guaranteed
-    # to be less powerful than the user GPU.
-    # They will find the patterns in the Steam API json and search
-    # MongoDB to find a match.
-    # If it finds a match, it will compare the GPU rating field of both the users
-    # GPU and the GPU on in the API json.
-    # If the user gpu is a higher rating, they receive a success message.
-    # '''
-    # # Find intel integrated graphics cards
-    # # eg. intel hd 3000 and Intel hd 620
-    # find_intel_gpu = re.findall(r'(?i)intel\su?hd\s\d+[a-zA-Z]{0,2}',
-    #                             gpu_requirements)
-    # if find_intel_gpu:
-    #     for gpu in find_intel_gpu:
-    #         # Formats out any unwanted whitespace
-    #         gpu = re.sub(r"^\s",  "", gpu)
-    #         gpu = re.sub(r"\s\s$",  "", gpu)
-    #         gpu = re.sub(r"\s$",  "", gpu)
-    #         gpu = re.sub(r"  ",  " ", gpu)
-    #         # searches weaker GPU database
-    #         check = mongo.db.weaker_gpu.find_one(
-    #             {"$text": {"$search": "\"" + gpu + "\""}})
-    #         if check:
-    #             # If it finds one, this means the users GPU is
-    #             # automatically better. User informed of success.
-    #             info_message = message_success
-    #         else:
-    #             # Checks the database for GPUs that may or
-    #             # may not be more powerful
-    #             check = mongo.db.gpu.find_one(
-    #                 {"$text": {"$search": "\"" + gpu + "\""}})
-    #             if check:
-    #                 # Finds GPU rating
-    #                 rating = int(check['rating'])
-    #                 # Compares the GPU rating against the user's GPU
-    #                 if user_gpu_rating <= rating:
-    #                     info_message = message_success
-    #                 elif user_gpu_rating > rating:
-    #                     info_message = message_fail
-    #                 else:
-    #                     pass
-    # else:
-    #     pass
+    ''' The below code will find any patterns that are for GPUs not guaranteed
+    to be less powerful than the user GPU.
+    They will find the patterns in the Steam API json and search
+    MongoDB to find a match.
+    If it finds a match, it will compare the GPU rating field of both the users
+    GPU and the GPU on in the API json.
+    If the user gpu is a higher rating, they receive a success message.
+    '''
+    # Find intel integrated graphics cards
+    # eg. intel hd 3000 and Intel hd 620
+
+    with open("static/data/intel_wiki.html") as wiki:
+        soup = BeautifulSoup(wiki, "html.parser")
+        gpu_requirements = str(soup)
+
+    find_intel_gpu = re.findall(r'(?i)(?!Amd|Radeon)(?:intel\s|\s|^)*'
+    r'(?:u?hd|(?:iris\s(?:pro|plus|xe\smax|xe|))|iris)(?:\sgraphics\s|\s)'
+    r'(?:\d+[a-zA-Z]{0,2}|xe|g[1-7]|(?:\d{2}(?:\s*eus*)))*\s*(?:graphics|(?:\d{2}(?:\s*eus*))|$)*', gpu_requirements)
+    found_gpus = ""
+    if find_intel_gpu:
+            for gpu in find_intel_gpu:
+                print(gpu)
+                store_name = gpu
+                gpu = re.sub(r"(?i)graphics",  "", gpu)
+                gpu = re.sub(r"(?i)eus",  "eu", gpu)
+                gpu = re.sub(r"(?i)\s\s",  " ", gpu)
+                gpu = re.sub(r"(?i)^\s",  "", gpu)
+                gpu = re.sub(r"(?i)(?:\(laptop\)|laptop|\(Notebook\)|Notebook|\(m\))",  "Mobile", gpu)
+                gpu = re.sub(r"(?i)(?:\sm\s|\sm$)",  " Mobile", gpu)
+                gpu = re.sub(r"(?i)\s$",  "", gpu)
+                gpu = re.sub(r"(?i)\s\s$",  "", gpu)
+                gpu = re.sub(r"(?i)[)(]",  "", gpu)
+                # Intel GPUs stonger than the weakest intel GPU available for user selection.
+                find_strong_intel_gpus = re.findall(r'(?i)(?:(?:u?hd|iris)\s((?:630|620|530|520|540|550|6000|5600|xe|plus|pro)(?:\s|$)))', gpu)
+                if find_strong_intel_gpus:
+                    store_name = ""
+                found_gpus += "" + store_name + ", "
+    return render_template(
+        "result.html", user_gpu_name=user_gpu_name,
+        user_game_id=user_game_id,
+        user_game_name=user_game_name, steam=steam,
+        found_gpus=found_gpus, info_message=info_message)
 
     # Find Regular Nvidia gpus from above 9000 series except for Titan and Quadro series.
     # Eg.'Geforce GT 740', 'Geforce RTX 2050 ti '
