@@ -363,37 +363,37 @@ def check():
     # Find intel integrated graphics cards
     # eg. intel hd 3000 and Intel hd 620
 
-    with open("static/data/intel_wiki.html") as wiki:
-        soup = BeautifulSoup(wiki, "html.parser")
-        gpu_requirements = str(soup)
+    # with open("static/data/intel_wiki.html") as wiki:
+    #     soup = BeautifulSoup(wiki, "html.parser")
+    #     gpu_requirements = str(soup)
 
-    find_intel_gpu = re.findall(r'(?i)(?!Amd|Radeon)(?:intel\s|\s|^)*'
-    r'(?:u?hd|(?:iris\s(?:pro|plus|xe\smax|xe|))|iris)(?:\sgraphics\s|\s)'
-    r'(?:\d+[a-zA-Z]{0,2}|xe|g[1-7]|(?:\d{2}(?:\s*eus*)))*\s*(?:graphics|(?:\d{2}(?:\s*eus*))|$)*', gpu_requirements)
-    found_gpus = ""
-    if find_intel_gpu:
-            for gpu in find_intel_gpu:
-                print(gpu)
-                store_name = gpu
-                gpu = re.sub(r"(?i)graphics",  "", gpu)
-                gpu = re.sub(r"(?i)eus",  "eu", gpu)
-                gpu = re.sub(r"(?i)\s\s",  " ", gpu)
-                gpu = re.sub(r"(?i)^\s",  "", gpu)
-                gpu = re.sub(r"(?i)(?:\(laptop\)|laptop|\(Notebook\)|Notebook|\(m\))",  "Mobile", gpu)
-                gpu = re.sub(r"(?i)(?:\sm\s|\sm$)",  " Mobile", gpu)
-                gpu = re.sub(r"(?i)\s$",  "", gpu)
-                gpu = re.sub(r"(?i)\s\s$",  "", gpu)
-                gpu = re.sub(r"(?i)[)(]",  "", gpu)
-                # Intel GPUs stonger than the weakest intel GPU available for user selection.
-                find_strong_intel_gpus = re.findall(r'(?i)(?:(?:u?hd|iris)\s((?:630|620|530|520|540|550|6000|5600|xe|plus|pro)(?:\s|$)))', gpu)
-                if find_strong_intel_gpus:
-                    store_name = ""
-                found_gpus += "" + store_name + ", "
-    return render_template(
-        "result.html", user_gpu_name=user_gpu_name,
-        user_game_id=user_game_id,
-        user_game_name=user_game_name, steam=steam,
-        found_gpus=found_gpus, info_message=info_message)
+    # find_intel_gpu = re.findall(r'(?i)(?!Amd|Radeon)(?:intel\s|\s|^)*'
+    # r'(?:u?hd|(?:iris\s(?:pro|plus|xe\smax|xe|))|iris)(?:\sgraphics\s|\s)'
+    # r'(?:\d+[a-zA-Z]{0,2}|xe|g[1-7]|(?:\d{2}(?:\s*eus*)))*\s*(?:graphics|(?:\d{2}(?:\s*eus*))|$)*', gpu_requirements)
+    # found_gpus = ""
+    # if find_intel_gpu:
+    #         for gpu in find_intel_gpu:
+    #             print(gpu)
+    #             store_name = gpu
+    #             gpu = re.sub(r"(?i)graphics",  "", gpu)
+    #             gpu = re.sub(r"(?i)eus",  "eu", gpu)
+    #             gpu = re.sub(r"(?i)\s\s",  " ", gpu)
+    #             gpu = re.sub(r"(?i)^\s",  "", gpu)
+    #             gpu = re.sub(r"(?i)(?:\(laptop\)|laptop|\(Notebook\)|Notebook|\(m\))",  "Mobile", gpu)
+    #             gpu = re.sub(r"(?i)(?:\sm\s|\sm$)",  " Mobile", gpu)
+    #             gpu = re.sub(r"(?i)\s$",  "", gpu)
+    #             gpu = re.sub(r"(?i)\s\s$",  "", gpu)
+    #             gpu = re.sub(r"(?i)[)(]",  "", gpu)
+    #             # Intel GPUs stonger than the weakest intel GPU available for user selection.
+    #             find_strong_intel_gpus = re.findall(r'(?i)(?:(?:u?hd|iris)\s((?:630|620|530|520|540|550|6000|5600|xe|plus|pro)(?:\s|$)))', gpu)
+    #             if find_strong_intel_gpus:
+    #                 store_name = ""
+    #             found_gpus += "" + store_name + ", "
+    # return render_template(
+    #     "result.html", user_gpu_name=user_gpu_name,
+    #     user_game_id=user_game_id,
+    #     user_game_name=user_game_name, steam=steam,
+    #     found_gpus=found_gpus, info_message=info_message)
 
     # Find Regular Nvidia gpus from above 9000 series except for Titan and Quadro series.
     # Eg.'Geforce GT 740', 'Geforce RTX 2050 ti '
@@ -471,22 +471,58 @@ def check():
     #         pass
     # return render_template("test.html", test=test)
 
-    # # find all Nvidia titan gpus in user gpu database
-    # # eg "NVIDIA Titan Xp Collector's Edition", 'NVIDIA Titan Xp'
-    # # 'NVIDIA Titan X (Pascal)', 'NVIDIA GTX TITAN X', 'NVIDIA GTX Titan Black'
+    # find all Nvidia titan gpus in user gpu database
+    # eg "NVIDIA Titan Xp Collector's Edition", 'NVIDIA Titan Xp'
+    # 'NVIDIA Titan X (Pascal)', 'NVIDIA GTX TITAN X', 'NVIDIA GTX Titan Black'
+    found_gpus = ""
+    with open("static/data/wiki-nvidia.html") as wiki:
+        soup = BeautifulSoup(wiki, "html.parser")
+        gpu_requirements = str(soup)
+
     # find_nvidia_titan = re.findall(
-    #     r'(?i)\s(?:geforce\sgtx\stitan|nvidia\sgtx\stitan|nvidia\stitan|titan)'
+    #     r'(?i)(?:geforce\sgtx\stitan|nvidia\sgtx\stitan|nvidia\stitan|titan)'
     #     r'\s(?:rtx|gtx|X\s'
     #     r'\(?Pascal\)?|Xp\sCollector\'s\sEdition|xp|x|V|5|black)',
     #     gpu_requirements)
     # if find_nvidia_titan:
     #     for gpu in find_nvidia_titan:
+    #         print(gpu)
     #         # Formats String to be compatible with database
-    #         gpu = re.sub(r"Geforce",  "", gpu)
+    #         store_name = gpu
     #         gpu = re.sub(r"^\s",  "", gpu)
     #         gpu = re.sub(r"\s\s$",  "", gpu)
     #         gpu = re.sub(r"\s$",  "", gpu)
     #         gpu = re.sub(r"  ",  " ", gpu)
+    #         found_gpus += "" + store_name + ", "
+    # return render_template(
+    #     "result.html", user_gpu_name=user_gpu_name,
+    #     user_game_id=user_game_id,
+    #     user_game_name=user_game_name, steam=steam,
+    #     found_gpus=found_gpus, info_message=info_message)
+
+
+    find_nvidia_quadro = re.findall(
+        r'(?i)(?:quadro\srtx|rtx|quadro\snvs|nvs|quadro[2-4]|quadro\sfx|quadro)\s'
+        r'(?:plex\s\d{3,4}|k*m*g*v*p*a*t*\d{3,4}d*m*|cx|ddr|mxr|ex|pro|dcc|\d{3}xgl'
+        r'|fx\s\d{3,4}g*x*2*(?:\ssdi|\slp|)|fx\s\d{3,4}|\d{2})*\s*(?:go\d{3,4}'
+        r'|go\sgl|go|max-q)*', gpu_requirements)
+    if find_nvidia_quadro:
+        for gpu in find_nvidia_quadro:
+            # Formats String to be compatible with database
+            store_name = gpu
+            gpu = re.sub(r"^\s",  "", gpu)
+            gpu = re.sub(r"\s\s$",  "", gpu)
+            gpu = re.sub(r"\s$",  "", gpu)
+            gpu = re.sub(r"  ",  " ", gpu)
+            found_gpus += "" + store_name + ", "
+    return render_template(
+        "result.html", user_gpu_name=user_gpu_name,
+        user_game_id=user_game_id,
+        user_game_name=user_game_name, steam=steam,
+        found_gpus=found_gpus, info_message=info_message)
+
+
+
     #         check = mongo.db.gpu.find_one(
     #             {"$text": {"$search": "\"" + gpu + "\""}})
     #         if check:

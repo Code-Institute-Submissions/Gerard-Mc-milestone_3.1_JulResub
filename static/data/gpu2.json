@@ -2656,7 +2656,7 @@
         "rating": "102"
     },
     {
-        "model": "Quadro FX Go1400",
+        "model": "Quadro FX Go 1400",
         "rating": "101"
     },
     {
@@ -3316,7 +3316,7 @@
         "rating": "51"
     },
     {
-        "model": "GeForce FX Go5700",
+        "model": "GeForce FX Go 5700",
         "rating": "51"
     },
     {
@@ -3904,7 +3904,7 @@
         "rating": "17"
     },
     {
-        "model": "GeForce FX Go5650",
+        "model": "GeForce FX Go 5650",
         "rating": "16"
     },
     {
@@ -3940,7 +3940,7 @@
         "rating": "12"
     },
     {
-        "model": "GeForce FX Go5300",
+        "model": "GeForce FX Go 5300",
         "rating": "12"
     },
     {
@@ -4284,7 +4284,11 @@
         "rating": "4"
     },
     {
-        "model": "Quadro2 MXR/EX",
+        "model": "Quadro2 EX",
+        "rating": "4"
+    },
+    {
+        "model": "Quadro2 MXR",
         "rating": "4"
     },
     {
