@@ -180,7 +180,11 @@ def search_gpu_homepage():
     
 @app.route("/admin", methods=["GET", "POST"])
 def admin():
-    gpus = mongo.db.strong_gpu.aggregate([{ "$sort" : { "rating" : -1 } }])
+    gpus = mongo.db.strong_gpu.aggregate([{ "$sort" : { "rating" : 1 } }])
+    if request.method == "POST":
+            insert_gpu_value = request.form.get("insert-gpu-value")
+            mongo.db.strong_gpu.insert( { "model": insert_gpu_value, "rating": 0 } )
+            return render_template("admin.html", gpus=gpus)
     return render_template("admin.html", gpus=gpus)
 
 @app.route('/check', methods=["GET", "POST"])

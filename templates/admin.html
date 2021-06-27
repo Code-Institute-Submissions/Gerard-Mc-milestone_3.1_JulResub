@@ -1,19 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
 <div>
-   
     {% for x in gpus %}
     <hr>
     <p>
     <strong class="ml-3">Model: </strong>{{ x.model }} <strong>&nbsp;Rating: </strong>{{ x.rating }}
     </p>
-    <form id="" class="w-100" action="{{ url_for('admin') }}" method="post">
-        <input placeholder="Input GPU" type="text" name="insert" id="" minlength="7" required>
-        <button for="" type="submit">
-            Search
-            GPU</button>
+    <form id="insert-gpu" class="w-100" action="{{ url_for('admin') }}" method="post">
+        <input placeholder="" type="text" name="insert-gpu-value" id="" minlength="4">
+        <button form="insert-gpu" type="submit">
+            Insert</button>
     </form>
     {% endfor %}
 </div>
-
 {% endblock %}
