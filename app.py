@@ -279,72 +279,57 @@ def check():
         "result.html", user_gpu_name=user_gpu_name,user_game_id=user_game_id,
         user_game_name=user_game_name, steam=steam, info_message=info_message)
 
-    '''
-    Because all user GPUs are above 1GB VRAM,
-    and only older GPU's VRAM is measured in MB, 512MB and below.
-    If the first regex pattern below finds these, it returns a success message
-    because the GPU is certain to be weaker than the users.
-    '''
-    # # Find old gpus under 1GB
-    # old_gpu = re.findall(r"\d+MB|\d+\sMB", gpu_requirements)
-    # if old_gpu:
-    #     info_message = message_success
+    with open("static/data/wiki-amd.html") as wiki:
+        soup = BeautifulSoup(wiki, "html.parser")
+        find = str(soup)
 
-    # '''
-    # Below fixes naming inconsistancies found
-    # in the Steam API files for Nvidia GPUs
-    # '''
-    # # Fix Steam Nvidia naming inconsistencies to align with this app's database
-    # # Eg. Geforce 7800GTX > Geforce 7800 GTX or Nvidia 7800GT > Geforce 7800 GT
-    # find_gtx_gt_fix = re.findall(
-    #     r'(?i)(?:nvidia\sgeforce|nvidia|geforce)\s\d+gt[xX]?\s',
-    #     gpu_requirements)
-    # if find_gtx_gt_fix:
-    #     for i in find_gtx_gt_fix:
-    #         before = i
-    #         i = re.sub(r"(?i)nvidia\sgeforce",  "", i)
-    #         i = re.sub(r"(?i)nvidia",  "", i)
-    #         i = re.sub(r"(?i)geforce\s",  " ", i)
-    #         i = re.sub(r"^\s",  "Nvidia GeForce ", i)
-    #         a = re.sub(r"(?i)(?:GTX|GT)", lambda ele: " " + ele[0] + " ", i)
-    #         switch = a
-    #         gpu_requirements = re.sub(before,  switch, gpu_requirements)
-    # else:
-    #     pass
+    # gpu_requirements = "ATI X850 Pro"
 
-    # 
+    # Fix Steam Nvidia naming inconsistencies to align with this app's database
+    # Eg. Geforce 7800GTX > Geforce 7800 GTX or Nvidia 7800GT > Geforce 7800 GT
+    find_gtx_gt_fix = re.findall(
+        r'(?i)(?:nvidia\sgeforce|nvidia|geforce)\s\d+gt[xX]?\s',
+        gpu_requirements)
+    if find_gtx_gt_fix:
+        for i in find_gtx_gt_fix:
+            before = i
+            i = re.sub(r"(?i)nvidia\sgeforce",  "", i)
+            i = re.sub(r"(?i)nvidia",  "", i)
+            i = re.sub(r"(?i)geforce\s",  " ", i)
+            i = re.sub(r"^\s",  "Nvidia GeForce ", i)
+            a = re.sub(r"(?i)(?:GTX|GT)", lambda ele: " " + ele[0] + " ", i)
+            switch = a
+            gpu_requirements = re.sub(before,  switch, gpu_requirements)
+    else:
+        pass
+
     """ The below regex patterns find AMD and Nvidia GPUs that are below the power
     of the weakest GPU the user can choose from. If any of these patterns are
     matched, the user info message will be success. """
 
     # Find old geforce gpus. Geforce 256, geforce2 - geforce4, geforce fx
     # geforce 6000, geforce 7000, geforce 8000 series.
-    
-    # find_old_geforce_gpu = re.findall(
-    #     r'(?i)(?:geforce\s(?:256|fx|pcx|mx4000|8\d{3}|6\d{3}'
-    #     r'|7\d{3}(?!m))|geforce[2-4]{1}\s)', gpu_requirements)
-    # if find_old_geforce_gpu:
-    #     info_message = message_success
-    #     mongo.db.gpu.update_one(
-    #         {"model": user_gpu_name},
-    #         {"$push": {'games': {"name": user_game_name}}})
-    #     print("Added to database")
-    #     return render_template(
-    #     "result.html", user_gpu_name=user_gpu_name,
-    #     user_game_id=user_game_id,
-    #     user_game_name=user_game_name, steam=steam, info_message=info_message)
+    old_geforce_gpu = ""
+    find_old_geforce_gpu = re.findall(
+        r'(?i)(?:(?:nvidia\s|geforce\s)(?:256|fx|pcx|mx4000|8\d{3}|6\d{3}'
+        r'|7\d{3}(?!m))|geforce[2-4]{1}\s)', gpu_requirements)
+    if find_old_geforce_gpu:
+        for gpu in find_old_geforce_gpu:
+            old_geforce_gpu += "" + gpu + ", "
+        # info_message = message_success
+        # mongo.db.gpu.update_one(
+        #     {"model": user_gpu_name},
+        #     {"$push": {'games': {"name": user_game_name}}})
+        
+    old_amd_gpu = ""
+    find_old_amd_gpu = re.findall(
+        r'(?i)(?:3d\srage|rage\s(?:pro|xl|128|fury)'
+        r'|(?:radeontm\s|ati\s|amd\s|radeon\s)(?:ve|le|sdr|ddr'
+        r'|7500|3[2-4]{1}0|[8-9]\d{3,4}|x\d{3,4}|hd\s[2-3]\d{3}))', gpu_requirements)
+    if find_old_amd_gpu:
+        for gpu in find_old_amd_gpu:
+            old_amd_gpu = "" + gpu + ", "
 
-    # Finds AMD GPU years 2001-2008 or from Radeon 8000 series - HD 3000 series
-    # Eg. Radeon X700, Radeon X1300 XT, Radeon X1900 GT, Radeon HD 2900 PRO
-    # r'(?i)(?:radeon|ati|amd)\s'
-    #     r'(?:hd|x\d+|xpress\s\d+|xpress|8\d+|9\d+)\s'
-    #     r'(?:[2-3]\d+\s(?:pro|xt|gt|x2|\d+)*'
-    #     r'|[1-2]\d+|x\d+|le|pro|se|xt|xxl|xl|agp|gto|gt|x)', find)
-
-    # find_old_amd_gpu = re.findall(
-    #     r'(?i)(?:3d\srage|rage\s(?:pro|xl|128|fury)'
-    #     r'|radeontm\s|ati\s|amd\s|radeon\s(?:ve|le|sdr|ddr'
-    #     r'|7500|3[2-4]{1}0|[8-9]\d{3,4}|x\d{3,4}|hd\s[2-3]\d{3}))', gpu_requirements)
     # if find_old_amd_gpu:
     #     info_message = message_success
     #     return render_template(
@@ -367,28 +352,29 @@ def check():
     #     soup = BeautifulSoup(wiki, "html.parser")
     #     gpu_requirements = str(soup)
 
-    # find_intel_gpu = re.findall(r'(?i)(?!Amd|Radeon)(?:intel\s|\s|^)*'
-    # r'(?:u?hd|(?:iris\s(?:pro|plus|xe\smax|xe|))|iris)(?:\sgraphics\s|\s)'
-    # r'(?:\d+[a-zA-Z]{0,2}|xe|g[1-7]|(?:\d{2}(?:\s*eus*)))*\s*(?:graphics|(?:\d{2}(?:\s*eus*))|$)*', gpu_requirements)
+    intel_gpu = ""
+    find_intel_gpu = re.findall(r'(?i)(?!Amd|Radeon)(?:intel\s|\s|^)*'
+    r'(?:u?hd|(?:iris\s(?:pro|plus|xe\smax|xe|))|iris)(?:\sgraphics\s|\s)'
+    r'(?:\d+[a-zA-Z]{0,2}|xe|g[1-7]|(?:\d{2}(?:\s*eus*)))*\s*(?:graphics|(?:\d{2}(?:\s*eus*))|$)*', gpu_requirements)
     # found_gpus = ""
-    # if find_intel_gpu:
-    #         for gpu in find_intel_gpu:
-    #             print(gpu)
-    #             store_name = gpu
-    #             gpu = re.sub(r"(?i)graphics",  "", gpu)
-    #             gpu = re.sub(r"(?i)eus",  "eu", gpu)
-    #             gpu = re.sub(r"(?i)\s\s",  " ", gpu)
-    #             gpu = re.sub(r"(?i)^\s",  "", gpu)
-    #             gpu = re.sub(r"(?i)(?:\(laptop\)|laptop|\(Notebook\)|Notebook|\(m\))",  "Mobile", gpu)
-    #             gpu = re.sub(r"(?i)(?:\sm\s|\sm$)",  " Mobile", gpu)
-    #             gpu = re.sub(r"(?i)\s$",  "", gpu)
-    #             gpu = re.sub(r"(?i)\s\s$",  "", gpu)
-    #             gpu = re.sub(r"(?i)[)(]",  "", gpu)
-    #             # Intel GPUs stonger than the weakest intel GPU available for user selection.
-    #             find_strong_intel_gpus = re.findall(r'(?i)(?:(?:u?hd|iris)\s((?:630|620|530|520|540|550|6000|5600|xe|plus|pro)(?:\s|$)))', gpu)
-    #             if find_strong_intel_gpus:
-    #                 store_name = ""
-    #             found_gpus += "" + store_name + ", "
+    if find_intel_gpu:
+            for gpu in find_intel_gpu:
+                store_name = gpu
+                gpu = re.sub(r"(?i)graphics",  "", gpu)
+                gpu = re.sub(r"(?i)eus",  "eu", gpu)
+                gpu = re.sub(r"(?i)\s\s",  " ", gpu)
+                gpu = re.sub(r"(?i)^\s",  "", gpu)
+                gpu = re.sub(r"(?i)(?:\(laptop\)|laptop|\(Notebook\)|Notebook|\(m\))",  "Mobile", gpu)
+                gpu = re.sub(r"(?i)(?:\sm\s|\sm$)",  " Mobile", gpu)
+                gpu = re.sub(r"(?i)\s$",  "", gpu)
+                gpu = re.sub(r"(?i)\s\s$",  "", gpu)
+                gpu = re.sub(r"(?i)[)(]",  "", gpu)
+                intel_gpu = "" + gpu + ", "
+                # Intel GPUs stonger than the weakest intel GPU available for user selection.
+                # find_strong_intel_gpus = re.findall(r'(?i)(?:(?:u?hd|iris)\s((?:630|620|530|520|540|550|6000|5600|xe|plus|pro)(?:\s|$)))', gpu)
+                # if find_strong_intel_gpus:
+                #     store_name = ""
+                # found_gpus += "" + store_name + ", "
     # return render_template(
     #     "result.html", user_gpu_name=user_gpu_name,
     #     user_game_id=user_game_id,
@@ -397,52 +383,50 @@ def check():
 
     # Find Regular Nvidia gpus from above 9000 series except for Titan and Quadro series.
     # Eg.'Geforce GT 740', 'Geforce RTX 2050 ti '
-    # TESTING 
-    # Tests Regex code that finds newer Nvidia Geforce GPUs.
+
     # with open('/workspace/milestone_3.1/static/data/gpu1.json', 'r') as json_file:
     #     gpu_list=json_file.read()
     # list = json.loads(gpu_list)
     # gpu_requirements = json.dumps(list)
-    # with open("static/data/wiki.html") as wiki:
+    # with open("static/data/wiki-nvidia.html") as wiki:
     #     soup = BeautifulSoup(wiki, "html.parser")
     #     find = str(soup)
 
     # test = ""
-    # count = 0
+    count = 0
     # count2 = 0
     # # gpu_requirements = "NVIDIA GeForce GTX 1060-5GB NVIDIA GeForce MX250 (25W)"
-    # find_newer_gtx_gpu = re.findall(
-    #     r'(?i)\s(?:geforce\s|gtx\s|gt\s|rtx\s|gts\s|g|mx|m|\d+[a-zA-Z]*)'
-    #     r'(?:\d+\s*-*\d+gb|\d*[a-zA-Z]*\s*\d*\s*)'
-    #     r'(?:max-q|NotebookR|max\sq|\(max\sq\)|\(max-q\)|max\sq|ti\sboost|ti|le'
-    #     r'|super\smax-q|se|super|\d+m|\(laptop\)|laptop|\(mobile\)|mobile|\(m\)'
-    #     r'|m|\(notebook\)|notebook|\(notebook\srefresh\)|\(\d+watts\)|\d+watts|\(\d+w\)|\d+w)*'
-    #     r'(?:\smax-q|\smax\sq|\s\(max\sq\)|\s\(max-q\)|\s\(*mobile\)*|\s\(*m\)*|\s\(laptop\)'
-    #     r'|\slaptop|\sNotebookR|\s\(notebook\srefresh\)|\snotebook\srefresh|\s\(notebook\)|\snotebook'
-    #     r'|-\d+gb|\s\d+gb|\d+\sgb|\s\(refresh\)|\srefresh||\s\(\d+watts\)|\s\d+watts|\s\(\d+w\)|\s\d+w)*', gpu_requirements)
-    # if find_newer_gtx_gpu:
-    #     for gpu in find_newer_gtx_gpu:
-    #         # Formats String to be compatible with database
-    #         gpu = re.sub(r"GeForce",  "", gpu)
-    #         gpu = re.sub(r"\s\s",  " ", gpu)
-    #         gpu = re.sub(r"^\s",  "", gpu)
-    #         gpu = re.sub(r"\s\s$",  "", gpu)
-    #         gpu = re.sub(r"\s$",  "", gpu)
-    #         gpu = re.sub(r"^",  "NVIDIA GeForce ", gpu)
-    #         gpu = re.sub(r"(?:\(laptop\srefresh\)|laptop\srefresh|\(mobile\srefresh\)"
-    #         r'|mobile\srefresh|\(m\srefresh\)|m\srefresh|\(notebook\srefresh\)|\snotebook\srefresh)',  "NotebookR", gpu)
-    #         gpu = re.sub(r"(?:\(laptop\)$|laptop$|\(mobile\)$|mobile$|\(m\)$)",  "Notebook", gpu)
-    #         gpu = re.sub(r"(?:\sm|\sm$)",  " Notebook", gpu)
-    #         gpu = re.sub(r"[)(]",  "", gpu)
-    #         gpu = re.sub(r"(?:watts|watts$)",  "w", gpu)
-    #         gpu = re.sub(r"\s\s",  " ", gpu)
-    #         check = mongo.db.strong_gpu.find({ "model": { "$regex": "^" + gpu + "$" , "$options": "i"} })
-    #         for i in check:
-    #             if str(i["model"]) == str(gpu):
-    #                 test += "<p>" + i["model"] + "</p>" +"<p>" + i["rating"] + "</p>"
-    #                 print(str(gpu))
-    #                 print(str(i["model"]))
-    #                 print("------------------")
+    newer_gtx_gpu = ""
+    find_newer_gtx_gpu = re.findall(
+        r'(?i)(?:nvidia\sgeforce\s|geforce\s|nvidia\s|gtx\s|gt\s|rtx\s|gts\s|g|mx|m)'
+        r'(?:\d+\s*-*\d+gb|\d*[a-zA-Z]*\s*\d*\s*)'
+        r'(?:max-q|NotebookR|max\sq|\(max\sq\)|\(max-q\)|max\sq|ti\sboost|ti|le'
+        r'|super\smax-q|se|super|\d+m|\(laptop\)|laptop|\(mobile\)|mobile|\(m\)'
+        r'|m|\(notebook\)|notebook|\(notebook\srefresh\)|\(\d+watts\)|\d+watts|\(\d+w\)|\d+w)*'
+        r'(?:\smax-q|\smax\sq|\s\(max\sq\)|\s\(max-q\)|\s\(*mobile\)*|\s\(*m\)*|\s\(laptop\)'
+        r'|\slaptop|\sNotebookR|\s\(notebook\srefresh\)|\snotebook\srefresh|\s\(notebook\)|\snotebook'
+        r'|-\d+gb|\s\d+gb|\d+\sgb|\s\(refresh\)|\srefresh||\s\(\d+watts\)|\s\d+watts|\s\(\d+w\)|\s\d+w)*', gpu_requirements)
+    if find_newer_gtx_gpu:
+        for gpu in find_newer_gtx_gpu:
+            # Formats String to be compatible with database
+            gpu = re.sub(r"(?i)Nvidia",  "", gpu)
+            gpu = re.sub(r"(?i)GeForce",  "", gpu)
+            gpu = re.sub(r"\s\s",  " ", gpu)
+            gpu = re.sub(r"^\s",  "", gpu)
+            gpu = re.sub(r"\s\s$",  "", gpu)
+            gpu = re.sub(r"\s$",  "", gpu)
+            gpu = re.sub(r"^",  "NVIDIA GeForce ", gpu)
+            gpu = re.sub(r"(?:\(laptop\srefresh\)|laptop\srefresh|\(mobile\srefresh\)"
+            r'|mobile\srefresh|\(m\srefresh\)|m\srefresh|\(notebook\srefresh\)|\snotebook\srefresh)',  "NotebookR", gpu)
+            gpu = re.sub(r"(?:\(laptop\)$|laptop$|\(mobile\)$|mobile$|\(m\)$)",  "Notebook", gpu)
+            gpu = re.sub(r"(?:\sm|\sm$)",  " Notebook", gpu)
+            gpu = re.sub(r"[)(]",  "", gpu)
+            gpu = re.sub(r"(?:watts|watts$)",  "w", gpu)
+            gpu = re.sub(r"\s\s",  " ", gpu)
+            # check = mongo.db.strong_gpu.find({ "model": { "$regex": "^" + gpu + "$" , "$options": "i"} })
+            # for i in check:
+            #     if str(i["model"]) == str(gpu):
+            newer_gtx_gpu += "" + gpu + " ,"
     # return render_template("test.html", test=test)
             # if check:
             #     for i in check:
@@ -479,41 +463,53 @@ def check():
     #     soup = BeautifulSoup(wiki, "html.parser")
     #     gpu_requirements = str(soup)
 
-    # find_nvidia_titan = re.findall(
-    #     r'(?i)(?:geforce\sgtx\stitan|nvidia\sgtx\stitan|nvidia\stitan|titan)'
-    #     r'\s(?:rtx|gtx|X\s'
-    #     r'\(?Pascal\)?|Xp\sCollector\'s\sEdition|xp|x|V|5|black)',
-    #     gpu_requirements)
-    # if find_nvidia_titan:
-    #     for gpu in find_nvidia_titan:
-    #         print(gpu)
-    #         # Formats String to be compatible with database
-    #         store_name = gpu
-    #         gpu = re.sub(r"^\s",  "", gpu)
-    #         gpu = re.sub(r"\s\s$",  "", gpu)
-    #         gpu = re.sub(r"\s$",  "", gpu)
-    #         gpu = re.sub(r"  ",  " ", gpu)
-    #         found_gpus += "" + store_name + ", "
+    nvidia_titan = ""
+    find_nvidia_titan = re.findall(
+        r'(?i)(?:geforce\sgtx\stitan|nvidia\sgtx\stitan|nvidia\stitan|titan)'
+        r'\s(?:rtx|gtx|X\s'
+        r'\(?Pascal\)?|Xp\sCollector\'s\sEdition|xp|x|V|5|black)',
+        gpu_requirements)
+    if find_nvidia_titan:
+        for gpu in find_nvidia_titan:
+            # Formats String to be compatible with database
+            store_name = gpu
+            gpu = re.sub(r"^\s",  "", gpu)
+            gpu = re.sub(r"\s\s$",  "", gpu)
+            gpu = re.sub(r"\s$",  "", gpu)
+            gpu = re.sub(r"  ",  " ", gpu)
+            check = mongo.db.strong_gpu.find({ "model": { "$regex": "^" + gpu + "$" , "$options": "i"} })
+            for i in check:
+                if str(i["model"]) == str(gpu):
+                    print(str(i["model"]))
+                    count += 1
+                    nvidia_titan += "" + str(i["model"]) + ", " 
+            # found_gpus += "" + store_name + ", "
     # return render_template(
     #     "result.html", user_gpu_name=user_gpu_name,
     #     user_game_id=user_game_id,
     #     user_game_name=user_game_name, steam=steam,
     #     found_gpus=found_gpus, info_message=info_message)
 
-
-    # find_nvidia_quadro = re.findall(
-    #     r'(?i)(?:quadro\srtx|rtx|quadro\snvs|nvs|quadro[2-4]|quadro\sfx|quadro)\s'
-    #     r'(?:plex\s\d{3,4}|k*m*g*v*p*a*t*\d{3,4}d*m*|cx|ddr|mxr|ex|pro|dcc|\d{3}xgl'
-    #     r'|fx\s\d{3,4}g*x*2*(?:\ssdi|\slp|)|fx\s\d{3,4}|\d{2})*\s*(?:go\d{3,4}'
-    #     r'|go\sgl|go|max-q)*', gpu_requirements)
-    # if find_nvidia_quadro:
-    #     for gpu in find_nvidia_quadro:
-    #         # Formats String to be compatible with database
-    #         store_name = gpu
-    #         gpu = re.sub(r"^\s",  "", gpu)
-    #         gpu = re.sub(r"\s\s$",  "", gpu)
-    #         gpu = re.sub(r"\s$",  "", gpu)
-    #         gpu = re.sub(r"  ",  " ", gpu)
+    nvidia_quadro = ""
+    find_nvidia_quadro = re.findall(
+        r'(?i)(?:quadro\srtx|rtx|quadro\snvs|nvs|quadro[2-4]|quadro\sfx|quadro)\s'
+        r'(?:plex\s\d{3,4}|k*m*g*v*p*a*t*\d{3,4}d*m*|cx|ddr|mxr|ex|pro|dcc|\d{3}xgl'
+        r'|fx\s\d{3,4}g*x*2*(?:\ssdi|\slp|)|fx\s\d{3,4}|\d{2})*\s*(?:go\d{3,4}'
+        r'|go\sgl|go|max-q)*', gpu_requirements)
+    if find_nvidia_quadro:
+        for gpu in find_nvidia_quadro:
+            # Formats String to be compatible with database
+            store_name = gpu
+            gpu = re.sub(r"^\s",  "", gpu)
+            gpu = re.sub(r"\s\s$",  "", gpu)
+            gpu = re.sub(r"\s$",  "", gpu)
+            gpu = re.sub(r"  ",  " ", gpu)
+            # check = mongo.db.strong_gpu.find({ "model": { "$regex": "^" + gpu + "$" , "$options": "i"} })
+            # for i in check:
+            #     if str(i["model"]) == str(gpu):
+            #         print(str(i["model"]))
+            #         count += 1
+            nvidia_quadro += "" + gpu + ", " 
     #         found_gpus += "" + store_name + ", "
     # return render_template(
     #     "result.html", user_gpu_name=user_gpu_name,
@@ -541,49 +537,21 @@ def check():
     #     pass
 
     
-    # # Find AMD RX graphics cards
-    # find_new_amd_rx__gpu = re.findall(
-    #     r"(?i)(?:radeon|ati|amd)\srx\s\d*[a-zA-Z]*\s*", gpu_requirements)
-    # if find_new_amd_rx__gpu:
-    #     for gpu in find_new_amd_rx__gpu:
-    #         # Formats String to be compatible with database
-    #         gpu = re.sub(r"(?i)ati",  "radeon", gpu)
-    #         gpu = re.sub(r"(?i)amd",  "radeon", gpu)
-    #         gpu = re.sub(r"^\s",  "", gpu)
-    #         gpu = re.sub(r"\s\s$",  "", gpu)
-    #         gpu = re.sub(r"\s$",  "", gpu)
-    #         check = mongo.db.gpu.find_one(
-    #             {"$text": {"$search": "\"" + gpu + "\""}})
-    #         if check:
-    #             rating = int(check['rating'])
-    #             if user_gpu_rating <= rating:
-    #                 info_message = message_success
-    #             elif user_gpu_rating > rating:
-    #                 info_message = message_fail
-    #             else:
-    #                 pass
-    # else:
-    #     pass
-
-    # Finds newer AMD GPUs
-    # find_new_amd_gpu = re.findall(
-    #     r'(?i)(?:mobility\sradeon|mobility|radeon|ati|amd)\s'
-    #     r'(?:hd|r[579x]|VII)\s\d*[a-zA-Z]*\d*\s*'
-    #     r'(?:xt|x2|boost|x|duo|56|64\sliquid|64)*', gpu_requirements)
     # Finds newer AMD GPUs
 
-    with open("static/data/wiki-amd.html") as wiki:
-        soup = BeautifulSoup(wiki, "html.parser")
-        gpu_requirements = str(soup)
+    # with open("static/data/wiki-amd.html") as wiki:
+    #     soup = BeautifulSoup(wiki, "html.parser")
+    #     gpu_requirements = str(soup)
 
-    found_gpus = ""
-    find_new_amd_gpu = re.findall(r'(?i)(?:mobility\sradeon|radeon)'
+    # found_gpus = "" AMD HD 7870
+    new_amd_gpu = ""
+    find_new_amd_gpu = re.findall(r'(?i)(?:mobility\sradeon|radeon|amd)'
     r'\s(?:VII|hd|rx|r[5-9]|x*\d{3,4}x*)\s*(?:m*\d{3,4}d*x*v*m*g*|fury|vega)'
     r'*\s*(?:X2|Graphics|XT|X|56|64|Pro)*', gpu_requirements)
     if find_new_amd_gpu:
         for gpu in find_new_amd_gpu:
             store_name = gpu
-            # Formats String to be compatible with database
+            # Formats String to be compatible with database 
             gpu = re.sub(r"(?i)ati",  "", gpu)
             gpu = re.sub(r"(?i)amd",  "", gpu)
             gpu = re.sub(r"(?i)radeon",  "", gpu)
@@ -591,15 +559,20 @@ def check():
             gpu = re.sub(r"\s\s",  " ", gpu)
             gpu = re.sub(r"\s\s$",  "", gpu)
             gpu = re.sub(r"\s$",  "", gpu)
-            found_gpus += "" + store_name + ", "
-    return render_template(
-        "result.html", user_gpu_name=user_gpu_name,
-        user_game_id=user_game_id,
-        user_game_name=user_game_name, steam=steam,
-        found_gpus=found_gpus, info_message=info_message)
+            print(gpu)
+            # check = mongo.db.strong_gpu.find({ "model": { "$regex": "^" + gpu + "$" , "$options": "i"} })
+            # for i in check:
+            #     if str(i["model"]) == str(gpu):
+            #         print(str(i["model"]))
+            #         count += 1
+            new_amd_gpu += "" + gpu + ", " 
+    #         found_gpus += "" + store_name + ", "
+    # return render_template(
+    #     "result.html", user_gpu_name=user_gpu_name,
+    #     user_game_id=user_game_id,
+    #     user_game_name=user_game_name, steam=steam,
+    #     found_gpus=found_gpus, info_message=info_message)
 
-
-            
             # searches weaker GPU database
     #         check = mongo.db.weaker_gpu.find_one(
     #             {"$text": {"$search": "\"" + gpu + "\""}})
@@ -637,7 +610,15 @@ def check():
         "result.html", user_gpu_name=user_gpu_name,
         user_game_id=user_game_id,
         user_game_name=user_game_name, steam=steam,
-        gpu_requirements=gpu_requirements, info_message=info_message)
+        old_geforce_gpu=old_geforce_gpu, old_amd_gpu=old_amd_gpu,
+        intel_gpu=intel_gpu, newer_gtx_gpu=newer_gtx_gpu,
+        nvidia_titan=nvidia_titan, new_amd_gpu=new_amd_gpu)
+
+    # return render_template(
+    #     "result.html", user_gpu_name=user_gpu_name,
+    #     user_game_id=user_game_id,
+    #     user_game_name=user_game_name, steam=steam,
+    #     gpu_requirements=gpu_requirements, info_message=info_message)
 
 
 if __name__ == "__main__":

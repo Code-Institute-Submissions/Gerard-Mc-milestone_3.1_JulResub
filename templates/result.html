@@ -14,7 +14,13 @@
     <p><strong>Game Name: </strong> {{ user_game_name }}</p>
     <p><strong>Game ID: </strong> {{ user_game_id }} </p>
     <p><strong> Can I run it? </strong>{{ info_message }}</p>
-    <p><strong> Found GPUs: </strong>{{ found_gpus }}</p>
+    <!-- <p><strong> Found GPUs: </strong>{{ found_gpus }}</p> -->
+    <p><strong>Find older Nvidia GPUs start pattern: </strong>{{old_geforce_gpu}}</p>
+    <p><strong>Find older AMD GPUs start pattern: </strong>{{old_amd_gpu}}</p>
+    <p><strong>Intel GPUs: </strong>{{intel_gpu}}</p>
+    <p><strong>New Nvidia GPUs: </strong>{{newer_gtx_gpu}}</p>
+    <p><strong>New Titan GPUs: </strong>{{nvidia_titan}}</p>
+    <p><strong>New AMD GPUs: </strong>{{new_amd_gpu}}</p>
     </div>
 </section>
 {% endblock %}
