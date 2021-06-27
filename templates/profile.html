@@ -9,7 +9,7 @@
                 onclick="display(this.dataset.number, this.dataset.id)"> Edit</a></p>
         <div id="gpu-results-1" class="w-100" style="display: none">
             <form id="profile-submit" class="w-100" action="{{ url_for('search_gpu') }}" method="post">
-                <input placeholder="Search GPUs" type="text-gpu" name="user-gpu" id="search_gpu_input" minlength="3"
+                <input placeholder="Search GPUs" type="text" name="user-gpu" id="search_gpu_input" minlength="3"
                     class="validate" required>
                 <button for="profile-submit" data-id="search-button-1" data-number="1"
                     onclick="display(this.dataset.number, this.dataset.id)" type="submit">
@@ -92,7 +92,7 @@
             onclick="display(this.dataset.number, this.dataset.id)"> Add GPU</a></p>
     <div id="gpu-results-2" class="w-100" style="display: none">
         <form id="profile-submit" class="w-100" action="{{ url_for('search_gpu') }}" method="post">
-            <input placeholder="Search GPUs" type="text-gpu" name="user-gpu" id="search_gpu_input" minlength="3"
+            <input placeholder="Search GPUs" type="text" name="user-gpu" id="search_gpu_input" minlength="3"
                 class="validate" required>
             <button for="profile-submit" data-id="search-button-2" data-number="2"
                 onclick="display(this.dataset.number, this.dataset.id)" type="submit">

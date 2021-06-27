@@ -35,6 +35,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('logout') }}">Log Out</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('admin') }}">Admin</a>
+                </li>
                 <!-- If not logged in, the user can access the below links; Resgister and login -->
                 {% else %}
                 <li class="nav-item">

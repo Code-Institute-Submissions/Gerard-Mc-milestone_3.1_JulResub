@@ -177,7 +177,11 @@ def search_gpu_homepage():
     gpu = list(mongo.db.gpu.find(
         {"$text": {"$search": "\"" + query_gpu + "\""}}))
     return render_template("index.html", gpu=gpu)
-
+    
+@app.route("/admin", methods=["GET", "POST"])
+def admin():
+    gpus = mongo.db.strong_gpu.aggregate([{ "$sort" : { "rating" : -1 } }])
+    return render_template("admin.html", gpus=gpus)
 
 @app.route('/check', methods=["GET", "POST"])
 def check():
