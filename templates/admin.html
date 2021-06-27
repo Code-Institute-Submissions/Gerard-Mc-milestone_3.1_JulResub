@@ -6,9 +6,11 @@
     <p>
     <strong class="ml-3">Model: </strong>{{ x.model }} <strong>&nbsp;Rating: </strong>{{ x.rating }}
     </p>
-    <form id="insert-gpu" class="w-100" action="{{ url_for('admin') }}" method="post">
-        <input placeholder="" type="text" name="insert-gpu-value" id="" minlength="4">
-        <button form="insert-gpu" type="submit">
+    <form id="insert-gpu-{{ x.model|replace(' ', '-') }}" class="w-100" action="{{ url_for('admin') }}" method="post">
+        <input placeholder="" type="text" name="insert-gpu-model" id="" minlength="4">
+        <textarea id="" style="display: none" class="hidden-text"
+        name="insert-gpu-rating">{{ x.rating }}</textarea>
+        <button form="insert-gpu-{{ x.model|replace(' ', '-') }}" type="submit">
             Insert</button>
     </form>
     {% endfor %}
