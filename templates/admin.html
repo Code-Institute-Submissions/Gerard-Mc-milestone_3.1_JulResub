@@ -5,10 +5,9 @@
     <hr>
     <p>
         <strong class="ml-3">Model: </strong>{{ x.model }} <strong>&nbsp;Rating: </strong>{{ x.rating }}&nbsp;&nbsp;
-        <span id="span-insert-{{ x.rating }}" data-number="{{ x.rating }}"
-            onclick="display(this.dataset.number, this.id)">Insert</span>&nbsp;
-        <span id="span-delete-{{ x.rating }}" data-number="{{ x.rating }}"
-            onclick="display(this.dataset.number, this.dataset.id)">Delete</span>
+        <button id="span-insert-{{ x.rating }}" class="btn btn-link" data-number="{{ x.rating }}"
+            onclick="display(this.dataset.number, this.id)">Insert</button>&nbsp;
+        <button form="delete-gpu-{{ x.rating }}" class="btn btn-link" type="submit">Delete</button>
     </p>
     <form class="gpu-form" style="display: none;" id="insert-gpu-{{ x.rating }}" action="{{ url_for('admin') }}"
         method="post">
@@ -20,18 +19,27 @@
             onclick="display(this.dataset.number, this.id)" type="submit">
             Insert</button>
     </form>
+    <form style="display: none;" id="delete-gpu-{{ x.rating }}" action="{{ url_for('admin') }}" method="post">
+        <textarea style="display: none" class="hidden-text" name="delete-gpu-rating">{{ x.rating }}</textarea>
+    </form>
     {% endfor %}
 </div>
 <script type="text/javascript" src="/static/js/reset_index.js"></script>
 <script>
+    var on_off = 0
     // Function to control when elements are displayed.
     function display(data_number, id) {
-        if (id == `span-insert-${data_number}`) {
+        if (id == `span-insert-${data_number}` && on_off == 0) {
             var forms = document.getElementsByClassName('gpu-form');
             for (var i = 0; i < forms.length; i += 1) {
                 forms[i].style.display = 'none';
             }
             document.getElementById(`insert-gpu-${data_number}`).style.display = "contents";
+            on_off = 1;
+        }
+        else if (on_off == 1) {
+            document.getElementById(`insert-gpu-${data_number}`).style.display = "none";
+            on_off = 0;
         }
         else if (id == `close-form-${data_number}`) {
             var forms = document.getElementsByClassName('gpu-form');
