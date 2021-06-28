@@ -182,15 +182,15 @@ def search_gpu_homepage():
 def admin():
     gpus = mongo.db.strong_gpu.aggregate([{ "$sort" : { "rating" : 1 } }])
     if request.method == "POST":
-        insert_gpu_model = request.form.get("insert-gpu-model")
-        insert_gpu_rating = request.form.get("insert-gpu-rating")
-        gpu_rating_adjusted = int(insert_gpu_rating) - 1
-        database_gpus = mongo.db.strong_gpu.find( { "rating": { "$gt": gpu_rating_adjusted}})
-        for gpu in database_gpus:
-            print(gpu["model"])
-            print(gpu["rating"])
-            mongo.db.strong_gpu.update_one({"model": gpu["model"], "rating": gpu["rating"]}, {"$set": {"rating": gpu["rating"]  + 1}})
-        mongo.db.strong_gpu.insert( { "model": insert_gpu_model, "rating": int(insert_gpu_rating)})
+        # insert_gpu_model = request.form.get("insert-gpu-model")
+        # insert_gpu_rating = request.form.get("insert-gpu-rating")
+        # gpu_rating_adjusted = int(insert_gpu_rating) - 1
+        # database_gpus = mongo.db.strong_gpu.find( { "rating": { "$gt": gpu_rating_adjusted}})
+        # for gpu in database_gpus:
+        #     print(gpu["model"])
+        #     print(gpu["rating"])
+        #     mongo.db.strong_gpu.update_one({"model": gpu["model"], "rating": gpu["rating"]}, {"$set": {"rating": gpu["rating"]  + 1}})
+        # mongo.db.strong_gpu.insert( { "model": insert_gpu_model, "rating": int(insert_gpu_rating)})
         return redirect(url_for("admin", gpus=gpus))
     return render_template("admin.html", gpus=gpus)
 

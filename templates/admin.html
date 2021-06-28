@@ -19,7 +19,8 @@
             onclick="display(this.dataset.number, this.id)" type="submit">
             Insert</button>
     </form>
-    <form style="display: none;" id="delete-gpu-{{ x.rating }}" action="{{ url_for('admin') }}" method="post">
+    <form style="display: none;" id="delete-gpu-{{ x.rating }}" action="{{ url_for('admin') }}" method="post"
+        onSubmit="return confirm('Are you sure you want to delete {{ x.model }}?');">
         <textarea style="display: none" class="hidden-text" name="delete-gpu-rating">{{ x.rating }}</textarea>
     </form>
     {% endfor %}
