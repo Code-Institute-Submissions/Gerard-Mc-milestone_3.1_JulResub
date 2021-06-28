@@ -12,7 +12,8 @@
     </p>
     <form class="gpu-form" style="display: none;" id="insert-gpu-{{ x.rating }}" action="{{ url_for('admin') }}"
         method="post">
-        <label class="ml-3 d-block font-weight-bold" for="insert-gpu-model-{{ x.rating }}">Insert</label>
+        <p class="ml-3" id="close-form-{{ x.rating }}" data-number="{{ x.rating }}"
+            onclick="display(this.dataset.number, this.id)">Close</p>
         <input class="ml-3" type="text" name="insert-gpu-model" id="insert-gpu-model-{{ x.rating }}" minlength="4">
         <textarea style="display: none" class="hidden-text" name="insert-gpu-rating">{{ x.rating }}</textarea>
         <button form="insert-gpu-{{ x.rating }}" id="button-{{ x.rating }}" data-number="{{ x.rating }}"
@@ -31,7 +32,12 @@
                 forms[i].style.display = 'none';
             }
             document.getElementById(`insert-gpu-${data_number}`).style.display = "contents";
-            return;
+        }
+        else if (id == `close-form-${data_number}`) {
+            var forms = document.getElementsByClassName('gpu-form');
+            for (var i = 0; i < forms.length; i += 1) {
+                forms[i].style.display = 'none';
+            }
         }
     }
 </script>
