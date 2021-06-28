@@ -281,29 +281,24 @@ def check():
         gpu_requirements = re.findall("(?<=Видеокарта).+", steam)
     # When the graphics section can't be found, the info message
     else:
-        gpu_requirements = ""
+        gpu_requirements = steam
     # Tidy gpu_requirements variable data for easier regex use.
-    if gpu_requirements != "":
+    if gpu_requirements != steam:
         # Removes words that will conflict or complicate regex patterns
         # and removes extra html.
-        gpu_requirements_cut = re.sub(
-            r"(?i)(?:series\s|or\s|better\s|<\/strong>|<br>|:)", "",
-            gpu_requirements[0])
+        # gpu_requirements_cut = re.sub(
+        #     r"(?i)(?:series\s|or\s|better\s|<\/strong>|<br>|:)", "",
+        #     gpu_requirements[0])
+
         # Cuts the json at the end of the graphics section.
         # The Graphics, CPU, HDD, Sound etc always end with </li>.
         gpu_requirements = re.sub(r"<\/li>.*$", "", gpu_requirements_cut)
 
-    else:
-        info_message = steam_format_error_message
-        return render_template(
-        "result.html", user_gpu_name=user_gpu_name,user_game_id=user_game_id,
-        user_game_name=user_game_name, steam=steam, info_message=info_message)
-
-    with open("static/data/wiki-amd.html") as wiki:
-        soup = BeautifulSoup(wiki, "html.parser")
-        find = str(soup)
-
-    # gpu_requirements = "ATI X850 Pro"
+    # else:
+    #     info_message = steam_format_error_message
+    #     return render_template(
+    #     "result.html", user_gpu_name=user_gpu_name,user_game_id=user_game_id,
+    #     user_game_name=user_game_name, steam=steam, info_message=info_message)
 
     # Fix Steam Nvidia naming inconsistencies to align with this app's database
     # Eg. Geforce 7800GTX > Geforce 7800 GTX or Nvidia 7800GT > Geforce 7800 GT
@@ -368,10 +363,6 @@ def check():
     # Find intel integrated graphics cards
     # eg. intel hd 3000 and Intel hd 620
 
-    # with open("static/data/intel_wiki.html") as wiki:
-    #     soup = BeautifulSoup(wiki, "html.parser")
-    #     gpu_requirements = str(soup)
-
     intel_gpu = ""
     find_intel_gpu = re.findall(r'(?i)(?!Amd|Radeon)(?:intel\s|\s|^)*'
     r'(?:u?hd|(?:iris\s(?:pro|plus|xe\smax|xe|))|iris)(?:\sgraphics\s|\s)'
@@ -404,18 +395,6 @@ def check():
     # Find Regular Nvidia gpus from above 9000 series except for Titan and Quadro series.
     # Eg.'Geforce GT 740', 'Geforce RTX 2050 ti '
 
-    # with open('/workspace/milestone_3.1/static/data/gpu1.json', 'r') as json_file:
-    #     gpu_list=json_file.read()
-    # list = json.loads(gpu_list)
-    # gpu_requirements = json.dumps(list)
-    # with open("static/data/wiki-nvidia.html") as wiki:
-    #     soup = BeautifulSoup(wiki, "html.parser")
-    #     find = str(soup)
-
-    # test = ""
-    count = 0
-    # count2 = 0
-    # # gpu_requirements = "NVIDIA GeForce GTX 1060-5GB NVIDIA GeForce MX250 (25W)"
     newer_gtx_gpu = ""
     find_newer_gtx_gpu = re.findall(
         r'(?i)(?:nvidia\sgeforce\s|geforce\s|nvidia\s|gtx\s|gt\s|rtx\s|gts\s|g|mx|m)'
@@ -478,11 +457,6 @@ def check():
     # find all Nvidia titan gpus in user gpu database
     # eg "NVIDIA Titan Xp Collector's Edition", 'NVIDIA Titan Xp'
     # 'NVIDIA Titan X (Pascal)', 'NVIDIA GTX TITAN X', 'NVIDIA GTX Titan Black'
-    # found_gpus = ""
-    # with open("static/data/wiki-nvidia.html") as wiki:
-    #     soup = BeautifulSoup(wiki, "html.parser")
-    #     gpu_requirements = str(soup)
-
     nvidia_titan = ""
     find_nvidia_titan = re.findall(
         r'(?i)(?:geforce\sgtx\stitan|nvidia\sgtx\stitan|nvidia\stitan|titan)'
@@ -558,12 +532,6 @@ def check():
 
     
     # Finds newer AMD GPUs
-
-    # with open("static/data/wiki-amd.html") as wiki:
-    #     soup = BeautifulSoup(wiki, "html.parser")
-    #     gpu_requirements = str(soup)
-
-    # found_gpus = "" AMD HD 7870
     new_amd_gpu = ""
     find_new_amd_gpu = re.findall(r'(?i)(?:mobility\sradeon|radeon|amd)'
     r'\s(?:VII|hd|rx|r[5-9]|x*\d{3,4}x*)\s*(?:m*\d{3,4}d*x*v*m*g*|fury|vega)'
