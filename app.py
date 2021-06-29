@@ -2,6 +2,7 @@ import os
 import requests
 import json
 import re
+import math
 from bs4 import BeautifulSoup
 from flask import (
     Flask, flash, render_template,
@@ -250,11 +251,26 @@ def check():
             '$elemMatch': {'name': f"{user_game_name}"}}}]})
 
     if check_database:
+        object = list(mongo.db.strong_gpu.find(
+            {'$and': [{'model': user_gpu_name}, {
+                'games.name': user_game_name}]}, {"games.userfps.$"}))
+        userfps = object[0]['games']
+        fps = object[0]['games'][0]['userfps']
+        all_fps = []
+        fps_sum = 0
+        fps_denominator = 0
+        for i in fps:
+            all_fps.append(i['fps'])
+            fps_denominator += 1
+
+        for i in all_fps:
+            fps_sum = fps_sum + i
+        fps_average = math.floor(fps_sum / fps_denominator)
         print("Already in database")
         return render_template(
             "result.html", user_gpu_name=user_gpu_name,
-            user_game_name=user_game_name, info_message=message_success,steam=steam)
-            
+            user_game_name=user_game_name, info_message=message_success, fps_average = fps_average)
+
     # Searches different variations of GPU requirements title in json data.
     # to prevent issues with regex confusing normal ram with video ram sizes.
     find_title_is_graphics = re.search("(?<=Graphics:).+", steam)
@@ -602,7 +618,7 @@ def check():
                     
     # If GPU is found to be strong enough, the users inputed game is added to an array 
     # that stores a list of compatible games within the GPU entity in the database.
-    if info_message != message_success:
+    if info_message == message_success:
         mongo.db.strong_gpu.update_one(
                 {"model": user_gpu_name},
                 {"$push": {'games': {"name": user_game_name}}})
