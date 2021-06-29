@@ -219,6 +219,7 @@ def check():
     user_gpu_rating = int(request.form.get('gpu-rating'))
     user_game_name = request.form.get("game-name")
     user_game_id = format(request.form['game-id'])
+
     # Below uses the user game id to connect to a specific external API file
     r = requests.get(
         f"https://store.steampowered.com/api/appdetails?appids={user_game_id}")
@@ -241,6 +242,19 @@ def check():
     # Loads json data and extracts the game's PC minimum requirements.
     steam = json.loads(
         r.text)[user_game_id]['data']['pc_requirements']['minimum']
+
+    # Checks the user GPU in the database to see if the game
+    # has been found to be already compatible from a previous search.
+    check_database = mongo.db.strong_gpu.find_one(
+        {'$and': [{'model': f"{user_gpu_name}"}, {'games': {
+            '$elemMatch': {'name': f"{user_game_name}"}}}]})
+
+    if check_database:
+        print("Already in database")
+        return render_template(
+            "result.html", user_gpu_name=user_gpu_name,
+            user_game_name=user_game_name, info_message=message_success,steam=steam)
+            
     # Searches different variations of GPU requirements title in json data.
     # to prevent issues with regex confusing normal ram with video ram sizes.
     find_title_is_graphics = re.search("(?<=Graphics:).+", steam)
