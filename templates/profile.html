@@ -34,7 +34,8 @@
         </div>
         <!-- Form for user to input the frames per second achieved while playing the game on their GPU. -->
         {% if gpu_in_database %}
-
+        {% if gpu_in_database.games %}
+        
         <div class="w-100">
             <p id="games" class="mb-1"><strong>Playable games</strong></p>
             {% for game in gpu_in_database.games %}
@@ -93,6 +94,7 @@
             {% endfor %}
         </div>
     </div>
+    {% endif %}
     {% endif %}
     </div>
     </div>

@@ -93,7 +93,7 @@ def logout():
     return render_template("index.html")
 
 
-@app.route("/search_gpu", methods=["POST"])
+@app.route("/search_gpu", methods=["GET", "POST"])
 def search_gpu():
     # Search MongoDb for GPUs based on user form input
     user_gpu = request.form.get("user-gpu")
@@ -105,11 +105,11 @@ def search_gpu():
             {"name": session["user"]})
     if not "user" in session: 
         flash("You must log-in to view this page")
-        return render_template("login.html")
+        return redirect(url_for("login"))
     if not user_gpu:
         if "gpu" in user:
             gpu_in_database = mongo.db.strong_gpu.find_one({"model": user['gpu']})
-        return render_template("profile.html", user=user,gpu_in_database=gpu_in_database )
+        return redirect(url_for("profile.html"))
     return render_template("profile.html", gpu=gpu, user=user)
 
 
