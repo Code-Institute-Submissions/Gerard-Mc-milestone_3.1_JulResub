@@ -96,8 +96,8 @@ def logout():
 def search_gpu():
     # Search MongoDb for GPUs based on user form input
     user_gpu = request.form.get("user-gpu")
-    gpu = list(mongo.db.strong_gpu.find(
-        {"$text": {"$search": "\"" + user_gpu + "\""}}))
+    gpu = list(mongo.db.strong_gpu.find({ "model": 
+    { "$regex": user_gpu, "$options": "i"} }))
     user = mongo.db.users.find_one(
         {"name": session["user"]})
     return render_template("profile.html", gpu=gpu, user=user)

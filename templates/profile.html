@@ -42,19 +42,24 @@
             <hr>
             <h4><strong>{{ game.name }}</strong></h4>
             <p class="mb-0">
+                
                 <strong>Average user FPS:</strong>
+                {% if game["userfps"] %}
                 {% set sum = namespace(value=0) %}
                 {% set denominator = namespace(value=0) %}
                 {% set averageFps = namespace(value=0) %}
 
                 {% for object in game["userfps"] %}
+                
                     {% set sum.value = sum.value + object.fps %}
                     {% set denominator.value = denominator.value + 1 %}
                 {% endfor %}
                 {% set averageFps.value = sum.value / denominator.value %}
                 <strong>{{ averageFps.value|round(1, 'floor')|int}}</strong>
             </p>
-            <p><strong>Your FPS:</strong><span id="userfps_{{ game.name|replace(' ', '') }}"></span>
+            {% endif %}
+            <p><strong>Your FPS: </strong><span id="userfps_{{ game.name|replace(' ', '') }}"></span>
+                {% if game["userfps"] %}
                 {% for object in game["userfps"] %}
                     {% if (object["username"] == user.name and (object["fps"] is defined ) ) %}
                         <script>
@@ -67,6 +72,11 @@
                         </script>
                     {% endif %}
                 {% endfor %}
+                {% else %}
+                <script>
+                    document.getElementById("userfps_{{ game.name|replace(' ', '') }}").innerText = "Empty";
+                </script>
+                {% endif %}
                 <span id="edit-switch-{{ game.name|replace(' ', '') }}" data-switch="0"
                     data-game="{{ game.name|replace(' ', '') }}"
                     onclick="show_edit_fps_options(this.dataset.switch, this.dataset.game)">Edit</span>
@@ -212,7 +222,6 @@
             switch_id.setAttribute("data-switch", 0);
         }
     }
-
 
 </script>
 <script type="text/javascript" src="/static/js/reset_index.js"></script>
