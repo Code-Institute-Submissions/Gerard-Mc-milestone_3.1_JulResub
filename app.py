@@ -93,14 +93,23 @@ def logout():
     return render_template("index.html")
 
 
-@app.route("/search_gpu", methods=["GET", "POST"])
+@app.route("/search_gpu", methods=["POST"])
 def search_gpu():
     # Search MongoDb for GPUs based on user form input
     user_gpu = request.form.get("user-gpu")
-    gpu = list(mongo.db.strong_gpu.find({ "model": 
-    { "$regex": user_gpu, "$options": "i"} }))
-    user = mongo.db.users.find_one(
-        {"name": session["user"]})
+    if user_gpu:
+        gpu = list(mongo.db.strong_gpu.find({ "model":
+        { "$regex": user_gpu, "$options": "i"} }))
+    if "user" in session:
+        user = mongo.db.users.find_one(
+            {"name": session["user"]})
+    if not "user" in session: 
+        flash("You must log-in to view this page")
+        return render_template("login.html")
+    if not user_gpu:
+        if "gpu" in user:
+            gpu_in_database = mongo.db.strong_gpu.find_one({"model": user['gpu']})
+        return render_template("profile.html", user=user,gpu_in_database=gpu_in_database )
     return render_template("profile.html", gpu=gpu, user=user)
 
 
@@ -402,7 +411,7 @@ def check():
     # eg. intel hd 3000 and Intel hd 620
     if info_message != message_success:
         find_intel_gpu = re.findall(r'(?i)(?!Amd|Radeon)(?:intel\s)'
-        r'(?:u?hd|(?:iris\s(?:pro|plus|xe\smax|xe|))|iris)(?:\sgraphics\s|\s)'
+        r'(?:u?hd|(?:iris\s(?:pro|plus|xe\smax|xe))|iris)(?:\sgraphics\s|\s)'
         r'(?:\d+[a-zA-Z]{0,2}|xe|g[1-7]|(?:\d{2}(?:\s*eus*)))*\s*(?:graphics'
         r'|(?:\d{2}(?:\s*eus*))|$)*(?:\(laptop\)|laptop|\(mobile\)|mobile|\(m\)'
         r'|m|\(notebook\)|notebook)*', gpu_requirements)
