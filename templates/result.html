@@ -13,11 +13,13 @@
     <p><strong>Game Name: </strong> {{ user_game_name }}</p>
     <p><strong>Game ID: </strong> {{ user_game_id }} </p>
     <p><strong> Can I run it? </strong>{{ info_message }}</p>
-        {% if gpu_in_database %}
+    
+    {% if gpu_in_database %}
+    <p><strong>Average user FPS: </strong>
+    {% if session.user %}
             {% if gpu_in_database.games %}
                 {% for game in gpu_in_database.games %}
                     {% if game["name"] == user_game_name %}
-                        <strong>Average user FPS:</strong>
                         {% if game["userfps"] %}
                             {% set sum = namespace(value=0) %}
                             {% set denominator = namespace(value=0) %}
@@ -33,9 +35,12 @@
                         {% endif %}
                     {% endif %}
                 {% endfor %}
-    
             {% endif %}
+        {% else %}
+        Login or register to see average user FPS <a href="{{ url_for('login') }}">Here</a>
         {% endif %}
+    {% endif %}
+    </p>
     </div>
     
 </section>
