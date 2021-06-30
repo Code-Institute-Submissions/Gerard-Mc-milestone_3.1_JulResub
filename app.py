@@ -96,21 +96,25 @@ def logout():
 @app.route("/search_gpu", methods=["GET", "POST"])
 def search_gpu():
     # Search MongoDb for GPUs based on user form input
-    user_gpu = request.form.get("user-gpu")
-    if user_gpu:
+    user_gpu_update = request.form.get("user-gpu")
+    if user_gpu_update:
         gpu = list(mongo.db.strong_gpu.find({ "model":
-        { "$regex": user_gpu, "$options": "i"} }))
+        { "$regex": user_gpu_update, "$options": "i"} }))
     if "user" in session:
         user = mongo.db.users.find_one(
             {"name": session["user"]})
+        current_gpu = mongo.db.strong_gpu.find_one({ "model":
+        { "$regex": user.get('gpu'), "$options": "i"} })
+        print(current_gpu)
+        
     if not "user" in session: 
         flash("You must log-in to view this page")
         return redirect(url_for("login"))
-    if not user_gpu:
+    if not user_gpu_update:
         if "gpu" in user:
             gpu_in_database = mongo.db.strong_gpu.find_one({"model": user['gpu']})
         return redirect(url_for("profile.html"))
-    return render_template("profile.html", gpu=gpu, user=user)
+    return render_template("profile.html", gpu=gpu, user=user, gpu_in_database=current_gpu)
 
 
 @app.route('/submit', methods=["GET", "POST"])
