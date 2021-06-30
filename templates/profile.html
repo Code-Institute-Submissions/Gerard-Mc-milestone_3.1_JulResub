@@ -9,6 +9,7 @@
                 onclick="display(this.dataset.number, this.dataset.id)"> Edit</a></p>
         <div id="gpu-results-1" class="w-100" style="display: none">
             <form id="profile-submit" class="w-100" action="{{ url_for('search_gpu') }}" method="post">
+                <a class="d-block" href="{{ url_for('profile', user=session['user'])}}" class="btn">Back</a>
                 <input placeholder="Search GPUs" type="text" name="user-gpu" id="search_gpu_input" minlength="3"
                     class="validate" required>
                 <button form="profile-submit" data-id="search-button-1" data-number="1"
@@ -21,12 +22,12 @@
         <div class="col-4 offset-4" id="gpu_list-1">
             {% for x in gpu %}
             <form id="submit_to_python" method="post" action="{{ url_for('submit') }}">
-                <hr>
-                <div class="d-block">
+                <div id="user-gpu-choice-1" class="d-block">
+                    <a class="d-block" href="{{ url_for('profile', user=session['user'])}}"class="btn">Back</a>
                     <textarea id="gpu-choice" style="display: none" class="hidden-text"
                         name="hidden-text-gpu-model">{{ x.model }}</textarea>
                     <!-- On submit, the user GPU field is updated -->
-                    <button id="user-gpu-choice-1" form="submit_to_python" data-id="user-gpu-choice-1" data-number="1" type="submit"
+                    <button form="submit_to_python" data-id="user-gpu-choice-1" data-number="1" type="submit"
                         onclick="display(this.dataset.number, this.dataset.id)">{{ x.model }}</button>
                 </div>
             </form>
@@ -103,6 +104,7 @@
     <p id="edit-gpu-2"><strong>GPU: </strong> {{ user.gpu }} <a href="#" data-id="2" data-number="2"
             onclick="display(this.dataset.number, this.dataset.id)"> Add GPU</a></p>
     <div id="gpu-results-2" class="w-100" style="display: none">
+        <a class="d-block" href="{{ url_for('profile', user=session['user'])}}"class="btn">Back</a>
         <form id="profile-submit" class="w-100" action="{{ url_for('search_gpu') }}" method="post">
             <input placeholder="Search GPUs" type="text" name="user-gpu" id="search_gpu_input" minlength="3"
                 class="validate" required>
@@ -116,7 +118,7 @@
     <div class="col-4 offset-4" id="gpu_list-2">
         {% for x in gpu %}
         <form id="submit_to_python" method="post" action="{{ url_for('submit') }}">
-            <hr>
+            <a class="d-block" href="{{ url_for('profile', user=session['user'])}}"class="btn">Back</a>
             <div class="d-block">
                 <textarea id="gpu-choice" style="display: none" class="hidden-text"
                     name="hidden-text-gpu-model">{{ x.model }}</textarea>
@@ -210,6 +212,7 @@
             document.getElementById(divID).style.display = "contents";
             // Removes edit link while form is displayed.
             document.getElementById(`edit-gpu-${data_number}`).style.display = "none";
+            document.getElementById("games-list").style.display = "none";
             return;
         }
     }

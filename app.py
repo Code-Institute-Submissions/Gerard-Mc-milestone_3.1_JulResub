@@ -95,24 +95,31 @@ def logout():
 
 @app.route("/search_gpu", methods=["GET", "POST"])
 def search_gpu():
+    gpu_in_database = None
     # Search MongoDb for GPUs based on user form input
     user_gpu_update = request.form.get("user-gpu")
     if user_gpu_update:
         gpu = list(mongo.db.strong_gpu.find({ "model":
         { "$regex": user_gpu_update, "$options": "i"} }))
+
     if "user" in session:
         user = mongo.db.users.find_one(
             {"name": session["user"]})
-        current_gpu = mongo.db.strong_gpu.find_one({ "model":
-        { "$regex": user.get('gpu'), "$options": "i"} })
+        if "gpu" in user:
+            current_gpu = mongo.db.strong_gpu.find_one({ "model":
+            { "$regex": user['gpu'], "$options": "i"} })
+            gpu_in_database=current_gpu
+
     if not "user" in session: 
         flash("You must log-in to view this page")
         return redirect(url_for("login"))
+
     if not user_gpu_update:
         if "gpu" in user:
             gpu_in_database = mongo.db.strong_gpu.find_one({"model": user['gpu']})
+
         return redirect(url_for("profile.html"))
-    return render_template("profile.html", gpu=gpu, user=user, gpu_in_database=current_gpu)
+    return render_template("profile.html", gpu=gpu, user=user, gpu_in_database=gpu_in_database)
 
 
 @app.route('/submit', methods=["GET", "POST"])
@@ -268,7 +275,7 @@ def check():
             "result.html", user_gpu_name=user_gpu_name,gpu_in_database=gpu_in_database,
             user_game_name=user_game_name, info_message=message_success)
 
-    # Searches different variations of GPU requirements title in json data.
+    # Searches different variations of GPU requirements title in json data
     # to prevent issues with regex confusing normal ram with video ram sizes.
     find_title_is_graphics = re.search("(?<=Graphics:*).+", steam)
     find_title_is_video = re.search("(?<=Video:*).+", steam)
