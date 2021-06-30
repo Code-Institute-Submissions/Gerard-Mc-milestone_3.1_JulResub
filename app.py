@@ -275,34 +275,33 @@ def check():
     # Loads json data and extracts the game's PC minimum requirements.
     steam = json.loads(
         r.text)[user_game_id]['data']['pc_requirements']['minimum']
-    gpu_requirements = None
+    gpu_requirements = steam
 
     # Searches different variations of GPU requirements title in json data
     # to prevent issues with regex confusing normal ram with video ram sizes.
     # When title is found, regex cuts from the graphics part of the json file.
     if re.search("(?<=Graphics Card:).+", steam):
-        gpu_requirements = re.findall("(?<=Graphics Card:).+", steam)
+        steam_formatted = re.findall("(?<=Graphics Card:).+", steam)
     elif re.search("(?<=Graphics:).+", steam):
-        gpu_requirements = re.findall("(?<=Graphics:).+", steam)
+        steam_formatted = re.findall("(?<=Graphics:).+", steam)
     elif re.search("(?<=Video Card:).+", steam):
-        gpu_requirements = re.findall("(?<=Video Card:).+", steam)
+        steam_formatted = re.findall("(?<=Video Card:).+", steam)
     elif re.search("(?<=Video:).+", steam):
-        gpu_requirements = re.findall("(?<=Video:).+", steam)
+        steam_formatted = re.findall("(?<=Video:).+", steam)
     # For the rare occasion when the JSON is in Russian
     elif re.search("(?<=Видеокарта:).+", steam):
-        gpu_requirements = re.findall("(?<=Видеокарта:).+", steam)
+        steam_formatted = re.findall("(?<=Видеокарта:).+", steam)
     
-    if gpu_requirements:
+    if steam_formatted:
         steam_has_been_formatted = True
         print("gpu_requirements")
-        gpu_requirements = str(gpu_requirements)
+        steam_formatted = str(gpu_requirements)
         # Cuts the json at the end of the graphics section.
         # The Graphics, CPU, HDD, Sound, etc. elements always end with </li>.
-        gpu_requirements = re.sub(r"<\/li>.*$", "", gpu_requirements)
+        steam_formatted = re.sub(r"<\/li>.*$", "", steam_formatted)
 
     else:
         steam_has_been_formatted = False
-        gpu_requirements = str(steam)
 
     '''
     All GPUs that the user has an option to select are above 1GB VRAM and have a higher frequency,
@@ -314,7 +313,7 @@ def check():
     '''
     # Find old gpus under 512mb
     if steam_has_been_formatted == True:
-        old_gpu = re.findall(r"(?i)(?:\d+MB|\d+\sMB)\s*(?:video/scard|graphics/scard|GPU)*", gpu_requirements)
+        old_gpu = re.findall(r"(?i)(?:\d+MB|\d+\sMB)\s*(?:video/scard|graphics/scard|GPU)*", steam_formatted)
         if old_gpu:
             for match in old_gpu:
                 if re.search(r'(?i)(?:1024mb|2048mb|4096mb)\s*(?:video/scard|graphics/scard|GPU)*', match):
