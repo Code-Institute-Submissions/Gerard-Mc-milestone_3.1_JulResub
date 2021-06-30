@@ -182,11 +182,33 @@ def profile(user):
 def search_game_homepage():
     query_game = request.form.get("query-game")
     game_list = []
-    game = list(mongo.db.game.find(
-        {"$text": {"$search": "\"" + query_game + "\""}}))
-    for i in game:
-        if i["appid"] % 10 == 0:
-            game_list.append(i)
+    game = list(mongo.db.game.find({ "name": { "$regex": query_game, "$options": "i"} }))
+    if game:
+        for i in game:
+            # Steam Game Ids are always a factor of 10
+            # Other software can be any number. This ensures it's only games. 
+            if i["appid"] % 10 == 0:
+                game_list.append(i)
+    # Makes sure the game is not missing because of Roman numerals. 
+    # Eg Grand Theft Auto V
+    elif not game:
+        query_game = re.sub(r"1",  "I", query_game)
+        query_game = re.sub(r"2",  "II", query_game)
+        query_game = re.sub(r"3",  "III", query_game)
+        query_game = re.sub(r"4",  "IV", query_game)
+        query_game = re.sub(r"5",  "V", query_game)
+        query_game = re.sub(r"6",  "VI", query_game)
+        query_game = re.sub(r"7",  "VII", query_game)
+        query_game = re.sub(r"8",  "VIII", query_game)
+        query_game = re.sub(r"9",  "IX", query_game)
+        query_game = re.sub(r"10",  "X", query_game)
+        game = list(mongo.db.game.find({ "name": { "$regex": query_game, "$options": "i"} }))
+        if game:
+            for i in game:
+                if i["appid"] % 10 == 0:
+                    game_list.append(i)
+        else:
+            flash("We don't have this game in our database.")
     return render_template("index.html", game_list=game_list)
 
 

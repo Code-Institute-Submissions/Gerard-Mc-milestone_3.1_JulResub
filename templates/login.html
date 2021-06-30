@@ -17,7 +17,8 @@
             <input id="password" name="password" minlength="8" maxlength="30" type="password" class="validate w-100"
                 required>
         </div>
-        <button type="submit" class="btn btn-primary w-40 float-left bg-navy w-100">Log In</button>
+        <button type="submit" class="btn btn-primary w-40 float-left bg-navy w-100">Login</button>
+        <p class="d-block">New User? Register <a href="{{ url_for('register') }}">Here</a></p>
     </form>
 </section>
 {% endblock %}
