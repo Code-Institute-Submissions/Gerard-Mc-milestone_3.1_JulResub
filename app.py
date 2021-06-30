@@ -239,9 +239,23 @@ def check():
     user_game_name = request.form.get("game-name")
     user_game_id = format(request.form['game-id'])
 
+    # Checks the user GPU in the database to see if the game
+    # has been found to be already compatible from a previous search.
+    check_database = mongo.db.strong_gpu.find_one(
+        {'$and': [{'model': f"{user_gpu_name}"}, {'games': {
+            '$elemMatch': {'name': f"{user_game_name}"}}}]})
+
+    if check_database:
+        gpu_in_database = check_database
+        print("Already in database")
+        return render_template(
+            "result.html", user_gpu_name=user_gpu_name,gpu_in_database=gpu_in_database,
+            user_game_name=user_game_name, info_message=message_success)
+
     # Below uses the user game id to connect to a specific external API file
     r = requests.get(
         f"https://store.steampowered.com/api/appdetails?appids={user_game_id}")
+
     # Sometimes the Steam API has missing documents and returns a json file
     # with 'success': False.
     # This seems to be from duplicate game names in the API game list.
@@ -261,19 +275,7 @@ def check():
     # Loads json data and extracts the game's PC minimum requirements.
     steam = json.loads(
         r.text)[user_game_id]['data']['pc_requirements']['minimum']
-
-    # Checks the user GPU in the database to see if the game
-    # has been found to be already compatible from a previous search.
-    check_database = mongo.db.strong_gpu.find_one(
-        {'$and': [{'model': f"{user_gpu_name}"}, {'games': {
-            '$elemMatch': {'name': f"{user_game_name}"}}}]})
-
-    if check_database:
-        gpu_in_database = check_database
-        print("Already in database")
-        return render_template(
-            "result.html", user_gpu_name=user_gpu_name,gpu_in_database=gpu_in_database,
-            user_game_name=user_game_name, info_message=message_success)
+    gpu_requirements = None
 
     # Searches different variations of GPU requirements title in json data
     # to prevent issues with regex confusing normal ram with video ram sizes.
@@ -289,21 +291,17 @@ def check():
     # For the rare occasion when the JSON is in Russian
     elif re.search("(?<=Видеокарта:).+", steam):
         gpu_requirements = re.findall("(?<=Видеокарта:).+", steam)
-    else:
-        gpu_requirements = steam
-    gpu_requirements = str(gpu_requirements)
-    if gpu_requirements != steam:
+    
+    if gpu_requirements:
+        print("gpu_requirements")
+        gpu_requirements = str(gpu_requirements)
         # Cuts the json at the end of the graphics section.
         # The Graphics, CPU, HDD, Sound, etc. elements always end with </li>.
         gpu_requirements = re.sub(r"<\/li>.*$", "", gpu_requirements)
-        print(gpu_requirements)
 
+    else:
+        gpu_requirements = str(steam)
 
-    # else:
-    #     info_message = steam_format_error_message
-    #     return render_template(
-    #     "result.html", user_gpu_name=user_gpu_name,user_game_id=user_game_id,
-    #     user_game_name=user_game_name, steam=steam, info_message=info_message)
     '''
     All GPUs that the user has an option to select are above 1GB VRAM and have a higher frequency,
     floating point operations per second, more power, later DirectX capability, etc.,
