@@ -225,11 +225,11 @@ def check():
     # and GPU being compatible or not compatible with the game.
     # info_message will be sent to the results page informing
     # the user of the result.
-    info_message = ""
+    info_message = None
     message_success = "Your GPU supports this game."
     message_fail = "Your GPU does not support this game."
     not_found_message = "We can't find this configuration in our database."
-    steam_format_error_message = """We can't find this configuration in our database.\nTry 
+    not_found_message_extra = """We can't find this configuration in our database.\nTry 
     reading the minimum requirements above for further information."""
 
     # Extract user gpu model, game id,
@@ -267,15 +267,16 @@ def check():
         "(?<='success': False).+", str(json.loads(r.text)))
     if find_missing_api_json:
         print("--------------API Fail-----------------")
-        mongo.db.game.delete_one({ "appid": int(user_game_id) })
-
+        # mongo.db.game.delete_one({ "appid": int(user_game_id) })
         return render_template("result.html", user_gpu_name=user_gpu_name,
                                user_game_name=user_game_name,
                                info_message=not_found_message)
     # Loads json data and extracts the game's PC minimum requirements.
     steam = json.loads(
         r.text)[user_game_id]['data']['pc_requirements']['minimum']
-    gpu_requirements = steam
+
+    steam_formatted = None
+    gpu_requirements = None
 
     # Searches different variations of GPU requirements title in json data
     # to prevent issues with regex confusing normal ram with video ram sizes.
@@ -294,8 +295,7 @@ def check():
     
     if steam_formatted:
         steam_has_been_formatted = True
-        print("gpu_requirements")
-        steam_formatted = str(gpu_requirements)
+        steam_formatted = str(steam_formatted)
         # Cuts the json at the end of the graphics section.
         # The Graphics, CPU, HDD, Sound, etc. elements always end with </li>.
         steam_formatted = re.sub(r"<\/li>.*$", "", steam_formatted)
@@ -313,14 +313,16 @@ def check():
     '''
     # Find old gpus under 512mb
     if steam_has_been_formatted == True:
-        old_gpu = re.findall(r"(?i)(?:\d+MB|\d+\sMB)\s*(?:video/scard|graphics/scard|GPU)*", steam_formatted)
+        old_gpu = re.findall(r"(?i)(?:\d+\sMB|\d+MB)", steam_formatted)
         if old_gpu:
             for match in old_gpu:
-                if re.search(r'(?i)(?:1024mb|2048mb|4096mb)\s*(?:video/scard|graphics/scard|GPU)*', match):
+                if re.search(r'(?i)(?:1024\s*mb|2048\s*mb|4096\s*mb)', match):
                     pass
                 else:
                     info_message = message_success
-            print("Found GPU under 512mb")
+                    print("Found GPU under 512mb")
+
+    gpu_requirements = steam
     
     # Fix Steam Nvidia naming inconsistencies to align with this app's database
     # Eg. Geforce 7800GTX > Geforce 7800 GTX or Nvidia 7800GT > Geforce 7800 GT
@@ -592,14 +594,18 @@ def check():
                     
     # If GPU is found to be strong enough, the users inputed game is added to an array 
     # that stores a list of compatible games within the GPU entity in the database.
-    # if info_message == message_success:
-    #     mongo.db.strong_gpu.update_one(
-    #             {"model": user_gpu_name},
-    #             {"$push": {'games': {"name": user_game_name}}})
-    #     print(user_gpu_name)
-    #     print(user_game_name)
-    #     print("Added to database")
+    if info_message == message_success:
+        print("here")
+        mongo.db.strong_gpu.update_one(
+                {"model": user_gpu_name},
+                {"$push": {'games': {"name": user_game_name}}})
+        print(user_gpu_name)
+        print(user_game_name)
+        print("Added to database")
 
+    else:
+        info_message = not_found_message_extra
+ 
     return render_template(
         "result.html", user_gpu_name=user_gpu_name,
         user_game_id=user_game_id,
