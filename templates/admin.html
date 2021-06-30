@@ -25,7 +25,7 @@
     </form>
     {% endfor %}
 </div>
-<script type="text/javascript" src="/static/js/reset_index.js"></script>
+<script src="{{ url_for('static', filename='js/reset_index.js') }}"></script>
 <script>
     var on_off = 0
     // Function to control when elements are displayed.
