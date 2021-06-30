@@ -23,7 +23,11 @@ mongo = PyMongo(app)
 
 @app.route('/')
 def find_gpus():
-    return render_template("index.html")
+    user = None
+    if "user" in session:
+        user = mongo.db.users.find_one(
+            {"name": session["user"]})
+    return render_template("index.html",user=user)
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -55,7 +59,10 @@ def register():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-
+    user = None
+    if "user" in session:
+        user = mongo.db.users.find_one(
+            {"name": session["user"]})
     if request.method == "POST":
         # Searches database for the entered username
         existing_user = mongo.db.users.find_one(
@@ -73,14 +80,14 @@ def login():
             else:
                 # If password unuccessful, user is directed to login page
                 flash("Incorrect Username and/or Password")
-                return redirect(url_for("login"))
+                return redirect(url_for("login"), user=user)
 
         else:
             # If username unuccessful, user is directed to login page
             flash("Incorrect Username and/or Password")
-            return redirect(url_for("login"))
+            return redirect(url_for("login"), user=user)
 
-    return render_template("login.html")
+    return render_template("login.html", user=user)
 
 
 @app.route("/logout")
@@ -202,7 +209,7 @@ def search_game_homepage():
         query_game = re.sub(r"8",  "VIII", query_game)
         query_game = re.sub(r"9",  "IX", query_game)
         query_game = re.sub(r"10",  "X", query_game)
-        game = list(mongo.db.game.find({ "name": { "$regex": query_game, "$options": "i"} }))
+        game = list(mongo.db.game.find({ "name": { "$regex": query_game, "$options": "i"}}))
         if game:
             for i in game:
                 if i["appid"] % 10 == 0:
@@ -215,11 +222,14 @@ def search_game_homepage():
 @app.route("/search_gpu_homepage", methods=["GET", "POST"])
 def search_gpu_homepage():
     query_gpu = request.form.get("query-gpu")
-    gpu = mongo.db.strong_gpu.find({ "model": { "$regex": query_gpu , "$options": "i"} })
+    gpu = mongo.db.strong_gpu.find({ "model": { "$regex": query_gpu , "$options": "i" }})
     return render_template("index.html", gpu=gpu)
     
 @app.route("/admin", methods=["GET", "POST"])
 def admin():
+    if "user" in session:
+        user = mongo.db.users.find_one(
+            {"name": session["user"]})
     gpus = mongo.db.strong_gpu.aggregate([{ "$sort" : { "rating" : 1 } }])
     if request.method == "POST":
         insert_gpu_model = request.form.get("insert-gpu-model")
@@ -238,8 +248,8 @@ def admin():
             for gpu in database_gpus:
                 mongo.db.strong_gpu.update_one({"model": gpu["model"], "rating": gpu["rating"]}, {"$set": {"rating": gpu["rating"]  + 1 }})
             mongo.db.strong_gpu.insert_one( { "model": insert_gpu_model, "rating": int(insert_gpu_rating)})
-        return redirect(url_for("admin", gpus=gpus))
-    return render_template("admin.html", gpus=gpus)
+        return redirect(url_for("admin", gpus=gpus, user=user))
+    return render_template("admin.html", gpus=gpus, user=user)
 
 @app.route('/check', methods=["GET", "POST"])
 def check():

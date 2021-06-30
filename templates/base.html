@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    
+
     <title>GPU Check</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,19 +24,19 @@
         </button>
         <div class="collapse navbar-collapse " id="navbarNav">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
-                </li>
                 <!-- If logged in, the user can access the below links; Profile and logout -->
-                {% if session.user %}
+                {% if (user["name"] == "admin" ) %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('profile', user=session['user'])}}" id="profile-link-id" data-id="profile-link" onclick="display(this.id,this.dataset.id)">Profile</a>
+                    <a class="nav-link" href="{{ url_for('admin') }}">Admin</a>
+                </li>
+                {% endif %}
+                    {% if session.user %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('profile', user=session['user'])}}" id="profile-link-id"
+                        data-id="profile-link" onclick="display(this.id,this.dataset.id)">Profile</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('logout') }}">Log Out</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('admin') }}">Admin</a>
                 </li>
                 <!-- If not logged in, the user can access the below links; Resgister and login -->
                 {% else %}
