@@ -277,36 +277,27 @@ def check():
 
     # Searches different variations of GPU requirements title in json data
     # to prevent issues with regex confusing normal ram with video ram sizes.
-    find_title_is_graphics = re.search("(?<=Graphics:*).+", steam)
-    find_title_is_video = re.search("(?<=Video:*).+", steam)
-    find_title_is_graphics_card = re.search("(?i)(?<=Graphics Card:*).+", steam)
-    find_title_is_video_card = re.search(")(?<=Video Card:).+", steam)
-    find_title_is_russian = re.search("(?<=Видеокарта:).+", steam)
     # When title is found, regex cuts from the graphics part of the json file.
-    if find_title_is_graphics:
-        gpu_requirements = re.findall("(?<=Graphics:*).+", steam)
-    elif find_title_is_graphics_card:
-        gpu_requirements = re.findall("(?<=Graphics Card:*).+", steam)
-    elif find_title_is_video:
-        gpu_requirements = re.findall("(?<=Video:*).+", steam)
-    elif find_title_is_video_card:
-        gpu_requirements = re.findall("(?<=Video Card:*).+", steam)
-    elif find_title_is_russian:
-        gpu_requirements = re.findall("(?<=Видеокарта:*).+", steam)
-    # When the graphics section can't be found, the info message
+    if re.search("(?<=Graphics Card:).+", steam):
+        gpu_requirements = re.findall("(?<=Graphics Card:).+", steam)
+    elif re.search("(?<=Graphics:).+", steam):
+        gpu_requirements = re.findall("(?<=Graphics:).+", steam)
+    elif re.search("(?<=Video Card:).+", steam):
+        gpu_requirements = re.findall("(?<=Video Card:).+", steam)
+    elif re.search("(?<=Video:).+", steam):
+        gpu_requirements = re.findall("(?<=Video:).+", steam)
+    # For the rare occasion when the JSON is in Russian
+    elif re.search("(?<=Видеокарта:).+", steam):
+        gpu_requirements = re.findall("(?<=Видеокарта:).+", steam)
     else:
         gpu_requirements = steam
-    # Tidy gpu_requirements variable data for easier regex use.
+    gpu_requirements = str(gpu_requirements)
     if gpu_requirements != steam:
-        # Removes words that will conflict or complicate regex patterns
-        # and removes extra html.
-        gpu_requirements_cut = re.sub(
-            r"(?i)(?:series\s|or\s|better\s|<\/strong>|<br>|:)", "",
-            gpu_requirements[0])
         # Cuts the json at the end of the graphics section.
-        # The Graphics, CPU, HDD, Sound etc always end with </li>.
-        # gpu_requirements = re.sub(r"<\/li>.*$", "", gpu_requirements_cut)
-        gpu_requirements = re.sub(r"<\/li>.*$", "", gpu_requirements_cut)
+        # The Graphics, CPU, HDD, Sound, etc. elements always end with </li>.
+        gpu_requirements = re.sub(r"<\/li>.*$", "", gpu_requirements)
+        print(gpu_requirements)
+
 
     # else:
     #     info_message = steam_format_error_message
@@ -601,13 +592,13 @@ def check():
                     
     # If GPU is found to be strong enough, the users inputed game is added to an array 
     # that stores a list of compatible games within the GPU entity in the database.
-    if info_message == message_success:
-        mongo.db.strong_gpu.update_one(
-                {"model": user_gpu_name},
-                {"$push": {'games': {"name": user_game_name}}})
-        print(user_gpu_name)
-        print(user_game_name)
-        print("Added to database")
+    # if info_message == message_success:
+    #     mongo.db.strong_gpu.update_one(
+    #             {"model": user_gpu_name},
+    #             {"$push": {'games': {"name": user_game_name}}})
+    #     print(user_gpu_name)
+    #     print(user_game_name)
+    #     print("Added to database")
 
     return render_template(
         "result.html", user_gpu_name=user_gpu_name,
