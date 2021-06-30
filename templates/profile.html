@@ -26,7 +26,7 @@
                     <textarea id="gpu-choice" style="display: none" class="hidden-text"
                         name="hidden-text-gpu-model">{{ x.model }}</textarea>
                     <!-- On submit, the user GPU field is updated -->
-                    <button form="submit_to_python" data-id="user-gpu-choice-1" data-number="1" type="submit"
+                    <button id="user-gpu-choice-1" form="submit_to_python" data-id="user-gpu-choice-1" data-number="1" type="submit"
                         onclick="display(this.dataset.number, this.dataset.id)">{{ x.model }}</button>
                 </div>
             </form>
@@ -184,8 +184,6 @@
 
     // Function to control when elements are displayed.
     function display(data_number, data_id) {
-        console.log("display");
-        console.log(data_id);
 
         // Controls element display style when search button is pressed.
         if (data_id == `search-button-${data_number}`) {
@@ -195,7 +193,7 @@
         }
         // Controls element display style when a GPU is pressed from the GPU list.
         else if (data_id == `user-gpu-choice-${data_number}`) {
-            sessionStorage.setItem(`result-display${data_number}`, "none");
+            sessionStorage.setItem(`result-display-${data_number}`, "none");
             sessionStorage.setItem(`link-display-${data_number}`, "contents");
             return;
         }

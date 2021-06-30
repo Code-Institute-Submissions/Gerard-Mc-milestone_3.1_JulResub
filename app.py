@@ -105,8 +105,6 @@ def search_gpu():
             {"name": session["user"]})
         current_gpu = mongo.db.strong_gpu.find_one({ "model":
         { "$regex": user.get('gpu'), "$options": "i"} })
-        print(current_gpu)
-        
     if not "user" in session: 
         flash("You must log-in to view this page")
         return redirect(url_for("login"))
@@ -264,65 +262,30 @@ def check():
             '$elemMatch': {'name': f"{user_game_name}"}}}]})
 
     if check_database:
-        object = list(mongo.db.strong_gpu.find(
-            {'$and': [{'model': user_gpu_name}, {
-                'games.name': user_game_name}]}, {"games.userfps.$"}))
-        userfps = object[0]['games']
-        fps = object[0]['games'][0]['userfps']
-        all_fps = []
-        fps_sum = 0
-        fps_denominator = 0
-        for i in fps:
-            all_fps.append(i['fps'])
-            fps_denominator += 1
-
-        for i in all_fps:
-            fps_sum = fps_sum + i
-        fps_average = math.floor(fps_sum / fps_denominator)
+        gpu_in_database = check_database
         print("Already in database")
         return render_template(
-            "result.html", user_gpu_name=user_gpu_name,
-            user_game_name=user_game_name, info_message=message_success, fps_average = fps_average)
+            "result.html", user_gpu_name=user_gpu_name,gpu_in_database=gpu_in_database,
+            user_game_name=user_game_name, info_message=message_success)
 
     # Searches different variations of GPU requirements title in json data.
     # to prevent issues with regex confusing normal ram with video ram sizes.
-    find_title_is_graphics = re.search("(?<=Graphics:).+", steam)
-    find_title_is_video = re.search("(?<=Video:).+", steam)
-    find_title_is_graphics_card = re.search("(?<=Graphics Card:).+", steam)
-    find_title_is_video_card = re.search("(?<=Video Card:).+", steam)
+    find_title_is_graphics = re.search("(?<=Graphics:*).+", steam)
+    find_title_is_video = re.search("(?<=Video:*).+", steam)
+    find_title_is_graphics_card = re.search("(?i)(?<=Graphics Card:*).+", steam)
+    find_title_is_video_card = re.search(")(?<=Video Card:).+", steam)
     find_title_is_russian = re.search("(?<=Видеокарта:).+", steam)
-    # Finds section when there is html in between the title and it's
-    #  following colon. (Happens rarely)
-    find_title_is_graphics_card_no_colon = re.search(
-        "(?<=Graphics Card).+", steam)
-    find_title_is_graphics_no_colon = re.search("(?<=Graphics).+", steam)
-    find_title_is_video_card_no_colon = re.search("(?<=Video Card).+", steam)
-    find_title_is_video_no_colon = re.search("(?<=Video).+", steam)
-    find_title_is_russian_no_colon = re.search("(?<=Видеокарта).+", steam)
-
     # When title is found, regex cuts from the graphics part of the json file.
     if find_title_is_graphics:
-        gpu_requirements = re.findall("(?<=Graphics:).+", steam)
+        gpu_requirements = re.findall("(?<=Graphics:*).+", steam)
     elif find_title_is_graphics_card:
-        gpu_requirements = re.findall("(?<=Graphics Card:).+", steam)
+        gpu_requirements = re.findall("(?<=Graphics Card:*).+", steam)
     elif find_title_is_video:
-        gpu_requirements = re.findall("(?<=Video:).+", steam)
+        gpu_requirements = re.findall("(?<=Video:*).+", steam)
     elif find_title_is_video_card:
-        gpu_requirements = re.findall("(?<=Video Card:).+", steam)
+        gpu_requirements = re.findall("(?<=Video Card:*).+", steam)
     elif find_title_is_russian:
-        gpu_requirements = re.findall("(?<=Видеокарта:).+", steam)
-    # Regex cuts from the graphics when there is html in
-    # between the title and it's following colon.
-    elif find_title_is_graphics_no_colon:
-        gpu_requirements = re.findall("(?<=Graphics).+", steam)
-    elif find_title_is_graphics_card_no_colon:
-        gpu_requirements = re.findall("(?<=Graphics Card).+", steam)
-    elif find_title_is_video_card_no_colon:
-        gpu_requirements = re.findall("(?<=Video Card).+", steam)
-    elif find_title_is_video_no_colon:
-        gpu_requirements = re.findall("(?<=Video).+", steam)
-    elif find_title_is_russian_no_colon:
-        gpu_requirements = re.findall("(?<=Видеокарта).+", steam)
+        gpu_requirements = re.findall("(?<=Видеокарта:*).+", steam)
     # When the graphics section can't be found, the info message
     else:
         gpu_requirements = steam
