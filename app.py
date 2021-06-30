@@ -293,6 +293,7 @@ def check():
         gpu_requirements = re.findall("(?<=Видеокарта:).+", steam)
     
     if gpu_requirements:
+        steam_has_been_formatted = True
         print("gpu_requirements")
         gpu_requirements = str(gpu_requirements)
         # Cuts the json at the end of the graphics section.
@@ -300,6 +301,7 @@ def check():
         gpu_requirements = re.sub(r"<\/li>.*$", "", gpu_requirements)
 
     else:
+        steam_has_been_formatted = False
         gpu_requirements = str(steam)
 
     '''
@@ -311,14 +313,15 @@ def check():
     These avoids unnecessarily searching the database and comparing user/requirements GPUs.
     '''
     # Find old gpus under 512mb
-    old_gpu = re.findall(r"(?i)(?:\d+MB|\d+\sMB)\s*(?:video/scard|graphics/scard|GPU)*", gpu_requirements)
-    if old_gpu:
-        for match in old_gpu:
-            if re.search(r'(?i)(?:1024mb|2048mb|4096mb)\s*(?:video/scard|graphics/scard|GPU)*', match):
-                pass
-            else:
-                info_message = message_success
-        print("Found GPU under 512mb")
+    if steam_has_been_formatted == True:
+        old_gpu = re.findall(r"(?i)(?:\d+MB|\d+\sMB)\s*(?:video/scard|graphics/scard|GPU)*", gpu_requirements)
+        if old_gpu:
+            for match in old_gpu:
+                if re.search(r'(?i)(?:1024mb|2048mb|4096mb)\s*(?:video/scard|graphics/scard|GPU)*', match):
+                    pass
+                else:
+                    info_message = message_success
+            print("Found GPU under 512mb")
     
     # Fix Steam Nvidia naming inconsistencies to align with this app's database
     # Eg. Geforce 7800GTX > Geforce 7800 GTX or Nvidia 7800GT > Geforce 7800 GT
