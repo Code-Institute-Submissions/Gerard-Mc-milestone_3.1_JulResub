@@ -58,13 +58,14 @@
     
         {% with messages = get_flashed_messages() %}
         {% if messages %}
-        {% for message in messages%}
         <section class="row d-flex justify-content-center mt-5"></section>
+        {% for message in messages%}
         <h4 class="bg-navy text-center color-white font-bold px-3 py-2 border-radius-5px">{{ message }}</h4>
         {% endfor %}
+        </section>
         {% endif %}
         {% endwith %}
-    </section>
+   
     {% block content %}
     {% endblock %}
     <footer class="bg-black w-100 d-flex justify-content-center">
