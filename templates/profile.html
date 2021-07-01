@@ -8,11 +8,11 @@
         <p id="edit-gpu-1"><strong>GPU: </strong> {{ user.gpu }} <a href="#" data-id="1" data-number="1"
                 onclick="display(this.dataset.number, this.dataset.id)"> Edit</a></p>
         <div id="gpu-results-1" class="w-100" style="display: none">
-            <form id="profile-submit" class="w-100" action="{{ url_for('search_gpu') }}" method="post">
-                <a class="d-block" href="{{ url_for('profile', user=session['user'])}}" class="btn">Back</a>
-                <input placeholder="Search GPUs" type="text" name="user-gpu" id="search_gpu_input" minlength="3"
+            <form id="profile-submit-1" class="w-100" action="{{ url_for('search_gpu') }}" method="post">
+                <a class="d-block btn" href="{{ url_for('profile', user=session['user'])}}">Back</a>
+                <input placeholder="Search GPUs" type="text" name="user-gpu" id="search_gpu_input-1" minlength="3"
                     class="validate" required>
-                <button form="profile-submit" data-id="search-button-1" data-number="1"
+                <button form="profile-submit-1" data-id="search-button-1" data-number="1"
                     onclick="display(this.dataset.number, this.dataset.id)" type="submit">
                     Search
                     GPU</button>
@@ -21,13 +21,13 @@
         <!-- Displays a list of GPU search results and updates user GPU attribute in database entity on submit -->
         <div class="col-4 offset-4" id="gpu_list-1">
             {% for x in gpu %}
-            <form id="submit_to_python" method="post" action="{{ url_for('submit') }}">
+            <form id="submit_to_python-1" method="post" action="{{ url_for('submit') }}">
                 <div id="user-gpu-choice-1" class="d-block">
-                    <a class="d-block" href="{{ url_for('profile', user=session['user'])}}"class="btn">Back</a>
-                    <textarea id="gpu-choice" style="display: none" class="hidden-text"
+                    <a class="d-block btn" href="{{ url_for('profile', user=session['user'])}}">Back</a>
+                    <textarea id="gpu-choice-1" style="display: none" class="hidden-text"
                         name="hidden-text-gpu-model">{{ x.model }}</textarea>
                     <!-- On submit, the user GPU field is updated -->
-                    <button form="submit_to_python" data-id="user-gpu-choice-1" data-number="1" type="submit"
+                    <button form="submit_to_python-1" data-id="user-gpu-choice-1" data-number="1" type="submit"
                         onclick="display(this.dataset.number, this.dataset.id)">{{ x.model }}</button>
                 </div>
             </form>
@@ -97,18 +97,16 @@
     </div>
     {% endif %}
     {% endif %}
-    </div>
-    </div>
     {% else %}
     <!-- Form to add a GPU attribute/value to the user entity when no GPU attribute is found  -->
     <p id="edit-gpu-2"><strong>GPU: </strong> {{ user.gpu }} <a href="#" data-id="2" data-number="2"
             onclick="display(this.dataset.number, this.dataset.id)"> Add GPU</a></p>
     <div id="gpu-results-2" class="w-100" style="display: none">
-        <a class="d-block" href="{{ url_for('profile', user=session['user'])}}"class="btn">Back</a>
-        <form id="profile-submit" class="w-100" action="{{ url_for('search_gpu') }}" method="post">
-            <input placeholder="Search GPUs" type="text" name="user-gpu" id="search_gpu_input" minlength="3"
+        <a class="d-block" href="{{ url_for('profile', user=session['user'])}}" class="btn">Back</a>
+        <form id="profile-submit-2" class="w-100" action="{{ url_for('search_gpu') }}" method="post">
+            <input placeholder="Search GPUs" type="text" name="user-gpu" id="search_gpu_input-2" minlength="3"
                 class="validate" required>
-            <button form="profile-submit" data-id="search-button-2" data-number="2"
+            <button form="profile-submit-2" data-id="search-button-2" data-number="2"
                 onclick="display(this.dataset.number, this.dataset.id)" type="submit">
                 Search
                 GPU</button>
@@ -117,20 +115,19 @@
     <!-- Below, the user can select from the search results -->
     <div class="col-4 offset-4" id="gpu_list-2">
         {% for x in gpu %}
-        <form id="submit_to_python" method="post" action="{{ url_for('submit') }}">
-            <a class="d-block" href="{{ url_for('profile', user=session['user'])}}"class="btn">Back</a>
+        <form id="submit_to_python-2" method="post" action="{{ url_for('submit') }}">
+            <a class="d-block" href="{{ url_for('profile', user=session['user'])}}" class="btn">Back</a>
             <div class="d-block">
-                <textarea id="gpu-choice" style="display: none" class="hidden-text"
+                <textarea id="gpu-choice-2" style="display: none" class="hidden-text"
                     name="hidden-text-gpu-model">{{ x.model }}</textarea>
                 <!-- On submit, the users GPU field is updated -->
-                <button form="submit_to_python" data-id="user-gpu-choice-2" data-number="2" type="submit"
+                <button form="submit_to_python-2" data-id="user-gpu-choice-2" data-number="2" type="submit"
                     onclick="display(this.dataset.number, this.dataset.id)">{{ x.model }}</button>
             </div>
         </form>
         {% endfor %}
     </div>
     {% endif %}
-    </div>
 </section>
 {% endblock %}
 {% block postloadjs %}

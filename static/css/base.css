@@ -82,7 +82,7 @@
 /* Styling and classes used throughout site ends here */
 
 body {
-	background-image: url("../img/bg.jpg");
+	/* background-image: url("../img/bg.jpg"); */
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -202,15 +202,6 @@ nav {
 
 @media only screen and (max-height: 500px) {
 	body {
-		background-image: url("../img/bg.jpg");
-		background-position: center;
-		background-repeat: no-repeat;
-		background-size: cover;
-		-webkit-background-size: cover;
-		-moz-background-size: cover;
-		-o-background-size: cover;
-		background-size: cover;
-		height: auto;
 		min-height: calc(80vw + 80px);
 	}
 	footer {
