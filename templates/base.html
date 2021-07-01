@@ -17,7 +17,7 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark font-1-bolder color-light-grey z-index-2">
-        <a id="logo" class="navbar-brand color-light-grey" href="{{ url_for('find_gpus') }}"><img style="max-height: 50px;" src="{{ url_for('static', filename='img/logo.png') }}"> GPUForce</a>
+        <a id="logo" class="navbar-brand color-light-grey" href="{{ url_for('find_gpus') }}"><img style="max-height: 50px;" alt="Logo" src="{{ url_for('static', filename='img/logo.png') }}"> GPUForce</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -55,8 +55,9 @@
         </div>
     </nav>
     <!-- Section for flash messages -->
-    <section class="row d-flex justify-content-center mt-5">
+    
         {% with messages = get_flashed_messages() %}
+        <section class="row d-flex justify-content-center mt-5"></section>
         {% if messages %}
         {% for message in messages%}
         <h4 class="bg-navy text-center color-white font-bold px-3 py-2 border-radius-5px">{{ message }}</h4>

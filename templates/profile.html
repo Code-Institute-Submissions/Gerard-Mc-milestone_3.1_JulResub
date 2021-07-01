@@ -2,7 +2,7 @@
 {% block content %}
 <section class="container-fluid col-12">
     <div class="boder-navy p-5 border-radius-5px">
-        <h3 class="mb-3"><strong>Username: </strong> {{ user.name }}</h3>
+        <h1 class="mb-3"><strong>Username: </strong> {{ user.name }}</h1>
         <!-- Form to edit user GPU attribute in the user entity -->
         {% if user.gpu %}
         <p id="edit-gpu-1"><strong>GPU: </strong> {{ user.gpu }} <a href="#" data-id="1" data-number="1"

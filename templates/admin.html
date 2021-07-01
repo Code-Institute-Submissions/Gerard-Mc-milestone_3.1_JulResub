@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
-<div>
+<section>
+    <h1>Admin</h1>
     {% for x in gpus %}
     <hr>
     <p>
@@ -24,7 +25,7 @@
         <textarea style="display: none" class="hidden-text" name="delete-gpu-rating">{{ x.rating }}</textarea>
     </form>
     {% endfor %}
-</div>
+</section>
 <script src="{{ url_for('static', filename='js/reset_index.js') }}"></script>
 <script>
     var on_off = 0
