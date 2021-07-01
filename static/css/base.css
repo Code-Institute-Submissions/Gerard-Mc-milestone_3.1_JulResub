@@ -165,7 +165,38 @@ nav {
 	margin-bottom: 20px;
 	margin-top: 20px;
 }
+/* index.html styling at screen widths over 768px starts here */
+@media only screen and (min-width: 768px) {
+	#index-content {
+		min-height: calc(68vh + 80px);
+		font-size: 16px;
+	}
+	#index-content h1 {
+		font-size: 50px;
+	}
+	#index-wrap-outer {
+		height: 30vh;
+	}
+	#index-wrap-inner {
+		padding-top: 50px;
+	}
+	#display-games-search {
+		max-height: calc(30vh + 80px);
+	}
+	#reset-confirm {
+		margin-bottom: 50px!important;
+		margin-top: 20px!important;
+	}
 
+	nav {
+		background-color: #000000c7 !important;
+	}
+	
+	.navbar-collapse {
+		background-color: rgba(0, 0, 0, 0);
+	}
+}
+/* index.html styling at screen widths over 768px ends here */
 
 /* index.html styling at screen heights under 500px starts here */
 
@@ -245,35 +276,3 @@ nav {
 }
 /* index.html styling at screen heights under 500px ends here */
 
-/* index.html styling at screen widths over 768px starts here */
-@media only screen and (min-width: 768px) {
-	#index-content {
-		min-height: calc(68vh + 80px);
-		font-size: 16px;
-	}
-	#index-content h1 {
-		font-size: 50px;
-	}
-	#index-wrap-outer {
-		height: 30vh;
-	}
-	#index-wrap-inner {
-		padding-top: 50px;
-	}
-	#display-games-search {
-		max-height: calc(30vh + 80px);
-	}
-	#reset-confirm {
-		margin-bottom: 50px!important;
-		margin-top: 20px!important;
-	}
-
-	nav {
-		background-color: #000000c7 !important;
-	}
-	
-	.navbar-collapse {
-		background-color: rgba(0, 0, 0, 0)!important;
-	}
-}
-/* index.html styling at screen widths over 768px ends here */
