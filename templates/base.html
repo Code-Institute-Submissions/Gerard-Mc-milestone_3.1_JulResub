@@ -57,9 +57,9 @@
     <!-- Section for flash messages -->
     
         {% with messages = get_flashed_messages() %}
-        <section class="row d-flex justify-content-center mt-5"></section>
         {% if messages %}
         {% for message in messages%}
+        <section class="row d-flex justify-content-center mt-5"></section>
         <h4 class="bg-navy text-center color-white font-bold px-3 py-2 border-radius-5px">{{ message }}</h4>
         {% endfor %}
         {% endif %}
