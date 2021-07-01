@@ -85,7 +85,6 @@ def login():
             # If username unuccessful, user is directed to login page
             flash("Incorrect Username and/or Password")
             return redirect(url_for("login"), user=user)
-
     return render_template("login.html", user=user)
 
 
@@ -185,6 +184,11 @@ def profile(user):
         display = False
         if request.method == "GET":
             display = True
+
+    if "user" not in session:
+        flash("You must be logged in to view this page")
+        return render_template("login.html")
+
         return render_template(
             "profile.html", user=user, display=display,
             gpu_in_database=gpu_in_database, fps_average=fps_average)
@@ -238,8 +242,16 @@ def search_gpu_homepage():
 @app.route("/admin", methods=["GET", "POST"])
 def admin():
     if "user" in session:
+        if user["name"] != "admin":
+            flash("You must be Admin to view this page")
+            return render_template("login.html")
         user = mongo.db.users.find_one(
             {"name": session["user"]})
+
+    if "user" not in session:
+        flash("You must be Admin to view this page")
+        return render_template("login.html")
+
     gpus = mongo.db.strong_gpu.aggregate(
         [{"$sort": {"rating": 1}}])
     if request.method == "POST":
