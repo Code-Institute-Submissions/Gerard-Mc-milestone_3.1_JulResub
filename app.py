@@ -180,14 +180,12 @@ def profile(user):
         display = False
         if request.method == "GET":
             display = True
-
-    if "user" not in session:
-        flash("You must be logged in to view this page")
-        return render_template("login.html")
-
         return render_template(
             "profile.html", user=user, display=display,
             gpu_in_database=gpu_in_database, fps_average=fps_average)
+    if "user" not in session:
+        flash("You must be logged in to view this page")
+        return render_template("login.html")
     return render_template("login.html")
 
 
