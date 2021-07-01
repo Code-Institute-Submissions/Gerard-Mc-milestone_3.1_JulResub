@@ -43,11 +43,11 @@
 }
 
 .bg-orange {
-	background-color: #FC3E29!important;
+	background-color: #FA4119!important;
 }
 
 .bg-green {
-	background-color: #D8FC42!important;
+	background-color: #9DFB01!important;
 }
 
 .boder-navy {
@@ -78,10 +78,7 @@
 	font-family: 'Orbitron', sans-serif;
 }
 
-
 /* Styling and classes used throughout site ends here */
-
-/* index.html styling at screen heights under 500px starts here */
 
 body {
 	background-image: url("../img/bg.jpg");
@@ -93,14 +90,14 @@ body {
 	-o-background-size: cover;
 	background-size: cover;
 	height: auto;
-	min-height: calc(80vw + 80px);
+	min-height: calc(100vh + 80px);
 }
 
 footer {
 	position: fixed;
 	left: 0;
 	bottom: 0;
-	height: 20px;
+	height: auto;
 }
 
 nav {
@@ -130,18 +127,18 @@ nav {
 }
 
 #index-content {
-	min-height: 80vw;
+	min-height: calc(78vh + 80px);
 	padding: 0;
-	margin-top: 1vh;
-	margin-bottom: 15vh;
+	margin-top: 0;
+	margin-bottom: 0vh;
 	width: 100%;
 	position: absolute;
-	top: 74px;
+	top: 22vh;
 	font-size: 15px;
 }
 
 #index-wrap-outer {
-	height: 40vw;
+	height: 39vh;
 	padding: 0;
 }
 
@@ -149,28 +146,107 @@ nav {
 	width: 100%;
 	padding: 0 0vw;
 	padding-bottom: 20px;
-	padding-top: 10px;
+	padding-top: 7vh;
 }
 
 #display-games-search {
-	max-height: 40vw;
+	max-height: calc(39vh + 80px);
 	overflow: auto;
 	text-align: left;
 	padding: 0px 10px;
 }
 
 #show-on-short-screen {
-	display: contents !important;
+	display: none !important;
 }
 
-#index-content h1 {
-	font-size: 40px;
+#reset-confirm {
+	margin-bottom: 20px;
+	margin-top: 20px;
 }
 
 
-/* #space{
+
+
+/* index.html styling at screen heights under 500px starts here */
+
+@media only screen and (max-height: 500px) {
+	body {
+		background-image: url("../img/bg.jpg");
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+		height: auto;
+		min-height: calc(80vw + 80px);
+	}
+	footer {
+		position: fixed;
+		left: 0;
+		bottom: 0;
+		height: 20px;
+	}
+	nav {
+		background-color: black;
+		height: 80px;
+		z-index: 3;
+	}
+	.navbar-collapse {
+		background-color: black;
+		margin-right: -16px !important;
+		margin-left: -16px !important;
+	}
+	.navbar-nav {
+		align-items: flex-end;
+		text-align: right;
+	}
+	.navbar-nav li {
+		width: 90px;
+		margin: 2vh 0;
+		margin-right: 22px;
+		border-bottom-style: solid;
+		border-bottom-width: 1px;
+		border-bottom-color: white;
+	}
+	#index-content {
+		min-height: 80vw;
+		padding: 0;
+		margin-top: 1vh;
+		margin-bottom: 15vh;
+		width: 100%;
+		position: absolute;
+		top: 74px;
+		font-size: 15px;
+	}
+	#index-wrap-outer {
+		height: 40vw;
+		padding: 0;
+	}
+	#index-wrap-inner {
+		width: 100%;
+		padding: 0 0vw;
+		padding-bottom: 20px;
+		padding-top: 10px;
+	}
+	#display-games-search {
+		max-height: 40vw;
+		overflow: auto;
+		text-align: left;
+		padding: 0px 10px;
+	}
+	#show-on-short-screen {
+		display: contents !important;
+	}
+	#index-content h1 {
+		font-size: 40px;
+	}
+	/* #space{
 	height: 30vw;
 } */
+}
 
 
 /* index.html styling at screen heights under 500px ends here */
