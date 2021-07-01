@@ -1,18 +1,23 @@
 {% extends "base.html" %}
 {% block content %}
-<section class="container-fluid col-12">
-    <div class="boder-navy p-5 border-radius-5px">
-        <h1 class="mb-3"><strong>Username: </strong> {{ user.name }}</h1>
-        <!-- Form to edit user GPU attribute in the user entity -->
-        {% if user.gpu %}
-        <p id="edit-gpu-1"><strong>GPU: </strong> {{ user.gpu }} <a href="#" data-id="1" data-number="1"
-                onclick="display(this.dataset.number, this.dataset.id)"> Edit</a></p>
+<section id="profile-section"
+    class="col-10 offset-1 col-md-6 offset-md-3 login-register-top-margin login-register-padding border-radius-5px font-2-bold bg-black-transparant color-white">
+    <div class="p-5">
+        <div class="text-center pb-3">
+            <h1 class="mb-3"><strong>Username: </strong> {{ user.name }}</h1>
+            <!-- Form to edit user GPU attribute in the user entity -->
+            {% if user.gpu %}
+            <p id="edit-gpu-1"><strong>GPU: </strong> {{ user.gpu }} <span class="edit-span" data-id="1" data-number="1"
+                    onclick="display(this.dataset.number, this.dataset.id)"> &nbsp;Edit</span></p>
+        </div>
         <div id="gpu-results-1" class="w-100" style="display: none">
             <form id="profile-submit-1" class="w-100" action="{{ url_for('search_gpu') }}" method="post">
-                <a class="d-block btn" href="{{ url_for('profile', user=session['user'])}}">Back</a>
+                <a class="d-block btn bg-white boder-black color-black font-2-bold py-0 mb-2 w-25 border-radius-5px"
+                    href="{{ url_for('profile', user=session['user'])}}">Back</a>
                 <input placeholder="Search GPUs" type="text" name="user-gpu" id="search_gpu_input-1" minlength="3"
                     class="validate" required>
-                <button form="profile-submit-1" data-id="search-button-1" data-number="1"
+                <button class="bg-green color-black font-1-bold btn boder-black border-radius-5px py-0"
+                    form="profile-submit-1" data-id="search-button-1" data-number="1"
                     onclick="display(this.dataset.number, this.dataset.id)" type="submit">
                     Search
                     GPU</button>
@@ -20,79 +25,91 @@
         </div>
         <!-- Displays a list of GPU search results and updates user GPU attribute in database entity on submit -->
         <div class="col-4 offset-4" id="gpu_list-1">
-            {% for x in gpu %}
+            <a class="d-block btn color-black bg-green border-radius-5px py-0 mb-3 w-25"
+                href="{{ url_for('profile', user=session['user'])}}">Back</a>
             <form id="submit_to_python-1" method="post" action="{{ url_for('submit') }}">
-                <div id="user-gpu-choice-1" class="d-block">
-                    <a class="d-block btn" href="{{ url_for('profile', user=session['user'])}}">Back</a>
+                <div id="user-gpu-choice-1" class="d-block gpu-results">
+                    {% for x in gpu %}
                     <textarea id="gpu-choice-1" style="display: none" class="hidden-text"
                         name="hidden-text-gpu-model">{{ x.model }}</textarea>
                     <!-- On submit, the user GPU field is updated -->
-                    <button form="submit_to_python-1" data-id="user-gpu-choice-1" data-number="1" type="submit"
-                        onclick="display(this.dataset.number, this.dataset.id)">{{ x.model }}</button>
+                    <button class="btn btn-link color-white" form="submit_to_python-1" data-id="user-gpu-choice-1"
+                        data-number="1" type="submit" onclick="display(this.dataset.number, this.dataset.id)">{{ x.model
+                        }}</button>
+                    {% endfor %}
                 </div>
             </form>
-            {% endfor %}
         </div>
         <!-- Form for user to input the frames per second achieved while playing the game on their GPU. -->
         {% if gpu_in_database %}
+        {% if gpu_in_database.games is not defined %}
+        <div id="games-list">
+            <p id="no-games-message" class="mt-3 hide">No playable games info available yet.<br>Try our
+                search engine <a href="{{ url_for('find_gpus') }}">here</a>.</p>
+        </div>
+        {% endif %}
         {% if gpu_in_database.games %}
-        
-        <div id="games-list" class="w-100">
-            <p id="games" class="mb-1"><strong>Playable games</strong></p>
-            {% for game in gpu_in_database.games %}
+        <div id="games-list">
+            <p id="main-paragraph" class="my-3">View list of playable games below</p>
+            <div id="games-list-wrap" class="w-100">
+                {% for game in gpu_in_database.games %}
+                <div class="game-wrap">
+                    <h5><strong>{{ game.name }}</strong></h5>
+                    <p class="m-0 font-2-regular">
 
-            <hr>
-            <h4><strong>{{ game.name }}</strong></h4>
-            <p class="mb-0">
-                
-                <strong>Average user FPS:</strong>
-                {% if game["userfps"] %}
-                {% set sum = namespace(value=0) %}
-                {% set denominator = namespace(value=0) %}
-                {% set averageFps = namespace(value=0) %}
+                        Average user FPS:
+                        {% if game["userfps"] %}
+                        {% set sum = namespace(value=0) %}
+                        {% set denominator = namespace(value=0) %}
+                        {% set averageFps = namespace(value=0) %}
 
-                {% for object in game["userfps"] %}
-                
-                    {% set sum.value = sum.value + object.fps %}
-                    {% set denominator.value = denominator.value + 1 %}
-                {% endfor %}
-                {% set averageFps.value = sum.value / denominator.value %}
-                <strong>{{ averageFps.value|round(1, 'floor')|int}}</strong>
-            </p>
-            {% endif %}
-            <p><strong>Your FPS: </strong><span id="userfps_{{ game.name|replace(' ', '') }}"></span>
-                {% if game["userfps"] %}
-                {% for object in game["userfps"] %}
-                    {% if (object["username"] == user.name and (object["fps"] is defined ) ) %}
+                        {% for object in game["userfps"] %}
+
+                        {% set sum.value = sum.value + object.fps %}
+                        {% set denominator.value = denominator.value + 1 %}
+                        {% endfor %}
+                        {% set averageFps.value = sum.value / denominator.value %}
+                        {{ averageFps.value|round(1, 'floor')|int}}
+                    </p>
+                    {% endif %}
+                    <p class="font-2-regular mb-0">Your FPS: <u><span
+                                id="userfps_{{ game.name|replace(' ', '') }}"></span></u>&nbsp;&nbsp;
+                        {% if game["userfps"] %}
+                        {% for object in game["userfps"] %}
+                        {% if (object["username"] == user.name and (object["fps"] is defined ) ) %}
                         <script>
                             document.getElementById("userfps_{{ game.name|replace(' ', '') }}").innerText = {{ object.fps }};
                         </script>
                         {% break %}
-                    {% else %}
+                        {% else %}
                         <script>
                             document.getElementById("userfps_{{ game.name|replace(' ', '') }}").innerText = "Empty";
                         </script>
-                    {% endif %}
-                {% endfor %}
-                {% else %}
-                <script>
-                    document.getElementById("userfps_{{ game.name|replace(' ', '') }}").innerText = "Empty";
-                </script>
-                {% endif %}
-                <span id="edit-switch-{{ game.name|replace(' ', '') }}" data-switch="0"
-                    data-game="{{ game.name|replace(' ', '') }}"
-                    onclick="show_edit_fps_options(this.dataset.switch, this.dataset.game)">Edit</span>
-                <br><br>
-            </p>
-            <div id="edit-fps-{{ game.name|replace(' ', '') }}" style="display: none;">
-                <p>Input your FPS @ Low settings and 1080p resolution.</p>
-                <form class="w-100" action="{{ url_for('profile', user=session['user'])}}" method="post">
-                    <input min="0" max="1000" type="number" name="submit_fps_input">
-                    <textarea style="display: none" class="hidden-text" name="game-name">{{ game.name }}</textarea>
-                    <button type="submit">Submit</button>
-                </form>
+                        {% endif %}
+                        {% endfor %}
+                        {% else %}
+                        <script>
+                            document.getElementById("userfps_{{ game.name|replace(' ', '') }}").innerText = "Empty";
+                        </script>
+                        {% endif %}
+                        <span class="edit-span small-text" id="edit-switch-{{ game.name|replace(' ', '') }}"
+                            data-switch="0" data-game="{{ game.name|replace(' ', '') }}"
+                            onclick="show_edit_fps_options(this.dataset.switch, this.dataset.game)">Edit</span>
+                        <br><br>
+                    </p>
+                    <div id="edit-fps-{{ game.name|replace(' ', '') }}" style="display: none;">
+                        <p>Input your FPS for {{game.name}} @ Low settings and 1080p resolution.</p>
+                        <form class="w-100 mb-3" action="{{ url_for('profile', user=session['user'])}}" method="post">
+                            <input min="0" max="1000" type="number" name="submit_fps_input">
+                            <textarea style="display: none" class="hidden-text"
+                                name="game-name">{{ game.name }}</textarea>
+                            <button class="bg-green btn color-black boder-none border-radius-5px boder-black py-0"
+                                type="submit">Submit</button>
+                        </form>
+                    </div>
+                    {% endfor %}
+                </div>
             </div>
-            {% endfor %}
         </div>
     </div>
     {% endif %}
@@ -102,31 +119,38 @@
     <p id="edit-gpu-2"><strong>GPU: </strong> {{ user.gpu }} <a href="#" data-id="2" data-number="2"
             onclick="display(this.dataset.number, this.dataset.id)"> Add GPU</a></p>
     <div id="gpu-results-2" class="w-100" style="display: none">
-        <a class="d-block btn" href="{{ url_for('profile', user=session['user'])}}">Back</a>
         <form id="profile-submit-2" class="w-100" action="{{ url_for('search_gpu') }}" method="post">
+            <a class="d-block btn bg-white boder-black color-black font-2-bold py-0 mb-2 w-25 ml-5 border-radius-5px"
+                href="{{ url_for('profile', user=session['user'])}}">Back</a>
             <input placeholder="Search GPUs" type="text" name="user-gpu" id="search_gpu_input-2" minlength="3"
-                class="validate" required>
-            <button form="profile-submit-2" data-id="search-button-2" data-number="2"
+                class="validate " required>
+            <button class="bg-green color-black font-1-bold btn boder-black border-radius-5px py-0"
+                form="profile-submit-2" data-id="search-button-2" data-number="2"
                 onclick="display(this.dataset.number, this.dataset.id)" type="submit">
                 Search
                 GPU</button>
         </form>
     </div>
     <!-- Below, the user can select from the search results -->
+
+
     <div class="col-4 offset-4" id="gpu_list-2">
-        {% for x in gpu %}
+        <a class="d-block btn color-black bg-green border-radius-5px py-0 mb-3 w-25"
+            href="{{ url_for('profile', user=session['user'])}}">Back</a>
         <form id="submit_to_python-2" method="post" action="{{ url_for('submit') }}">
-            <a class="d-block btn" href="{{ url_for('profile', user=session['user'])}}">Back</a>
-            <div class="d-block">
+            <div id="user-gpu-choice-2" class="d-block gpu-results">
+                {% for x in gpu %}
                 <textarea id="gpu-choice-2" style="display: none" class="hidden-text"
                     name="hidden-text-gpu-model">{{ x.model }}</textarea>
                 <!-- On submit, the users GPU field is updated -->
-                <button form="submit_to_python-2" data-id="user-gpu-choice-2" data-number="2" type="submit"
-                    onclick="display(this.dataset.number, this.dataset.id)">{{ x.model }}</button>
+                <button class="btn btn-link color-white" form="submit_to_python-2" data-id="user-gpu-choice-2"
+                    data-number="2" type="submit" onclick="display(this.dataset.number, this.dataset.id)">{{ x.model
+                    }}</button>
+                {% endfor %}
             </div>
         </form>
-        {% endfor %}
     </div>
+
     {% endif %}
 </section>
 {% endblock %}
@@ -158,17 +182,19 @@
     var display_variable_1 = sessionStorage.getItem('link-display-1');
     var gpu_input_paragragh_2 = document.getElementById("edit-gpu-2");
     var display_variable_2 = sessionStorage.getItem('link-display-2');
-    var games_list = document.getElementById("games-list");
+    var games_list_1 = document.getElementById("games-list");
     // Some elements are loaded by Jinja depending on whether the user has a GPU attribute in their user entity or not.
     // If loaded by Jinja, this code edits the display value for the paragraphs with the IDs:edit-gpu-1 and edit-gpu-2.
     if ((gpu_input_paragragh_1 != null && typeof (gpu_input_paragragh_1) != "undefined")) {
         if (display_variable_1 != null) {
             gpu_input_paragragh_1.style.display = display_variable_1;
-            games_list.style.display = display_variable_1;
+            games_list_1.style.display = display_variable_1;
+            games_list_2.style.display = display_variable_1;
         }
         else {
             gpu_input_paragragh_1.style.display = "contents";
-            games_list.style.display = "contents";
+            games_list_1.style.display = "contents";
+            games_list_2.style.display = "contents";
         }
     }
     if ((gpu_input_paragragh_2 != null && typeof (gpu_input_paragragh_2) != "undefined")) {
@@ -221,10 +247,12 @@
 
         if (switch_number == 0) {
             document.getElementById(divID).style.display = "contents";
+            document.getElementById(`edit-switch-${data_game}`).innerText = "Return";
             switch_id.setAttribute("data-switch", 1);
         }
         else {
             document.getElementById(divID).style.display = "none";
+            document.getElementById(`edit-switch-${data_game}`).innerText = "Edit";
             switch_id.setAttribute("data-switch", 0);
         }
     }

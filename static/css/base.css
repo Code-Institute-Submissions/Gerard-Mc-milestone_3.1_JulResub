@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 /* Styling and classes used throughout site starts here */
 
@@ -12,6 +13,10 @@
 
 .bg-navy {
 	background-color: #280061 !important;
+}
+
+.bg-light {
+	background-color: #f8f8f8 !important;
 }
 
 .bg-black-transparant {
@@ -28,6 +33,22 @@
 
 .color-navy {
 	color: #280061 !important;
+}
+
+.color-green {
+	color: #9DFB01 !important;
+}
+
+.z-index-3{
+z-index: 3;
+}
+
+.color-purple {
+	color: #8900AD;
+}
+
+.color-black {
+	color: #000000 !important;
 }
 
 .color-white {
@@ -50,10 +71,13 @@
 	background-color: #9DFB01!important;
 }
 
-.boder-navy {
-	border-style: solid !important;
-	border-width: 1px !important;
-	border-color: rgba(40, 0, 97, 0.57) !important;
+.boder-white {
+	border-bottom-style: solid !important;
+	border-bottom-width: 1px !important;
+	border-bottom-color: rgb(0, 0, 0) 0.57) !important;
+}
+.boder-none{
+	border-style: none;
 }
 
 .boder-white {
@@ -78,6 +102,20 @@
 	font-family: 'Orbitron', sans-serif;
 }
 
+.font-2-regular {
+	font-weight: 500;
+	font-family: 'Roboto', sans-serif;
+}
+
+.font-2-bold {
+	font-weight: 700;
+	font-family: 'Roboto', sans-serif;
+}
+
+.font-2-bolder {
+	font-weight: 900;
+	font-family: 'Roboto', sans-serif;
+}
 
 .round-border {
 	border-radius: 15px;
@@ -288,3 +326,50 @@ nav {
 }
 
 /* login.html and register.html styling ends here */
+
+/* profile.html and register.html styling starts here */
+
+.edit-span{
+	color:#88db03;
+	cursor: pointer;
+}
+
+.game-wrap{
+	padding-top: 10px;
+	border-top-style: solid;
+	border-top-width: 2px;
+	border-top-color: white;
+
+}
+
+#games-list-wrap{
+max-height: 60vh; 
+overflow: auto;
+}
+
+#profile-section{
+	margin-bottom: 10vh;
+}
+
+.small-text{
+	font-size: 12px;
+}
+
+.gpu-results{
+	max-height: 60vh;
+	overflow: scroll
+}
+
+@media only screen and (max-width: 767px) {
+	#profile-section h1{
+		font-size: 25px;
+		
+	}
+
+	#profile-section p{
+		font-size:14px;
+		
+	}
+
+
+}
