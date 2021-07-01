@@ -102,7 +102,7 @@
     <p id="edit-gpu-2"><strong>GPU: </strong> {{ user.gpu }} <a href="#" data-id="2" data-number="2"
             onclick="display(this.dataset.number, this.dataset.id)"> Add GPU</a></p>
     <div id="gpu-results-2" class="w-100" style="display: none">
-        <a class="d-block" href="{{ url_for('profile', user=session['user'])}}" class="btn">Back</a>
+        <a class="d-block btn" href="{{ url_for('profile', user=session['user'])}}">Back</a>
         <form id="profile-submit-2" class="w-100" action="{{ url_for('search_gpu') }}" method="post">
             <input placeholder="Search GPUs" type="text" name="user-gpu" id="search_gpu_input-2" minlength="3"
                 class="validate" required>
@@ -116,7 +116,7 @@
     <div class="col-4 offset-4" id="gpu_list-2">
         {% for x in gpu %}
         <form id="submit_to_python-2" method="post" action="{{ url_for('submit') }}">
-            <a class="d-block" href="{{ url_for('profile', user=session['user'])}}" class="btn">Back</a>
+            <a class="d-block btn" href="{{ url_for('profile', user=session['user'])}}">Back</a>
             <div class="d-block">
                 <textarea id="gpu-choice-2" style="display: none" class="hidden-text"
                     name="hidden-text-gpu-model">{{ x.model }}</textarea>

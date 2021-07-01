@@ -106,7 +106,6 @@ def search_gpu():
     if user_gpu_update:
         gpu = list(mongo.db.strong_gpu.find(
             {"model": {"$regex": user_gpu_update, "$options": "i"}}))
-
     if "user" in session:
         user = mongo.db.users.find_one(
             {"name": session["user"]})
@@ -114,16 +113,13 @@ def search_gpu():
             current_gpu = mongo.db.strong_gpu.find_one(
                 {"model": {"$regex": user['gpu'], "$options": "i"}})
             gpu_in_database = current_gpu
-
     if "user" not in session:
         flash("You must log-in to view this page")
         return redirect(url_for("login"))
-
     if not user_gpu_update:
         if "gpu" in user:
             gpu_in_database = mongo.db.strong_gpu.find_one(
                 {"model": user['gpu']})
-
         return redirect(url_for("profile.html"))
     return render_template(
         "profile.html", gpu=gpu, user=user, gpu_in_database=gpu_in_database)
@@ -243,22 +239,19 @@ def search_gpu_homepage():
 def admin():
     if "user" in session:
         if user["name"] != "admin":
-            flash("You must be Admin to view this page")
+            flash("You must be an administrator to view this page")
             return render_template("login.html")
         user = mongo.db.users.find_one(
             {"name": session["user"]})
-
     if "user" not in session:
         flash("You must be Admin to view this page")
         return render_template("login.html")
-
     gpus = mongo.db.strong_gpu.aggregate(
         [{"$sort": {"rating": 1}}])
     if request.method == "POST":
         insert_gpu_model = request.form.get("insert-gpu-model")
         insert_gpu_rating = request.form.get("insert-gpu-rating")
         delete_gpu_rating = request.form.get("delete-gpu-rating")
-
         if delete_gpu_rating:
             mongo.db.strong_gpu.delete_one(
                 {"rating": int(delete_gpu_rating)})
