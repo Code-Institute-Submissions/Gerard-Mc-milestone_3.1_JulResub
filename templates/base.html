@@ -3,7 +3,7 @@
 
 <head>
 
-    <title>GPU Check</title>
+    <title>GPUForce</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -16,35 +16,36 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-navy">
-        <a class="navbar-brand" href="{{ url_for('find_gpus') }}">GPU CHECK</a>
+    <nav class="navbar navbar-expand-lg navbar-dark font-1-bolder color-light-grey z-index-2">
+        <a id="logo" class="navbar-brand color-light-grey" href="{{ url_for('find_gpus') }}"><img style="max-height: 50px;" src="{{ url_for('static', filename='img/logo.png') }}"> GPUForce</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse " id="navbarNav">
+        <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <!-- If logged in, the user can access the below links; Profile and logout -->
-                {% if (user["name"] == "admin" ) %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('admin') }}">Admin</a>
+                {% if user and (user["name"] == "admin" ) %}
+                <li class="nav-item color-light-grey">
+                    <a class="nav-link color-light-grey" href="{{ url_for('admin') }}">Admin</a>
                 </li>
                 {% endif %}
-                    {% if session.user %}
+                {% if session.user %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('profile', user=session['user'])}}" id="profile-link-id"
-                        data-id="profile-link" onclick="display(this.id,this.dataset.id)">Profile</a>
+                    <a class="nav-link color-light-grey" href="{{ url_for('profile', user=session['user'])}}"
+                        id="profile-link-id" data-id="profile-link"
+                        onclick="display(this.id,this.dataset.id)">Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('logout') }}">Log Out</a>
+                    <a class="nav-link color-light-grey" href="{{ url_for('logout') }}">Log Out</a>
                 </li>
                 <!-- If not logged in, the user can access the below links; Resgister and login -->
                 {% else %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('register') }}">Register</a>
+                    <a class="nav-link color-light-grey" href="{{ url_for('register') }}">Register</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('login') }}">Log In</a>
+                    <a class="nav-link color-light-grey" href="{{ url_for('login') }}">Log In</a>
                 </li>
                 {% endif %}
                 {% if session.user %}
@@ -63,13 +64,13 @@
         {% endif %}
         {% endwith %}
     </section>
-
     {% block content %}
     {% endblock %}
-
+    <footer class="bg-black w-100 d-flex justify-content-center">
+        <p class="text-center py-3 m-0 color-light-grey">2021 Copyright GPUForce</p>
+    </footer>
     {% block postloadjs %}
     {% endblock %}
-
 </body>
 
 </html>

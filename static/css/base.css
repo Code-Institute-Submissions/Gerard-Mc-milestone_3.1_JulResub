@@ -1,47 +1,214 @@
-.float-left{
-    float: left !important;
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap');
+
+/* Styling and classes used throughout site starts here */
+
+body {
+	background-image: url("../img/bg.jpg");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	min-height: 100vh;
 }
 
-.float-right{
-    float: right !important;
+.float-left {
+	float: left !important;
 }
 
-.bg-navy{
-    background-color: #280061 !important;
+.float-right {
+	float: right !important;
 }
 
-.color-navy{
-    color: #280061 !important;
+.bg-navy {
+	background-color: #280061 !important;
 }
 
-.color-white{
-    color: white !important;
+.bg-black-transparant {
+	background-color: #000000c7 !important;
 }
 
-.bg-navy{
-    background-color: #280061 !important;
+.bg-black {
+	background-color: #000000 !important;
 }
 
-.bg-grey{
-    background-color: #e0e0e0 !important;
+.color-light-grey {
+	color: rgb(228, 228, 228) !important;
 }
 
-.boder-navy{
-    border-style: solid !important;
-    border-width: 1px !important;
-    border-color: rgba(40, 0, 97, 0.57) !important;
+.color-navy {
+	color: #280061 !important;
 }
 
-.font-bold{
-    font-weight: bold;
+.color-white {
+	color: white !important;
 }
 
-.border-radius-5px{
-    border-radius: 5px;
+.bg-navy {
+	background-color: #280061 !important;
 }
 
-/* overflow control for the gpu list the user chooses from on the profile page */
-#gpu_list{
-    max-height: 400px !important;
-    overflow:auto;
+.bg-grey {
+	background-color: #e0e0e0 !important;
 }
+
+.bg-orange {
+	background-color: #FC3E29!important;
+}
+
+.bg-green {
+	background-color: #D8FC42!important;
+}
+
+.boder-navy {
+	border-style: solid !important;
+	border-width: 1px !important;
+	border-color: rgba(40, 0, 97, 0.57) !important;
+}
+
+.boder-white {
+	border-color: rgb(255, 255, 255) !important;
+}
+
+.font-bold {
+	font-weight: bold;
+}
+
+.border-radius-5px {
+	border-radius: 5px;
+}
+
+.font-1-bold {
+	font-weight: 700;
+	font-family: 'Orbitron', sans-serif;
+}
+
+.font-1-bolder {
+	font-weight: 900;
+	font-family: 'Orbitron', sans-serif;
+}
+
+nav {
+	height: 10vh;
+	background-color: #000000c7;
+}
+
+footer {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	height: auto;
+}
+
+@media only screen and (max-width: 991px) {
+	nav {
+		background-color: black !important;
+	}
+	.navbar-collapse {
+		background-color: black;
+		margin-right: -16px !important;
+		margin-left: -16px !important;
+	}
+	.navbar-nav {
+		align-items: flex-end;
+		text-align: right;
+	}
+	.navbar-nav li {
+		width: 90px;
+		margin: 2vh 0;
+		margin-right: 22px;
+		border-bottom-style: solid;
+		border-bottom-width: 1px;
+		border-bottom-color: white;
+	}
+	/* Styling and classes used throughout site ends here */
+	/* index.html styling starts here */
+	#index-content {
+		position: absolute;
+		top: 0;
+		margin-top: 15vh;
+		margin-bottom: 15vh;
+		height: auto;
+	}
+	#user_select_form {
+		height: auto;
+	}
+	#display-games-search {
+		max-height: 40vh;
+		height: auto;
+		overflow: auto;
+	}
+	.z-index-2 {
+		z-index: 2 !important;
+	}
+	.button-style {
+		width: 50%!important;
+		margin: 0 !important;
+		padding: 0 !important;
+	}
+	#reset-confirm {
+		width: 100%!important;
+	}
+	@media only screen and (max-width: 991px) {
+		#index-content {
+			position: absolute;
+			top: 0;
+			margin-top: 22vh;
+			margin-bottom: 15vh;
+			height: auto;
+			background-color: rgba(0, 0, 0, 0.672)!important;
+		}
+		#display-games-search {
+			max-height: 30vh;
+		}
+	}
+	@media only screen and (max-height: 500px) {
+		body {
+			height: 600px;
+			font-size: 10px;
+		}
+		#display-games-search {
+			min-height: 300px;
+			overflow: auto;
+			margin-top: -10px !important;
+			padding-top: 0px !important;
+		}
+		#index-content {
+			margin-top: 50px;
+			height: auto;
+		}
+		#index-content h1 {
+			font-size: 30px;
+		}
+		#index-content p {
+			font-size: 12px;
+		}
+		nav {
+			height: 80px;
+		}
+		#index-top-forms-div {
+			padding-top: 0px !important;
+		}
+		#show-on-short-screen {
+			display: contents!important;
+		}
+	}
+	@media only screen and (min-height: 501px) {
+		#show-on-short-screen {
+			display: none!important;
+		}
+	}
+	@media only screen and (max-width: 455px) {
+		#index-top-forms-div {
+			padding: 0;
+			margin-right: 0!important;
+			margin-left: 0!important;
+		}
+		.gpu-and-game-search-forms {
+			width: 50%;
+			margin: 0;
+			padding: 0;
+		}
+		#index-content {
+			min-width: 100vw!important;
+		}
+	}
+	/* index.html styling ends here */

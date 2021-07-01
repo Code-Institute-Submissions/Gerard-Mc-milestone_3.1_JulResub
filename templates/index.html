@@ -1,48 +1,58 @@
 {% extends "base.html" %}
 {% block content %}
-<section class="col-4 offset-4 mt-5">
-    <br>
-    <h1>Can your GPU run it?</h1>
-    <p>Search for your GPU and chosen game in the fields below</p>
-    <hr>
-    <!-- Form that takes user game input and sends to backend to search database -->
-    <form action="{{ url_for('search_game_homepage') }}" method="post">
-        <!-- Add autocomplete="off" to input when testing is complete for UX purposes-->
-        <input type="text" name="query-game" id="query-game" minlength="3" class="validate" required>
-        <button onclick="display_results()" class="search-button" type="submit"> Search</button>
-    </form>
-
-    <!-- Form that takes user gpu input and sends to backend to search database -->
-    <form action="{{ url_for('search_gpu_homepage') }}" method="post">
-        <input type="text" name="query-gpu" id="query-gpu" minlength="3" class="validate" required>
-        <button onclick="display_results()" class="search-button" type="submit"> Search</button>
-    </form>
-     <div>
-        <button class="submit-button" id="submit_to_python_button" form="submit_to_python" type="submit">Confirm
-        </button>
-        <button class="submit-button" id="reset" onclick="reset()">Reset
-        </button>
+<section id="index-content"
+    class="container-fluid col-12 col-lg-6 offset-lg-3 color-white bg-black-transparant font-1-bolder pb-3 px-5">
+    <div class="text-center pt-5">
+        <h1>Can your GPU run it?</h1>
+        <p>Search for your GPU and a game in the fields below.</p>
     </div>
 
+    <div id="index-top-forms-div" class="text-center container-fluid pt-5 mb-1">
+        <!-- Form that takes user game input and sends to backend to search database -->
+        <form action="{{ url_for('search_game_homepage') }}" method="post">
+            <!-- Add autocomplete="off" to input when testing is complete for UX purposes-->
+            <input type="text" name="query-game" id="query-game" minlength="3"
+                class="validate gpu-and-game-search-forms" required>
+            <button onclick="display_results()" class="search-button bg-green font-1-bold" type="submit">
+                Search</button>
+        </form>
+
+        <!-- Form that takes user gpu input and sends to backend to search database -->
+        <form action="{{ url_for('search_gpu_homepage') }}" method="post">
+            <input type="text" name="query-gpu" id="query-gpu" minlength="3" class="validate gpu-and-game-search-forms"
+                required>
+            <button onclick="display_results()" class="search-button bg-green font-1-bold" type="submit">
+                Search</button>
+        </form>
+        <div id="reset-confirm" class="container-fluid mb-5 mt-2">
+            <button class="bg-orange font-1-bolder col-6 submit-button button-style float-left" id="reset"
+                onclick="reset()">Reset
+            </button>
+            <button class="bg-green font-1-bolder submit-button button-style float-right col-6"
+                id="submit_to_python_button" form="submit_to_python" type="submit">Confirm
+            </button>
+        </div>
+    </div>
     <!-- Div displays after user search for gpu has been sent. Displays the results of the search -->
-    <div style="max-height:400px" class="overflow-auto">
-        <div id="user_select_form" style="display:none">
-        {% for x in game_list %}
-        <hr>
-        <!-- When user clicks this link, the game name and id are stored and the results box disappear -->
-        <a href="#" onclick="display_game_choice(this.id, this.dataset.id)" name="game_choice" id="{{ x.name }}"
-            data-id="{{ x.appid }}">{{ x.name }}</a>
+    <div id="display-games-search" class="pb-5">
+        <div class="text-center py-1">
+            <h5 id="show-on-short-screen">Select Below</h5>
+        </div>
+        <div id="user_select_form" style="display:none" class="row mt-2">
+            {% for x in game_list %}
+            <hr class="border-white">
+            <!-- When user clicks this link, the game name and id are stored and the results box disappear -->
+            <a class="color-white" href="#" onclick="display_game_choice(this.id, this.dataset.id)" name="game_choice"
+                id="{{ x.name }}" data-id="{{ x.appid }}">{{ x.name }}</a>
+            {% endfor %}
 
-        {% endfor %}
-
-        {% for x in gpu %}
-        <hr>
-        <!-- When user clicks this link, the gpu model and rating are stored and the results box disappear -->
-        <a href="#" onclick="display_gpu_choice(this.id, this.dataset.id)" name="game_choice" id="{{ x.model }}"
-            data-id="{{ x.rating}}">{{ x.model }}</a>
-
-        {% endfor %}
-    </div>
+            {% for x in gpu %}
+            <hr class="border-white">
+            <!-- When user clicks this link, the gpu model and rating are stored and the results box disappear -->
+            <a class="color-white" href="#" onclick="display_gpu_choice(this.id, this.dataset.id)" name="game_choice"
+                id="{{ x.model }}" data-id="{{ x.rating}}">{{ x.model }}</a>
+            {% endfor %}
+        </div>
     </div>
 
     <!-- When user clicks submit, the gpu model and game name are sent to the backend -->
@@ -64,20 +74,20 @@
     if ((sessionStorage.getItem('name') == null)) {
         document.getElementById("query-game").placeholder = "Search Game";
     }
-    else{
+    else {
         document.getElementById("query-game").placeholder = sessionStorage.getItem('name');
     }
     if ((sessionStorage.getItem('gpu') == null)) {
         document.getElementById("query-gpu").placeholder = "Search GPU";
     }
-    else{
+    else {
         document.getElementById("query-gpu").placeholder = sessionStorage.getItem('gpu');
     }
 
     // If the display session storage has a value, the results box value will be set to the session item.
     // Otherwise, it will stay as the inline style of "display:none"
     // This ensures on initial page load, the results box wont be displayed
-    if (sessionStorage.getItem('display') != null){
+    if (sessionStorage.getItem('display') != null) {
         document.getElementById("user_select_form").style.display = sessionStorage.getItem('display');
     }
 
