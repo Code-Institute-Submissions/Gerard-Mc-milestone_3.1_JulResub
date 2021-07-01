@@ -2,14 +2,6 @@
 
 /* Styling and classes used throughout site starts here */
 
-body {
-	background-image: url("../img/bg.jpg");
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: cover;
-	min-height: 100vh;
-}
-
 .float-left {
 	float: left !important;
 }
@@ -86,129 +78,99 @@ body {
 	font-family: 'Orbitron', sans-serif;
 }
 
-nav {
-	height: 10vh;
-	background-color: #000000c7;
+
+/* Styling and classes used throughout site ends here */
+
+/* index.html styling at screen heights under 500px starts here */
+
+body {
+	background-image: url("../img/bg.jpg");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	height: auto;
+	min-height: calc(80vw + 80px);
 }
 
 footer {
 	position: fixed;
 	left: 0;
 	bottom: 0;
-	height: auto;
+	height: 20px;
 }
 
-@media only screen and (max-width: 991px) {
-	nav {
-		background-color: black !important;
-	}
-	.navbar-collapse {
-		background-color: black;
-		margin-right: -16px !important;
-		margin-left: -16px !important;
-	}
-	.navbar-nav {
-		align-items: flex-end;
-		text-align: right;
-	}
-	.navbar-nav li {
-		width: 90px;
-		margin: 2vh 0;
-		margin-right: 22px;
-		border-bottom-style: solid;
-		border-bottom-width: 1px;
-		border-bottom-color: white;
-	}
-	/* Styling and classes used throughout site ends here */
-	/* index.html styling starts here */
-	#index-content {
-		position: absolute;
-		top: 0;
-		margin-top: 15vh;
-		margin-bottom: 15vh;
-		height: auto;
-	}
-	#user_select_form {
-		height: auto;
-	}
-	#display-games-search {
-		max-height: 40vh;
-		height: auto;
-		overflow: auto;
-	}
-	.z-index-2 {
-		z-index: 2 !important;
-	}
-	.button-style {
-		width: 50%!important;
-		margin: 0 !important;
-		padding: 0 !important;
-	}
-	#reset-confirm {
-		width: 100%!important;
-	}
-	@media only screen and (max-width: 991px) {
-		#index-content {
-			position: absolute;
-			top: 0;
-			margin-top: 22vh;
-			margin-bottom: 15vh;
-			height: auto;
-			background-color: rgba(0, 0, 0, 0.672)!important;
-		}
-		#display-games-search {
-			max-height: 30vh;
-		}
-	}
-	@media only screen and (max-height: 500px) {
-		body {
-			height: 600px;
-			font-size: 10px;
-		}
-		#display-games-search {
-			min-height: 300px;
-			overflow: auto;
-			margin-top: -10px !important;
-			padding-top: 0px !important;
-		}
-		#index-content {
-			margin-top: 50px;
-			height: auto;
-		}
-		#index-content h1 {
-			font-size: 30px;
-		}
-		#index-content p {
-			font-size: 12px;
-		}
-		nav {
-			height: 80px;
-		}
-		#index-top-forms-div {
-			padding-top: 0px !important;
-		}
-		#show-on-short-screen {
-			display: contents!important;
-		}
-	}
-	@media only screen and (min-height: 501px) {
-		#show-on-short-screen {
-			display: none!important;
-		}
-	}
-	@media only screen and (max-width: 455px) {
-		#index-top-forms-div {
-			padding: 0;
-			margin-right: 0!important;
-			margin-left: 0!important;
-		}
-		.gpu-and-game-search-forms {
-			width: 50%;
-			margin: 0;
-			padding: 0;
-		}
-		#index-content {
-			min-width: 100vw!important;
-		}
-	}
-	/* index.html styling ends here */
+nav {
+	background-color: black;
+	height: 80px;
+	z-index: 3;
+}
+
+.navbar-collapse {
+	background-color: black;
+	margin-right: -16px !important;
+	margin-left: -16px !important;
+}
+
+.navbar-nav {
+	align-items: flex-end;
+	text-align: right;
+}
+
+.navbar-nav li {
+	width: 90px;
+	margin: 2vh 0;
+	margin-right: 22px;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-bottom-color: white;
+}
+
+#index-content {
+	min-height: 80vw;
+	padding: 0;
+	margin-top: 1vh;
+	margin-bottom: 15vh;
+	width: 100%;
+	position: absolute;
+	top: 74px;
+	font-size: 15px;
+}
+
+#index-wrap-outer {
+	height: 40vw;
+	padding: 0;
+}
+
+#index-wrap-inner {
+	width: 100%;
+	padding: 0 0vw;
+	padding-bottom: 20px;
+	padding-top: 10px;
+}
+
+#display-games-search {
+	max-height: 40vw;
+	overflow: auto;
+	text-align: left;
+	padding: 0px 10px;
+}
+
+#show-on-short-screen {
+	display: contents !important;
+}
+
+#index-content h1 {
+	font-size: 40px;
+}
+
+
+/* #space{
+	height: 30vw;
+} */
+
+
+/* index.html styling at screen heights under 500px ends here */

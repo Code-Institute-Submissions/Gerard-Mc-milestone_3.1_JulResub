@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
 <section id="index-content"
-    class="container-fluid col-12 col-lg-6 offset-lg-3 color-white bg-black-transparant font-1-bolder pb-3 px-5">
-    <div class="text-center pt-5">
-        <h1>Can your GPU run it?</h1>
-        <p>Search for your GPU and a game in the fields below.</p>
-    </div>
-
-    <div id="index-top-forms-div" class="text-center container-fluid pt-5 mb-1">
+    class="container-fluid col-12 col-md-10 offset-md-1 col-lg-6 offset-lg-3 color-white font-1-bolder">
+    <div id="index-wrap-outer" class="text-center container-fluid">
+        <div id="index-wrap-inner" class="text-center container-fluid bg-black-transparant">
+        <div class="text-center">
+            <h1>Can your GPU run it?</h1>
+            <p>Search for your GPU and a game in the fields below.</p>
+        </div>
         <!-- Form that takes user game input and sends to backend to search database -->
         <form action="{{ url_for('search_game_homepage') }}" method="post">
             <!-- Add autocomplete="off" to input when testing is complete for UX purposes-->
@@ -24,7 +24,7 @@
             <button onclick="display_results()" class="search-button bg-green font-1-bold" type="submit">
                 Search</button>
         </form>
-        <div id="reset-confirm" class="container-fluid mb-5 mt-2">
+        <div id="reset-confirm" class="container-fluid pb-2 mb-4 mt-2">
             <button class="bg-orange font-1-bolder col-6 submit-button button-style float-left" id="reset"
                 onclick="reset()">Reset
             </button>
@@ -32,13 +32,14 @@
                 id="submit_to_python_button" form="submit_to_python" type="submit">Confirm
             </button>
         </div>
-    </div>
+    
     <!-- Div displays after user search for gpu has been sent. Displays the results of the search -->
-    <div id="display-games-search" class="pb-5">
-        <div class="text-center py-1">
-            <h5 id="show-on-short-screen">Select Below</h5>
-        </div>
-        <div id="user_select_form" style="display:none" class="row mt-2">
+    <div id="display-games-search" >
+        
+        <div id="user_select_form" style="display:none" class="row">
+            <div class="text-center p-0 m-0">
+                <h5 id="show-on-short-screen" style="display:none">Select Below &darr;</h5>
+            </div>
             {% for x in game_list %}
             <hr class="border-white">
             <!-- When user clicks this link, the game name and id are stored and the results box disappear -->
@@ -66,7 +67,12 @@
         <!-- JS changes the text area vaule to the gpu rating -->
         <textarea style="display: none" class="hidden-text" id="submit-gpu-rating" name="gpu-rating"></textarea>
     </form>
+</div>
+</div>
 </section>
+
+<!-- <div id="space" class="container"></div> -->
+<!-- <div id="space" class="container-fluid"> </div> -->
 <script src="{{ url_for('static', filename='js/reset_profile_page_variable.js') }}"></script>
 <script>
     // IF statements prevent input user GPU/Game input field placeholders loading as NULL when session data is empty.
