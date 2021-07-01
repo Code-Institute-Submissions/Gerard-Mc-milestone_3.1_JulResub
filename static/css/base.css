@@ -79,10 +79,15 @@
 }
 
 
+.round-border {
+	border-radius: 15px;
+}
+
+
 /* Styling and classes used throughout site ends here */
 
 body {
-	/* background-image: url("../img/bg.jpg"); */
+	background-image: url("../img/bg.jpg");
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -165,7 +170,10 @@ nav {
 	margin-bottom: 20px;
 	margin-top: 20px;
 }
+
+
 /* index.html styling at screen widths over 768px starts here */
+
 @media only screen and (min-width: 768px) {
 	#index-content {
 		min-height: calc(68vh + 80px);
@@ -187,16 +195,17 @@ nav {
 		margin-bottom: 50px!important;
 		margin-top: 20px!important;
 	}
-
 	nav {
 		background-color: #000000c7 !important;
 	}
-	
 	.navbar-collapse {
 		background-color: rgba(0, 0, 0, 0);
 	}
 }
+
+
 /* index.html styling at screen widths over 768px ends here */
+
 
 /* index.html styling at screen heights under 500px starts here */
 
@@ -265,5 +274,17 @@ nav {
 		font-size: 40px;
 	}
 }
+
 /* index.html styling at screen heights under 500px ends here */
 
+/* login.html and register.html styling starts here */
+
+.login-register-top-margin {
+	margin-top: 10vh;
+}
+
+.login-register-padding {
+	padding: 20px;
+}
+
+/* login.html and register.html styling ends here */
