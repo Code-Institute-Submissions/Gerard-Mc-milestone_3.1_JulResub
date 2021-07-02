@@ -25,7 +25,7 @@
         </div>
         <!-- Displays a list of GPU search results and updates user GPU attribute in database entity on submit -->
         <div class="col-4 offset-4" id="gpu_list-1">
-            <a class="d-block btn color-black bg-green border-radius-5px py-0 mb-3 w-25"
+            <a class="d-block btn color-black bg-white border-radius-5px py-0 mb-3 w-25"
                 href="{{ url_for('profile', user=session['user'])}}">Back</a>
             <form id="submit_to_python-1" method="post" action="{{ url_for('submit') }}">
                 <div id="user-gpu-choice-1" class="d-block gpu-results">
@@ -135,7 +135,7 @@
 
 
     <div class="col-4 offset-4" id="gpu_list-2">
-        <a class="d-block btn color-black bg-green border-radius-5px py-0 mb-3 w-25"
+        <a class="d-block btn color-black bg-white border-radius-5px py-0 mb-3 w-25"
             href="{{ url_for('profile', user=session['user'])}}">Back</a>
         <form id="submit_to_python-2" method="post" action="{{ url_for('submit') }}">
             <div id="user-gpu-choice-2" class="d-block gpu-results">
