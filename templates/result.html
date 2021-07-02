@@ -1,21 +1,23 @@
 {% extends "base.html" %}
 {% block content %}
 
-<section id="results" class="col-4 offset-4 mt-5">
+<section id="profile-section"
+    class="col-10 offset-1 col-md-6 offset-md-3 login-register-top-margin login-register-padding border-radius-5px font-2-bold bg-black-transparant color-white">
     <h1>Results</h1>
-    <h4>Can {{ user_gpu_name}} run {{ user_game_name }}?</h4>
+    <h4 id="results-h4">Can {{ user_gpu_name}} run {{ user_game_name }}?</h4>
     <br>
-    <h5><strong>PC Minimum Requirements</strong></h5>
-    {{ steam|safe }}
+    {% if steam is defined %}
+    <h5 id="results-h5"><strong>PC Minimum Requirements</strong></h5>
+    <div id="results-steam-p">{{ steam|safe }}</div>
     <br>
+    {% endif %}
     <div class="boder-navy p-3">
     <p><strong>User GPU:</strong> {{ user_gpu_name}} </p>
-    <p><strong>Game Name: </strong> {{ user_game_name }}</p>
-    <p><strong>Game ID: </strong> {{ user_game_id }} </p>
+    <p><strong>Game: </strong> {{ user_game_name }}</p>
     <p><strong> Can I run it? </strong>{{ info_message }}</p>
     
     {% if gpu_in_database %}
-    <p><strong>Average user FPS: </strong>
+    <p><strong>Average user FPS with your GPU: </strong>
     {% if session.user %}
             {% if gpu_in_database.games %}
                 {% for game in gpu_in_database.games %}

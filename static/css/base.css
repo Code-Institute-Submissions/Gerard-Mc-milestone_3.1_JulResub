@@ -360,6 +360,8 @@ overflow: auto;
 	overflow: scroll
 }
 
+
+
 @media only screen and (max-width: 767px) {
 	#profile-section h1{
 		font-size: 25px;
@@ -370,6 +372,40 @@ overflow: auto;
 		font-size:14px;
 		
 	}
+	
+	#results-h4{
+		font-size:16px;
+	}
+
+	#results-h5{
+		font-size:15px;
+	}
+
 
 
 }
+
+/* profile.html and register.html styling ends here */
+
+/* results.html and register.html styling starts here */
+@media only screen and (max-width: 767px) {	
+	#results-h4{
+		font-size:16px;
+	}
+
+	#results-h5{
+		font-size:14px;
+	}
+
+	#results-steam-p{
+		font-size:13px;
+	}
+
+	#results-steam-p ul li{
+		font-size:13px;
+	}
+
+
+
+}
+/* profile.html and register.html styling ends here */
