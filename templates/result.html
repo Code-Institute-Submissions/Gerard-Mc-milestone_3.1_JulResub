@@ -16,10 +16,11 @@
     <p><strong>Game: </strong> {{ user_game_name }}</p>
     <p><strong> Can I run it? </strong>{{ info_message }}</p>
     
-    {% if gpu_in_database %}
-    <p><strong>Average user FPS with your GPU: </strong>
+{% if gpu_in_database %}
     {% if session.user %}
-            {% if gpu_in_database.games %}
+    <p><strong>Average user FPS with your GPU: </strong>
+        {% if gpu_in_database.games %}
+            {% if gpu_in_database %}
                 {% for game in gpu_in_database.games %}
                     {% if game["name"] == user_game_name %}
                         {% if game["userfps"] %}
@@ -31,17 +32,19 @@
                                 {% set sum.value = sum.value + object.fps %}
                                 {% set denominator.value = denominator.value + 1 %}
                             {% endfor %}
-                            
                             {% set averageFps.value = sum.value / denominator.value %}
                             {{ averageFps.value|round(1, 'floor')|int}}
+                        {% else %}
+                         Empty
                         {% endif %}
                     {% endif %}
                 {% endfor %}
             {% endif %}
-        {% else %}
+            {% endif %}
+    {% else %}
         Login or register to see average user FPS <a href="{{ url_for('login') }}">Here</a>
-        {% endif %}
     {% endif %}
+{% endif %}
     </p>
     </div>
     
