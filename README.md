@@ -61,7 +61,7 @@ The wireframes are just simple sketches of what the layout was to become.
 
 They can be found in the link below.
 
-[Wireframes](https://github.com/)                                  WIREFRAMES NEEDED 
+[Wireframes](readme_files/wireframes)
 
 
 ## Features
