@@ -163,20 +163,30 @@ The accounts were tested by logging out and login in again, and after entering t
 
 ### Profile Page
 
-#### Access Without Being Logged in as User
+- #### Access Without Being Logged in as User
 To make sure the profile page isn't accessible without being logged in, the profile page URL was copied and then the user was logged out. When the URL was pasted into the browser's address bar and enter was hit, the page was redirected to the login page with the expected flash message. 
 When the same was tried with the admin profile page, it too was redirected to the login page with its expected flash message.
 
-#### Choose a GPU
+- #### Choose a GPU
 A GPU was chosen for the users and it was displayed on the screen and also added to the user entity in the MongoDB Atlas user collection.
 After this, the GPU was edited and a new one was selected. It displayed on the screen and the user entity now had the GPU in its GPU field.
 
-#### Display Average FPS, User FPS, and Edit user FPS
+- #### Display Average FPS, User FPS, and Edit user FPS
 
 After the GPU was selected, the list of games stored in the array in the GPU entity from the GPU collection in Mongo was displayed, along with the average value from all the user FPS data that is stored in objects within an array of games associated with the user's chosen GPU. The individual values were counted and the average calculated and it matched what was on the screen. It was done manually by putting in a value into a game with no user fps, and then with a different user, and then taking the average of the values put in by each one. This came out as expected too.
 
 
 When the user fps was edited on the profile page, the page updated and the new FPS value was displayed. It was found to be the same in Mongo too.
+
+### Admin 
+
+- #### Insert and Delete
+After hitting the insert button, the input displayed as the JS is coded to do, and when the insert or close button was pressed it disappeared as expected. When the text was entered into the insert text field and submitted, the page refreshed and the new test was there with a rating of the GPU it replaced. The GPU it replaced and all others of a lower value had the rating decreased by one. This was repeated several times and each time it displayed as expected with MongoDb collection updating too.
+The same tests were done for the delete functionality with the same result, only the GPUs under its rating increased by one.
+
+
+
+
 
 
 
