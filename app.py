@@ -236,7 +236,7 @@ def search_gpu_homepage():
 @app.route("/admin", methods=["GET", "POST"])
 def admin():
     if "user" in session:
-        if user["name"] != "admin":
+        if session["user"] != "admin":
             flash("You must be an administrator to view this page")
             return render_template("login.html")
         user = mongo.db.users.find_one(

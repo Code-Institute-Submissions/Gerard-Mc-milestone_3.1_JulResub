@@ -1,30 +1,38 @@
 {% extends "base.html" %}
 {% block content %}
-<section>
-    <h1>Admin</h1>
+<section id="admin-section"
+    class="col-12 col-md-8 offset-md-2 login-register-top-margin login-register-padding border-radius-5px font-2-bold bg-black-transparant color-white">
+    <h1>ADMIN</h1>
+    <h5>Insert</h5>
+    <p>If you need to insert a new GPU.</p>
+    <p>This will insert the new GPU into the database and increase the GPU that held it's rating previously and all other GPUs ratings by one.</p>
+    <br>
+    <h5>Delete</h5>
+    <p>Delete will permanently remove a GPU from the database and decrease all GPUs below the deleted GPU by one.</p>
+    <div id="gpu-list-wrap" class="w-100">
     {% for x in gpus %}
     <hr>
-    <p>
-        <strong class="ml-3">Model: </strong>{{ x.model }} <strong>&nbsp;Rating: </strong>{{ x.rating }}&nbsp;&nbsp;
-        <button id="span-insert-{{ x.rating }}" class="btn btn-link" data-number="{{ x.rating }}"
+    <p class="w-100"><strong>Model:</strong> {{ x.model }}</p>
+    <p class="w-100"><strong>Rating:</strong> {{ x.rating }}</p>
+    <button id="span-insert-{{ x.rating }}" class="btn btn bg-white boder-black color-black font-2-bold py-0 mb-2 bg-green border-radius-5px" data-number="{{ x.rating }}"
             onclick="display(this.dataset.number, this.id)">Insert</button>&nbsp;
-        <button form="delete-gpu-{{ x.rating }}" class="btn btn-link" type="submit">Delete</button>
-    </p>
+        <button form="delete-gpu-{{ x.rating }}" class="btn btn bg-white boder-black color-black font-2-bold py-0 mb-2 bg-orange border-radius-5px" type="submit">Delete</button>
     <form class="gpu-form" style="display: none;" id="insert-gpu-{{ x.rating }}" action="{{ url_for('admin') }}"
         method="post">
-        <p class="ml-3" id="close-form-{{ x.rating }}" data-number="{{ x.rating }}"
+        <p class="ml-3 close-box" id="close-form-{{ x.rating }}" data-number="{{ x.rating }}"
             onclick="display(this.dataset.number, this.id)">Close</p>
         <input class="ml-3" type="text" name="insert-gpu-model" id="insert-gpu-model-{{ x.rating }}" minlength="4">
         <textarea style="display: none" class="hidden-text" name="insert-gpu-rating">{{ x.rating }}</textarea>
         <button form="insert-gpu-{{ x.rating }}" id="button-{{ x.rating }}" data-number="{{ x.rating }}"
             onclick="display(this.dataset.number, this.id)" type="submit">
-            Insert</button>
+            Submit</button>
     </form>
     <form style="display: none;" id="delete-gpu-{{ x.rating }}" action="{{ url_for('admin') }}" method="post"
         onSubmit="return confirm('Are you sure you want to delete {{ x.model }}?');">
         <textarea style="display: none" class="hidden-text" name="delete-gpu-rating">{{ x.rating }}</textarea>
     </form>
     {% endfor %}
+</div>
 </section>
 <script src="{{ url_for('static', filename='js/reset_index.js') }}"></script>
 <script>

@@ -1,129 +1,96 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-
 /* Styling and classes used throughout site starts here */
-
 .float-left {
 	float: left !important;
 }
-
 .float-right {
 	float: right !important;
 }
-
 .bg-navy {
 	background-color: #280061 !important;
 }
-
 .bg-light {
 	background-color: #f8f8f8 !important;
 }
-
 .bg-black-transparant {
 	background-color: #000000c7 !important;
 }
-
 .bg-black {
 	background-color: #000000 !important;
 }
-
 .color-light-grey {
 	color: rgb(228, 228, 228) !important;
 }
-
 .color-navy {
 	color: #280061 !important;
 }
-
 .color-green {
 	color: #9DFB01 !important;
 }
-
 .z-index-3{
-z-index: 3;
+	z-index: 3;
 }
-
 .color-purple {
 	color: #8900AD;
 }
-
 .color-black {
 	color: #000000 !important;
 }
-
 .color-white {
 	color: white !important;
 }
-
 .bg-navy {
 	background-color: #280061 !important;
 }
-
 .bg-grey {
 	background-color: #e0e0e0 !important;
 }
-
 .bg-orange {
 	background-color: #FA4119!important;
 }
-
 .bg-green {
 	background-color: #9DFB01!important;
 }
-
 .boder-white {
 	border-bottom-style: solid !important;
 	border-bottom-width: 1px !important;
-	border-bottom-color: rgb(0, 0, 0) 0.57) !important;
+	border-bottom-color: white;
 }
 .boder-none{
 	border-style: none;
 }
-
 .boder-white {
 	border-color: rgb(255, 255, 255) !important;
 }
-
 .font-bold {
 	font-weight: bold;
 }
-
 .border-radius-5px {
 	border-radius: 5px;
 }
-
 .font-1-bold {
 	font-weight: 700;
 	font-family: 'Orbitron', sans-serif;
 }
-
 .font-1-bolder {
 	font-weight: 900;
 	font-family: 'Orbitron', sans-serif;
 }
-
 .font-2-regular {
 	font-weight: 500;
 	font-family: 'Roboto', sans-serif;
 }
-
 .font-2-bold {
 	font-weight: 700;
 	font-family: 'Roboto', sans-serif;
 }
-
 .font-2-bolder {
 	font-weight: 900;
 	font-family: 'Roboto', sans-serif;
 }
-
 .round-border {
 	border-radius: 15px;
 }
-
-
 /* Styling and classes used throughout site ends here */
-
 body {
 	background-image: url("../img/bg.jpg");
 	background-position: center;
@@ -136,31 +103,26 @@ body {
 	height: auto;
 	min-height: calc(100vh + 80px);
 }
-
 footer {
 	position: fixed;
 	left: 0;
 	bottom: 0;
 	height: auto;
 }
-
 nav {
 	background-color: black;
 	height: 80px;
 	z-index: 3;
 }
-
 .navbar-collapse {
 	background-color: black;
 	margin-right: -16px !important;
 	margin-left: -16px !important;
 }
-
 .navbar-nav {
 	align-items: flex-end;
 	text-align: right;
 }
-
 .navbar-nav li {
 	width: 90px;
 	margin: 2vh 0;
@@ -169,7 +131,6 @@ nav {
 	border-bottom-width: 1px;
 	border-bottom-color: white;
 }
-
 #index-content {
 	min-height: calc(78vh + 80px);
 	padding: 0;
@@ -180,97 +141,86 @@ nav {
 	top: 22vh;
 	font-size: 15px;
 }
-
 #index-wrap-outer {
 	height: 39vh;
 	padding: 0;
 }
-
 #index-wrap-inner {
 	width: 100%;
 	padding: 0 0vw;
 	padding-bottom: 20px;
 	padding-top: 7vh;
 }
-
 #display-games-search {
 	max-height: calc(39vh);
 	overflow: auto;
 	text-align: left;
 	padding: 0px 10px;
 }
-
 #show-on-short-screen {
 	display: none !important;
 }
-
 #reset-confirm {
 	margin-bottom: 20px;
 	margin-top: 20px;
 }
-
-
 /* index.html styling at screen widths over 768px starts here */
-
 @media only screen and (min-width: 768px) {
 	#index-content {
 		min-height: calc(68vh + 80px);
 		font-size: 16px;
-	}
+   }
 	#index-content h1 {
 		font-size: 50px;
-	}
+   }
 	#index-wrap-outer {
 		height: 30vh;
-	}
+   }
 	#index-wrap-inner {
 		padding-top: 50px;
-	}
+   }
 	#display-games-search {
 		max-height: calc(30vh + 80px);
-	}
+   }
 	#reset-confirm {
 		margin-bottom: 50px!important;
 		margin-top: 20px!important;
-	}
+   }
+}
+@media only screen and (min-width: 992px) {
 	nav {
 		background-color: #000000c7 !important;
-	}
+   }
 	.navbar-collapse {
 		background-color: rgba(0, 0, 0, 0);
-	}
+   }
 }
-
-
 /* index.html styling at screen widths over 768px ends here */
-
-
 /* index.html styling at screen heights under 500px starts here */
-
 @media only screen and (max-height: 500px) {
 	body {
 		min-height: calc(80vw + 80px);
-	}
+   }
 	footer {
 		position: fixed;
 		left: 0;
 		bottom: 0;
 		height: 20px;
-	}
+   }
 	nav {
 		background-color: black;
 		height: 80px;
 		z-index: 3;
-	}
+   }
 	.navbar-collapse {
 		background-color: black;
 		margin-right: -16px !important;
 		margin-left: -16px !important;
-	}
+   }
 	.navbar-nav {
 		align-items: flex-end;
 		text-align: right;
-	}
+   }
 	.navbar-nav li {
 		width: 90px;
 		margin: 2vh 0;
@@ -278,7 +228,7 @@ nav {
 		border-bottom-style: solid;
 		border-bottom-width: 1px;
 		border-bottom-color: white;
-	}
+   }
 	#index-content {
 		min-height: 80vw;
 		padding: 0;
@@ -288,124 +238,116 @@ nav {
 		position: absolute;
 		top: 74px;
 		font-size: 15px;
-	}
+   }
 	#index-wrap-outer {
 		height: 40vw;
 		padding: 0;
-	}
+   }
 	#index-wrap-inner {
 		width: 100%;
 		padding: 0 0vw;
 		padding-bottom: 20px;
 		padding-top: 10px;
-	}
+   }
 	#display-games-search {
 		max-height: 40vw;
 		overflow: auto;
 		text-align: left;
 		padding: 0px 10px;
-	}
+   }
 	#show-on-short-screen {
 		display: contents !important;
-	}
+   }
 	#index-content h1 {
 		font-size: 40px;
-	}
+   }
 }
-
 /* index.html styling at screen heights under 500px ends here */
-
 /* login.html and register.html styling starts here */
-
 .login-register-top-margin {
 	margin-top: 10vh;
 }
-
 .login-register-padding {
 	padding: 20px;
 }
-
 /* login.html and register.html styling ends here */
-
-/* profile.html and register.html styling starts here */
-
+/* profile.html styling starts here */
 .edit-span{
 	color:#88db03;
 	cursor: pointer;
 }
-
 .game-wrap{
 	padding-top: 10px;
 	border-top-style: solid;
 	border-top-width: 2px;
 	border-top-color: white;
-
 }
-
 #games-list-wrap{
-max-height: 60vh; 
-overflow: auto;
+	max-height: 60vh;
+	overflow: auto;
 }
-
 #profile-section{
 	margin-bottom: 10vh;
 }
-
 .small-text{
 	font-size: 12px;
 }
-
 .gpu-results{
 	max-height: 60vh;
-	overflow: scroll
+	overflow: scroll 
 }
-
-
-
 @media only screen and (max-width: 767px) {
 	#profile-section h1{
 		font-size: 25px;
-		
-	}
-
+   }
 	#profile-section p{
 		font-size:14px;
-		
-	}
-	
+   }
 	#results-h4{
 		font-size:16px;
-	}
-
+   }
 	#results-h5{
 		font-size:15px;
-	}
-
-
-
+   }
 }
-
-/* profile.html and register.html styling ends here */
-
-/* results.html and register.html styling starts here */
-@media only screen and (max-width: 767px) {	
+/* profile.html styling ends here */
+/* results.html a styling starts here */
+@media only screen and (max-width: 767px) {
 	#results-h4{
 		font-size:16px;
-	}
-
+   }
 	#results-h5{
 		font-size:14px;
-	}
-
+   }
 	#results-steam-p{
 		font-size:13px;
-	}
-
+   }
 	#results-steam-p ul li{
 		font-size:13px;
-	}
-
-
-
+   }
 }
-/* profile.html and register.html styling ends here */
+/* profile.html styling ends here */
+/* admin.html styling starts here */
+#gpu-list-wrap{
+	max-height: 60vh;
+	overflow: auto;
+}
+.close-box{
+	color:#88db03;
+	cursor: pointer;
+}
+#admin-section{
+	margin-bottom: 20vh;
+}
+@media only screen and (max-width: 767px) {
+	#admin-section h1{
+		font-size:25px;
+   }
+	#admin-section h5{
+		font-size:18px;
+   }
+	#admin-section p{
+		font-size:16px;
+   }
+}
+/* admin.html styling ends here */
