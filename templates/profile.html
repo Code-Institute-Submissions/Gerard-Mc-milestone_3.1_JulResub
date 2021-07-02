@@ -7,7 +7,7 @@
             <h1 class="mb-3"><strong>Username: </strong> {{ user.name }}</h1>
             <!-- Form to edit user GPU attribute in the user entity -->
             {% if user.gpu %}
-            <p id="edit-gpu-1"><strong>GPU: </strong> {{ user.gpu }} <span class="edit-span" data-id="1" data-number="1"
+            <p id="edit-gpu-1"><strong>GPU: </strong> {{ user.gpu }} <span class="edit-span color-green" data-id="1" data-number="1"
                     onclick="display(this.dataset.number, this.dataset.id)"> &nbsp;Edit</span></p>
         </div>
         <div id="gpu-results-1" class="w-100" style="display: none">
@@ -92,7 +92,7 @@
                             document.getElementById("userfps_{{ game.name|replace(' ', '') }}").innerText = "Empty";
                         </script>
                         {% endif %}
-                        <span class="edit-span small-text" id="edit-switch-{{ game.name|replace(' ', '') }}"
+                        <span class="edit-span small-text color-green" id="edit-switch-{{ game.name|replace(' ', '') }}"
                             data-switch="0" data-game="{{ game.name|replace(' ', '') }}"
                             onclick="show_edit_fps_options(this.dataset.switch, this.dataset.game)">Edit</span>
                         <br><br>

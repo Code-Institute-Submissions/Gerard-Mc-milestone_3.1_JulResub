@@ -43,15 +43,15 @@
             {% for x in game_list %}
             <hr class="border-white">
             <!-- When user clicks this link, the game name and id are stored and the results box disappear -->
-            <a class="color-white" href="#" onclick="display_game_choice(this.id, this.dataset.id)" name="game_choice"
-                id="{{ x.name }}" data-id="{{ x.appid }}">{{ x.name }}</a>
+            <p class="color-white cursor-p" onclick="display_game_choice(this.id, this.dataset.id)" name="game_choice"
+                id="{{ x.name }}" data-id="{{ x.appid }}">{{ x.name }}</p>
             {% endfor %}
 
             {% for x in gpu %}
             <hr class="border-white">
             <!-- When user clicks this link, the gpu model and rating are stored and the results box disappear -->
-            <a class="color-white" href="#" onclick="display_gpu_choice(this.id, this.dataset.id)" name="game_choice"
-                id="{{ x.model }}" data-id="{{ x.rating}}">{{ x.model }}</a>
+            <p class="color-white cursor-p" onclick="display_gpu_choice(this.id, this.dataset.id)" name="game_choice"
+                id="{{ x.model }}" data-id="{{ x.rating}}">{{ x.model }}</p>
             {% endfor %}
         </div>
     </div>

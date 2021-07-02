@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <title>GPUForce</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,7 +12,6 @@
     {% block extra_js %}
     {% endblock %}
 </head>
-
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark font-1-bolder color-light-grey z-index-2">
         <a id="logo" class="navbar-brand color-light-grey" href="{{ url_for('find_gpus') }}"><img style="max-height: 50px;" alt="Logo" src="{{ url_for('static', filename='img/logo.png') }}"> GPUForce</a>
@@ -74,5 +71,4 @@
     {% block postloadjs %}
     {% endblock %}
 </body>
-
 </html>

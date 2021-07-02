@@ -184,8 +184,71 @@ When the user fps was edited on the profile page, the page updated and the new F
 After hitting the insert button, the input displayed as the JS is coded to do, and when the insert or close button was pressed it disappeared as expected. When the text was entered into the insert text field and submitted, the page refreshed and the new test was there with a rating of the GPU it replaced. The GPU it replaced and all others of a lower value had the rating decreased by one. This was repeated several times and each time it displayed as expected with MongoDb collection updating too.
 The same tests were done for the delete functionality with the same result, only the GPUs under its rating increased by one.
 
+### Home Search
+
+Many game names and partial were typed in the game search form and games with appropriate names were returned. When a game was chosen from this list the hidden text area values changed as expected. This was seen in the developer panel in Chrome.
+The same process was done for the GPU search form.
+
+When the main submit button was pressed the results came back as expected. Modern games eg. CyberPunk, which needs strong GPUs were giving negative results for the weaker GPUs in the user GPU database and positive for the stronger ones. This was tried multiple times for strong and weak games, and the weak GPUs only ad success on less taxing games, and the strongest could play anything.
+
+the use of print statements was used to track the values of the submitted user forms and data that came back for comparison in MongoDB. The statements were as expected every time.
+
+The user FPS should only display when a user is logged in, otherwise, the user should see a message asking them to login or register to see the avg FPS for this game. 
+
+This was tested by log in and out and comparing the results, and it worked as expected.
+
+### Use of the Website at different Screen Sizes and Browsers
+
+The site was designed to display correctly for screen sizes as low as 320px high and wide.
+This was tested using Chrome tools. The search engine on the home page displays well down to these sizes. But once it gets below 310px of height, the user might not know that the search results have come back because they will be below the visual part of the screen. Very few people use phones of this size so it was decided not to tailor the design to sizes below 320px high or 300px wide.
 
 
+### Known Bugs
+
+When the user is updating or adding a GPU on their profile page, there are few steps to it.
+* 1st, they press edit and the form is displayed.
+
+* 2nd, the type in a GPU and press search
+
+* 3rd, they choose a GPU and the profile page is reset with the updated GPU.
+
+If they press back on the nav after the final step, they will see the previous GPU displayed as their GPU.
+
+## Validation
+
+[Validation](readme_files/validation)
+
+All CSS, Python, Javascrip, and HTML was validated.
+
+The only errors coming back are because the validators don't recognise Jinja, and the some ids are duplicated because they wouldn't be displayed when Jinja has control.
+
+
+### Database Models
+
+#### game
+
+_id: <ObjectId>
+app_id: <Int32>
+name: <string>
+
+#### strong_gpu
+
+_id: <ObjectId>
+model: <string>
+rating: <Int32>
+games: <Array>
+
+
+#### users
+
+_id: <ObjectId>
+name: <string>
+password: <string>
+gpu: <string>
+
+#### weaker_gpu
+_id: <ObjectId>
+model: <string>
 
 
 

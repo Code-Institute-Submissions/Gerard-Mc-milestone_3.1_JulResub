@@ -309,7 +309,6 @@ def check():
         # Loads json data and extracts the game's PC minimum requirements.
         steam = json.loads(
             r.text)[game_id]['data']['pc_requirements']['minimum']
-        print("Already in database")
         return render_template(
             "result.html", user_gpu_name=user_gpu_name, steam=steam,
             gpu_in_database=gpu_in_database,
@@ -329,7 +328,6 @@ def check():
     find_missing_api_json = re.search(
         "(?<='success': False).+", str(json.loads(r.text)))
     if find_missing_api_json:
-        print("--------------API Fail-----------------")
         mongo.db.game.delete_one({"appid": int(game_id)})
         return render_template("result.html", user_gpu_name=user_gpu_name,
                                user_game_name=user_game_name,
@@ -385,7 +383,6 @@ def check():
                     pass
                 else:
                     info_message = message_success
-                    print("Found GPU under 512mb")
 
     gpu_requirements = steam
 
@@ -406,7 +403,6 @@ def check():
                     r"(?i)(?:GTX|GT)", lambda ele: " " + ele[0] + " ", i)
                 switch = a
                 gpu_requirements = re.sub(before,  switch, gpu_requirements)
-            print("Found gt/gtx format error")
 
     """ The below regex patterns find AMD and Nvidia GPUs that are below the power
     of the weakest GPU the user can choose from. If any of these patterns are
@@ -419,7 +415,6 @@ def check():
             r'|7\d{3}(?!m))|geforce[2-4]{1}\s)', gpu_requirements)
         if find_old_geforce_gpu:
             info_message = message_success
-            print("Found older Nvidia GPU")
 
     # # Find AMD GPU Radeon 8000 series - HD 3000 series. Years 2001-2008
     if info_message != message_success:
@@ -430,7 +425,6 @@ def check():
             gpu_requirements)
         if find_old_amd_gpu:
             info_message = message_success
-            print("Found older AMD GPU")
 
     ''' The below code will find any patterns that are for GPUs not guaranteed
     to be less powerful than the user GPU.
@@ -492,7 +486,6 @@ def check():
                                 for object in check_weaker_gpu:
                                     if str(object["model"]) == str(gpu):
                                         info_message = message_success
-                                        print("Found WEAK SUCCESS")
 
                     if info_message == message_success:
                         break
@@ -543,12 +536,10 @@ def check():
                         if str(object["model"]) == str(gpu):
                             # Compares the GPU rating against the user's GPU
                             if user_gpu_rating <= object["rating"]:
-                                print("NVIDIA STRONG SUCCESS")
                                 in_gpu = True
                                 info_message = message_success
 
                             elif user_gpu_rating > object["rating"]:
-                                print("NVIDIA STRONG Fail")
                                 info_message = message_fail
 
                 if in_gpu is False:
@@ -583,11 +574,9 @@ def check():
                         if str(object["model"]) == str(gpu):
                             # Compares the GPU rating against the user's GPU
                             if user_gpu_rating <= object["rating"]:
-                                print("NVIDIA Titan SUCCESS")
                                 info_message = message_success
                                 break
                             elif user_gpu_rating > object["rating"]:
-                                print("NVIDIA Titan Fail")
                                 info_message = message_fail
                                 break
 
@@ -618,12 +607,10 @@ def check():
                         if str(object["model"]) == str(gpu):
                             # Compares the GPU rating against the user's GPU
                             if user_gpu_rating <= object["rating"]:
-                                print("NVIDIA Quadro STRONG SUCCESS")
                                 in_gpu = True
                                 info_message = message_success
 
                             elif user_gpu_rating > object["rating"]:
-                                print("NVIDIA Quadro STRONG Fail")
                                 info_message = message_fail
 
                 if in_gpu is False:
@@ -664,14 +651,11 @@ def check():
                         if str(object["model"]) == str(gpu):
                             # Compares the GPU rating against the user's GPU
                             if user_gpu_rating <= object["rating"]:
-                                print("AMD STRONG SUCCESS")
-                                print(gpu)
                                 in_gpu = True
                                 info_message = message_success
                                 break
 
                             elif user_gpu_rating > object["rating"]:
-                                print("AMD STRONG Fail")
                                 info_message = message_fail
                                 break
                     gpu = re.sub(r"AMD ",  "", gpu)
@@ -681,8 +665,6 @@ def check():
                     if check_weaker_gpu:
                         for object in check_weaker_gpu:
                             if str(object["model"]) == str(gpu):
-                                print("AMD Weak Success")
-                                print(str(gpu))
                                 info_message = message_success
                                 break
 
@@ -693,13 +675,9 @@ def check():
     # is added to an array that stores a list of compatible games
     #  within the GPU entity in the database.
     if info_message == message_success:
-        print("here")
         mongo.db.strong_gpu.update_one(
                 {"model": user_gpu_name},
                 {"$push": {'games': {"name": user_game_name}}})
-        print(user_gpu_name)
-        print(user_game_name)
-        print("Added to database")
 
     else:
         info_message = not_found_message_extra
@@ -713,4 +691,4 @@ def check():
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
-            debug=True)
+            debug=False)
