@@ -44,13 +44,13 @@ The background image of a gaming laptop was chosen because it's relevant but als
 
 A radioactive green was used as it complimented the purple but also work in a UX capacity because it stands out, and therefore good for guiding the user through 
 
-the steps needed to complete tasks like searching for games and GPUs. This is is hex color code: #bebebe.
+the steps needed to complete tasks like searching for games and GPUs. This is is hex color code: `#bebebe`.
 
-A complimentary orange-ish color was picked using the Adobe Color website. This was used to visually caution the site owner of the delete button. The hex code: #FA4119.
+A complimentary orange-ish color was picked using the Adobe Color website. This was used to visually caution the site owner of the delete button. The hex code: `#FA4119`.
 
 #### Typography
 
-A font named Orbitron was used for much of the site as it suited the tech style aimed for. For parts where reading needs to be easier, a font named Roboto was used 
+A font named [Orbitron](https://fonts.google.com/specimen/Orbitron?query=orbitron) was used for much of the site as it suited the tech style aimed for. For parts where reading needs to be easier, a font named [Roboto](https://fonts.google.com/specimen/Roboto) was used 
 
 because it's informal enough to suit the site and is very easy to read.
 
@@ -70,9 +70,7 @@ They can be found in the link below.
 ### Existing Features
 
 #### Home Page Search Engine
-
 On the home page, there is a section with a form to search for games, a form to search for GPUs, and a submit form with a hidden text area that sends the GPU and 
-
 game search data to the back end where it performs queries and comparison logic.
 
 ##### The Game Search Form
@@ -232,34 +230,109 @@ The errors coming back are because the validators don't recognise Jinja, and the
 
 #### game
 
+```
 _id: <ObjectId>
 app_id: <Int32>
 name: <string>
+```
 
 #### strong_gpu
-
+```
 _id: <ObjectId>
 model: <string>
 rating: <Int32>
 games: <Array>
-
+```
 
 #### users
-
+```
 _id: <ObjectId>
 name: <string>
 password: <string>
 gpu: <string>
-
+```
 #### weaker_gpu
+```
 _id: <ObjectId>
 model: <string>
+```
 
 
 
 
 ## Deployment
 
+### Locol Deployment
+
+* Install [app](https://api.steampowered.com/ISteamApps/GetAppList/v2/), [PIP](https://pip.pypa.io/en/stable/installing), [GIT](https://www.atlassian.com/git/tutorials/install-git), [MongoDB](https://www.mongodb.com) , any IDE. 
+
+* Clone the repository be tpying `git clone https://github.com/Gerard-Mc/milestone_3.1.git` into the Git command line interface. 
+
+* Create a database in Mongo called whatevr you want.
+
+* Create a database in Mongo with a collection for games.
+
+* Download this JSON file from steam [File](https://api.steampowered.com/ISteamApps/GetAppList/v2/)
+
+* Create a new collection in your mongo database called game.
+
+* Paste in the Json file.
+
+* Create a collection called strong_gpu
+
+* Paste in this file [File](static/data/gpu1.json)
+
+* Create a collection called weaker_gpu
+
+* Paste in this file [File](static/data/gpu2.json)
+
+* Create a collection called users
+
+* Use the below model.
+
+* 
+```
+_id: <ObjectId>
+name: <string>
+password: <string>
+gpu: <string>
+```
+
+* Create a env.py file and add this code:
 
 
+```
+import os
 
+os.environ.setdefault("IP", "0.0.0.0")
+os.environ.setdefault("PORT", "5000")
+os.environ.setdefault("SECRET_KEY", "Choose your own")
+os.environ.setdefault("MONGO_URI", "Your mongo database URI")
+os.environ.setdefault("MONGO_DBNAME", "Database Name")
+```
+Install everything inside the requirements.txt by typing pip3 install -r requirements.txt in GIT.
+
+
+### Remote Deployment
+
+This site is deployed on [Heroku](https://www.heroku.com/).
+
+To install:
+
+* Install this requirements.txt file [requirements](requirements.txt)
+
+* Use this procfile [procfile](Procfile)
+
+* Create a Heroku account, create a new project app.
+* Go to the deploy tab and "Connect GitHub" as the Deployment Method.
+* Choose "Enable Automatic Deployment".
+* Go to settings.
+* Go to Reveal Config Vars
+* Add the environmental variables:
+    IP : 0.0.0.0
+    PORT : 5000
+    MONGO_URI : <Your MongoDB URI>
+    SECRET_KEY : <your secret key>
+    MONGO_DBNAME: <your DB name>
+    
+* Finish
