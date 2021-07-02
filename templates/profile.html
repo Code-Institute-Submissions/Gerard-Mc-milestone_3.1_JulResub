@@ -156,8 +156,6 @@
 {% endblock %}
 {% block postloadjs %}
 <script>
-
-
     {% if display %}
     // Enables edit options to display after browser back navigation.
     sessionStorage.setItem("link-display-1", "contents");
@@ -182,19 +180,17 @@
     var display_variable_1 = sessionStorage.getItem('link-display-1');
     var gpu_input_paragragh_2 = document.getElementById("edit-gpu-2");
     var display_variable_2 = sessionStorage.getItem('link-display-2');
-    var games_list_1 = document.getElementById("games-list");
+    var games_list = document.getElementById("games-list");
     // Some elements are loaded by Jinja depending on whether the user has a GPU attribute in their user entity or not.
     // If loaded by Jinja, this code edits the display value for the paragraphs with the IDs:edit-gpu-1 and edit-gpu-2.
     if ((gpu_input_paragragh_1 != null && typeof (gpu_input_paragragh_1) != "undefined")) {
         if (display_variable_1 != null) {
             gpu_input_paragragh_1.style.display = display_variable_1;
-            games_list_1.style.display = display_variable_1;
-            games_list_2.style.display = display_variable_1;
+            games_list.style.display = display_variable_1;
         }
         else {
             gpu_input_paragragh_1.style.display = "contents";
-            games_list_1.style.display = "contents";
-            games_list_2.style.display = "contents";
+            games_list.style.display = "contents";
         }
     }
     if ((gpu_input_paragragh_2 != null && typeof (gpu_input_paragragh_2) != "undefined")) {
@@ -256,7 +252,6 @@
             switch_id.setAttribute("data-switch", 0);
         }
     }
-
 </script>
 <script src="{{ url_for('static', filename='js/reset_index.js') }}"></script>
 {% endblock %}

@@ -292,7 +292,7 @@ def check():
     user_gpu_name = request.form.get("gpu-model")
     user_gpu_rating = int(request.form.get('gpu-rating'))
     user_game_name = request.form.get("game-name")
-    user_game_id = format(request.form['game-id'])
+    game_id = format(request.form['game-id'])
 
     # Checks the user GPU in the database to see if the game
     # has been found to be already compatible from a previous search.
@@ -302,20 +302,21 @@ def check():
 
     if check_database:
         gpu_in_database = check_database
-        # Below uses the user game id to connect to a specific external API file
+        # Below uses the user game id to connect
+        # to a specific external API file.
         r = requests.get(
-        f"https://store.steampowered.com/api/appdetails?appids={user_game_id}")
+            f"https://store.steampowered.com/api/appdetails?appids={game_id}")
         # Loads json data and extracts the game's PC minimum requirements.
         steam = json.loads(
-        r.text)[user_game_id]['data']['pc_requirements']['minimum']
+            r.text)[game_id]['data']['pc_requirements']['minimum']
         print("Already in database")
         return render_template(
-            "result.html", user_gpu_name=user_gpu_name,
+            "result.html", user_gpu_name=user_gpu_name, steam=steam,
             gpu_in_database=gpu_in_database,
             user_game_name=user_game_name, info_message=message_success)
 
     r = requests.get(
-        f"https://store.steampowered.com/api/appdetails?appids={user_game_id}")
+        f"https://store.steampowered.com/api/appdetails?appids={game_id}")
 
     # Sometimes the Steam API has missing documents and returns a json file
     # with 'success': False.
@@ -329,13 +330,13 @@ def check():
         "(?<='success': False).+", str(json.loads(r.text)))
     if find_missing_api_json:
         print("--------------API Fail-----------------")
-        # mongo.db.game.delete_one({ "appid": int(user_game_id) })
+        mongo.db.game.delete_one({"appid": int(game_id)})
         return render_template("result.html", user_gpu_name=user_gpu_name,
                                user_game_name=user_game_name,
                                info_message=not_found_message)
 
     steam = json.loads(
-        r.text)[user_game_id]['data']['pc_requirements']['minimum']
+        r.text)[game_id]['data']['pc_requirements']['minimum']
 
     steam_formatted = None
     gpu_requirements = None
@@ -705,7 +706,6 @@ def check():
 
     return render_template(
         "result.html", user_gpu_name=user_gpu_name,
-        user_game_id=user_game_id,
         user_game_name=user_game_name, steam=steam,
         info_message=info_message)
 
