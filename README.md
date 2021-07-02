@@ -220,7 +220,12 @@ If they press back on the nav after the final step, they will see the previous G
 
 All CSS, Python, Javascrip, and HTML was validated.
 
-The only errors coming back are because the validators don't recognise Jinja, and the some ids are duplicated because they wouldn't be displayed when Jinja has control.
+* [W3C Markup Validation Service](https://validator.w3.org/) used to validate HTML.
+* [W3C CSS Validation Service](https://validator.w3.org/) used to validate CSS.
+* [JSHint](https://jshint.com/) used to validate JavaScript.
+* [PEP8 Online](http://pep8online.com/) used to validate Python.
+
+The errors coming back are because the validators don't recognise Jinja, and the some ids are duplicated because they wouldn't be displayed when Jinja has control.
 
 
 ### Database Models
@@ -253,6 +258,7 @@ model: <string>
 
 
 
+## Deployment
 
 
 
