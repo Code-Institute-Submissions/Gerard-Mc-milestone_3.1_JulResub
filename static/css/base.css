@@ -283,7 +283,7 @@ nav {
 	border-top-color: white;
 }
 #games-list-wrap{
-	max-height: 60vh;
+	max-height: 50vh;
 	overflow: auto;
 }
 #profile-section{

@@ -3,7 +3,6 @@ import requests
 import json
 import re
 import math
-from bs4 import BeautifulSoup
 from flask import (
     Flask, flash, render_template,
     redirect, request, session, url_for)
@@ -142,7 +141,6 @@ def submit():
 @app.route("/profile/<user>", methods=["GET", "POST"])
 def profile(user):
     gpu_in_database = None
-    fps_average = None
     # Dynamically creates a user page based on session data
     if "user" in session:
         user = mongo.db.users.find_one(
@@ -174,6 +172,8 @@ def profile(user):
                         "$addToSet": {"games.$.userfps": {
                             'username': username,
                             'fps': int(user_fps_input)}}})
+            return redirect(url_for(
+                "profile", user=user, gpu_in_database=gpu_in_database))
         # The display variable is used in the profile.html
         # JavaScript to prevent elements displaying or not displaying
         # inappropriately when the user navigates backwards on their browser.
@@ -182,7 +182,7 @@ def profile(user):
             display = True
         return render_template(
             "profile.html", user=user, display=display,
-            gpu_in_database=gpu_in_database, fps_average=fps_average)
+            gpu_in_database=gpu_in_database)
     if "user" not in session:
         flash("You must be logged in to view this page")
         return render_template("login.html")
