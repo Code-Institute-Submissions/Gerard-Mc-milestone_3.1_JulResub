@@ -302,13 +302,18 @@ def check():
 
     if check_database:
         gpu_in_database = check_database
+        # Below uses the user game id to connect to a specific external API file
+        r = requests.get(
+        f"https://store.steampowered.com/api/appdetails?appids={user_game_id}")
+        # Loads json data and extracts the game's PC minimum requirements.
+        steam = json.loads(
+        r.text)[user_game_id]['data']['pc_requirements']['minimum']
         print("Already in database")
         return render_template(
             "result.html", user_gpu_name=user_gpu_name,
             gpu_in_database=gpu_in_database,
             user_game_name=user_game_name, info_message=message_success)
 
-    # Below uses the user game id to connect to a specific external API file
     r = requests.get(
         f"https://store.steampowered.com/api/appdetails?appids={user_game_id}")
 
@@ -328,7 +333,7 @@ def check():
         return render_template("result.html", user_gpu_name=user_gpu_name,
                                user_game_name=user_game_name,
                                info_message=not_found_message)
-    # Loads json data and extracts the game's PC minimum requirements.
+
     steam = json.loads(
         r.text)[user_game_id]['data']['pc_requirements']['minimum']
 
