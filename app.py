@@ -679,6 +679,9 @@ def check():
                 {"model": user_gpu_name},
                 {"$push": {'games': {"name": user_game_name}}})
 
+    elif info_message == message_fail:
+        info_message = message_fail
+
     else:
         info_message = not_found_message_extra
 
